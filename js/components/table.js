@@ -15,12 +15,20 @@ export function initTable(tableEl, rows) {
   let ascending = true;
 
   tableEl.querySelectorAll('th').forEach(th => {
+    if (th.dataset.bound) {
+      return;
+    }
+    th.dataset.bound = 'true';
+
     th.addEventListener('click', () => {
       const index = Number(th.dataset.index);
       ascending = sortIndex === index ? !ascending : true;
       sortIndex = index;
 
-      const isNumeric = currentRows.every(row => !isNaN(parseFloat(row[index])));
+      const isNumeric = currentRows.every(row => {
+        const trimmed = row[index].trim();
+        return trimmed !== '' && !isNaN(Number(trimmed));
+      });
       currentRows = [...currentRows].sort((a, b) => {
         const valA = isNumeric ? parseFloat(a[index]) : a[index];
         const valB = isNumeric ? parseFloat(b[index]) : b[index];
