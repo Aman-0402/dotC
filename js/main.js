@@ -12,7 +12,7 @@ async function bootstrap() {
 
   const res = await fetch('./data/nav.json');
   const nav = await res.json();
-  const allLessons = nav.topics.flatMap(t => t.lessons);
+  const allLessons = nav.topics.flatMap(t => t.lessons.map(l => ({ ...l, topicTitle: t.title })));
   initSearch(allLessons);
 
   registerRoute('/', () => renderHome(nav, allLessons));

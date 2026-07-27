@@ -399,3 +399,10 @@
   align-items: center;
   gap: 8px;
 }
+
+.search-result-topic {
+  display: block;
+  font-size: 11px;
+  color: var(--color-primary);
+  font-weight: 600;
+}

@@ -12,7 +12,14 @@ export function initSearch(allLessons) {
     }
 
     const matches = allLessons.filter(l => l.title.toLowerCase().includes(query));
-    results.innerHTML = matches.map(l => `<li><a href="#/lesson/${l.id}">${l.title}</a></li>`).join('');
+    results.innerHTML = matches.map(l => `
+      <li>
+        <a href="#/lesson/${l.id}">
+          <span class="search-result-topic">${l.topicTitle}</span>
+          ${l.title}
+        </a>
+      </li>
+    `).join('');
     results.hidden = matches.length === 0;
   });
 }
