@@ -381,3 +381,21 @@
   font-size: 12px;
   color: var(--color-border);
 }
+
+.bookmark-panel-title {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.bookmark-panel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bookmark-panel-item {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
