@@ -2,27 +2,27 @@
   "_temp": true,
   "topics": [
     {
-      "id": "javascript",
-      "title": "JavaScript",
+      "id": "basics",
+      "title": "C Basics",
       "lessons": [
-        { "id": "js-variables", "title": "Variables and Data Types", "level": "Beginner" },
-        { "id": "js-functions", "title": "Functions", "level": "Beginner" },
-        { "id": "js-arrays", "title": "Arrays", "level": "Intermediate" }
+        { "id": "c-intro", "title": "Introduction to C", "level": "Beginner" },
+        { "id": "c-variables", "title": "Variables and Data Types", "level": "Beginner" },
+        { "id": "c-operators", "title": "Operators", "level": "Beginner" }
       ]
     },
     {
-      "id": "python",
-      "title": "Python",
+      "id": "control-flow",
+      "title": "Control Flow",
       "lessons": [
-        { "id": "py-basics", "title": "Python Basics", "level": "Beginner" },
-        { "id": "py-loops", "title": "Loops", "level": "Beginner" }
+        { "id": "c-if-else", "title": "If-Else and Switch", "level": "Beginner" },
+        { "id": "c-loops", "title": "Loops", "level": "Beginner" }
       ]
     },
     {
-      "id": "sql",
-      "title": "SQL",
+      "id": "functions-arrays",
+      "title": "Functions & Arrays",
       "lessons": [
-        { "id": "sql-select", "title": "SELECT Statements", "level": "Beginner" }
+        { "id": "c-functions", "title": "Functions", "level": "Intermediate" }
       ]
     }
   ]
