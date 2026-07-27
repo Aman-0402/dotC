@@ -130,3 +130,30 @@
   color: var(--color-text);
   font-weight: 500;
 }
+
+.code-block {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 14px;
+  overflow-x: auto;
+}
+
+.code-block-copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--color-sidebar);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 11px;
+  cursor: pointer;
+  color: var(--color-text);
+}
