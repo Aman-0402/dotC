@@ -1,3 +1,29 @@
 {
-  "topics": []
+  "_temp": true,
+  "topics": [
+    {
+      "id": "javascript",
+      "title": "JavaScript",
+      "lessons": [
+        { "id": "js-variables", "title": "Variables and Data Types", "level": "Beginner" },
+        { "id": "js-functions", "title": "Functions", "level": "Beginner" },
+        { "id": "js-arrays", "title": "Arrays", "level": "Intermediate" }
+      ]
+    },
+    {
+      "id": "python",
+      "title": "Python",
+      "lessons": [
+        { "id": "py-basics", "title": "Python Basics", "level": "Beginner" },
+        { "id": "py-loops", "title": "Loops", "level": "Beginner" }
+      ]
+    },
+    {
+      "id": "sql",
+      "title": "SQL",
+      "lessons": [
+        { "id": "sql-select", "title": "SELECT Statements", "level": "Beginner" }
+      ]
+    }
+  ]
 }
