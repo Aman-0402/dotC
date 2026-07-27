@@ -1,6 +1,6 @@
 import { initTheme } from './theme.js';
 import { initRouter, registerRoute, registerNotFound } from './router.js';
-import { initSidebar } from './sidebar.js';
+import { initSidebar } from './components/sidebar.js';
 import { initSearch } from './search.js';
 
 async function bootstrap() {
