@@ -2,6 +2,7 @@ import { initTheme } from './theme.js';
 import { initRouter, registerRoute, registerNotFound } from './router.js';
 import { initSidebar } from './components/sidebar.js';
 import { initSearch } from './search.js';
+import { setBreadcrumb, breadcrumbForRoute } from './components/navbar.js';
 
 async function bootstrap() {
   initTheme();
@@ -15,6 +16,12 @@ async function bootstrap() {
   registerRoute('/', () => renderPlaceholder('Home'));
   registerNotFound(() => renderPlaceholder('Not Found'));
   initRouter();
+
+  window.addEventListener('hashchange', () => {
+    const path = window.location.hash.slice(1) || '/';
+    setBreadcrumb(breadcrumbForRoute(path, nav));
+  });
+  setBreadcrumb(breadcrumbForRoute(window.location.hash.slice(1) || '/', nav));
 
   initMobileSidebarToggle();
 }

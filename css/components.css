@@ -124,3 +124,9 @@
 .sidebar-lesson-done {
   color: var(--color-success) !important;
 }
+
+.breadcrumb {
+  font-size: 14px;
+  color: var(--color-text);
+  font-weight: 500;
+}
