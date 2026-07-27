@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dev Platform</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/layout.css" />
+  <link rel="stylesheet" href="./css/theme.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar">
+      <nav id="sidebar-nav"></nav>
+    </aside>
+
+    <header class="app-navbar">
+      <button id="sidebar-toggle" aria-label="Toggle sidebar">☰</button>
+
+      <div class="navbar-search">
+        <input id="search-input" type="text" placeholder="Search lessons..." />
+        <ul id="search-results" hidden></ul>
+      </div>
+
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <span class="icon-sun">☀️</span>
+        <span class="icon-moon">🌙</span>
+      </button>
+    </header>
+
+    <main class="app-main" id="main-content"></main>
+  </div>
+
+  <!-- Monaco Editor (CDN, loaded on demand later in Phase 2/5) -->
+  <script>
+    window.MONACO_CDN_BASE = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.50.0/min';
+  </script>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
