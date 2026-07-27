@@ -3,6 +3,8 @@ import { initRouter, registerRoute, registerNotFound } from './router.js';
 import { initSidebar } from './components/sidebar.js';
 import { initSearch } from './search.js';
 import { setBreadcrumb, breadcrumbForRoute } from './components/navbar.js';
+import { renderProgressCard } from './components/progress-card.js';
+import { renderLessonGrid } from './components/lesson-card.js';
 
 async function bootstrap() {
   initTheme();
@@ -13,7 +15,7 @@ async function bootstrap() {
   const allLessons = nav.topics.flatMap(t => t.lessons);
   initSearch(allLessons);
 
-  registerRoute('/', () => renderPlaceholder('Home'));
+  registerRoute('/', () => renderHome(nav, allLessons));
   registerNotFound(() => renderPlaceholder('Not Found'));
   initRouter();
 
@@ -29,6 +31,12 @@ async function bootstrap() {
 function renderPlaceholder(title) {
   const main = document.getElementById('main-content');
   if (main) main.innerHTML = `<h1>${title}</h1><p>Lesson engine not built yet.</p>`;
+}
+
+function renderHome(nav, allLessons) {
+  const main = document.getElementById('main-content');
+  if (!main) return;
+  main.innerHTML = renderProgressCard(allLessons) + renderLessonGrid(nav.topics);
 }
 
 function initMobileSidebarToggle() {
