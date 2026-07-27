@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="./css/layout.css" />
   <link rel="stylesheet" href="./css/theme.css" />
   <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
 </head>
 <body>
   <div class="app-shell">
@@ -38,11 +39,16 @@
     <main class="app-main" id="main-content"></main>
   </div>
 
+  <div id="modal-root"></div>
+
   <!-- Monaco Editor (CDN, loaded on demand later in Phase 2/5) -->
   <script>
     window.MONACO_CDN_BASE = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.50.0/min';
   </script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
   <script type="module" src="./js/main.js"></script>
 </body>
 </html>
