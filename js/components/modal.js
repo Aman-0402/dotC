@@ -1,6 +1,8 @@
 let escapeHandler = null;
 
 export function openModal({ title, body, onConfirm }) {
+  closeModal();
+
   const root = document.getElementById('modal-root');
 
   root.innerHTML = `
