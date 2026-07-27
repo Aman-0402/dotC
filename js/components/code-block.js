@@ -12,15 +12,25 @@ export function renderCodeBlock(code) {
   `;
 }
 
+const COPY_ICON = '📋';
+
 export function initCodeBlocks(container) {
   container.querySelectorAll('.code-block-copy').forEach(button => {
+    if (button.dataset.bound) {
+      return;
+    }
+    button.dataset.bound = 'true';
+
     button.addEventListener('click', () => {
       const code = button.parentElement.querySelector('code').textContent;
       navigator.clipboard.writeText(code);
-      const original = button.textContent;
+      if (button._copyResetTimeout) {
+        clearTimeout(button._copyResetTimeout);
+      }
       button.textContent = 'Copied';
-      setTimeout(() => {
-        button.textContent = original;
+      button._copyResetTimeout = setTimeout(() => {
+        button.textContent = COPY_ICON;
+        button._copyResetTimeout = null;
       }, 1500);
     });
   });
