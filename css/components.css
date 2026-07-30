@@ -89,6 +89,11 @@ pre[class*="language-"] {
   margin-bottom: 0.5rem;
 }
 
+.lesson-main h4 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+}
+
 .lesson-main ul,
 .lesson-main ol {
   margin: 0.75rem 0 1rem 1.5rem;

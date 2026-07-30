@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C Tokens — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / C Tokens</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>C Tokens</h1>
+
+      <h2>What are C Tokens?</h2>
+      <p>A <strong>token</strong> is the <strong>smallest individual unit</strong> (or meaningful element) of a C program that the compiler recognizes.</p>
+      <p>Just as an English sentence is made up of words, a C program is made up of tokens.</p>
+      <p>For example:</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <p>This single statement contains <strong>5 tokens</strong>:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>int</code></td>
+            <td>Keyword</td>
+          </tr>
+          <tr>
+            <td><code>age</code></td>
+            <td>Identifier</td>
+          </tr>
+          <tr>
+            <td><code>=</code></td>
+            <td>Operator</td>
+          </tr>
+          <tr>
+            <td><code>20</code></td>
+            <td>Constant</td>
+          </tr>
+          <tr>
+            <td><code>;</code></td>
+            <td>Special Symbol</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Definition</h2>
+      <blockquote>
+        <p><strong>A token is the smallest meaningful unit in a C program that is recognized by the compiler.</strong></p>
+      </blockquote>
+
+      <h2>Types of Tokens in C</h2>
+      <p>There are <strong>6 main types</strong> of tokens:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Token Type</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Keywords</td>
+            <td><code>int</code>, <code>if</code>, <code>return</code></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Identifiers</td>
+            <td><code>age</code>, <code>sum</code>, <code>marks</code></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Constants</td>
+            <td><code>10</code>, <code>3.14</code>, <code>'A'</code></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Strings</td>
+            <td><code>"Hello"</code></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Operators</td>
+            <td><code>+</code>, <code>-</code>, <code>*</code>, <code>=</code></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Special Symbols (Separators/Punctuators)</td>
+            <td><code>;</code>, <code>{}</code>, <code>()</code>, <code>,</code>, <code>[]</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>1. Keywords</h2>
+      <p>Keywords are <strong>reserved words</strong> that have predefined meanings in C.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">int age;</code></pre>
+      <p>Here:</p>
+      <ul>
+        <li><code>int</code> → Keyword</li>
+        <li><code>age</code> → Identifier</li>
+      </ul>
+      <p>Some common keywords:</p>
+      <pre><code class="language-none">int
+char
+float
+double
+if
+else
+for
+while
+return
+void
+break
+continue
+switch
+case</code></pre>
+
+      <h2>2. Identifiers</h2>
+      <p>Identifiers are the <strong>names given by the programmer</strong> to variables, functions, arrays, etc.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">int marks;</code></pre>
+      <p>Here:</p>
+      <ul>
+        <li><code>marks</code> is an identifier.</li>
+      </ul>
+      <p>More examples:</p>
+      <pre><code class="language-c">studentName
+totalMarks
+salary
+calculateArea</code></pre>
+      <p>Rules (briefly):</p>
+      <ul>
+        <li>Can contain letters, digits, and <code>_</code></li>
+        <li>Cannot start with a digit</li>
+        <li>Cannot be a keyword</li>
+        <li>Case-sensitive</li>
+      </ul>
+
+      <h2>3. Constants</h2>
+      <p>Constants are <strong>fixed values</strong> that do not change during program execution.</p>
+      <p>Examples:</p>
+      <pre><code class="language-c">100
+25.5
+'A'</code></pre>
+      <p>Program:</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("%d", 100);
+    return 0;
+}</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">100</code></pre>
+
+      <h2>4. String Literals</h2>
+      <p>A string is a sequence of characters enclosed in <strong>double quotes</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">"Hello"</code></pre>
+      <p>Program:</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Welcome");
+    return 0;
+}</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">Welcome</code></pre>
+
+      <h2>5. Operators</h2>
+      <p>Operators perform operations on data.</p>
+      <p>Examples:</p>
+      <pre><code class="language-c">+
+-
+*
+/
+%
+=
+==
+&lt;
+&gt;
+&amp;&amp;
+||</code></pre>
+      <p>Example:</p>
+      <pre><code class="language-c">int sum = 10 + 20;</code></pre>
+      <p>Tokens:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>int</td>
+            <td>Keyword</td>
+          </tr>
+          <tr>
+            <td>sum</td>
+            <td>Identifier</td>
+          </tr>
+          <tr>
+            <td>=</td>
+            <td>Operator</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Constant</td>
+          </tr>
+          <tr>
+            <td>+</td>
+            <td>Operator</td>
+          </tr>
+          <tr>
+            <td>20</td>
+            <td>Constant</td>
+          </tr>
+          <tr>
+            <td>;</td>
+            <td>Special Symbol</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>6. Special Symbols (Punctuators)</h2>
+      <p>These symbols define the structure of a C program.</p>
+      <p>Examples:</p>
+      <pre><code class="language-none">;
+,
+()
+{}
+[]
+#
+.
+:</code></pre>
+      <p>Example:</p>
+      <pre><code class="language-c">int main()
+{
+}</code></pre>
+      <p>Symbols used:</p>
+      <ul>
+        <li><code>(</code></li>
+        <li><code>)</code></li>
+        <li><code>{</code></li>
+        <li><code>}</code></li>
+      </ul>
+
+      <h2>Example 1: Token Identification</h2>
+      <p>Program:</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 20;
+
+    printf("%d", age);
+
+    return 0;
+}</code></pre>
+
+      <h3>Tokens</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>#</code></td>
+            <td>Special Symbol</td>
+          </tr>
+          <tr>
+            <td><code>include</code></td>
+            <td>Identifier (preprocessor directive name)</td>
+          </tr>
+          <tr>
+            <td><code>&lt;</code></td>
+            <td>Special Symbol</td>
+          </tr>
+          <tr>
+            <td><code>stdio.h</code></td>
+            <td>Header file name</td>
+          </tr>
+          <tr>
+            <td><code>&gt;</code></td>
+            <td>Special Symbol</td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>Keyword</td>
+          </tr>
+          <tr>
+            <td><code>main</code></td>
+            <td>Identifier</td>
+          </tr>
+          <tr>
+            <td><code>(</code></td>
+            <td>Special Symbol</td>
+          </tr>
+          <tr>
+            <td><code>)</code></td>
+            <td>Special Symbol</td>
+          </tr>
+          <tr>
+            <td><code>{</code></td>
+            <td>Special Symbol</td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>Keyword</td>
+          </tr>
+          <tr>
+            <td><code>age</code></td>
+            <td>Identifier</td>
+          </tr>
+          <tr>
+            <td><code>=</code></td>
+            <td>Operator</td>
+          </tr>
+          <tr>
+            <td><code>20</code></td>
+            <td>Constant</td>
+          </tr>
+          <tr>
+            <td><code>;</code></td>
+            <td>Special Symbol</td>
+          </tr>
+          <tr>
+            <td><code>printf</code></td>
+            <td>Identifier (library function name)</td>
+          </tr>
+          <tr>
+            <td><code>"%d"</code></td>
+            <td>String Literal</td>
+          </tr>
+          <tr>
+            <td><code>,</code></td>
+            <td>Special Symbol</td>
+          </tr>
+          <tr>
+            <td><code>age</code></td>
+            <td>Identifier</td>
+          </tr>
+          <tr>
+            <td><code>)</code></td>
+            <td>Special Symbol</td>
+          </tr>
+          <tr>
+            <td><code>;</code></td>
+            <td>Special Symbol</td>
+          </tr>
+          <tr>
+            <td><code>return</code></td>
+            <td>Keyword</td>
+          </tr>
+          <tr>
+            <td><code>0</code></td>
+            <td>Constant</td>
+          </tr>
+          <tr>
+            <td><code>;</code></td>
+            <td>Special Symbol</td>
+          </tr>
+          <tr>
+            <td><code>}</code></td>
+            <td>Special Symbol</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Example 2: More Tokens</h2>
+      <pre><code class="language-c">float salary = 25000.50;</code></pre>
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>float</td>
+            <td>Keyword</td>
+          </tr>
+          <tr>
+            <td>salary</td>
+            <td>Identifier</td>
+          </tr>
+          <tr>
+            <td>=</td>
+            <td>Operator</td>
+          </tr>
+          <tr>
+            <td>25000.50</td>
+            <td>Constant</td>
+          </tr>
+          <tr>
+            <td>;</td>
+            <td>Special Symbol</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Example 3</h2>
+      <pre><code class="language-c">char grade = 'A';</code></pre>
+      <p>Tokens:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>char</td>
+            <td>Keyword</td>
+          </tr>
+          <tr>
+            <td>grade</td>
+            <td>Identifier</td>
+          </tr>
+          <tr>
+            <td>=</td>
+            <td>Operator</td>
+          </tr>
+          <tr>
+            <td>'A'</td>
+            <td>Character Constant</td>
+          </tr>
+          <tr>
+            <td>;</td>
+            <td>Special Symbol</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Why are Tokens Important?</h2>
+      <p>The compiler first breaks your source code into tokens before checking for syntax errors and generating machine code.</p>
+      <p>Compilation flow:</p>
+      <pre><code class="language-none">Source Code
+      │
+      ▼
+Tokenization (Lexical Analysis)
+      │
+      ▼
+Syntax Checking
+      │
+      ▼
+Compilation
+      │
+      ▼
+Machine Code</code></pre>
+      <p>If a token is invalid, compilation fails.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">int 2age = 10;</code></pre>
+      <p>Here, <code>2age</code> is <strong>not a valid identifier</strong>, so the compiler reports an error.</p>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Using a keyword as an identifier</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">int int = 5;</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">int number = 5;</code></pre>
+
+      <h3>2. Missing semicolon</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">int age = 20</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+
+      <h3>3. Forgetting double quotes for strings</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">printf(Hello);</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">printf("Hello");</code></pre>
+
+      <h3>4. Starting an identifier with a digit</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">int 1value;</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">int value1;</code></pre>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is a token in C?</h3>
+      <p>A token is the smallest meaningful unit of a C program recognized by the compiler.</p>
+
+      <h3>2. Name the different types of tokens.</h3>
+      <ul>
+        <li>Keywords</li>
+        <li>Identifiers</li>
+        <li>Constants</li>
+        <li>String Literals</li>
+        <li>Operators</li>
+        <li>Special Symbols (Punctuators)</li>
+      </ul>
+
+      <h3>3. Is <code>printf</code> a keyword?</h3>
+      <p>No. <code>printf</code> is a <strong>library function name (identifier)</strong> declared in <code>&lt;stdio.h&gt;</code>.</p>
+
+      <h3>4. Is <code>"Hello"</code> a token?</h3>
+      <p>Yes. It is a <strong>string literal token</strong>.</p>
+
+      <h3>5. Is <code>;</code> a token?</h3>
+      <p>Yes. It is a <strong>special symbol (punctuator)</strong> token.</p>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define a token in C.</li>
+        <li>List the six types of tokens with examples.</li>
+        <li>Differentiate between keywords and identifiers.</li>
+        <li>What are string literals?</li>
+        <li>Why are tokens important in the compilation process?</li>
+      </ol>
+
+      <h3>Coding</h3>
+      <h4>Q1. Identify the tokens in the following statement:</h4>
+      <pre><code class="language-c">int marks = 95;</code></pre>
+      <p><strong>Answer:</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>int</td>
+            <td>Keyword</td>
+          </tr>
+          <tr>
+            <td>marks</td>
+            <td>Identifier</td>
+          </tr>
+          <tr>
+            <td>=</td>
+            <td>Operator</td>
+          </tr>
+          <tr>
+            <td>95</td>
+            <td>Constant</td>
+          </tr>
+          <tr>
+            <td>;</td>
+            <td>Special Symbol</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>Q2. Write a program using different types of tokens.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 21;
+    float height = 5.9;
+    char grade = 'A';
+
+    printf("Age = %d\n", age);
+    printf("Height = %.1f\n", height);
+    printf("Grade = %c\n", grade);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Age = 21
+Height = 5.9
+Grade = A</code></pre>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
