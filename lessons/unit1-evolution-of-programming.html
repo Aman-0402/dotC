@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evolution of Programming & Languages — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 1 / Evolution of Programming & Languages</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Evolution of Programming & Languages</h1>
+
+      <h2>What is Programming?</h2>
+      <p>Programming is the process of writing instructions that tell a computer what to do.</p>
+      <p>A computer cannot think on its own. It only follows instructions written in a programming language.</p>
+      <p>Example:</p>
+      <ul>
+        <li>Add two numbers</li>
+        <li>Display the result</li>
+      </ul>
+      <p>These instructions must be written in a language the computer understands.</p>
+
+      <h2>Evolution of Programming Languages</h2>
+      <p>Programming languages have evolved over time to make programming easier, faster, and more understandable.</p>
+
+      <h3>1. First Generation Language (1GL)</h3>
+      <p><strong>Machine Language</strong></p>
+      <ul>
+        <li>Uses only binary digits (0 and 1)</li>
+        <li>Directly understood by the CPU</li>
+        <li>Fastest execution</li>
+        <li>Very difficult for humans to write and read</li>
+        <li>Machine dependent</li>
+      </ul>
+      <p>Example</p>
+      <pre><code class="language-none">10110010
+11001001
+00010110</code></pre>
+      <p><strong>Advantages</strong></p>
+      <ul>
+        <li>Very fast</li>
+        <li>No translation required</li>
+      </ul>
+      <p><strong>Disadvantages</strong></p>
+      <ul>
+        <li>Hard to write</li>
+        <li>Hard to debug</li>
+        <li>Easy to make mistakes</li>
+      </ul>
+
+      <h3>2. Second Generation Language (2GL)</h3>
+      <p><strong>Assembly Language</strong></p>
+      <p>Instead of binary, programmers use mnemonics (short keywords).</p>
+      <p>Example</p>
+      <pre><code class="language-none">MOV A, B
+ADD A, C
+SUB A, D</code></pre>
+      <p>Since computers understand only machine language, an Assembler converts assembly language into machine code.</p>
+      <p><strong>Advantages</strong></p>
+      <ul>
+        <li>Easier than machine language</li>
+        <li>Faster development</li>
+      </ul>
+      <p><strong>Disadvantages</strong></p>
+      <ul>
+        <li>Machine dependent</li>
+        <li>Still difficult for large programs</li>
+      </ul>
+
+      <h3>3. Third Generation Language (3GL)</h3>
+      <p>These are High-Level Languages.</p>
+      <p><strong>Examples</strong></p>
+      <ul>
+        <li>C</li>
+        <li>C++</li>
+        <li>Java</li>
+        <li>Python</li>
+        <li>Pascal</li>
+      </ul>
+      <p>Example in C</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+int main() {
+    printf("Hello World");
+    return 0;
+}</code></pre>
+      <p><strong>Features</strong></p>
+      <ul>
+        <li>Easy to learn</li>
+        <li>English-like syntax</li>
+        <li>Portable</li>
+        <li>Easier debugging</li>
+      </ul>
+      <p>Most modern software is written using high-level languages.</p>
+
+      <h3>4. Fourth Generation Language (4GL)</h3>
+      <p>Designed to reduce coding and increase productivity.</p>
+      <p><strong>Examples</strong></p>
+      <ul>
+        <li>SQL</li>
+        <li>MATLAB</li>
+        <li>SAS</li>
+      </ul>
+      <p>Example</p>
+      <pre><code class="language-sql">SELECT * FROM Students;</code></pre>
+      <p>Instead of writing many lines of code, one statement performs the task.</p>
+
+      <h3>5. Fifth Generation Language (5GL)</h3>
+      <p>Used mainly in</p>
+      <ul>
+        <li>Artificial Intelligence</li>
+        <li>Expert Systems</li>
+        <li>Machine Learning</li>
+        <li>Natural Language Processing</li>
+      </ul>
+      <p><strong>Examples</strong></p>
+      <ul>
+        <li>Prolog</li>
+        <li>Mercury</li>
+      </ul>
+      <p>These languages focus more on solving problems using logic rather than writing detailed algorithms.</p>
+
+      <h2>Evolution Summary</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Generation</th>
+            <th>Language Type</th>
+            <th>Example</th>
+            <th>Translator</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1GL</td>
+            <td>Machine Language</td>
+            <td>10101010</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td>2GL</td>
+            <td>Assembly Language</td>
+            <td>MOV, ADD</td>
+            <td>Assembler</td>
+          </tr>
+          <tr>
+            <td>3GL</td>
+            <td>High-Level Language</td>
+            <td>C, Java, Python</td>
+            <td>Compiler / Interpreter</td>
+          </tr>
+          <tr>
+            <td>4GL</td>
+            <td>Very High-Level Language</td>
+            <td>SQL</td>
+            <td>DBMS/Compiler</td>
+          </tr>
+          <tr>
+            <td>5GL</td>
+            <td>AI &amp; Logic Language</td>
+            <td>Prolog</td>
+            <td>Special AI Systems</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Why was C developed?</h2>
+      <p>Before C, programming was mostly done using Assembly Language.</p>
+      <p><strong>Problems:</strong></p>
+      <ul>
+        <li>Difficult to write</li>
+        <li>Machine dependent</li>
+        <li>Large programs became difficult to manage</li>
+      </ul>
+      <p>To solve these problems, Dennis Ritchie developed C in 1972 at Bell Laboratories.</p>
+      <p>C became popular because it is:</p>
+      <ul>
+        <li>Fast</li>
+        <li>Portable</li>
+        <li>Efficient</li>
+        <li>Suitable for system programming</li>
+        <li>The foundation for many modern languages like C++, Java, and C#</li>
+      </ul>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>Programming means giving instructions to a computer.</li>
+        <li>Programming languages evolved from Machine Language to AI-based languages.</li>
+        <li>Machine Language is fastest but hardest to use.</li>
+        <li>Assembly Language uses mnemonics and requires an Assembler.</li>
+        <li>High-Level Languages (like C) are easy to read and write.</li>
+        <li>C was developed by Dennis Ritchie in 1972.</li>
+        <li>C is called the mother of many modern programming languages because it influenced languages such as C++, Java, C#, JavaScript (syntax), PHP, and many others.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-sql.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

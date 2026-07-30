@@ -69,3 +69,43 @@ pre[class*="language-"] {
 .lesson-nav a:only-child {
   margin-left: auto;
 }
+
+.lesson-main p {
+  margin: 0.9rem 0;
+}
+
+.lesson-main h2 {
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.lesson-main h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.lesson-main ul,
+.lesson-main ol {
+  margin: 0.75rem 0 1rem 1.5rem;
+}
+
+.lesson-main li {
+  margin: 0.25rem 0;
+}
+
+.lesson-main table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+}
+
+.lesson-main th,
+.lesson-main td {
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.lesson-main th {
+  background: var(--color-bg-elevated);
+}
