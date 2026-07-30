@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction to C Program and C Compilers — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 1 / Introduction to C Program and C Compilers</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Introduction to C Program and C Compilers</h1>
+
+      <p>Now that you know how to solve a problem using <strong>Algorithms, Pseudocode, and Flowcharts</strong>, it's time to learn the language in which we'll write programs: <strong>C</strong>.</p>
+
+      <h2>What is C?</h2>
+      <p><strong>Definition:</strong></p>
+      <blockquote>
+        <p><strong>C</strong> is a <strong>general-purpose, procedural programming language</strong> developed for writing efficient and fast programs.</p>
+      </blockquote>
+      <p>It is one of the most popular programming languages and is often called the <strong>mother of modern programming languages</strong>.</p>
+
+      <h2>History of C</h2>
+      <ul>
+        <li><strong>Developed by:</strong> Dennis Ritchie</li>
+        <li><strong>Year:</strong> 1972</li>
+        <li><strong>Developed at:</strong> Bell Laboratories (Bell Labs), USA</li>
+        <li><strong>Purpose:</strong> To develop the <strong>UNIX Operating System</strong></li>
+      </ul>
+      <p>Before C, the <strong>B language</strong> was used. C was developed as an improved version of B.</p>
+
+      <h2>Why is C So Popular?</h2>
+      <ul>
+        <li>Fast execution</li>
+        <li>Easy to learn</li>
+        <li>Portable (runs on different operating systems)</li>
+        <li>Supports structured programming</li>
+        <li>Used for system programming</li>
+        <li>Foundation for many modern languages</li>
+      </ul>
+
+      <h2>Applications of C</h2>
+      <p>C is used in many areas of software development.</p>
+
+      <h3>1. Operating Systems</h3>
+      <p>Examples:</p>
+      <ul>
+        <li>UNIX</li>
+        <li>Linux (many parts)</li>
+        <li>Windows (some components)</li>
+      </ul>
+
+      <h3>2. Embedded Systems</h3>
+      <p>Examples:</p>
+      <ul>
+        <li>Washing Machines</li>
+        <li>Smart TVs</li>
+        <li>Routers</li>
+        <li>ATM Machines</li>
+        <li>IoT Devices</li>
+      </ul>
+
+      <h3>3. Device Drivers</h3>
+      <p>Drivers help the operating system communicate with hardware devices like:</p>
+      <ul>
+        <li>Keyboard</li>
+        <li>Mouse</li>
+        <li>Printer</li>
+        <li>Graphics Card</li>
+      </ul>
+
+      <h3>4. Database Systems</h3>
+      <p>Examples:</p>
+      <ul>
+        <li>MySQL (core components)</li>
+        <li>Oracle Database (some parts)</li>
+      </ul>
+
+      <h3>5. Game Development</h3>
+      <p>Many game engines use C or C++ because of their speed.</p>
+
+      <h3>6. Compilers and Interpreters</h3>
+      <p>Many programming language compilers are written in C.</p>
+
+      <h3>7. Networking Software</h3>
+      <p>Examples:</p>
+      <ul>
+        <li>Web Servers</li>
+        <li>Network Utilities</li>
+        <li>Communication Software</li>
+      </ul>
+
+      <h2>Features of C</h2>
+
+      <h3>1. Simple</h3>
+      <p>Easy syntax and fewer keywords.</p>
+
+      <h3>2. Fast</h3>
+      <p>Produces efficient machine code.</p>
+
+      <h3>3. Portable</h3>
+      <p>The same C program can run on different operating systems with little or no modification.</p>
+
+      <h3>4. Structured</h3>
+      <p>Programs can be divided into smaller functions.</p>
+
+      <h3>5. Modular</h3>
+      <p>Large programs can be broken into multiple functions.</p>
+
+      <h3>6. Rich Library</h3>
+      <p>Provides many built-in functions through header files like:</p>
+      <pre><code class="language-c">stdio.h
+math.h
+string.h
+stdlib.h</code></pre>
+
+      <h3>7. Middle-Level Language</h3>
+      <p>C is called a <strong>Middle-Level Language</strong> because it supports features of both <strong>Low-Level</strong> and <strong>High-Level</strong> languages.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Low-Level Features</th>
+            <th>High-Level Features</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Memory access</td>
+            <td>Easy syntax</td>
+          </tr>
+          <tr>
+            <td>Fast execution</td>
+            <td>Readability</td>
+          </tr>
+          <tr>
+            <td>Pointer support</td>
+            <td>Portability</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Advantages of C</h2>
+      <ul>
+        <li>High performance</li>
+        <li>Easy debugging</li>
+        <li>Reusable code through functions</li>
+        <li>Large community support</li>
+        <li>Widely used in industry</li>
+      </ul>
+
+      <h2>Limitations of C</h2>
+      <ul>
+        <li>No built-in Object-Oriented Programming (OOP)</li>
+        <li>No automatic garbage collection</li>
+        <li>Manual memory management</li>
+        <li>Limited runtime error checking</li>
+      </ul>
+
+      <h2>What is a Compiler?</h2>
+      <p>A <strong>Compiler</strong> is a software program that converts the entire C source code into machine language before execution.</p>
+      <p>Without a compiler, the computer cannot understand C programs.</p>
+
+      <h3>Simple Diagram</h3>
+      <pre><code class="language-none">C Program
+    │
+    ▼
+Compiler
+    │
+    ▼
+Machine Code
+    │
+    ▼
+Computer Executes</code></pre>
+
+      <h2>Why Do We Need a Compiler?</h2>
+      <p>Computers understand only <strong>Machine Language (0s and 1s)</strong>.</p>
+      <p>Example:</p>
+      <p>You write:</p>
+      <pre><code class="language-c">printf("Hello");</code></pre>
+      <p>The computer actually executes something like:</p>
+      <pre><code class="language-none">101010001011001010...</code></pre>
+      <p>The compiler performs this conversion automatically.</p>
+
+      <h2>How a Compiler Works</h2>
+      <pre><code class="language-none">Source Code (.c)
+        │
+        ▼
+   Compiler
+        │
+        ▼
+ Object Code (.o/.obj)
+        │
+        ▼
+    Linker
+        │
+        ▼
+ Executable File (.exe)
+        │
+        ▼
+Program Output</code></pre>
+      <blockquote>
+        <p>We'll study the <strong>Compilation Process</strong>, <strong>Object Code</strong>, <strong>Linker</strong>, and <strong>Executable Code</strong> in detail in the upcoming topics.</p>
+      </blockquote>
+
+      <h2>Popular C Compilers</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Compiler</th>
+            <th>Platform</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GCC (GNU Compiler Collection)</td>
+            <td>Linux, Windows, macOS</td>
+          </tr>
+          <tr>
+            <td>Clang</td>
+            <td>Linux, macOS, Windows</td>
+          </tr>
+          <tr>
+            <td>Turbo C</td>
+            <td>Old DOS-based compiler (used in older textbooks)</td>
+          </tr>
+          <tr>
+            <td>Microsoft Visual C (MSVC)</td>
+            <td>Windows</td>
+          </tr>
+          <tr>
+            <td>MinGW GCC</td>
+            <td>Windows</td>
+          </tr>
+        </tbody>
+      </table>
+      <blockquote>
+        <p><strong>For modern C programming, GCC and Clang are the most recommended compilers.</strong></p>
+      </blockquote>
+
+      <h2>Compiler vs Interpreter</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Compiler</th>
+            <th>Interpreter</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Translates the entire program at once</td>
+            <td>Translates one line at a time</td>
+          </tr>
+          <tr>
+            <td>Faster execution</td>
+            <td>Slower execution</td>
+          </tr>
+          <tr>
+            <td>Generates an executable file</td>
+            <td>No separate executable file</td>
+          </tr>
+          <tr>
+            <td>Errors shown after compilation</td>
+            <td>Errors shown line by line</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Examples:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Compiler Languages</th>
+            <th>Interpreter Languages</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>C</td>
+            <td>Python</td>
+          </tr>
+          <tr>
+            <td>C++</td>
+            <td>JavaScript (in browsers)</td>
+          </tr>
+          <tr>
+            <td>Go</td>
+            <td>Ruby</td>
+          </tr>
+        </tbody>
+      </table>
+      <blockquote>
+        <p>We'll discuss <strong>Interpreters</strong> in detail later in this unit.</p>
+      </blockquote>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine you wrote a letter in <strong>English</strong>, but your friend understands only <strong>Japanese</strong>.</p>
+      <p>You need a <strong>translator</strong>.</p>
+      <pre><code class="language-none">English Letter
+      │
+      ▼
+Translator
+      │
+      ▼
+Japanese Letter</code></pre>
+      <p>Similarly:</p>
+      <pre><code class="language-none">C Program
+     │
+     ▼
+Compiler
+     │
+     ▼
+Machine Language</code></pre>
+      <p>The compiler acts as the <strong>translator</strong> between the programmer and the computer.</p>
+
+      <h2>Summary</h2>
+      <pre><code class="language-none">Programmer
+     │
+Writes C Program
+     │
+     ▼
+Compiler
+     │
+Converts into Machine Language
+     │
+     ▼
+Computer Executes</code></pre>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li><strong>C</strong> is a <strong>general-purpose procedural programming language</strong>.</li>
+        <li>It was developed by <strong>Dennis Ritchie</strong> in <strong>1972</strong> at <strong>Bell Labs</strong>.</li>
+        <li>C is called a <strong>Middle-Level Language</strong> because it combines low-level and high-level features.</li>
+        <li>A <strong>Compiler</strong> translates the entire C program into machine language.</li>
+        <li>Computers cannot understand C directly; they only understand <strong>binary (0s and 1s)</strong>.</li>
+        <li>Popular C compilers include <strong>GCC</strong>, <strong>Clang</strong>, <strong>MSVC</strong>, and <strong>MinGW GCC</strong>.</li>
+      </ul>
+
+      <h2>Interview Questions</h2>
+
+      <h3>Q1. Who developed the C programming language?</h3>
+      <p><strong>Answer:</strong> Dennis Ritchie.</p>
+
+      <h3>Q2. In which year was C developed?</h3>
+      <p><strong>Answer:</strong> 1972.</p>
+
+      <h3>Q3. Why is C called a middle-level language?</h3>
+      <p><strong>Answer:</strong> Because it combines the efficiency of low-level programming with the ease of high-level programming.</p>
+
+      <h3>Q4. What is a compiler?</h3>
+      <p><strong>Answer:</strong> A compiler is software that translates an entire C program into machine code before execution.</p>
+
+      <h3>Q5. Name two popular C compilers.</h3>
+      <p><strong>Answer:</strong> GCC and Clang.</p>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

@@ -22,6 +22,10 @@
         {
           "title": "Flowcharts",
           "path": "lessons/unit1-flowcharts.html"
+        },
+        {
+          "title": "Introduction to C Program and C Compilers",
+          "path": "lessons/unit1-intro-to-c-and-compilers.html"
         }
       ]
     }
