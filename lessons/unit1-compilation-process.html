@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compilation Process — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 1 / Compilation Process</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Compilation Process</h1>
+
+      <p>When you write a C program, the computer <strong>cannot understand it directly</strong> because it only understands <strong>Machine Language (0s and 1s)</strong>.</p>
+      <p>So, the C program must go through several stages before it can be executed.</p>
+      <p>This complete journey is called the <strong>Compilation Process</strong>.</p>
+
+      <h2>What is the Compilation Process?</h2>
+      <blockquote>
+        <p><strong>Compilation Process</strong> is the process of converting a C source program into an executable program that the computer can run.</p>
+      </blockquote>
+
+      <h2>Overall Compilation Process</h2>
+      <pre><code class="language-none">        Source Code (.c)
+               │
+               ▼
+      Preprocessor
+               │
+               ▼
+         Compiler
+               │
+               ▼
+       Assembly Code (.s)
+               │
+               ▼
+         Assembler
+               │
+               ▼
+        Object Code (.o/.obj)
+               │
+               ▼
+           Linker
+               │
+               ▼
+     Executable File (.exe)
+               │
+               ▼
+           Loader
+               │
+               ▼
+        Program Execution</code></pre>
+      <p>There are <strong>6 main stages</strong>:</p>
+      <ol>
+        <li>Preprocessing</li>
+        <li>Compilation</li>
+        <li>Assembly</li>
+        <li>Linking</li>
+        <li>Loading</li>
+        <li>Execution</li>
+      </ol>
+
+      <h2>Stage 1: Source Code</h2>
+      <p>The program written by the programmer is called the <strong>Source Code</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello World");
+
+    return 0;
+}</code></pre>
+      <p>Usually saved as</p>
+      <pre><code class="language-none">hello.c</code></pre>
+      <p>Extension:</p>
+      <pre><code class="language-none">.c</code></pre>
+
+      <h2>Stage 2: Preprocessing</h2>
+      <p>The <strong>Preprocessor</strong> processes all <strong>preprocessor directives</strong> before compilation.</p>
+      <p>Examples of directives:</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#define PI 3.14</code></pre>
+      <h3>What does the preprocessor do?</h3>
+      <ul>
+        <li>Includes header files</li>
+        <li>Expands macros</li>
+        <li>Removes comments</li>
+        <li>Processes conditional compilation directives (<code>#ifdef</code>, <code>#ifndef</code>, etc.)</li>
+      </ul>
+      <h3>Example</h3>
+      <p>Original code</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello");
+}</code></pre>
+      <p>After preprocessing (conceptually)</p>
+      <pre><code class="language-c">// Thousands of lines from stdio.h are inserted here
+
+int main()
+{
+    printf("Hello");
+}</code></pre>
+
+      <h2>Stage 3: Compilation</h2>
+      <p>Now the <strong>Compiler</strong> checks the program for errors and converts it into <strong>Assembly Language</strong>.</p>
+      <p>Compiler checks for:</p>
+      <ul>
+        <li>Syntax errors</li>
+        <li>Type errors</li>
+        <li>Declaration errors</li>
+      </ul>
+      <p>Example:</p>
+      <pre><code class="language-c">printf("Hello")</code></pre>
+      <p>Missing semicolon.</p>
+      <p>Compiler Output</p>
+      <pre><code class="language-none">Error: expected ';'</code></pre>
+      <p>If there are no errors, it generates:</p>
+      <pre><code class="language-none">Assembly Code (.s)</code></pre>
+
+      <h2>Stage 4: Assembly</h2>
+      <p>The <strong>Assembler</strong> converts the assembly code into <strong>Object Code</strong>.</p>
+      <pre><code class="language-none">Assembly Code
+      │
+      ▼
+Assembler
+      │
+      ▼
+Object Code</code></pre>
+      <p>Object file extension:</p>
+      <p>Windows</p>
+      <pre><code class="language-none">.obj</code></pre>
+      <p>Linux</p>
+      <pre><code class="language-none">.o</code></pre>
+      <p>Object code is <strong>machine code</strong>, but it is <strong>not yet executable</strong> because it may still depend on external libraries.</p>
+
+      <h2>Stage 5: Linking</h2>
+      <p>Most programs use library functions like:</p>
+      <pre><code class="language-c">printf()
+scanf()
+sqrt()
+strlen()</code></pre>
+      <p>These functions are <strong>not stored in your source file</strong>.</p>
+      <p>The <strong>Linker</strong> connects your object code with the required library files.</p>
+      <p>Example</p>
+      <pre><code class="language-c">printf("Hello");</code></pre>
+      <p>The linker finds the implementation of <code>printf()</code> inside the C Standard Library and attaches it to your program.</p>
+      <p>Output:</p>
+      <pre><code class="language-none">Executable File</code></pre>
+      <p>Windows:</p>
+      <pre><code class="language-none">program.exe</code></pre>
+      <p>Linux:</p>
+      <pre><code class="language-none">a.out</code></pre>
+      <p>(or another executable name if specified)</p>
+
+      <h2>Stage 6: Loading</h2>
+      <p>When you run the executable, the <strong>Loader</strong> loads it into the computer's <strong>main memory (RAM)</strong>.</p>
+      <pre><code class="language-none">Executable
+      │
+      ▼
+Loader
+      │
+      ▼
+RAM</code></pre>
+      <p>After loading, the CPU starts execution from the <code>main()</code> function.</p>
+
+      <h2>Stage 7: Execution</h2>
+      <p>Now the CPU executes the instructions.</p>
+      <p>Example</p>
+      <pre><code class="language-c">printf("Hello World");</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Hello World</code></pre>
+
+      <h2>Complete Example</h2>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello World");
+
+    return 0;
+}</code></pre>
+      <p>Journey</p>
+      <pre><code class="language-none">Write Program
+      │
+      ▼
+Source Code (.c)
+      │
+      ▼
+Preprocessor
+      │
+      ▼
+Compiler
+      │
+      ▼
+Assembly Code (.s)
+      │
+      ▼
+Assembler
+      │
+      ▼
+Object Code (.o)
+      │
+      ▼
+Linker
+      │
+      ▼
+Executable (.exe / a.out)
+      │
+      ▼
+Loader
+      │
+      ▼
+RAM
+      │
+      ▼
+CPU Executes
+      │
+      ▼
+Output</code></pre>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine writing a book.</p>
+
+      <h3>Step 1</h3>
+      <p>You write the manuscript.</p>
+      <p>➡ Source Code</p>
+
+      <h3>Step 2</h3>
+      <p>An editor checks grammar.</p>
+      <p>➡ Compiler</p>
+
+      <h3>Step 3</h3>
+      <p>The book is printed.</p>
+      <p>➡ Object Code</p>
+
+      <h3>Step 4</h3>
+      <p>The publisher adds the cover, index, and references.</p>
+      <p>➡ Linker</p>
+
+      <h3>Step 5</h3>
+      <p>The book is delivered to the library.</p>
+      <p>➡ Loader</p>
+
+      <h3>Step 6</h3>
+      <p>Readers read it.</p>
+      <p>➡ Execution</p>
+
+      <h2>Important Terms</h2>
+
+      <h3>Source Code</h3>
+      <p>Program written by the programmer.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">program.c</code></pre>
+
+      <h3>Object Code</h3>
+      <p>Machine code generated after assembly.</p>
+      <p>Extension:</p>
+      <pre><code class="language-none">program.o</code></pre>
+      <p>Cannot be run directly.</p>
+
+      <h3>Executable Code</h3>
+      <p>Final program after linking.</p>
+      <p>Extension:</p>
+      <p>Windows</p>
+      <pre><code class="language-none">program.exe</code></pre>
+      <p>Linux</p>
+      <pre><code class="language-none">a.out</code></pre>
+      <p>Can be executed.</p>
+
+      <h2>Difference Between Source, Object, and Executable Code</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Source Code</th>
+            <th>Object Code</th>
+            <th>Executable Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Written by</td>
+            <td>Programmer</td>
+            <td>Assembler</td>
+            <td>Linker</td>
+          </tr>
+          <tr>
+            <td>Readable</td>
+            <td>✅ Yes</td>
+            <td>❌ No</td>
+            <td>❌ No</td>
+          </tr>
+          <tr>
+            <td>Extension</td>
+            <td><code>.c</code></td>
+            <td><code>.o</code> / <code>.obj</code></td>
+            <td><code>.exe</code> / <code>a.out</code></td>
+          </tr>
+          <tr>
+            <td>Can Execute?</td>
+            <td>❌ No</td>
+            <td>❌ No</td>
+            <td>✅ Yes</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Compilation Errors vs Runtime Errors</h2>
+
+      <h3>Compilation Error</h3>
+      <p>Occurs <strong>before</strong> execution.</p>
+      <p>Example</p>
+      <pre><code class="language-c">printf("Hello")</code></pre>
+      <p>Compiler message</p>
+      <pre><code class="language-none">Missing semicolon</code></pre>
+      <p>Program does not compile.</p>
+
+      <h3>Runtime Error</h3>
+      <p>Occurs <strong>during execution</strong>.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int a = 10;
+int b = 0;
+
+printf("%d", a / b);</code></pre>
+      <p>The program compiles successfully but fails at runtime because division by zero is invalid.</p>
+
+      <h2>Compilation Process Summary</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>Component</th>
+            <th>Output</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Source Code</td>
+            <td><code>.c</code> file</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Preprocessor</td>
+            <td>Expanded source code</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Compiler</td>
+            <td>Assembly code (<code>.s</code>)</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Assembler</td>
+            <td>Object code (<code>.o</code> / <code>.obj</code>)</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Linker</td>
+            <td>Executable (<code>.exe</code> / <code>a.out</code>)</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Loader</td>
+            <td>Program loaded into RAM</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>CPU</td>
+            <td>Program execution</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>The <strong>Compilation Process</strong> converts a C program into an executable program.</li>
+        <li><strong>Source Code</strong> is the program written by the programmer (<code>.c</code>).</li>
+        <li>The <strong>Preprocessor</strong> handles directives like <code>#include</code> and <code>#define</code>.</li>
+        <li>The <strong>Compiler</strong> checks for syntax errors and generates assembly code.</li>
+        <li>The <strong>Assembler</strong> converts assembly code into object code (<code>.o</code> / <code>.obj</code>).</li>
+        <li>The <strong>Linker</strong> combines object code with required libraries to create an executable file.</li>
+        <li>The <strong>Loader</strong> loads the executable into RAM.</li>
+        <li>Execution always starts from the <strong><code>main()</code> function</strong>.</li>
+      </ul>
+
+      <h2>Interview Questions</h2>
+
+      <h3>Q1. What is the compilation process?</h3>
+      <p><strong>Answer:</strong> It is the process of converting C source code into an executable program.</p>
+
+      <h3>Q2. What is the difference between source code and object code?</h3>
+      <p><strong>Answer:</strong> Source code is human-readable C code (<code>.c</code>), while object code is machine code (<code>.o</code>/<code>.obj</code>) generated by the assembler and is not directly executable.</p>
+
+      <h3>Q3. What is the role of the linker?</h3>
+      <p><strong>Answer:</strong> The linker combines object code with required library files to produce an executable program.</p>
+
+      <h3>Q4. What is the role of the loader?</h3>
+      <p><strong>Answer:</strong> The loader loads the executable program into RAM and prepares it for execution.</p>
+
+      <h3>Q5. Which stage checks for syntax errors?</h3>
+      <p><strong>Answer:</strong> The <strong>Compiler</strong> checks the program for syntax and semantic errors before generating assembly code.</p>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

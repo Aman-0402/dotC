@@ -30,6 +30,10 @@
         {
           "title": "Structure of a C Program",
           "path": "lessons/unit1-structure-of-c-program.html"
+        },
+        {
+          "title": "Compilation Process",
+          "path": "lessons/unit1-compilation-process.html"
         }
       ]
     }
