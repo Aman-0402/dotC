@@ -34,6 +34,10 @@
         {
           "title": "Compilation Process",
           "path": "lessons/unit1-compilation-process.html"
+        },
+        {
+          "title": "Source Code, Object Code & Executable Code",
+          "path": "lessons/unit1-source-object-executable-code.html"
         }
       ]
     }
