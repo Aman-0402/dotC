@@ -18,6 +18,10 @@
         {
           "title": "Pseudocode",
           "path": "lessons/unit1-pseudocode.html"
+        },
+        {
+          "title": "Flowcharts",
+          "path": "lessons/unit1-flowcharts.html"
         }
       ]
     }

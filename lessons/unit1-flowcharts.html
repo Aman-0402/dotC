@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flowcharts — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 1 / Flowcharts</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Flowcharts</h1>
+
+      <p>A <strong>Flowchart</strong> is a graphical (diagrammatic) representation of an algorithm. Instead of writing steps in words, we use <strong>standard symbols connected by arrows</strong> to show the flow of a program.</p>
+      <p>It helps us understand the logic of a program visually.</p>
+
+      <h2>What is a Flowchart?</h2>
+      <p><strong>Definition:</strong></p>
+      <blockquote>
+        <p>A <strong>Flowchart</strong> is a diagram that represents the sequence of steps in solving a problem using standard symbols connected by arrows.</p>
+      </blockquote>
+      <p>A flowchart shows:</p>
+      <ul>
+        <li>Where the program starts</li>
+        <li>What operations are performed</li>
+        <li>What decisions are made</li>
+        <li>Where the program ends</li>
+      </ul>
+
+      <h2>Why Use Flowcharts?</h2>
+      <ul>
+        <li>Easy to understand.</li>
+        <li>Helps in planning before coding.</li>
+        <li>Makes debugging easier.</li>
+        <li>Shows program logic visually.</li>
+        <li>Improves communication among programmers.</li>
+      </ul>
+
+      <h2>Common Flowchart Symbols</h2>
+
+      <h3>1. Terminator (Start / Stop)</h3>
+      <p>Used to indicate the beginning and end of a program.</p>
+      <p><strong>Shape:</strong> Oval</p>
+      <pre><code class="language-none">   _________
+ /         \
+|  START    |
+ \_________/</code></pre>
+      <p>OR</p>
+      <pre><code class="language-none">   _________
+ /         \
+|   STOP    |
+ \_________/</code></pre>
+
+      <h3>2. Process</h3>
+      <p>Used for calculations or assignments.</p>
+      <p><strong>Shape:</strong> Rectangle</p>
+      <pre><code class="language-none">+----------------+
+| SUM = A + B    |
++----------------+</code></pre>
+      <p>Examples:</p>
+      <ul>
+        <li>Area = L × W</li>
+        <li>Total = A + B</li>
+        <li>Count = Count + 1</li>
+      </ul>
+
+      <h3>3. Input / Output</h3>
+      <p>Used for taking input or displaying output.</p>
+      <p><strong>Shape:</strong> Parallelogram</p>
+      <pre><code class="language-none">  /--------------/
+ / INPUT A      /
+/--------------/</code></pre>
+      <p>Examples:</p>
+      <ul>
+        <li>Read Number</li>
+        <li>Print Result</li>
+      </ul>
+
+      <h3>4. Decision</h3>
+      <p>Used for checking conditions.</p>
+      <p><strong>Shape:</strong> Diamond</p>
+      <pre><code class="language-none">      /\
+     /  \
+    &lt; A&gt;B? &gt;
+     \  /
+      \/</code></pre>
+      <p>It has two possible paths:</p>
+      <ul>
+        <li>Yes (True)</li>
+        <li>No (False)</li>
+      </ul>
+      <p>Example:</p>
+      <pre><code class="language-none">Marks >= 40 ?</code></pre>
+
+      <h3>5. Flow Line</h3>
+      <p>Shows the direction of execution.</p>
+      <pre><code class="language-none">↓
+↑
+→
+←</code></pre>
+
+      <h3>6. Connector</h3>
+      <p>Used to connect different parts of a flowchart.</p>
+      <p><strong>Shape:</strong> Small Circle</p>
+      <pre><code class="language-none"> (A)</code></pre>
+      <p>Useful when the flowchart becomes too large.</p>
+
+      <h2>Summary of Symbols</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Shape</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Terminator</td>
+            <td>Oval</td>
+            <td>Start / Stop</td>
+          </tr>
+          <tr>
+            <td>Process</td>
+            <td>Rectangle</td>
+            <td>Calculation / Processing</td>
+          </tr>
+          <tr>
+            <td>Input / Output</td>
+            <td>Parallelogram</td>
+            <td>Read or Display Data</td>
+          </tr>
+          <tr>
+            <td>Decision</td>
+            <td>Diamond</td>
+            <td>Condition Checking</td>
+          </tr>
+          <tr>
+            <td>Flow Line</td>
+            <td>Arrow</td>
+            <td>Direction of Flow</td>
+          </tr>
+          <tr>
+            <td>Connector</td>
+            <td>Circle</td>
+            <td>Connect Flowchart Parts</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>General Flowchart Structure</h2>
+      <pre><code class="language-none">      START
+        │
+        ▼
+     INPUT
+        │
+        ▼
+    PROCESS
+        │
+        ▼
+     OUTPUT
+        │
+        ▼
+      STOP</code></pre>
+
+      <h2>Example 1: Add Two Numbers</h2>
+      <h3>Problem</h3>
+      <p>Find the sum of two numbers.</p>
+
+      <h3>Algorithm</h3>
+      <pre><code class="language-none">Start
+Read A
+Read B
+Sum = A + B
+Print Sum
+Stop</code></pre>
+
+      <h3>Flowchart</h3>
+      <pre><code class="language-none">        (START)
+            │
+            ▼
+    / Input A,B /
+            │
+            ▼
++------------------+
+| SUM = A + B      |
++------------------+
+            │
+            ▼
+   / Print SUM /
+            │
+            ▼
+        (STOP)</code></pre>
+
+      <h2>Example 2: Area of Rectangle</h2>
+      <p>Formula</p>
+      <pre><code class="language-none">Area = Length × Width</code></pre>
+
+      <h3>Flowchart</h3>
+      <pre><code class="language-none">       (START)
+           │
+           ▼
+ / Read Length, Width /
+           │
+           ▼
++----------------------+
+| Area = L × W         |
++----------------------+
+           │
+           ▼
+   / Print Area /
+           │
+           ▼
+        (STOP)</code></pre>
+
+      <h2>Example 3: Average of Three Numbers</h2>
+      <p>Formula</p>
+      <pre><code class="language-none">Average = (A+B+C)/3</code></pre>
+
+      <h3>Flowchart</h3>
+      <pre><code class="language-none">      (START)
+          │
+          ▼
+ / Read A,B,C /
+          │
+          ▼
++---------------------------+
+| Average=(A+B+C)/3         |
++---------------------------+
+          │
+          ▼
+ / Print Average /
+          │
+          ▼
+       (STOP)</code></pre>
+
+      <h2>Example 4: Pass or Fail</h2>
+      <p>Condition</p>
+      <pre><code class="language-none">If Marks >= 40
+Pass
+Else
+Fail</code></pre>
+
+      <h3>Flowchart</h3>
+      <pre><code class="language-none">             (START)
+                 │
+                 ▼
+        / Input Marks /
+                 │
+                 ▼
+            ◇ Marks ≥ 40? ◇
+             /           \
+          Yes             No
+           │               │
+           ▼               ▼
+    / Print PASS /   / Print FAIL /
+           │               │
+            \             /
+             \           /
+                 ▼
+              (STOP)</code></pre>
+      <p>Notice the <strong>Decision Symbol (Diamond)</strong> creates two different paths.</p>
+
+      <h2>Rules for Drawing Flowcharts</h2>
+      <ul>
+        <li>Start with <strong>START</strong> and end with <strong>STOP</strong>.</li>
+        <li>Use arrows to show the direction of flow.</li>
+        <li>Flow should generally move from <strong>top to bottom</strong>.</li>
+        <li>Use standard symbols only.</li>
+        <li>Keep the flowchart simple and neat.</li>
+        <li>Every symbol should be connected properly.</li>
+      </ul>
+
+      <h2>Advantages of Flowcharts</h2>
+      <ul>
+        <li>Easy to understand.</li>
+        <li>Helps in finding logical errors.</li>
+        <li>Simplifies coding.</li>
+        <li>Useful for documentation.</li>
+        <li>Easy to modify.</li>
+      </ul>
+
+      <h2>Disadvantages of Flowcharts</h2>
+      <ul>
+        <li>Time-consuming for large programs.</li>
+        <li>Difficult to update if logic changes frequently.</li>
+        <li>Large programs produce complex flowcharts.</li>
+      </ul>
+
+      <h2>Flowchart vs Algorithm vs Pseudocode</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Algorithm</th>
+            <th>Pseudocode</th>
+            <th>Flowchart</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Format</td>
+            <td>Simple English</td>
+            <td>Programming-like English</td>
+            <td>Diagram</td>
+          </tr>
+          <tr>
+            <td>Easy to Draw</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>❌</td>
+          </tr>
+          <tr>
+            <td>Visual</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Can be Executed</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>❌</td>
+          </tr>
+          <tr>
+            <td>Used Before Coding</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Complete Problem-Solving Process</h2>
+      <pre><code class="language-none">Problem
+   │
+   ▼
+Algorithm
+   │
+   ▼
+Pseudocode
+   │
+   ▼
+Flowchart
+   │
+   ▼
+C Program
+   │
+   ▼
+Output</code></pre>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>A <strong>Flowchart</strong> is a <strong>graphical representation</strong> of an algorithm.</li>
+        <li>It uses <strong>standard symbols</strong> to represent different operations.</li>
+        <li>The <strong>Oval</strong> represents <strong>Start/Stop</strong>.</li>
+        <li>The <strong>Rectangle</strong> represents <strong>Processing</strong>.</li>
+        <li>The <strong>Parallelogram</strong> represents <strong>Input/Output</strong>.</li>
+        <li>The <strong>Diamond</strong> represents <strong>Decision Making</strong>.</li>
+        <li><strong>Arrows</strong> show the flow of execution.</li>
+        <li>Flowcharts help programmers understand program logic before writing code.</li>
+      </ul>
+
+      <h2>Interview Questions</h2>
+
+      <h3>Q1. What is a flowchart?</h3>
+      <p><strong>Answer:</strong> A flowchart is a graphical representation of an algorithm using standard symbols connected by arrows.</p>
+
+      <h3>Q2. Which symbol is used for decision making?</h3>
+      <p><strong>Answer:</strong> The <strong>Diamond</strong> symbol.</p>
+
+      <h3>Q3. Which symbol is used for calculations?</h3>
+      <p><strong>Answer:</strong> The <strong>Rectangle (Process)</strong> symbol.</p>
+
+      <h3>Q4. Why are flowcharts important?</h3>
+      <p><strong>Answer:</strong> They help visualize program logic, simplify debugging, and make coding easier.</p>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
