@@ -42,6 +42,10 @@
         {
           "title": "Execution and Debugging",
           "path": "lessons/unit1-execution-and-debugging.html"
+        },
+        {
+          "title": "Operating Systems (OS)",
+          "path": "lessons/unit1-operating-systems.html"
         }
       ]
     }
