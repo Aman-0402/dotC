@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Single-Line and Multi-Line Comments — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 1 / Single-Line and Multi-Line Comments</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Single-Line (<code>//</code>) and Multi-Line (<code>/* ... */</code>) Comments</h1>
+
+      <p>Comments are one of the simplest but most useful features in C programming.</p>
+      <p>They help programmers <strong>explain the code</strong>, making it easier to understand and maintain.</p>
+      <blockquote>
+        <p><strong>Comments are ignored by the compiler</strong>, so they do not affect the execution of the program.</p>
+      </blockquote>
+
+      <h2>What are Comments?</h2>
+      <h3>Definition</h3>
+      <blockquote>
+        <p>A <strong>Comment</strong> is a piece of text written inside a program to explain the code. It is <strong>not executed</strong> by the compiler.</p>
+      </blockquote>
+      <p>Comments are useful for:</p>
+      <ul>
+        <li>Explaining the purpose of the code.</li>
+        <li>Improving readability.</li>
+        <li>Helping other programmers understand the program.</li>
+        <li>Temporarily disabling code during testing.</li>
+      </ul>
+
+      <h2>Types of Comments in C</h2>
+      <p>There are <strong>two types</strong> of comments:</p>
+      <ol>
+        <li>Single-Line Comments (<code>//</code>)</li>
+        <li>Multi-Line Comments (<code>/* ... */</code>)</li>
+      </ol>
+
+      <h2>1. Single-Line Comments (<code>//</code>)</h2>
+      <p>A <strong>Single-Line Comment</strong> starts with <code>//</code>.</p>
+      <p>Everything after <code>//</code> on that line is ignored by the compiler.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">// This is a single-line comment</code></pre>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    // Print Hello World
+    printf("Hello World");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Hello World</code></pre>
+      <p>The comment:</p>
+      <pre><code class="language-c">// Print Hello World</code></pre>
+      <p>is ignored during compilation.</p>
+
+      <h3>Example 2</h3>
+      <pre><code class="language-c">int age = 20;   // Store student's age</code></pre>
+      <p>Here, the comment explains what the variable stores.</p>
+
+      <h2>2. Multi-Line Comments (<code>/* ... */</code>)</h2>
+      <p>A <strong>Multi-Line Comment</strong> begins with <code>/*</code> and ends with <code>*/</code>.</p>
+      <p>It can span <strong>multiple lines</strong>.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">/*
+This is
+a multi-line
+comment
+*/</code></pre>
+
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+/*
+This program
+prints
+Hello World
+*/
+
+int main()
+{
+    printf("Hello World");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Hello World</code></pre>
+
+      <h2>Difference Between Single-Line and Multi-Line Comments</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Single-Line (<code>//</code>)</th>
+            <th>Multi-Line (<code>/* ... */</code>)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Number of Lines</td>
+            <td>One line</td>
+            <td>One or more lines</td>
+          </tr>
+          <tr>
+            <td>Starts With</td>
+            <td><code>//</code></td>
+            <td><code>/*</code></td>
+          </tr>
+          <tr>
+            <td>Ends With</td>
+            <td>End of line</td>
+            <td><code>*/</code></td>
+          </tr>
+          <tr>
+            <td>Best For</td>
+            <td>Short explanations</td>
+            <td>Detailed descriptions</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Using Comments for Documentation</h2>
+      <p>Comments can describe the program.</p>
+      <p>Example</p>
+      <pre><code class="language-c">/*
+Program Name : Addition Program
+Author       : Aman
+Date         : 31 July 2026
+Purpose      : Add two numbers
+*/</code></pre>
+      <p>This type of comment is usually written at the beginning of a program.</p>
+
+      <h2>Using Comments to Explain Logic</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 10;
+    int b = 20;
+
+    // Calculate the sum
+    int sum = a + b;
+
+    // Display the result
+    printf("%d", sum);
+
+    return 0;
+}</code></pre>
+      <p>Comments explain each important step.</p>
+
+      <h2>Using Comments to Disable Code (Comment Out)</h2>
+      <p>Sometimes programmers temporarily disable code for testing.</p>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello");
+
+    // printf("World");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Hello</code></pre>
+      <p>The second <code>printf()</code> is ignored because it is commented out.</p>
+
+      <h3>Multi-Line Comment Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    /*
+    printf("Hello");
+    printf("World");
+    */
+
+    printf("C Programming");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">C Programming</code></pre>
+
+      <h2>Rules for Writing Comments</h2>
+      <ul>
+        <li>Use comments to explain <strong>why</strong> the code exists, not just <strong>what</strong> it does.</li>
+        <li>Keep comments short and meaningful.</li>
+        <li>Update comments if the code changes.</li>
+        <li>Avoid unnecessary comments.</li>
+      </ul>
+
+      <h2>Good vs Bad Comments</h2>
+
+      <h3>Good Comment</h3>
+      <pre><code class="language-c">// Calculate total marks
+total = m1 + m2 + m3;</code></pre>
+      <p>The comment explains the purpose.</p>
+
+      <h3>Bad Comment</h3>
+      <pre><code class="language-c">// Add a and b
+sum = a + b;</code></pre>
+      <p>The code already makes this obvious, so the comment adds little value.</p>
+
+      <h2>Common Mistakes</h2>
+
+      <h3>1. Forgetting to Close a Multi-Line Comment</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">/*
+This comment never ends
+
+printf("Hello");</code></pre>
+      <p>The compiler treats everything after <code>/*</code> as part of the comment, causing an error.</p>
+      <p>Correct</p>
+      <pre><code class="language-c">/*
+This comment ends properly
+*/</code></pre>
+
+      <h3>2. Nesting Multi-Line Comments</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">/*
+Outer comment
+
+/*
+Inner comment
+*/
+
+*/</code></pre>
+      <p>C <strong>does not support nested multi-line comments</strong>.</p>
+
+      <h3>3. Commenting Important Code Accidentally</h3>
+      <pre><code class="language-c">// return 0;</code></pre>
+      <p>This may cause unexpected behavior or compiler warnings in some cases.</p>
+      <p>Always check what you've commented out.</p>
+
+      <h2>Advantages of Comments</h2>
+      <ul>
+        <li>Improve readability.</li>
+        <li>Help in debugging.</li>
+        <li>Make maintenance easier.</li>
+        <li>Explain complex logic.</li>
+        <li>Useful for teamwork.</li>
+      </ul>
+
+      <h2>Disadvantages of Poor Comments</h2>
+      <ul>
+        <li>Too many comments make code cluttered.</li>
+        <li>Outdated comments can mislead programmers.</li>
+        <li>Obvious comments reduce readability.</li>
+      </ul>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine reading a textbook.</p>
+      <p>The <strong>main text</strong> explains the subject.</p>
+      <p>The <strong>notes in the margin</strong> help you understand important points.</p>
+      <pre><code class="language-none">Book Content
+     │
+     ▼
+Program Code
+
+Side Notes
+     │
+     ▼
+Comments</code></pre>
+      <p>The notes are for readers, not for the printer. Similarly, comments are for programmers, not for the compiler.</p>
+
+      <h2>Summary Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Comment Type</th>
+            <th>Syntax</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Single-Line</td>
+            <td><code>// Comment</code></td>
+            <td>Short explanation</td>
+          </tr>
+          <tr>
+            <td>Multi-Line</td>
+            <td><code>/* Comment */</code></td>
+            <td>Long explanation or documentation</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Complete Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+/*
+Program: Addition of Two Numbers
+Author : Aman
+Purpose: Demonstrate comments
+*/
+
+int main()
+{
+    int a = 10;
+    int b = 20;
+
+    // Calculate sum
+    int sum = a + b;
+
+    // Display result
+    printf("Sum = %d", sum);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Sum = 30</code></pre>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>Comments are <strong>ignored by the compiler</strong>.</li>
+        <li>They improve code readability and documentation.</li>
+        <li><code>//</code> is used for <strong>single-line comments</strong>.</li>
+        <li><code>/* ... */</code> is used for <strong>multi-line comments</strong>.</li>
+        <li>C does <strong>not</strong> support nested multi-line comments.</li>
+        <li>Good comments explain <strong>why</strong> something is done, not just <strong>what</strong> the code does.</li>
+      </ul>
+
+      <h2>Interview Questions</h2>
+
+      <h3>Q1. What is a comment in C?</h3>
+      <p><strong>Answer:</strong> A comment is text written in a program to explain the code. It is ignored by the compiler.</p>
+
+      <h3>Q2. How many types of comments are there in C?</h3>
+      <p><strong>Answer:</strong> Two: Single-line (<code>//</code>) and Multi-line (<code>/* ... */</code>).</p>
+
+      <h3>Q3. Can comments affect program execution?</h3>
+      <p><strong>Answer:</strong> No. The compiler ignores comments.</p>
+
+      <h3>Q4. Can you nest multi-line comments in C?</h3>
+      <p><strong>Answer:</strong> No. Nested multi-line comments are not allowed.</p>
+
+      <h3>Q5. Why are comments important?</h3>
+      <p><strong>Answer:</strong> They improve readability, help explain program logic, simplify debugging, and make code easier to maintain.</p>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

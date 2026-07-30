@@ -54,6 +54,10 @@
         {
           "title": "Linkers and Loaders",
           "path": "lessons/unit1-linkers-and-loaders.html"
+        },
+        {
+          "title": "Single-Line and Multi-Line Comments",
+          "path": "lessons/unit1-comments.html"
         }
       ]
     }
