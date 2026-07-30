@@ -46,6 +46,10 @@
         {
           "title": "Operating Systems (OS)",
           "path": "lessons/unit1-operating-systems.html"
+        },
+        {
+          "title": "Interpreters",
+          "path": "lessons/unit1-interpreters.html"
         }
       ]
     }

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interpreters — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 1 / Interpreters</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Interpreters</h1>
+
+      <p>In the previous topics, we learned that <strong>C uses a Compiler</strong> to convert the entire program into machine code.</p>
+      <p>But not all programming languages work this way. Some languages use an <strong>Interpreter</strong> instead.</p>
+      <p>Understanding the difference between a <strong>Compiler</strong> and an <strong>Interpreter</strong> is a very common interview and exam topic.</p>
+
+      <h2>What is an Interpreter?</h2>
+      <h3>Definition</h3>
+      <blockquote>
+        <p>An <strong>Interpreter</strong> is a software program that translates and executes a program <strong>one statement (or one line) at a time</strong>, instead of translating the whole program at once.</p>
+      </blockquote>
+      <p>Unlike a compiler, an interpreter <strong>does not create a separate executable file</strong>.</p>
+
+      <h2>How Does an Interpreter Work?</h2>
+      <p>Suppose we have the following program:</p>
+      <pre><code class="language-none">Line 1
+Line 2
+Line 3
+Line 4</code></pre>
+      <p>An interpreter works like this:</p>
+      <pre><code class="language-none">Read Line 1
+      │
+      ▼
+Translate
+      │
+      ▼
+Execute
+      │
+      ▼
+Read Line 2
+      │
+      ▼
+Translate
+      │
+      ▼
+Execute
+      │
+      ▼
+Continue...</code></pre>
+      <p>Each line is translated and executed immediately.</p>
+
+      <h2>Example (Python)</h2>
+      <pre><code class="language-python">print("Hello")
+print("Welcome")
+print("Python")</code></pre>
+      <p>Execution:</p>
+      <pre><code class="language-none">Interpreter
+      │
+      ▼
+Execute print("Hello")
+      │
+      ▼
+Execute print("Welcome")
+      │
+      ▼
+Execute print("Python")</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Hello
+Welcome
+Python</code></pre>
+
+      <h2>What Happens if an Error Occurs?</h2>
+      <p>Example:</p>
+      <pre><code class="language-python">print("Hello")
+
+x = 10
+
+print(y)
+
+print("End")</code></pre>
+      <p>Execution:</p>
+      <pre><code class="language-none">Line 1 → Executed ✅
+
+Line 2 → Executed ✅
+
+Line 3 → Error ❌
+
+Program Stops</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">Hello
+
+NameError: name 'y' is not defined</code></pre>
+      <p>Notice:</p>
+      <ul>
+        <li>The first two lines executed successfully.</li>
+        <li>Execution stopped at the error.</li>
+        <li>The last line was never executed.</li>
+      </ul>
+
+      <h2>How Does a Compiler Work?</h2>
+      <p>Suppose we have a C program.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello");
+
+    printf("Welcome")
+
+    printf("C");
+
+    return 0;
+}</code></pre>
+      <p>There is a missing semicolon after:</p>
+      <pre><code class="language-c">printf("Welcome")</code></pre>
+      <p>The compiler checks the <strong>entire program first</strong>.</p>
+      <p>Result:</p>
+      <pre><code class="language-none">Compilation Error
+
+Program Will Not Execute</code></pre>
+      <p>Even though the first <code>printf()</code> is correct, <strong>nothing is executed</strong> until all compilation errors are fixed.</p>
+
+      <h2>Compiler vs Interpreter</h2>
+
+      <h3>Compiler</h3>
+      <pre><code class="language-none">Entire Program
+       │
+       ▼
+Compiler
+       │
+       ▼
+Machine Code
+       │
+       ▼
+Run Program</code></pre>
+
+      <h3>Interpreter</h3>
+      <pre><code class="language-none">Line 1
+   │
+Execute
+
+Line 2
+   │
+Execute
+
+Line 3
+   │
+Execute
+
+...</code></pre>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine translating an English book into Hindi.</p>
+
+      <h3>Compiler</h3>
+      <p>The translator first translates the <strong>entire book</strong>, then gives you the finished copy.</p>
+      <pre><code class="language-none">Entire Book
+      │
+      ▼
+Translator
+      │
+      ▼
+Complete Hindi Book</code></pre>
+
+      <h3>Interpreter</h3>
+      <p>A translator sits beside you.</p>
+      <p>You speak one sentence.</p>
+      <p>They translate it immediately.</p>
+      <p>Then you speak the next sentence.</p>
+      <pre><code class="language-none">Sentence 1
+      │
+Translate
+      │
+Speak
+
+Sentence 2
+      │
+Translate
+      │
+Speak</code></pre>
+
+      <h2>Advantages of Compiler</h2>
+      <ul>
+        <li>Faster execution after compilation.</li>
+        <li>Creates an executable file.</li>
+        <li>Optimizes the program.</li>
+        <li>Errors are detected before execution.</li>
+      </ul>
+
+      <h2>Disadvantages of Compiler</h2>
+      <ul>
+        <li>Compilation takes time.</li>
+        <li>Every change requires recompilation.</li>
+        <li>Larger executable files.</li>
+      </ul>
+
+      <h2>Advantages of Interpreter</h2>
+      <ul>
+        <li>Easy to test small programs.</li>
+        <li>No separate compilation step.</li>
+        <li>Good for scripting.</li>
+        <li>Easier for beginners.</li>
+      </ul>
+
+      <h2>Disadvantages of Interpreter</h2>
+      <ul>
+        <li>Slower execution.</li>
+        <li>No executable file.</li>
+        <li>Stops at the first runtime error.</li>
+        <li>Must interpret the program every time it runs.</li>
+      </ul>
+
+      <h2>Languages Using Compilers</h2>
+      <p>Examples:</p>
+      <ul>
+        <li>C</li>
+        <li>C++</li>
+        <li>Go</li>
+        <li>Rust</li>
+      </ul>
+
+      <h2>Languages Using Interpreters</h2>
+      <p>Examples:</p>
+      <ul>
+        <li>Python</li>
+        <li>JavaScript (in browsers)</li>
+        <li>Ruby</li>
+        <li>PHP</li>
+      </ul>
+      <blockquote>
+        <p><strong>Note:</strong> Modern implementations are often more complex. For example, Java uses both compilation (to bytecode) and interpretation/JIT compilation, and Python also compiles to bytecode internally before execution. For beginners, it's fine to remember that C is primarily compiled, while Python and JavaScript are commonly described as interpreted.</p>
+      </blockquote>
+
+      <h2>Comparison Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Compiler</th>
+            <th>Interpreter</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Translation</td>
+            <td>Entire program</td>
+            <td>One statement at a time</td>
+          </tr>
+          <tr>
+            <td>Speed</td>
+            <td>Faster after compilation</td>
+            <td>Slower</td>
+          </tr>
+          <tr>
+            <td>Executable File</td>
+            <td>✅ Yes</td>
+            <td>❌ No</td>
+          </tr>
+          <tr>
+            <td>Error Detection</td>
+            <td>Before execution</td>
+            <td>During execution</td>
+          </tr>
+          <tr>
+            <td>Program Execution</td>
+            <td>After successful compilation</td>
+            <td>Immediately line by line</td>
+          </tr>
+          <tr>
+            <td>Memory Usage</td>
+            <td>Usually higher</td>
+            <td>Usually lower</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Example Comparison</h2>
+
+      <h3>C (Compiled)</h3>
+      <pre><code class="language-c">printf("Hello");
+printf("World");</code></pre>
+      <p>Steps:</p>
+      <pre><code class="language-none">Compile Entire Program
+        │
+        ▼
+Executable
+        │
+        ▼
+Run</code></pre>
+
+      <h3>Python (Interpreted)</h3>
+      <pre><code class="language-python">print("Hello")
+print("World")</code></pre>
+      <p>Steps:</p>
+      <pre><code class="language-none">Translate Line 1
+Execute Line 1
+
+Translate Line 2
+Execute Line 2</code></pre>
+
+      <h2>Quick Comparison Diagram</h2>
+      <pre><code class="language-none">                Compiler
+
+Source Code
+      │
+      ▼
+ Entire Program
+      │
+      ▼
+Machine Code
+      │
+      ▼
+ Executable
+      │
+      ▼
+  Output</code></pre>
+      <pre><code class="language-none">              Interpreter
+
+Source Code
+      │
+      ▼
+Translate One Line
+      │
+      ▼
+ Execute
+      │
+      ▼
+Next Line
+      │
+      ▼
+ Execute</code></pre>
+
+      <h2>Interview Questions</h2>
+
+      <h3>Q1. What is an Interpreter?</h3>
+      <p><strong>Answer:</strong> An Interpreter is software that translates and executes a program one statement at a time.</p>
+
+      <h3>Q2. What is the main difference between a Compiler and an Interpreter?</h3>
+      <p><strong>Answer:</strong> A compiler translates the entire program before execution, while an interpreter translates and executes one statement at a time.</p>
+
+      <h3>Q3. Does an Interpreter create an executable file?</h3>
+      <p><strong>Answer:</strong> No, an interpreter executes the program directly without creating a separate executable file.</p>
+
+      <h3>Q4. Which is faster after translation: Compiler or Interpreter?</h3>
+      <p><strong>Answer:</strong> A compiled program is generally faster because it runs as machine code.</p>
+
+      <h3>Q5. Name two interpreted languages.</h3>
+      <p><strong>Answer:</strong> Python and JavaScript.</p>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>An <strong>Interpreter</strong> translates and executes code <strong>one statement at a time</strong>.</li>
+        <li>A <strong>Compiler</strong> translates the <strong>entire program</strong> before execution.</li>
+        <li>Compilers create executable files; interpreters generally do not.</li>
+        <li>C uses a <strong>Compiler</strong>.</li>
+        <li>Python and JavaScript are commonly taught as <strong>Interpreted Languages</strong>.</li>
+        <li>Compiled programs usually execute faster than interpreted programs.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
