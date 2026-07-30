@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pseudocode — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 1 / Pseudocode</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Pseudocode</h1>
+
+      <p>After writing an algorithm, the next step is often to write <strong>Pseudocode</strong>.</p>
+      <p>Pseudocode acts as a <strong>bridge between an algorithm and a program</strong>. It is easier to convert into actual code than a plain English algorithm.</p>
+
+      <h2>What is Pseudocode?</h2>
+      <p><strong>Definition:</strong></p>
+      <blockquote>
+        <p><strong>Pseudocode</strong> is an informal way of writing a program's logic using simple English mixed with programming-like keywords, without following the syntax of any programming language.</p>
+      </blockquote>
+      <p>It is <strong>not a programming language</strong>, so it cannot be compiled or executed.</p>
+
+      <h2>Why Do We Use Pseudocode?</h2>
+      <ul>
+        <li>Makes program logic easy to understand.</li>
+        <li>Helps plan before writing code.</li>
+        <li>Easy to convert into C, Java, Python, etc.</li>
+        <li>Makes debugging easier.</li>
+        <li>Improves communication among programmers.</li>
+      </ul>
+
+      <h2>Features of Pseudocode</h2>
+      <ul>
+        <li>Written in simple English.</li>
+        <li>No strict syntax rules.</li>
+        <li>Easy to read and modify.</li>
+        <li>Language-independent.</li>
+        <li>Focuses only on logic.</li>
+      </ul>
+
+      <h2>Common Keywords Used in Pseudocode</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>START</td>
+            <td>Beginning of the algorithm</td>
+          </tr>
+          <tr>
+            <td>STOP / END</td>
+            <td>End of the algorithm</td>
+          </tr>
+          <tr>
+            <td>INPUT</td>
+            <td>Accept data from the user</td>
+          </tr>
+          <tr>
+            <td>OUTPUT / PRINT</td>
+            <td>Display data</td>
+          </tr>
+          <tr>
+            <td>SET</td>
+            <td>Assign a value</td>
+          </tr>
+          <tr>
+            <td>IF</td>
+            <td>Decision making</td>
+          </tr>
+          <tr>
+            <td>ELSE</td>
+            <td>Alternative condition</td>
+          </tr>
+          <tr>
+            <td>WHILE</td>
+            <td>Repeat while a condition is true</td>
+          </tr>
+          <tr>
+            <td>FOR</td>
+            <td>Repeat a fixed number of times</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>General Structure of Pseudocode</h2>
+      <pre><code class="language-none">START
+
+Step 1
+Step 2
+Step 3
+
+STOP</code></pre>
+
+      <h2>Example 1: Add Two Numbers</h2>
+      <h3>Problem</h3>
+      <p>Find the sum of two numbers.</p>
+
+      <h3>Pseudocode</h3>
+      <pre><code class="language-none">START
+
+INPUT A
+INPUT B
+
+SET SUM = A + B
+
+PRINT SUM
+
+STOP</code></pre>
+
+      <h3>Equivalent C Program</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int A, B, SUM;
+
+    scanf("%d %d", &amp;A, &amp;B);
+
+    SUM = A + B;
+
+    printf("%d", SUM);
+
+    return 0;
+}</code></pre>
+      <p>Notice that the pseudocode is much simpler because it ignores C syntax like <code>#include</code>, <code>main()</code>, semicolons, and braces.</p>
+
+      <h2>Example 2: Area of a Rectangle</h2>
+      <p>Formula</p>
+      <pre><code class="language-none">Area = Length × Width</code></pre>
+
+      <h3>Pseudocode</h3>
+      <pre><code class="language-none">START
+
+INPUT Length
+INPUT Width
+
+SET Area = Length * Width
+
+PRINT Area
+
+STOP</code></pre>
+
+      <h2>Example 3: Average of Three Numbers</h2>
+      <p>Formula</p>
+      <pre><code class="language-none">Average = (A + B + C) / 3</code></pre>
+
+      <h3>Pseudocode</h3>
+      <pre><code class="language-none">START
+
+INPUT A
+INPUT B
+INPUT C
+
+SET Average = (A + B + C) / 3
+
+PRINT Average
+
+STOP</code></pre>
+
+      <h2>Example 4: Swap Two Numbers</h2>
+      <p>Before</p>
+      <pre><code class="language-none">A = 10
+B = 20</code></pre>
+
+      <h3>Pseudocode</h3>
+      <pre><code class="language-none">START
+
+INPUT A
+INPUT B
+
+SET Temp = A
+SET A = B
+SET B = Temp
+
+PRINT A
+PRINT B
+
+STOP</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">A = 20
+B = 10</code></pre>
+
+      <h2>Example 5: Find Simple Interest</h2>
+      <p>Formula</p>
+      <pre><code class="language-none">SI = (P × R × T) / 100</code></pre>
+
+      <h3>Pseudocode</h3>
+      <pre><code class="language-none">START
+
+INPUT P
+INPUT R
+INPUT T
+
+SET SI = (P * R * T) / 100
+
+PRINT SI
+
+STOP</code></pre>
+
+      <h2>Difference Between Algorithm and Pseudocode</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Algorithm</th>
+            <th>Pseudocode</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Written in simple English</td>
+            <td>Written in English with programming-like keywords</td>
+          </tr>
+          <tr>
+            <td>More descriptive</td>
+            <td>More structured</td>
+          </tr>
+          <tr>
+            <td>Easier for beginners</td>
+            <td>Easier to convert into code</td>
+          </tr>
+          <tr>
+            <td>Focuses on problem-solving</td>
+            <td>Focuses on program logic</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Example</h3>
+      <p><strong>Algorithm</strong></p>
+      <pre><code class="language-none">Step 1: Start
+Step 2: Read two numbers
+Step 3: Add them
+Step 4: Display the result
+Step 5: Stop</code></pre>
+      <p><strong>Pseudocode</strong></p>
+      <pre><code class="language-none">START
+
+INPUT A
+INPUT B
+
+SET SUM = A + B
+
+PRINT SUM
+
+STOP</code></pre>
+
+      <h2>Difference Between Pseudocode and C Program</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pseudocode</th>
+            <th>C Program</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>No syntax rules</td>
+            <td>Strict syntax rules</td>
+          </tr>
+          <tr>
+            <td>Cannot be executed</td>
+            <td>Can be compiled and executed</td>
+          </tr>
+          <tr>
+            <td>Language-independent</td>
+            <td>Language-dependent</td>
+          </tr>
+          <tr>
+            <td>Easy to write</td>
+            <td>Requires correct syntax</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Always start with <code>START</code>.</li>
+        <li>End with <code>STOP</code> or <code>END</code>.</li>
+        <li>Use meaningful variable names.</li>
+        <li>Keep statements simple and clear.</li>
+        <li>Indent blocks for readability (especially for <code>IF</code> and loops).</li>
+      </ul>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li><strong>Pseudocode</strong> is a <strong>structured description of program logic</strong>.</li>
+        <li>It is <strong>not</strong> a programming language.</li>
+        <li>It <strong>cannot</strong> be compiled or executed.</li>
+        <li>It uses keywords such as <code>START</code>, <code>INPUT</code>, <code>SET</code>, <code>PRINT</code>, and <code>STOP</code>.</li>
+        <li>It is easier to convert into actual C code than a plain English algorithm.</li>
+        <li>Every programmer may write pseudocode slightly differently, as there is <strong>no fixed standard syntax</strong>.</li>
+      </ul>
+
+      <h3>Quick Comparison</h3>
+      <pre><code class="language-none">Problem
+   ↓
+Algorithm
+   ↓
+Pseudocode
+   ↓
+Flowchart
+   ↓
+C Program</code></pre>
+      <blockquote>
+        <p><strong>Note:</strong> The order of Pseudocode and Flowchart may vary. Some programmers create the flowchart first, while others write pseudocode first. Both serve the same purpose—planning the solution before coding.</p>
+      </blockquote>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
