@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Problem Solving with Sequential Logic Structure — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 1 / Problem Solving with Sequential Logic Structure</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Problem Solving with Sequential Logic Structure</h1>
+
+      <p>Before writing a program, we first think about <strong>how to solve the problem</strong>. This is called <strong>Problem Solving</strong>.</p>
+      <p>Programming is not just writing code — it's about finding the correct solution first.</p>
+
+      <h2>What is Problem Solving?</h2>
+      <p>Problem solving is the process of understanding a problem, planning the solution, and then converting that solution into a program.</p>
+
+      <h3>Steps of Problem Solving</h3>
+      <pre><code class="language-none">Problem
+   ↓
+Understand the Problem
+   ↓
+Plan the Solution
+   ↓
+Write Algorithm
+   ↓
+Draw Flowchart (Optional)
+   ↓
+Write Program
+   ↓
+Test & Debug</code></pre>
+
+      <h2>What is Logic?</h2>
+      <p>Logic is the sequence of steps used to solve a problem.</p>
+
+      <h3>Example</h3>
+      <p>Problem: Calculate the area of a rectangle.</p>
+      <p>Logic:</p>
+      <ol>
+        <li>Read length.</li>
+        <li>Read width.</li>
+        <li>Multiply length × width.</li>
+        <li>Display area.</li>
+      </ol>
+
+      <h2>What is Sequential Logic?</h2>
+      <p><strong>Sequential Logic</strong> means executing statements <strong>one after another in the exact order they are written</strong>.</p>
+      <p>There is:</p>
+      <ul>
+        <li>No decision (<code>if</code>)</li>
+        <li>No repetition (<code>for</code>, <code>while</code>)</li>
+        <li>Every step runs once from top to bottom.</li>
+      </ul>
+      <p>It is the <strong>simplest program structure</strong>.</p>
+
+      <h2>Sequential Structure</h2>
+      <pre><code class="language-none">Start
+  ↓
+Step 1
+  ↓
+Step 2
+  ↓
+Step 3
+  ↓
+End</code></pre>
+      <p>Every instruction executes exactly once.</p>
+
+      <h2>Example 1: Add Two Numbers</h2>
+      <p>Problem: Find the sum of two numbers.</p>
+
+      <h3>Sequential Steps</h3>
+      <pre><code class="language-none">Start
+Input A
+Input B
+Sum = A + B
+Display Sum
+Stop</code></pre>
+
+      <h3>C Program</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a, b, sum;
+
+    printf("Enter two numbers: ");
+    scanf("%d %d", &amp;a, &amp;b);
+
+    sum = a + b;
+
+    printf("Sum = %d", sum);
+
+    return 0;
+}</code></pre>
+
+      <h3>Dry Run</h3>
+      <p>Suppose</p>
+      <pre><code class="language-none">a = 10
+b = 20</code></pre>
+      <p>Execution:</p>
+      <pre><code class="language-none">Step 1 → Read 10
+Step 2 → Read 20
+Step 3 → sum = 10 + 20 = 30
+Step 4 → Print 30</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Sum = 30</code></pre>
+
+      <h2>Example 2: Calculate Simple Interest</h2>
+      <p>Formula</p>
+      <pre><code class="language-none">SI = (P × R × T) / 100</code></pre>
+
+      <h3>Sequential Steps</h3>
+      <pre><code class="language-none">Read Principal
+Read Rate
+Read Time
+Calculate SI
+Display SI</code></pre>
+      <p>Again, every statement executes only once.</p>
+
+      <h2>Characteristics of Sequential Logic</h2>
+      <ul>
+        <li>Instructions execute from top to bottom.</li>
+        <li>No conditions are checked.</li>
+        <li>No loops are used.</li>
+        <li>Easy to understand.</li>
+        <li>Best for simple calculations.</li>
+      </ul>
+
+      <h2>Types of Program Control Structures</h2>
+      <p>There are <strong>three basic control structures</strong> in programming.</p>
+
+      <h3>1. Sequential Structure</h3>
+      <p>Statements execute one after another.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">Read Number
+Square = Number × Number
+Print Square</code></pre>
+
+      <h3>2. Selection Structure</h3>
+      <p>Used when a decision is required.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">If marks >= 40
+    Pass
+Else
+    Fail</code></pre>
+      <p>Uses:</p>
+      <ul>
+        <li><code>if</code></li>
+        <li><code>if-else</code></li>
+        <li><code>switch</code></li>
+      </ul>
+
+      <h3>3. Iteration (Looping) Structure</h3>
+      <p>Used to repeat a set of statements.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">Print Hello 5 times</code></pre>
+      <p>Uses:</p>
+      <ul>
+        <li><code>for</code></li>
+        <li><code>while</code></li>
+        <li><code>do-while</code></li>
+      </ul>
+
+      <h2>Real-Life Example of Sequential Logic</h2>
+      <p>Making Tea:</p>
+      <pre><code class="language-none">Boil water
+↓
+Add tea leaves
+↓
+Add sugar
+↓
+Add milk
+↓
+Boil
+↓
+Serve</code></pre>
+      <p>Every step happens in order without any decision or repetition.</p>
+
+      <h2>Sequential Logic vs Selection vs Iteration</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Sequential</th>
+            <th>Selection</th>
+            <th>Iteration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Executes in order</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>❌</td>
+          </tr>
+          <tr>
+            <td>Decision making</td>
+            <td>❌</td>
+            <td>✅</td>
+            <td>Sometimes</td>
+          </tr>
+          <tr>
+            <td>Repeats statements</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Difficulty</td>
+            <td>Easy</td>
+            <td>Medium</td>
+            <td>Medium</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Why is Sequential Logic Important?</h2>
+      <ul>
+        <li>It is the foundation of programming.</li>
+        <li>Every program starts with sequential execution.</li>
+        <li>Even programs with <code>if</code> or loops still execute sequentially until they reach those statements.</li>
+        <li>Understanding sequential logic makes learning conditions and loops much easier.</li>
+      </ul>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li><strong>Problem solving</strong> means finding the correct solution before coding.</li>
+        <li><strong>Logic</strong> is the sequence of steps used to solve a problem.</li>
+        <li><strong>Sequential Logic</strong> executes statements one after another in order.</li>
+        <li>It does <strong>not</strong> use decisions (<code>if</code>) or loops (<code>for</code>, <code>while</code>).</li>
+        <li>The three control structures in programming are:
+          <ol>
+            <li>Sequential</li>
+            <li>Selection</li>
+            <li>Iteration</li>
+          </ol>
+        </li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
