@@ -23,6 +23,11 @@ pre[class*="language-"] {
   overflow-x: auto;
 }
 
+.lesson-main code[class*="language-"],
+.lesson-main pre[class*="language-"] {
+  text-shadow: none;
+}
+
 .toc-chapter {
   margin-bottom: 0.75rem;
 }
