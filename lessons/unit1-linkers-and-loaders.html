@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linkers and Loaders — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 1 / Linkers and Loaders</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Linkers and Loaders</h1>
+
+      <p>After a C program is compiled, it still <strong>cannot run immediately</strong>.</p>
+      <p>Two important system programs work behind the scenes:</p>
+      <ol>
+        <li><strong>Linker</strong></li>
+        <li><strong>Loader</strong></li>
+      </ol>
+      <p>These are essential parts of the program execution process and are frequently asked in interviews.</p>
+
+      <h2>Complete Journey of a C Program</h2>
+      <p>Before understanding the Linker and Loader, let's see where they fit.</p>
+      <pre><code class="language-none">Source Code (.c)
+       │
+       ▼
+Preprocessor
+       │
+       ▼
+Compiler
+       │
+       ▼
+Assembly Code (.s)
+       │
+       ▼
+Assembler
+       │
+       ▼
+Object Code (.o/.obj)
+       │
+       ▼
+Linker
+       │
+       ▼
+Executable File (.exe / a.out)
+       │
+       ▼
+Loader
+       │
+       ▼
+RAM (Main Memory)
+       │
+       ▼
+CPU Executes Program</code></pre>
+      <p>The <strong>Linker</strong> creates the executable, and the <strong>Loader</strong> runs it.</p>
+
+      <h2>What is a Linker?</h2>
+      <h3>Definition</h3>
+      <blockquote>
+        <p>A <strong>Linker</strong> is a system program that combines one or more object files and required library files to create a single executable program.</p>
+      </blockquote>
+      <p>Simply put,</p>
+      <blockquote>
+        <p><strong>The Linker joins everything needed to build the final executable file.</strong></p>
+      </blockquote>
+
+      <h2>Why Do We Need a Linker?</h2>
+      <p>Consider the following program:</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello World");
+
+    return 0;
+}</code></pre>
+      <p>The function</p>
+      <pre><code class="language-c">printf()</code></pre>
+      <p>is <strong>not written inside your program</strong>.</p>
+      <p>It already exists in the <strong>C Standard Library</strong>.</p>
+      <p>The compiler knows that <code>printf()</code> exists but doesn't include its implementation.</p>
+      <p>The <strong>Linker</strong> finds the required library code and combines it with your object code.</p>
+
+      <h2>Linking Process</h2>
+      <pre><code class="language-none">Object File
+      │
+      ▼
++----------------+
+|  hello.o       |
++----------------+
+      │
+      ▼
+Linker
+      │
+      ▼
+Standard Library
+      │
+      ▼
+Executable File</code></pre>
+
+      <h2>Example</h2>
+      <p>Suppose your program contains:</p>
+      <pre><code class="language-c">printf("Hello");</code></pre>
+      <p>The linker searches the C Standard Library for the implementation of <code>printf()</code> and adds it to the executable.</p>
+      <p>Without the linker, the executable cannot be created.</p>
+
+      <h2>Static Linking</h2>
+      <p>In <strong>Static Linking</strong>, all required library code is copied into the executable file.</p>
+      <pre><code class="language-none">Program
+      │
+      ▼
+Library Functions
+      │
+Copied into
+      │
+Executable</code></pre>
+      <h3>Advantages</h3>
+      <ul>
+        <li>Program runs independently.</li>
+        <li>No need for external libraries at runtime.</li>
+        <li>Easy to distribute.</li>
+      </ul>
+      <h3>Disadvantages</h3>
+      <ul>
+        <li>Larger executable size.</li>
+        <li>Library updates require recompilation.</li>
+      </ul>
+
+      <h2>Dynamic Linking</h2>
+      <p>In <strong>Dynamic Linking</strong>, the executable stores only references to shared libraries.</p>
+      <p>The actual library is loaded when the program starts.</p>
+      <pre><code class="language-none">Executable
+      │
+      ▼
+Reference to Library
+      │
+      ▼
+Library Loaded at Runtime</code></pre>
+      <h3>Advantages</h3>
+      <ul>
+        <li>Smaller executable size.</li>
+        <li>Shared libraries save memory.</li>
+        <li>Easy to update libraries.</li>
+      </ul>
+      <h3>Disadvantages</h3>
+      <ul>
+        <li>Program depends on external library files.</li>
+        <li>Missing libraries can prevent the program from running.</li>
+      </ul>
+
+      <h2>Static vs Dynamic Linking</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Static Linking</th>
+            <th>Dynamic Linking</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Library Included</td>
+            <td>Yes</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Executable Size</td>
+            <td>Large</td>
+            <td>Small</td>
+          </tr>
+          <tr>
+            <td>Runtime Dependency</td>
+            <td>No</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>Performance</td>
+            <td>Slightly Faster Startup</td>
+            <td>May Load Libraries at Runtime</td>
+          </tr>
+          <tr>
+            <td>Updates</td>
+            <td>Requires Rebuild</td>
+            <td>Library can be updated independently</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>What is a Loader?</h2>
+      <h3>Definition</h3>
+      <blockquote>
+        <p>A <strong>Loader</strong> is a system program that loads the executable file into <strong>RAM (Main Memory)</strong> and prepares it for execution.</p>
+      </blockquote>
+      <p>After the linker creates the executable, the loader takes over.</p>
+
+      <h2>Loader Process</h2>
+      <pre><code class="language-none">Executable File
+       │
+       ▼
+Loader
+       │
+       ▼
+RAM
+       │
+       ▼
+CPU Executes</code></pre>
+      <p>The Loader ensures the program is placed into memory correctly before execution begins.</p>
+
+      <h2>What Does the Loader Do?</h2>
+      <p>The loader performs several tasks:</p>
+      <ul>
+        <li>Loads the executable into RAM.</li>
+        <li>Allocates memory for the program.</li>
+        <li>Loads required shared libraries (for dynamic linking).</li>
+        <li>Sets up the program's execution environment.</li>
+        <li>Transfers control to the <code>main()</code> function.</li>
+      </ul>
+
+      <h2>Program Execution</h2>
+      <p>Suppose the executable is:</p>
+      <pre><code class="language-none">hello.exe</code></pre>
+      <p>Execution flow:</p>
+      <pre><code class="language-none">Double Click
+      │
+      ▼
+Operating System
+      │
+      ▼
+Loader
+      │
+      ▼
+Program Loaded into RAM
+      │
+      ▼
+CPU Starts main()
+      │
+      ▼
+Output</code></pre>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine making a movie.</p>
+      <h3>Script</h3>
+      <p>➡ Source Code</p>
+      <h3>Actors Perform</h3>
+      <p>➡ Compiler</p>
+      <h3>Editing Team Combines Scenes</h3>
+      <p>➡ Linker</p>
+      <h3>Theater Plays the Movie</h3>
+      <p>➡ Loader</p>
+      <pre><code class="language-none">Script
+   │
+   ▼
+Shooting
+   │
+   ▼
+Editing
+   │
+   ▼
+Final Movie
+   │
+   ▼
+Projector Shows Movie</code></pre>
+
+      <h2>Linker vs Loader</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Linker</th>
+            <th>Loader</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Works After</td>
+            <td>Assembly</td>
+            <td>Linking</td>
+          </tr>
+          <tr>
+            <td>Input</td>
+            <td>Object Files</td>
+            <td>Executable File</td>
+          </tr>
+          <tr>
+            <td>Output</td>
+            <td>Executable File</td>
+            <td>Program in RAM</td>
+          </tr>
+          <tr>
+            <td>Main Job</td>
+            <td>Combines files and libraries</td>
+            <td>Loads program into memory</td>
+          </tr>
+          <tr>
+            <td>Executes Program</td>
+            <td>No</td>
+            <td>Yes (starts execution through OS/CPU)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Complete Program Life Cycle</h2>
+      <pre><code class="language-none">Write Program
+      │
+      ▼
+Source Code (.c)
+      │
+      ▼
+Compiler
+      │
+      ▼
+Object Code (.o)
+      │
+      ▼
+Linker
+      │
+Creates Executable
+      │
+      ▼
+Loader
+      │
+Loads into RAM
+      │
+      ▼
+CPU Executes main()
+      │
+      ▼
+Output</code></pre>
+
+      <h2>Example Using GCC</h2>
+      <p>Suppose you have:</p>
+      <pre><code class="language-none">hello.c</code></pre>
+
+      <h3>Compile Only</h3>
+      <pre><code class="language-bash">gcc -c hello.c</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">hello.o</code></pre>
+
+      <h3>Compile + Link</h3>
+      <pre><code class="language-bash">gcc hello.c -o hello</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">hello</code></pre>
+      <p>Here:</p>
+      <ul>
+        <li><strong>Compiler</strong> converts source code to object code.</li>
+        <li><strong>Linker</strong> creates the executable named <code>hello</code>.</li>
+      </ul>
+
+      <h3>Run the Program</h3>
+      <p>Linux/macOS:</p>
+      <pre><code class="language-bash">./hello</code></pre>
+      <p>Windows:</p>
+      <pre><code class="language-bash">hello.exe</code></pre>
+      <p>At this stage, the <strong>Loader</strong> loads the program into RAM, and execution begins.</p>
+
+      <h2>Common Interview Question</h2>
+      <h3>Q. What happens if the linker cannot find a required function?</h3>
+      <p>Example:</p>
+      <pre><code class="language-c">printf("Hello");</code></pre>
+      <p>If the required library is missing or not linked properly, the linker generates a <strong>linker error</strong>, such as:</p>
+      <pre><code class="language-none">undefined reference to 'printf'</code></pre>
+      <p>No executable file is created.</p>
+
+      <h2>Summary Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Input</th>
+            <th>Output</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Compiler</td>
+            <td>Source Code</td>
+            <td>Assembly Code</td>
+            <td>Checks syntax and translates C code</td>
+          </tr>
+          <tr>
+            <td>Assembler</td>
+            <td>Assembly Code</td>
+            <td>Object Code</td>
+            <td>Converts assembly to machine code</td>
+          </tr>
+          <tr>
+            <td>Linker</td>
+            <td>Object Files + Libraries</td>
+            <td>Executable</td>
+            <td>Combines everything into one runnable file</td>
+          </tr>
+          <tr>
+            <td>Loader</td>
+            <td>Executable</td>
+            <td>Program in RAM</td>
+            <td>Loads program into memory and starts execution</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>The <strong>Linker</strong> combines object files and required libraries to create an executable program.</li>
+        <li>The <strong>Loader</strong> loads the executable into RAM and prepares it for execution.</li>
+        <li><strong>Static Linking</strong> copies libraries into the executable.</li>
+        <li><strong>Dynamic Linking</strong> loads libraries at runtime.</li>
+        <li>Execution starts from the <strong><code>main()</code> function</strong> after the loader finishes its work.</li>
+      </ul>
+
+      <h2>Interview Questions</h2>
+
+      <h3>Q1. What is a Linker?</h3>
+      <p><strong>Answer:</strong> A Linker is a system program that combines object files and required libraries to create an executable program.</p>
+
+      <h3>Q2. What is a Loader?</h3>
+      <p><strong>Answer:</strong> A Loader is a system program that loads the executable into RAM and prepares it for execution.</p>
+
+      <h3>Q3. What is the difference between Static and Dynamic Linking?</h3>
+      <p><strong>Answer:</strong> Static linking copies library code into the executable, while dynamic linking loads shared libraries at runtime.</p>
+
+      <h3>Q4. Which comes first: Linker or Loader?</h3>
+      <p><strong>Answer:</strong> The Linker runs first to create the executable. The Loader runs afterward when the executable is started.</p>
+
+      <h3>Q5. Does the Linker execute the program?</h3>
+      <p><strong>Answer:</strong> No. The Linker only creates the executable. The Loader loads it into memory, and then the CPU executes it.</p>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

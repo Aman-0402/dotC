@@ -50,6 +50,10 @@
         {
           "title": "Interpreters",
           "path": "lessons/unit1-interpreters.html"
+        },
+        {
+          "title": "Linkers and Loaders",
+          "path": "lessons/unit1-linkers-and-loaders.html"
         }
       ]
     }
