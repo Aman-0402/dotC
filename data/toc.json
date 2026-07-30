@@ -26,6 +26,10 @@
         {
           "title": "Introduction to C Program and C Compilers",
           "path": "lessons/unit1-intro-to-c-and-compilers.html"
+        },
+        {
+          "title": "Structure of a C Program",
+          "path": "lessons/unit1-structure-of-c-program.html"
         }
       ]
     }

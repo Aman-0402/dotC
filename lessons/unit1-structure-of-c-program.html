@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Structure of a C Program — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 1 / Structure of a C Program</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Structure of a C Program</h1>
+
+      <p>Every C program follows a <strong>basic structure</strong>. Whether the program is small or large, it is generally organized in the same way.</p>
+      <p>Understanding this structure helps you read and write C programs correctly.</p>
+
+      <h2>Basic Structure of a C Program</h2>
+      <p>A C program generally consists of the following sections:</p>
+      <pre><code class="language-none">Documentation Section
+        ↓
+Link Section
+        ↓
+Definition Section (Optional)
+        ↓
+Global Declaration Section (Optional)
+        ↓
+main() Function
+        ↓
+User-Defined Functions (Optional)</code></pre>
+      <blockquote>
+        <p><strong>Note:</strong> Only the <strong>Link Section</strong> and <strong><code>main()</code> function</strong> are mandatory for most beginner C programs.</p>
+      </blockquote>
+
+      <h2>First C Program</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello, World!");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Hello, World!</code></pre>
+      <p>Now let's understand every line.</p>
+
+      <h2>1. Documentation Section</h2>
+      <p>This section contains <strong>comments</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">// My First C Program</code></pre>
+      <p>or</p>
+      <pre><code class="language-c">/*
+   My First C Program
+   Written by Aman
+*/</code></pre>
+      <h3>Purpose</h3>
+      <ul>
+        <li>Explains the program.</li>
+        <li>Makes code easier to understand.</li>
+        <li>Ignored by the compiler.</li>
+      </ul>
+
+      <h2>2. Link Section</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;</code></pre>
+      <p>This is called a <strong>Preprocessor Directive</strong>.</p>
+      <h3>Meaning</h3>
+      <ul>
+        <li><code>#include</code> tells the compiler to include a header file.</li>
+        <li><code>stdio.h</code> stands for <strong>Standard Input Output Header File</strong>.</li>
+      </ul>
+      <p>It provides functions like:</p>
+      <pre><code class="language-c">printf()
+scanf()</code></pre>
+      <p>Without including <code>stdio.h</code>, functions like <code>printf()</code> and <code>scanf()</code> may not work correctly.</p>
+
+      <h2>Common Header Files</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Header File</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>stdio.h</code></td>
+            <td>Input and Output</td>
+          </tr>
+          <tr>
+            <td><code>math.h</code></td>
+            <td>Mathematical functions</td>
+          </tr>
+          <tr>
+            <td><code>string.h</code></td>
+            <td>String functions</td>
+          </tr>
+          <tr>
+            <td><code>stdlib.h</code></td>
+            <td>Memory allocation, conversion, utilities</td>
+          </tr>
+          <tr>
+            <td><code>ctype.h</code></td>
+            <td>Character handling</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>3. Definition Section (Optional)</h2>
+      <p>Used to define constants.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">#define PI 3.14159</code></pre>
+      <p>Now instead of writing:</p>
+      <pre><code class="language-c">3.14159</code></pre>
+      <p>we can write:</p>
+      <pre><code class="language-c">PI</code></pre>
+
+      <h2>4. Global Declaration Section (Optional)</h2>
+      <p>Variables and function declarations that can be accessed throughout the program.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">int count = 0;</code></pre>
+      <p>We'll learn global variables in later units.</p>
+
+      <h2>5. main() Function (Most Important)</h2>
+      <p>Every C program starts execution from the <strong><code>main()</code> function</strong>.</p>
+      <pre><code class="language-c">int main()
+{
+}</code></pre>
+      <h3>Why is <code>main()</code> important?</h3>
+      <ul>
+        <li>It is the entry point of every C program.</li>
+        <li>The operating system starts executing the program from here.</li>
+      </ul>
+      <p>Without <code>main()</code>, the program <strong>cannot run</strong>.</p>
+
+      <h2>Understanding <code>int main()</code></h2>
+      <pre><code class="language-c">int main()</code></pre>
+      <h3><code>int</code></h3>
+      <p>Means the function returns an <strong>integer value</strong>.</p>
+      <p>Usually:</p>
+      <pre><code class="language-c">return 0;</code></pre>
+      <p>returns the value <strong>0</strong> to the operating system, indicating successful execution.</p>
+
+      <h2>Curly Braces <code>{ }</code></h2>
+      <p>Everything inside these braces belongs to the <code>main()</code> function.</p>
+      <pre><code class="language-c">int main()
+{
+    // Program statements
+}</code></pre>
+
+      <h2>6. Executable Statements</h2>
+      <p>These are the instructions executed by the computer.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">printf("Hello World");</code></pre>
+      <p>or</p>
+      <pre><code class="language-c">a = b + c;</code></pre>
+
+      <h2>Understanding <code>printf()</code></h2>
+      <pre><code class="language-c">printf("Hello World");</code></pre>
+      <h3>Purpose</h3>
+      <p>Displays output on the screen.</p>
+      <p>Output</p>
+      <pre><code class="language-none">Hello World</code></pre>
+      <p><code>printf</code> means <strong>Print Formatted</strong>.</p>
+
+      <h2>Understanding <code>return 0;</code></h2>
+      <pre><code class="language-c">return 0;</code></pre>
+      <p>It tells the operating system:</p>
+      <blockquote>
+        <p>"The program finished successfully."</p>
+      </blockquote>
+      <p>Although some modern compilers allow omitting it in <code>main()</code>, it is <strong>good practice</strong> to include it.</p>
+
+      <h2>Why is Semicolon (<code>;</code>) Used?</h2>
+      <p>Every statement in C ends with a semicolon.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">printf("Hello");</code></pre>
+      <pre><code class="language-c">return 0;</code></pre>
+      <p>The semicolon tells the compiler that the statement has ended.</p>
+      <h3>Incorrect</h3>
+      <pre><code class="language-c">printf("Hello")</code></pre>
+      <p>This results in a <strong>compilation error</strong>.</p>
+
+      <h2>Program Execution Flow</h2>
+      <pre><code class="language-none">Program Starts
+      │
+      ▼
+main()
+      │
+      ▼
+printf("Hello")
+      │
+      ▼
+return 0
+      │
+      ▼
+Program Ends</code></pre>
+
+      <h2>Example 2</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Welcome to C Programming");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Welcome to C Programming</code></pre>
+
+      <h2>Example 3</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello\n");
+    printf("World");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Hello
+World</code></pre>
+      <p>Here,</p>
+      <pre><code class="language-c">\n</code></pre>
+      <p>moves the cursor to the next line.</p>
+
+      <h2>Example 4</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("A");
+    printf("B");
+    printf("C");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">ABC</code></pre>
+      <p>Since no <code>\n</code> or space is used, all output appears on the same line.</p>
+
+      <h2>Example 5</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Name : Aman\n");
+    printf("Course : C Programming\n");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Name : Aman
+Course : C Programming</code></pre>
+
+      <h2>Overall Structure of a C Program</h2>
+      <pre><code class="language-c">// Documentation Section
+
+#include &lt;stdio.h&gt;     // Link Section
+
+#define PI 3.14        // Definition Section
+
+int count;             // Global Declaration
+
+int main()             // Main Function
+{
+    printf("Hello");
+
+    return 0;
+}
+
+// User Defined Functions</code></pre>
+
+      <h2>Important Rules</h2>
+      <ul>
+        <li>Every C program should have a <code>main()</code> function.</li>
+        <li>Statements end with a semicolon (<code>;</code>).</li>
+        <li>C is <strong>case-sensitive</strong>.
+          <ul>
+            <li><code>main</code> ✅</li>
+            <li><code>Main</code> ❌</li>
+            <li><code>MAIN</code> ❌</li>
+          </ul>
+        </li>
+        <li>Braces <code>{}</code> define blocks of code.</li>
+        <li><code>printf()</code> is used to display output.</li>
+        <li><code>return 0;</code> indicates successful program execution.</li>
+      </ul>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <p>❌ Missing semicolon</p>
+      <pre><code class="language-c">printf("Hello")</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">printf("Hello");</code></pre>
+
+      <p>❌ Wrong case</p>
+      <pre><code class="language-c">Printf("Hello");</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">printf("Hello");</code></pre>
+
+      <p>❌ Missing braces</p>
+      <pre><code class="language-c">int main()
+printf("Hello");</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">int main()
+{
+    printf("Hello");
+}</code></pre>
+
+      <p>❌ Missing <code>#include</code></p>
+      <pre><code class="language-c">int main()
+{
+    printf("Hello");
+}</code></pre>
+      <p>While some compilers may still compile this with warnings, always include the appropriate header (<code>stdio.h</code>) when using <code>printf()</code>.</p>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>Every C program starts execution from the <strong><code>main()</code> function</strong>.</li>
+        <li><code>#include &lt;stdio.h&gt;</code> includes the Standard Input/Output library.</li>
+        <li><code>printf()</code> displays output on the screen.</li>
+        <li>Every statement ends with a <strong>semicolon (<code>;</code>)</strong>.</li>
+        <li>Curly braces <code>{}</code> define the body of a function.</li>
+        <li><code>return 0;</code> indicates successful execution.</li>
+        <li>C is <strong>case-sensitive</strong>.</li>
+      </ul>
+
+      <h2>Interview Questions</h2>
+
+      <h3>Q1. Which function is the starting point of every C program?</h3>
+      <p><strong>Answer:</strong> <code>main()</code>.</p>
+
+      <h3>Q2. What is the purpose of <code>#include &lt;stdio.h&gt;</code>?</h3>
+      <p><strong>Answer:</strong> It includes the Standard Input/Output header file, which provides functions like <code>printf()</code> and <code>scanf()</code>.</p>
+
+      <h3>Q3. Why do we use <code>return 0;</code>?</h3>
+      <p><strong>Answer:</strong> It returns <code>0</code> to the operating system, indicating that the program executed successfully.</p>
+
+      <h3>Q4. What happens if you forget a semicolon?</h3>
+      <p><strong>Answer:</strong> The compiler generates a syntax (compilation) error.</p>
+
+      <h3>Q5. Is C case-sensitive?</h3>
+      <p><strong>Answer:</strong> Yes. For example, <code>printf()</code> is correct, while <code>Printf()</code> is incorrect.</p>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
