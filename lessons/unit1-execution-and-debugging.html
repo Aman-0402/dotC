@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Execution and Debugging — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 1 / Execution and Debugging</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Execution and Debugging</h1>
+
+      <p>Writing a program is only half the job. The other half is <strong>running it correctly</strong> and <strong>fixing errors</strong>.</p>
+      <p>This process involves two important concepts:</p>
+      <ol>
+        <li><strong>Execution</strong> – Running the program.</li>
+        <li><strong>Debugging</strong> – Finding and fixing errors.</li>
+      </ol>
+
+      <h2>What is Program Execution?</h2>
+      <blockquote>
+        <p><strong>Execution</strong> is the process of running a compiled program so that the CPU performs the instructions written in the program.</p>
+      </blockquote>
+      <p>Once a C program is compiled and linked successfully, an executable file is created.</p>
+      <p>When you run that executable, the operating system loads it into memory (RAM), and the CPU starts executing instructions from the <strong><code>main()</code> function</strong>.</p>
+
+      <h2>Program Execution Flow</h2>
+      <pre><code class="language-none">Write Program (.c)
+       │
+       ▼
+Compile
+       │
+       ▼
+Executable File
+       │
+       ▼
+Run Program
+       │
+       ▼
+Loader loads into RAM
+       │
+       ▼
+CPU starts from main()
+       │
+       ▼
+Output Displayed</code></pre>
+
+      <h2>Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Welcome to C Programming");
+
+    return 0;
+}</code></pre>
+      <p>Execution Steps:</p>
+      <pre><code class="language-none">1. Program is compiled.
+2. Executable file is created.
+3. User runs the executable.
+4. Loader loads the program into RAM.
+5. CPU starts executing from main().
+6. printf() displays the message.
+7. return 0; ends the program.</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Welcome to C Programming</code></pre>
+
+      <h2>What is Debugging?</h2>
+      <blockquote>
+        <p><strong>Debugging</strong> is the process of identifying, locating, and fixing errors (bugs) in a program.</p>
+      </blockquote>
+      <p>A programmer spends a significant amount of time debugging programs.</p>
+
+      <h2>What is a Bug?</h2>
+      <p>A <strong>Bug</strong> is any mistake or error in a program that causes incorrect behavior.</p>
+      <p>Examples:</p>
+      <ul>
+        <li>Program does not compile.</li>
+        <li>Program crashes.</li>
+        <li>Wrong output.</li>
+        <li>Infinite loop.</li>
+        <li>Unexpected results.</li>
+      </ul>
+
+      <h2>Types of Errors in C</h2>
+      <p>There are <strong>three major types of errors</strong>:</p>
+      <ol>
+        <li>Syntax Errors</li>
+        <li>Runtime Errors</li>
+        <li>Logical Errors</li>
+      </ol>
+
+      <h2>1. Syntax Error</h2>
+      <h3>Definition</h3>
+      <p>A <strong>Syntax Error</strong> occurs when the programmer violates the rules (syntax) of the C language.</p>
+      <p>The compiler detects these errors during compilation.</p>
+
+      <h3>Example 1: Missing Semicolon</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello")
+
+    return 0;
+}</code></pre>
+      <p>Compiler Error</p>
+      <pre><code class="language-none">error: expected ';'</code></pre>
+      <p>Correct Code</p>
+      <pre><code class="language-c">printf("Hello");</code></pre>
+
+      <h3>Example 2: Missing Braces</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">int main()
+
+printf("Hello");</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">int main()
+{
+    printf("Hello");
+}</code></pre>
+
+      <h3>Example 3: Wrong Function Name</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">Printf("Hello");</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">printf("Hello");</code></pre>
+      <p>Remember:</p>
+      <p>C is <strong>case-sensitive</strong>.</p>
+
+      <h2>Common Syntax Errors</h2>
+      <ul>
+        <li>Missing semicolon (<code>;</code>)</li>
+        <li>Missing braces (<code>{}</code>)</li>
+        <li>Missing quotation marks (<code>" "</code>)</li>
+        <li>Misspelled keywords</li>
+        <li>Missing header files</li>
+        <li>Unmatched parentheses</li>
+      </ul>
+
+      <h2>2. Runtime Error</h2>
+      <h3>Definition</h3>
+      <p>A <strong>Runtime Error</strong> occurs <strong>while the program is running</strong>, even though it compiled successfully.</p>
+
+      <h3>Example 1: Division by Zero</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 10;
+    int b = 0;
+
+    printf("%d", a / b);
+
+    return 0;
+}</code></pre>
+      <p>Result</p>
+      <pre><code class="language-none">Program crashes</code></pre>
+
+      <h3>Example 2: Invalid Memory Access</h3>
+      <pre><code class="language-c">int *ptr = NULL;
+
+printf("%d", *ptr);</code></pre>
+      <p>Result</p>
+      <pre><code class="language-none">Segmentation Fault</code></pre>
+      <p>We'll learn pointers later, but this shows a common runtime error.</p>
+
+      <h3>Example 3: File Not Found</h3>
+      <p>Trying to open a file that doesn't exist may also cause a runtime error.</p>
+
+      <h2>Common Runtime Errors</h2>
+      <ul>
+        <li>Division by zero</li>
+        <li>Invalid memory access</li>
+        <li>Array index out of bounds (undefined behavior in C)</li>
+        <li>File opening failure</li>
+        <li>Stack overflow (deep recursion)</li>
+      </ul>
+
+      <h2>3. Logical Error</h2>
+      <h3>Definition</h3>
+      <p>A <strong>Logical Error</strong> occurs when the program compiles and runs successfully, but produces the <strong>wrong output</strong>.</p>
+      <p>These are the hardest errors to detect because the compiler cannot identify them.</p>
+
+      <h3>Example</h3>
+      <p>Problem:</p>
+      <p>Find the sum of two numbers.</p>
+      <p>Wrong Code</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 10;
+    int b = 20;
+
+    printf("%d", a * b);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">200</code></pre>
+      <p>Expected Output</p>
+      <pre><code class="language-none">30</code></pre>
+      <p>The program compiled successfully but the logic is incorrect.</p>
+      <p>Correct Code</p>
+      <pre><code class="language-c">printf("%d", a + b);</code></pre>
+
+      <h2>Comparison of Errors</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Error Type</th>
+            <th>Detected By</th>
+            <th>When It Occurs</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Syntax Error</td>
+            <td>Compiler</td>
+            <td>Before execution</td>
+            <td>Missing <code>;</code></td>
+          </tr>
+          <tr>
+            <td>Runtime Error</td>
+            <td>Operating System / Runtime</td>
+            <td>During execution</td>
+            <td>Division by zero</td>
+          </tr>
+          <tr>
+            <td>Logical Error</td>
+            <td>Programmer</td>
+            <td>After execution</td>
+            <td>Wrong formula</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>What is a Debugger?</h2>
+      <p>A <strong>Debugger</strong> is a software tool that helps programmers find and fix errors.</p>
+      <p>Popular IDEs such as <strong>Visual Studio Code</strong>, <strong>Code::Blocks</strong>, <strong>Visual Studio</strong>, and <strong>CLion</strong> provide debugging features.</p>
+
+      <h2>Common Debugging Techniques</h2>
+
+      <h3>1. Read Error Messages</h3>
+      <p>Example:</p>
+      <pre><code class="language-none">error: expected ';'</code></pre>
+      <p>The compiler usually tells you the line number where it found the problem.</p>
+
+      <h3>2. Use <code>printf()</code> for Debugging</h3>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 5;
+    int b = 10;
+
+    printf("a = %d\n", a);
+    printf("b = %d\n", b);
+
+    printf("%d", a + b);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">a = 5
+b = 10
+15</code></pre>
+      <p>Printing variable values is one of the simplest ways to understand what the program is doing.</p>
+
+      <h3>3. Execute Step by Step</h3>
+      <p>Most debuggers allow you to:</p>
+      <ul>
+        <li>Run one line at a time.</li>
+        <li>Check variable values.</li>
+        <li>Pause execution.</li>
+        <li>Continue execution.</li>
+      </ul>
+      <p>This helps locate exactly where an error occurs.</p>
+
+      <h2>Best Practices to Avoid Errors</h2>
+      <ul>
+        <li>Write small programs first.</li>
+        <li>Compile frequently.</li>
+        <li>Read compiler error messages carefully.</li>
+        <li>Use meaningful variable names.</li>
+        <li>Test with different inputs.</li>
+        <li>Keep code properly indented.</li>
+        <li>Add comments where necessary.</li>
+      </ul>
+
+      <h2>Program Life Cycle</h2>
+      <pre><code class="language-none">Write Program
+      │
+      ▼
+Compile
+      │
+      ▼
+Fix Syntax Errors
+      │
+      ▼
+Run Program
+      │
+      ▼
+Fix Runtime Errors
+      │
+      ▼
+Check Output
+      │
+      ▼
+Fix Logical Errors
+      │
+      ▼
+Correct Program</code></pre>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine you're solving a math problem.</p>
+      <ul>
+        <li><strong>Syntax Error:</strong> You forgot to write a number or symbol.</li>
+        <li><strong>Runtime Error:</strong> Your calculator stops working halfway through.</li>
+        <li><strong>Logical Error:</strong> You solved the problem using the wrong formula.</li>
+      </ul>
+
+      <h2>Summary Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Concept</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Execution</td>
+            <td>Running the compiled program</td>
+          </tr>
+          <tr>
+            <td>Debugging</td>
+            <td>Finding and fixing errors</td>
+          </tr>
+          <tr>
+            <td>Bug</td>
+            <td>A mistake in a program</td>
+          </tr>
+          <tr>
+            <td>Syntax Error</td>
+            <td>Violates C language rules</td>
+          </tr>
+          <tr>
+            <td>Runtime Error</td>
+            <td>Occurs while the program is running</td>
+          </tr>
+          <tr>
+            <td>Logical Error</td>
+            <td>Produces incorrect output despite successful execution</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li><strong>Execution</strong> is the process of running a compiled program.</li>
+        <li><strong>Debugging</strong> means finding and fixing errors.</li>
+        <li>A <strong>Bug</strong> is any mistake in a program.</li>
+        <li><strong>Syntax Errors</strong> are detected by the compiler.</li>
+        <li><strong>Runtime Errors</strong> occur during execution.</li>
+        <li><strong>Logical Errors</strong> produce incorrect output and are found by testing.</li>
+        <li>Reading compiler messages and using <code>printf()</code> are simple but effective debugging techniques.</li>
+      </ul>
+
+      <h2>Interview Questions</h2>
+
+      <h3>Q1. What is debugging?</h3>
+      <p><strong>Answer:</strong> Debugging is the process of finding and fixing errors (bugs) in a program.</p>
+
+      <h3>Q2. What is the difference between execution and debugging?</h3>
+      <p><strong>Answer:</strong> Execution is running the program, while debugging is identifying and correcting errors.</p>
+
+      <h3>Q3. Which type of error is detected by the compiler?</h3>
+      <p><strong>Answer:</strong> Syntax errors.</p>
+
+      <h3>Q4. Which error is the hardest to detect?</h3>
+      <p><strong>Answer:</strong> Logical errors, because the program compiles and runs but gives incorrect results.</p>
+
+      <h3>Q5. What is a debugger?</h3>
+      <p><strong>Answer:</strong> A debugger is a tool that helps programmers execute code step by step, inspect variables, and identify errors.</p>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

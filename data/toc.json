@@ -38,6 +38,10 @@
         {
           "title": "Source Code, Object Code & Executable Code",
           "path": "lessons/unit1-source-object-executable-code.html"
+        },
+        {
+          "title": "Execution and Debugging",
+          "path": "lessons/unit1-execution-and-debugging.html"
         }
       ]
     }
