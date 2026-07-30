@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C Fundamentals — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / C Fundamentals</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>C Fundamentals</h1>
+
+      <h2>What are C Fundamentals?</h2>
+      <p>C Fundamentals are the basic building blocks of the C programming language. Before writing programs, we need to understand these core concepts because every C program is built using them.</p>
+      <p>Think of learning C like learning English.</p>
+      <pre><code class="language-none">Alphabets → Words → Sentences → Paragraphs</code></pre>
+      <p>Similarly,</p>
+      <pre><code class="language-none">Characters → Tokens → Statements → Functions → Program</code></pre>
+      <p>Everything starts from the fundamentals.</p>
+
+      <h2>Characteristics of C</h2>
+      <p>C has several important features.</p>
+
+      <h3>1. Simple Language</h3>
+      <p>C contains only a small number of keywords.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int a = 10;</code></pre>
+      <p>Simple and easy to understand.</p>
+
+      <h3>2. Procedural Language</h3>
+      <p>C follows the top-to-bottom execution approach.</p>
+      <p>Programs are divided into functions.</p>
+      <p>Example</p>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+void greet()
+{
+    printf("Hello");
+}
+
+int main()
+{
+    greet();
+}</code></pre>
+
+      <h3>3. Middle-Level Language</h3>
+      <p>C can work like</p>
+      <ul>
+        <li>High-Level Language</li>
+        <li>Low-Level Language</li>
+      </ul>
+      <p>It allows hardware access while remaining easy to program.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int a = 10;</code></pre>
+      <p>and also</p>
+      <pre><code class="language-c">int *ptr = &amp;a;</code></pre>
+      <p>Pointers allow direct memory manipulation.</p>
+
+      <h3>4. Portable Language</h3>
+      <p>The same program can run on different operating systems with little or no modification.</p>
+      <p>Example</p>
+      <p>A program written on Windows usually works on Linux after recompilation.</p>
+
+      <h3>5. Fast Language</h3>
+      <p>Since C is compiled, it executes much faster than interpreted languages.</p>
+      <p>Flow:</p>
+      <pre><code class="language-none">Source Code
+      ↓
+Compiler
+      ↓
+Machine Code
+      ↓
+Execution</code></pre>
+
+      <h3>6. Structured Programming</h3>
+      <p>Programs are divided into small functions.</p>
+      <p>Instead of writing</p>
+      <pre><code class="language-none">1000 lines</code></pre>
+      <p>We write</p>
+      <pre><code class="language-none">main()
+
+login()
+
+display()
+
+calculate()</code></pre>
+      <p>This improves readability and maintenance.</p>
+
+      <h3>7. Rich Library</h3>
+      <p>C provides many built-in functions.</p>
+      <p>Example</p>
+      <pre><code class="language-c">printf();
+scanf();
+strlen();
+sqrt();</code></pre>
+      <p>These functions are available through header files.</p>
+
+      <h3>8. Dynamic Memory Management</h3>
+      <p>Memory can be allocated during program execution.</p>
+      <p>Example</p>
+      <pre><code class="language-c">malloc()
+calloc()
+realloc()
+free()</code></pre>
+      <p>These are introduced in advanced topics.</p>
+
+      <h3>9. Supports Pointers</h3>
+      <p>Pointers are one of C's most powerful features.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int a = 10;
+int *p = &amp;a;</code></pre>
+      <p>The pointer stores the address of <code>a</code>.</p>
+
+      <h3>10. Extensible</h3>
+      <p>Users can create their own functions.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int add(int x, int y)
+{
+    return x+y;
+}</code></pre>
+
+      <h2>Structure of Every C Program</h2>
+      <p>Every C program generally contains:</p>
+      <pre><code class="language-none">Documentation
+
+↓
+
+Header Files
+
+↓
+
+Global Variables
+
+↓
+
+Function Declaration
+
+↓
+
+main()
+
+↓
+
+User Functions</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    printf("Welcome to C");
+
+    return 0;
+}</code></pre>
+
+      <h2>Program Execution Flow</h2>
+      <pre><code class="language-none">Start
+
+↓
+
+Preprocessor
+
+↓
+
+Compiler
+
+↓
+
+Assembler
+
+↓
+
+Linker
+
+↓
+
+Executable File
+
+↓
+
+Run
+
+↓
+
+Output</code></pre>
+
+      <h2>Why Learn C?</h2>
+      <p>Because C is the foundation of many technologies:</p>
+      <ul>
+        <li>C++</li>
+        <li>Java (syntax inspired by C)</li>
+        <li>C#</li>
+        <li>JavaScript (syntax influenced by C)</li>
+        <li>Operating Systems</li>
+        <li>Embedded Systems</li>
+        <li>Device Drivers</li>
+        <li>Database Engines</li>
+        <li>Game Engines</li>
+        <li>Compilers</li>
+      </ul>
+      <p>Many modern programming languages borrow syntax and concepts from C.</p>
+
+      <h2>Real-World Applications of C</h2>
+      <ul>
+        <li>Operating Systems</li>
+        <li>Embedded Systems</li>
+        <li>Robotics</li>
+        <li>IoT Devices</li>
+        <li>Device Drivers</li>
+        <li>Networking</li>
+        <li>Database Systems</li>
+        <li>Game Development</li>
+        <li>Compiler Design</li>
+        <li>Microcontrollers</li>
+        <li>Aerospace Software</li>
+        <li>Medical Devices</li>
+      </ul>
+
+      <h2>Example Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    printf("Welcome to C Programming!\n");
+
+    printf("Learning Fundamentals.");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Welcome to C Programming!
+Learning Fundamentals.</code></pre>
+
+      <h2>Common Beginner Mistakes</h2>
+      <p>❌ Forgetting <code>#include&lt;stdio.h&gt;</code></p>
+      <p>❌ Missing semicolon <code>;</code></p>
+      <pre><code class="language-c">printf("Hello")</code></pre>
+      <p>Correct:</p>
+      <pre><code class="language-c">printf("Hello");</code></pre>
+      <p>❌ Forgetting <code>return 0;</code></p>
+      <p>❌ Using capital letters incorrectly</p>
+      <pre><code class="language-c">Printf();</code></pre>
+      <p>Correct:</p>
+      <pre><code class="language-c">printf();</code></pre>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. Why is C called a middle-level language?</h3>
+      <p>Because it combines features of both high-level and low-level programming. It is easy to write while also allowing direct memory and hardware access through pointers.</p>
+
+      <h3>2. Why is C faster than Python?</h3>
+      <p>C is compiled directly into machine code before execution, whereas Python is interpreted line by line, resulting in additional runtime overhead.</p>
+
+      <h3>3. What are the major features of C?</h3>
+      <ul>
+        <li>Simple</li>
+        <li>Portable</li>
+        <li>Fast</li>
+        <li>Structured</li>
+        <li>Procedural</li>
+        <li>Middle-Level</li>
+        <li>Rich Library</li>
+        <li>Pointer Support</li>
+        <li>Dynamic Memory Allocation</li>
+      </ul>
+
+      <h3>4. Why is C still used today?</h3>
+      <p>Because it provides high performance, efficient memory management, hardware-level control, and portability. It remains the preferred language for operating systems, embedded systems, compilers, and performance-critical software.</p>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>What are the main characteristics of the C language?</li>
+        <li>Why is C called a procedural language?</li>
+        <li>Explain why C is considered a middle-level language.</li>
+        <li>List five real-world applications of C.</li>
+        <li>Differentiate between compiled and interpreted languages.</li>
+      </ol>
+
+      <h3>Coding</h3>
+      <p>Q1. Print a welcome message.</p>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    printf("Welcome to C Programming!");
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Welcome to C Programming!</code></pre>
+
+      <p>Q2. Print multiple lines.</p>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    printf("Learning C\n");
+    printf("Building Strong Programming Skills\n");
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Learning C
+Building Strong Programming Skills</code></pre>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

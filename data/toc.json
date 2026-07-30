@@ -60,6 +60,15 @@
           "path": "lessons/unit1-comments.html"
         }
       ]
+    },
+    {
+      "title": "Unit 2",
+      "lessons": [
+        {
+          "title": "C Fundamentals",
+          "path": "lessons/unit2-c-fundamentals.html"
+        }
+      ]
     }
   ]
 }
