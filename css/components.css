@@ -1,0 +1,71 @@
+.btn {
+  display: inline-block;
+  padding: 0.65rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background: var(--color-accent-hover);
+  color: #fff;
+  text-decoration: none;
+}
+
+pre[class*="language-"] {
+  background: var(--color-code-bg) !important;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 1rem !important;
+  font-family: var(--font-mono);
+  overflow-x: auto;
+}
+
+.toc-chapter {
+  margin-bottom: 0.75rem;
+}
+
+.toc-chapter summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.5rem 0;
+}
+
+.toc-lesson-list {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.toc-lesson-list li {
+  padding: 0.35rem 0;
+}
+
+.sidebar-lesson-list {
+  list-style: none;
+}
+
+.sidebar-lesson-list li a {
+  display: block;
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+  color: var(--color-text);
+}
+
+.sidebar-lesson-list li a.active {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.lesson-nav a:only-child {
+  margin-left: auto;
+}
