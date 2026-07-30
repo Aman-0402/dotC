@@ -10,6 +10,10 @@
         {
           "title": "Problem Solving with Sequential Logic Structure",
           "path": "lessons/unit1-sequential-logic.html"
+        },
+        {
+          "title": "Writing Algorithms",
+          "path": "lessons/unit1-writing-algorithms.html"
         }
       ]
     }

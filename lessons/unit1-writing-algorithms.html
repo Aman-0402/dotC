@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing Algorithms — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 1 / Writing Algorithms</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Writing Algorithms</h1>
+
+      <p>Before writing a program, programmers first write an <strong>Algorithm</strong>.</p>
+      <p>An algorithm is a <strong>step-by-step procedure</strong> to solve a problem.</p>
+      <p>Think of it like a recipe. Before cooking, you follow a sequence of steps. Similarly, before coding, you define the steps needed to solve the problem.</p>
+
+      <h2>What is an Algorithm?</h2>
+      <p><strong>Definition:</strong></p>
+      <blockquote>
+        <p>An <strong>Algorithm</strong> is a finite sequence of well-defined steps used to solve a problem or perform a task.</p>
+      </blockquote>
+      <p>It focuses on <strong>what to do</strong>, not <strong>how to write it in a programming language</strong>.</p>
+
+      <h2>Characteristics of a Good Algorithm</h2>
+      <p>A good algorithm should have the following properties:</p>
+
+      <h3>1. Input</h3>
+      <p>It should accept <strong>zero or more inputs</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">Enter two numbers</code></pre>
+
+      <h3>2. Output</h3>
+      <p>It should produce <strong>at least one output</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">Display the sum</code></pre>
+
+      <h3>3. Definiteness</h3>
+      <p>Each step should be <strong>clear and unambiguous</strong>.</p>
+      <p>❌ Wrong</p>
+      <pre><code class="language-none">Do some calculation</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-none">Sum = A + B</code></pre>
+
+      <h3>4. Finiteness</h3>
+      <p>The algorithm must <strong>end after a finite number of steps</strong>.</p>
+      <p>❌ Wrong</p>
+      <pre><code class="language-none">Repeat forever</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-none">Repeat 5 times
+Stop</code></pre>
+
+      <h3>5. Effectiveness</h3>
+      <p>Each step should be <strong>simple and executable</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">Multiply two numbers</code></pre>
+      <p>is effective because it is a basic operation.</p>
+
+      <h2>General Structure of an Algorithm</h2>
+      <pre><code class="language-none">Start
+Step 1
+Step 2
+Step 3
+...
+Stop</code></pre>
+
+      <h2>Example 1: Add Two Numbers</h2>
+      <h3>Problem</h3>
+      <p>Find the sum of two numbers.</p>
+
+      <h3>Algorithm</h3>
+      <pre><code class="language-none">Algorithm: Add Two Numbers
+
+Step 1: Start
+Step 2: Read A
+Step 3: Read B
+Step 4: Sum = A + B
+Step 5: Display Sum
+Step 6: Stop</code></pre>
+
+      <h3>Dry Run</h3>
+      <p>Input:</p>
+      <pre><code class="language-none">A = 10
+B = 20</code></pre>
+      <p>Execution:</p>
+      <pre><code class="language-none">Sum = 10 + 20
+Sum = 30</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">30</code></pre>
+
+      <h2>Example 2: Area of a Rectangle</h2>
+      <p>Formula</p>
+      <pre><code class="language-none">Area = Length × Width</code></pre>
+
+      <h3>Algorithm</h3>
+      <pre><code class="language-none">Algorithm: Area of Rectangle
+
+Step 1: Start
+Step 2: Read Length
+Step 3: Read Width
+Step 4: Area = Length × Width
+Step 5: Display Area
+Step 6: Stop</code></pre>
+      <p>Example</p>
+      <pre><code class="language-none">Length = 8
+Width = 5
+Area = 40</code></pre>
+
+      <h2>Example 3: Swap Two Numbers (Using Third Variable)</h2>
+      <p>Before</p>
+      <pre><code class="language-none">A = 10
+B = 20</code></pre>
+
+      <h3>Algorithm</h3>
+      <pre><code class="language-none">Step 1: Start
+Step 2: Read A and B
+Step 3: Temp = A
+Step 4: A = B
+Step 5: B = Temp
+Step 6: Display A and B
+Step 7: Stop</code></pre>
+      <p>After swapping</p>
+      <pre><code class="language-none">A = 20
+B = 10</code></pre>
+
+      <h2>Example 4: Find Simple Interest</h2>
+      <p>Formula</p>
+      <pre><code class="language-none">SI = (P × R × T) / 100</code></pre>
+
+      <h3>Algorithm</h3>
+      <pre><code class="language-none">Step 1: Start
+Step 2: Read P, R and T
+Step 3: SI = (P × R × T) / 100
+Step 4: Display SI
+Step 5: Stop</code></pre>
+
+      <h2>Example 5: Find Average of Three Numbers</h2>
+      <p>Formula</p>
+      <pre><code class="language-none">Average = (A + B + C) / 3</code></pre>
+
+      <h3>Algorithm</h3>
+      <pre><code class="language-none">Step 1: Start
+Step 2: Read A, B and C
+Step 3: Average = (A + B + C) / 3
+Step 4: Display Average
+Step 5: Stop</code></pre>
+
+      <h2>Advantages of Algorithms</h2>
+      <ul>
+        <li>Easy to understand.</li>
+        <li>Helps in planning before coding.</li>
+        <li>Independent of any programming language.</li>
+        <li>Makes debugging easier.</li>
+        <li>Can be converted into a flowchart or program.</li>
+      </ul>
+
+      <h2>Limitations of Algorithms</h2>
+      <ul>
+        <li>Writing algorithms for very large problems can be time-consuming.</li>
+        <li>There is no universal standard format.</li>
+        <li>Complex algorithms may become lengthy.</li>
+      </ul>
+
+      <h2>Algorithm vs Program</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Algorithm</th>
+            <th>Program</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Step-by-step solution</td>
+            <td>Actual implementation in a programming language</td>
+          </tr>
+          <tr>
+            <td>Written in simple English</td>
+            <td>Written using language syntax (e.g., C, Java, Python)</td>
+          </tr>
+          <tr>
+            <td>Language-independent</td>
+            <td>Language-dependent</td>
+          </tr>
+          <tr>
+            <td>Easier to understand</td>
+            <td>Requires programming knowledge</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Real-Life Example</h2>
+      <h3>Problem: Withdraw Money from an ATM</h3>
+      <pre><code class="language-none">Step 1: Start
+Step 2: Insert ATM Card
+Step 3: Enter PIN
+Step 4: Select Withdraw
+Step 5: Enter Amount
+Step 6: Collect Cash
+Step 7: Take Receipt
+Step 8: Remove Card
+Step 9: Stop</code></pre>
+      <p>Notice that these are simply <strong>ordered steps</strong>, just like an algorithm for a computer program.</p>
+
+      <h2>Tips for Writing Good Algorithms</h2>
+      <ul>
+        <li>Start with <strong>Start</strong> and end with <strong>Stop</strong>.</li>
+        <li>Write one clear action per step.</li>
+        <li>Keep steps in the correct order.</li>
+        <li>Use meaningful variable names like <code>sum</code>, <code>area</code>, <code>average</code>.</li>
+        <li>Avoid unnecessary or vague instructions.</li>
+      </ul>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>An <strong>algorithm</strong> is a <strong>step-by-step procedure</strong> to solve a problem.</li>
+        <li>It is <strong>language-independent</strong>.</li>
+        <li>Every algorithm should have:
+          <ul>
+            <li><strong>Input</strong></li>
+            <li><strong>Output</strong></li>
+            <li><strong>Definiteness</strong></li>
+            <li><strong>Finiteness</strong></li>
+            <li><strong>Effectiveness</strong></li>
+          </ul>
+        </li>
+        <li>Algorithms are written <strong>before</strong> writing the actual program.</li>
+        <li>A well-written algorithm makes coding easier and reduces errors.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
