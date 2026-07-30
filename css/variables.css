@@ -1,0 +1,28 @@
+:root {
+  --color-bg: #faf8f5;
+  --color-bg-elevated: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #5a5a5a;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-border: #e2ddd4;
+  --color-code-bg: #f2f0eb;
+
+  --font-heading: Georgia, "Times New Roman", serif;
+  --font-body: -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Fira Code", Consolas, monospace;
+
+  --sidebar-width: 260px;
+  --navbar-height: 56px;
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #0d1117;
+  --color-bg-elevated: #161b22;
+  --color-text: #e6edf3;
+  --color-text-muted: #9198a1;
+  --color-accent: #58a6ff;
+  --color-accent-hover: #79c0ff;
+  --color-border: #30363d;
+  --color-code-bg: #161b22;
+}
