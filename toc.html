@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Table of Contents — C Programming</title>
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="index.html">C Programming</a></span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <main style="max-width: 760px; margin: 2rem auto; padding: 0 1.5rem;">
+    <h1>Table of Contents</h1>
+    <div id="toc-root"></div>
+  </main>
+
+  <script src="js/theme.js"></script>
+  <script>
+    fetch("data/toc.json")
+      .then(function (res) { return res.json(); })
+      .then(function (toc) {
+        var root = document.getElementById("toc-root");
+        toc.chapters.forEach(function (chapter) {
+          var details = document.createElement("details");
+          details.className = "toc-chapter";
+          details.open = true;
+
+          var summary = document.createElement("summary");
+          summary.textContent = chapter.title;
+          details.appendChild(summary);
+
+          var list = document.createElement("ul");
+          list.className = "toc-lesson-list";
+
+          chapter.lessons.forEach(function (lesson) {
+            var li = document.createElement("li");
+            var a = document.createElement("a");
+            a.href = lesson.path;
+            a.textContent = lesson.title;
+            li.appendChild(a);
+            list.appendChild(li);
+          });
+
+          details.appendChild(list);
+          root.appendChild(details);
+        });
+      });
+  </script>
+</body>
+</html>
