@@ -1,0 +1,13 @@
+{
+  "chapters": [
+    {
+      "title": "Chapter 1: Getting Started",
+      "lessons": [
+        {
+          "title": "Lesson 1: Placeholder",
+          "path": "lessons/lesson-template.html"
+        }
+      ]
+    }
+  ]
+}
