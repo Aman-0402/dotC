@@ -71,6 +71,10 @@
         {
           "title": "C Tokens",
           "path": "lessons/unit2-c-tokens.html"
+        },
+        {
+          "title": "Keywords",
+          "path": "lessons/unit2-keywords.html"
         }
       ]
     }

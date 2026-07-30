@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keywords — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Keywords</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Keywords</h1>
+
+      <h2>What are Keywords?</h2>
+      <p><strong>Keywords</strong> are <strong>reserved words</strong> in C that have predefined meanings. These words are part of the C language itself, so the compiler understands them and uses them for specific purposes.</p>
+      <p>Since keywords are reserved, <strong>they cannot be used as identifiers</strong> (such as variable names, function names, or array names).</p>
+
+      <h2>Definition</h2>
+      <blockquote>
+        <p><strong>A keyword is a reserved word in C with a predefined meaning that cannot be used as an identifier.</strong></p>
+      </blockquote>
+
+      <h2>Why are Keywords Important?</h2>
+      <p>Keywords tell the compiler what action to perform.</p>
+      <p>Examples:</p>
+      <ul>
+        <li><code>int</code> → Declares an integer variable.</li>
+        <li><code>if</code> → Makes a decision.</li>
+        <li><code>for</code> → Creates a loop.</li>
+        <li><code>return</code> → Returns a value from a function.</li>
+      </ul>
+      <p>Without keywords, the compiler would not understand the structure or logic of a C program.</p>
+
+      <h2>Number of Keywords in C</h2>
+      <p>The <strong>ANSI C (C89/C90)</strong> standard defines <strong>32 keywords</strong>.</p>
+      <p>Modern C standards (such as C99, C11, C17, and C23) introduce additional keywords. However, for most academic syllabi and interviews, the original <strong>32 ANSI C keywords</strong> are the primary focus.</p>
+
+      <h2>List of 32 ANSI C Keywords</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>auto</code></td><td>Automatic storage class</td></tr>
+          <tr><td><code>break</code></td><td>Exit a loop or switch</td></tr>
+          <tr><td><code>case</code></td><td>A case label in a switch statement</td></tr>
+          <tr><td><code>char</code></td><td>Character data type</td></tr>
+          <tr><td><code>const</code></td><td>Declare a constant value</td></tr>
+          <tr><td><code>continue</code></td><td>Skip the current loop iteration</td></tr>
+          <tr><td><code>default</code></td><td>Default case in a switch statement</td></tr>
+          <tr><td><code>do</code></td><td>Start a do-while loop</td></tr>
+          <tr><td><code>double</code></td><td>Double-precision floating-point type</td></tr>
+          <tr><td><code>else</code></td><td>Alternative block for <code>if</code></td></tr>
+          <tr><td><code>enum</code></td><td>Define an enumeration</td></tr>
+          <tr><td><code>extern</code></td><td>Declare an external variable</td></tr>
+          <tr><td><code>float</code></td><td>Floating-point data type</td></tr>
+          <tr><td><code>for</code></td><td>Loop statement</td></tr>
+          <tr><td><code>goto</code></td><td>Jump to a labeled statement</td></tr>
+          <tr><td><code>if</code></td><td>Conditional statement</td></tr>
+          <tr><td><code>int</code></td><td>Integer data type</td></tr>
+          <tr><td><code>long</code></td><td>Long integer type modifier</td></tr>
+          <tr><td><code>register</code></td><td>Register storage class</td></tr>
+          <tr><td><code>return</code></td><td>Return from a function</td></tr>
+          <tr><td><code>short</code></td><td>Short integer type modifier</td></tr>
+          <tr><td><code>signed</code></td><td>Signed numeric type</td></tr>
+          <tr><td><code>sizeof</code></td><td>Returns the size of a type or variable</td></tr>
+          <tr><td><code>static</code></td><td>Static storage class</td></tr>
+          <tr><td><code>struct</code></td><td>User-defined structure</td></tr>
+          <tr><td><code>switch</code></td><td>Multi-way selection statement</td></tr>
+          <tr><td><code>typedef</code></td><td>Create a type alias</td></tr>
+          <tr><td><code>union</code></td><td>User-defined union</td></tr>
+          <tr><td><code>unsigned</code></td><td>Unsigned numeric type</td></tr>
+          <tr><td><code>void</code></td><td>No return value or no data type</td></tr>
+          <tr><td><code>volatile</code></td><td>Indicates value may change unexpectedly</td></tr>
+          <tr><td><code>while</code></td><td>Loop statement</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Categories of Keywords</h2>
+
+      <h3>1. Data Type Keywords</h3>
+      <p>Used to declare variables.</p>
+      <pre><code class="language-c">int age;
+char grade;
+float salary;
+double pi;
+void display();</code></pre>
+      <table>
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>int</code></td><td>Integer</td></tr>
+          <tr><td><code>char</code></td><td>Character</td></tr>
+          <tr><td><code>float</code></td><td>Decimal number</td></tr>
+          <tr><td><code>double</code></td><td>High-precision decimal</td></tr>
+          <tr><td><code>void</code></td><td>No value or return type</td></tr>
+        </tbody>
+      </table>
+
+      <h3>2. Decision-Making Keywords</h3>
+      <p>Used to make decisions.</p>
+      <pre><code class="language-c">if (marks >= 40)
+{
+    printf("Pass");
+}
+else
+{
+    printf("Fail");
+}</code></pre>
+      <p>Keywords used:</p>
+      <ul>
+        <li><code>if</code></li>
+        <li><code>else</code></li>
+      </ul>
+
+      <h3>3. Loop Keywords</h3>
+      <p>Used for repetition.</p>
+
+      <h4>for Loop</h4>
+      <pre><code class="language-c">for(int i = 1; i &lt;= 5; i++)
+{
+    printf("%d ", i);
+}</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h4>while Loop</h4>
+      <pre><code class="language-c">int i = 1;
+
+while(i &lt;= 5)
+{
+    printf("%d ", i);
+    i++;
+}</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h4>do-while Loop</h4>
+      <pre><code class="language-c">int i = 1;
+
+do
+{
+    printf("%d ", i);
+    i++;
+} while(i &lt;= 5);</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h3>4. Jump Keywords</h3>
+
+      <h4>break</h4>
+      <p>Stops the loop immediately.</p>
+      <pre><code class="language-c">for(int i = 1; i &lt;= 10; i++)
+{
+    if(i == 5)
+        break;
+
+    printf("%d ", i);
+}</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">1 2 3 4</code></pre>
+
+      <h4>continue</h4>
+      <p>Skips the current iteration.</p>
+      <pre><code class="language-c">for(int i = 1; i &lt;= 5; i++)
+{
+    if(i == 3)
+        continue;
+
+    printf("%d ", i);
+}</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">1 2 4 5</code></pre>
+
+      <h4>return</h4>
+      <p>Ends a function and optionally returns a value.</p>
+      <pre><code class="language-c">int main()
+{
+    return 0;
+}</code></pre>
+
+      <h4>goto</h4>
+      <p>Transfers control to a labeled statement.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    goto end;
+
+    printf("This will not execute.\n");
+
+end:
+    printf("Program Finished.");
+
+    return 0;
+}</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">Program Finished.</code></pre>
+      <blockquote>
+        <p><strong>Note:</strong> <code>goto</code> is valid in C but is generally avoided because it can make programs harder to read and maintain.</p>
+      </blockquote>
+
+      <h3>5. Storage Class Keywords</h3>
+      <p>These control the lifetime and visibility of variables.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>auto</code></td><td>Local variable (default)</td></tr>
+          <tr><td><code>register</code></td><td>Suggest storing variable in CPU register</td></tr>
+          <tr><td><code>static</code></td><td>Preserve value between function calls</td></tr>
+          <tr><td><code>extern</code></td><td>Variable defined in another file or scope</td></tr>
+        </tbody>
+      </table>
+      <p>These will be covered in detail in the <strong>Storage Classes</strong> topic.</p>
+
+      <h3>6. User-Defined Type Keywords</h3>
+
+      <h4>struct</h4>
+      <p>Groups related variables.</p>
+      <pre><code class="language-c">struct Student
+{
+    int id;
+    char grade;
+};</code></pre>
+
+      <h4>union</h4>
+      <p>Members share the same memory.</p>
+      <pre><code class="language-c">union Data
+{
+    int i;
+    float f;
+};</code></pre>
+
+      <h4>enum</h4>
+      <p>Defines a set of named integer constants.</p>
+      <pre><code class="language-c">enum Day
+{
+    MON,
+    TUE,
+    WED
+};</code></pre>
+
+      <h4>typedef</h4>
+      <p>Creates an alias for an existing type.</p>
+      <pre><code class="language-c">typedef int Number;
+
+Number age = 20;</code></pre>
+      <p>Equivalent to:</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+
+      <h2>Example Program Using Keywords</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 18;
+
+    if(age >= 18)
+    {
+        printf("Eligible to Vote");
+    }
+    else
+    {
+        printf("Not Eligible");
+    }
+
+    return 0;
+}</code></pre>
+      <h3>Keywords used:</h3>
+      <ul>
+        <li><code>#include</code> <em>(preprocessor directive, not a keyword)</em></li>
+        <li><code>int</code></li>
+        <li><code>if</code></li>
+        <li><code>else</code></li>
+        <li><code>return</code></li>
+      </ul>
+      <p>Output:</p>
+      <pre><code class="language-none">Eligible to Vote</code></pre>
+
+      <h2>Rules About Keywords</h2>
+
+      <h3>Rule 1</h3>
+      <p>Keywords <strong>cannot</strong> be used as variable names.</p>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">int if = 10;</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">int number = 10;</code></pre>
+
+      <h3>Rule 2</h3>
+      <p>Keywords are <strong>case-sensitive</strong>.</p>
+      <pre><code class="language-c">int age;</code></pre>
+      <p>Correct.</p>
+      <pre><code class="language-c">Int age;</code></pre>
+      <p>Wrong (<code>Int</code> is not a keyword).</p>
+
+      <h3>Rule 3</h3>
+      <p>The spelling of a keyword cannot be changed.</p>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">Float salary;</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">float salary;</code></pre>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>Mistake 1</h3>
+      <p>Using keywords as identifiers.</p>
+      <pre><code class="language-c">int while;</code></pre>
+      <p><strong>Error:</strong> <code>while</code> is a keyword.</p>
+
+      <h3>Mistake 2</h3>
+      <p>Incorrect capitalization.</p>
+      <pre><code class="language-c">Int marks;</code></pre>
+      <p>Should be:</p>
+      <pre><code class="language-c">int marks;</code></pre>
+
+      <h3>Mistake 3</h3>
+      <p>Misspelling keywords.</p>
+      <pre><code class="language-c">retrun 0;</code></pre>
+      <p>Correct:</p>
+      <pre><code class="language-c">return 0;</code></pre>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is a keyword in C?</h3>
+      <p>A keyword is a reserved word with a predefined meaning that cannot be used as an identifier.</p>
+
+      <h3>2. How many keywords are there in ANSI C?</h3>
+      <p>There are <strong>32 keywords</strong> in ANSI C.</p>
+
+      <h3>3. Can keywords be used as variable names?</h3>
+      <p>No. Keywords are reserved by the language and cannot be used as identifiers.</p>
+
+      <h3>4. Is <code>printf</code> a keyword?</h3>
+      <p>No. <code>printf</code> is a <strong>library function</strong> declared in <code>&lt;stdio.h&gt;</code>.</p>
+
+      <h3>5. Is <code>main</code> a keyword?</h3>
+      <p>No. <code>main</code> is a function name chosen by convention as the program's entry point; it is <strong>not</strong> a C keyword.</p>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define a keyword in C.</li>
+        <li>Why can't keywords be used as identifiers?</li>
+        <li>List any ten C keywords and explain their purpose.</li>
+        <li>Differentiate between <code>break</code> and <code>continue</code>.</li>
+        <li>What is the difference between <code>struct</code> and <code>union</code>?</li>
+      </ol>
+
+      <h3>Coding</h3>
+      <h4>Q1. Use <code>if</code> and <code>else</code> to determine whether a number is positive.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int num = 10;
+
+    if(num > 0)
+        printf("Positive");
+    else
+        printf("Negative or Zero");
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Positive</code></pre>
+
+      <h4>Q2. Print numbers from 1 to 5 using a <code>for</code> loop.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    for(int i = 1; i &lt;= 5; i++)
+    {
+        printf("%d ", i);
+    }
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li>Keywords are <strong>reserved words</strong> with predefined meanings.</li>
+        <li>ANSI C contains <strong>32 standard keywords</strong>.</li>
+        <li>Keywords <strong>cannot</strong> be used as identifiers.</li>
+        <li>They are <strong>case-sensitive</strong>.</li>
+        <li>Keywords define data types, loops, conditions, storage classes, and user-defined types.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
