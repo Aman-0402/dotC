@@ -194,6 +194,10 @@
         {
           "title": "Structures & Unions",
           "path": "lessons/unit5-structures-unions.html"
+        },
+        {
+          "title": "File Handling",
+          "path": "lessons/unit5-file-handling.html"
         }
       ]
     }

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File Handling — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 5 / File Handling</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>File Handling</h1>
+
+      <p>Programs normally store data in <strong>RAM (memory)</strong> while they are running. Once the program ends, all the data is lost. To store data permanently, C provides <strong>File Handling</strong>.</p>
+      <p>File handling allows a program to create, read, write, update, and delete files stored on secondary storage devices such as hard disks or SSDs.</p>
+
+      <h2>What is a File?</h2>
+      <p>A <strong>file</strong> is a collection of related data stored permanently on a storage device.</p>
+      <p>Examples:</p>
+      <ul>
+        <li>Student Records</li>
+        <li>Employee Details</li>
+        <li>Banking Transactions</li>
+        <li>Text Documents</li>
+        <li>Images</li>
+        <li>Videos</li>
+        <li>Log Files</li>
+      </ul>
+      <p>Unlike variables, data stored in a file remains available even after the program terminates.</p>
+
+      <h2>Why File Handling?</h2>
+      <p>Without files:</p>
+      <pre><code class="language-none">Program Starts
+↓
+
+Enter Data
+↓
+
+Program Ends
+↓
+
+Data Lost</code></pre>
+      <p>With files:</p>
+      <pre><code class="language-none">Program Starts
+↓
+
+Read Data From File
+↓
+
+Process Data
+↓
+
+Write Data To File
+↓
+
+Program Ends
+
+↓
+
+Data Remains Saved</code></pre>
+
+      <h2>Advantages of File Handling</h2>
+      <ul>
+        <li>Permanent data storage</li>
+        <li>Easy retrieval of information</li>
+        <li>Handles large amounts of data</li>
+        <li>Supports data sharing</li>
+        <li>Useful in databases and applications</li>
+        <li>Reduces manual work</li>
+      </ul>
+
+      <h2>Types of Files in C</h2>
+      <p>There are <strong>two main types of files</strong> in C.</p>
+      <pre><code class="language-none">Files
+│
+├── Text Files
+│
+└── Binary Files</code></pre>
+
+      <h2>File Basics</h2>
+      <h3>File Pointer</h3>
+      <p>In C, every file is accessed using a <strong>file pointer</strong>.</p>
+      <p>A file pointer is a pointer of type <code>FILE</code>.</p>
+      <p>Syntax</p>
+      <pre><code class="language-c">FILE *fp;</code></pre>
+      <ul>
+        <li><code>FILE</code> is a predefined structure available in <code>&lt;stdio.h&gt;</code>.</li>
+        <li><code>fp</code> stores the address of the opened file.</li>
+      </ul>
+
+      <h2>Opening a File</h2>
+      <p>The <code>fopen()</code> function opens a file.</p>
+      <p>Syntax</p>
+      <pre><code class="language-c">FILE *fp;
+
+fp = fopen("filename", "mode");</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">FILE *fp;
+
+fp = fopen("student.txt", "r");</code></pre>
+      <p>If the file opens successfully,</p>
+      <pre><code class="language-none">fp → File Address</code></pre>
+      <p>If opening fails,</p>
+      <pre><code class="language-none">fp = NULL</code></pre>
+      <p>Always check before using the file.</p>
+      <p>Example</p>
+      <pre><code class="language-c">if(fp == NULL)
+{
+    printf("File cannot be opened.");
+}</code></pre>
+
+      <h2>Closing a File</h2>
+      <p>Always close a file after use.</p>
+      <p>Syntax</p>
+      <pre><code class="language-c">fclose(fp);</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">fclose(fp);</code></pre>
+      <p>Closing a file:</p>
+      <ul>
+        <li>Saves data properly</li>
+        <li>Frees memory</li>
+        <li>Prevents corruption</li>
+      </ul>
+
+      <h2>File Opening Modes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Mode</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>"r"</code></td><td>Read existing file</td></tr>
+          <tr><td><code>"w"</code></td><td>Write (creates new or overwrites existing file)</td></tr>
+          <tr><td><code>"a"</code></td><td>Append data at the end</td></tr>
+          <tr><td><code>"r+"</code></td><td>Read and write</td></tr>
+          <tr><td><code>"w+"</code></td><td>Read and write (overwrites file)</td></tr>
+          <tr><td><code>"a+"</code></td><td>Read and append</td></tr>
+        </tbody>
+      </table>
+      <p>Binary modes:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Mode</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>"rb"</code></td><td>Read binary</td></tr>
+          <tr><td><code>"wb"</code></td><td>Write binary</td></tr>
+          <tr><td><code>"ab"</code></td><td>Append binary</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Text Files</h2>
+      <h3>Definition</h3>
+      <p>A <strong>text file</strong> stores data in <strong>human-readable characters</strong>.</p>
+      <p>Examples</p>
+      <pre><code class="language-none">student.txt
+
+Hello World
+
+100
+
+Aman
+
+95.5</code></pre>
+      <p>Common extensions</p>
+      <pre><code class="language-none">.txt
+.csv
+.log
+.ini</code></pre>
+
+      <h2>Characteristics of Text Files</h2>
+      <ul>
+        <li>Human-readable</li>
+        <li>Can be opened in Notepad or any text editor</li>
+        <li>Easy to edit manually</li>
+        <li>Slightly larger in size</li>
+        <li>Slower than binary files for large data</li>
+      </ul>
+
+      <h2>Writing to a Text File</h2>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("student.txt", "w");
+
+    if(fp == NULL)
+    {
+        printf("Cannot open file");
+        return 1;
+    }
+
+    fprintf(fp, "Roll: %d\n", 101);
+    fprintf(fp, "Name: Aman\n");
+    fprintf(fp, "Marks: %.2f\n", 92.5);
+
+    fclose(fp);
+
+    printf("Data Written Successfully");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Data Written Successfully</code></pre>
+      <p>Contents of <strong>student.txt</strong></p>
+      <pre><code class="language-none">Roll: 101
+Name: Aman
+Marks: 92.50</code></pre>
+
+      <h2>Reading from a Text File</h2>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+    char ch;
+
+    fp = fopen("student.txt", "r");
+
+    if(fp == NULL)
+    {
+        printf("Cannot open file");
+        return 1;
+    }
+
+    while((ch = fgetc(fp)) != EOF)
+    {
+        printf("%c", ch);
+    }
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Roll: 101
+Name: Aman
+Marks: 92.50</code></pre>
+
+      <h2>Appending Data</h2>
+      <p>Append means adding data <strong>without deleting existing contents</strong>.</p>
+      <pre><code class="language-c">FILE *fp;
+
+fp = fopen("student.txt", "a");
+
+fprintf(fp, "\nCity: Ranchi");
+
+fclose(fp);</code></pre>
+      <p>Result</p>
+      <pre><code class="language-none">Roll: 101
+Name: Aman
+Marks: 92.50
+City: Ranchi</code></pre>
+
+      <h2>Binary Files</h2>
+      <h3>Definition</h3>
+      <p>A <strong>binary file</strong> stores data in <strong>binary format (0s and 1s)</strong> instead of readable text.</p>
+      <p>Example</p>
+      <pre><code class="language-none">student.dat
+employee.bin
+record.dat</code></pre>
+      <p>The contents cannot be read directly using a text editor.</p>
+
+      <h2>Characteristics of Binary Files</h2>
+      <ul>
+        <li>Not human-readable</li>
+        <li>Faster than text files</li>
+        <li>Smaller file size</li>
+        <li>Better for storing structures and large data</li>
+        <li>More secure against manual modification</li>
+      </ul>
+
+      <h2>Writing to a Binary File</h2>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+struct Student
+{
+    int roll;
+    char name[20];
+    float marks;
+};
+
+int main()
+{
+    struct Student s = {101, "Aman", 92.5};
+
+    FILE *fp;
+
+    fp = fopen("student.dat", "wb");
+
+    if(fp == NULL)
+    {
+        printf("Cannot open file");
+        return 1;
+    }
+
+    fwrite(&amp;s, sizeof(s), 1, fp);
+
+    fclose(fp);
+
+    printf("Record Saved");
+
+    return 0;
+}</code></pre>
+
+      <h2>Reading from a Binary File</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+struct Student
+{
+    int roll;
+    char name[20];
+    float marks;
+};
+
+int main()
+{
+    struct Student s;
+
+    FILE *fp;
+
+    fp = fopen("student.dat", "rb");
+
+    if(fp == NULL)
+    {
+        printf("Cannot open file");
+        return 1;
+    }
+
+    fread(&amp;s, sizeof(s), 1, fp);
+
+    fclose(fp);
+
+    printf("Roll : %d\n", s.roll);
+    printf("Name : %s\n", s.name);
+    printf("Marks: %.2f\n", s.marks);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Roll : 101
+Name : Aman
+Marks: 92.50</code></pre>
+
+      <h2>Text File vs Binary File</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Text File</th>
+            <th>Binary File</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Storage Format</td><td>Characters</td><td>Binary data</td></tr>
+          <tr><td>Readability</td><td>Human-readable</td><td>Not human-readable</td></tr>
+          <tr><td>Speed</td><td>Slower</td><td>Faster</td></tr>
+          <tr><td>File Size</td><td>Larger</td><td>Smaller</td></tr>
+          <tr><td>Editing</td><td>Can edit in text editor</td><td>Cannot edit directly</td></tr>
+          <tr><td>Best For</td><td>Documents, logs, reports</td><td>Structures, images, databases</td></tr>
+        </tbody>
+      </table>
+
+      <h2>File Handling Workflow</h2>
+      <pre><code class="language-none">Create File Pointer
+        │
+        ▼
+Open File (fopen)
+        │
+        ▼
+Read / Write / Append
+        │
+        ▼
+Close File (fclose)</code></pre>
+
+      <h2>Common File Handling Functions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>fopen()</code></td><td>Opens a file</td></tr>
+          <tr><td><code>fclose()</code></td><td>Closes a file</td></tr>
+          <tr><td><code>fprintf()</code></td><td>Writes formatted data to a text file</td></tr>
+          <tr><td><code>fscanf()</code></td><td>Reads formatted data from a text file</td></tr>
+          <tr><td><code>fgetc()</code></td><td>Reads one character</td></tr>
+          <tr><td><code>fputc()</code></td><td>Writes one character</td></tr>
+          <tr><td><code>fgets()</code></td><td>Reads a string/line</td></tr>
+          <tr><td><code>fputs()</code></td><td>Writes a string</td></tr>
+          <tr><td><code>fread()</code></td><td>Reads binary data</td></tr>
+          <tr><td><code>fwrite()</code></td><td>Writes binary data</td></tr>
+          <tr><td><code>remove()</code></td><td>Deletes a file</td></tr>
+          <tr><td><code>rename()</code></td><td>Renames a file</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Real-World Applications</h2>
+      <ul>
+        <li>Student Management System</li>
+        <li>Banking Systems</li>
+        <li>Library Management</li>
+        <li>Hospital Records</li>
+        <li>Inventory Management</li>
+        <li>Payroll Systems</li>
+        <li>Database Storage</li>
+        <li>Log File Generation</li>
+        <li>Configuration Files</li>
+        <li>Game Save Files</li>
+      </ul>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li>A <strong>file</strong> stores data permanently on secondary storage.</li>
+        <li>Every file is accessed through a <strong><code>FILE *</code> pointer</strong>.</li>
+        <li><strong><code>fopen()</code></strong> opens a file, and <strong><code>fclose()</code></strong> closes it.</li>
+        <li><strong>Text files</strong> store readable characters and are suitable for reports, logs, and documents.</li>
+        <li><strong>Binary files</strong> store raw binary data, offering faster performance and compact storage, making them ideal for structures and large datasets.</li>
+        <li>Always check if <code>fopen()</code> returns <code>NULL</code> before performing file operations.</li>
+        <li>Closing a file with <code>fclose()</code> ensures data is saved correctly and resources are released.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
