@@ -119,6 +119,10 @@
         {
           "title": "Integer Variants and Floating-Point Variants",
           "path": "lessons/unit2-integer-and-floating-variants.html"
+        },
+        {
+          "title": "Non-Numeric Data Types (Character & String)",
+          "path": "lessons/unit2-non-numeric-data-types.html"
         }
       ]
     }

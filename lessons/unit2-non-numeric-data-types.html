@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Non-Numeric Data Types (Character & String) — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Non-Numeric Data Types (Character & String)</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Non-Numeric Data Types (Character &amp; String)</h1>
+
+      <p>In C, not all data is numerical. Many programs work with <strong>letters, words, names, passwords, addresses, messages, and symbols</strong>. These are stored using <strong>Non-Numeric Data Types</strong>.</p>
+      <p>This topic covers:</p>
+      <ul>
+        <li>Non-Numeric Data Types</li>
+        <li>Character (<code>char</code>)</li>
+        <li>String</li>
+      </ul>
+
+      <h2>What are Non-Numeric Data Types?</h2>
+      <p>Non-numeric data types are used to store data that is <strong>not primarily used for mathematical calculations</strong>.</p>
+      <p>Examples:</p>
+      <ul>
+        <li>Student Name</li>
+        <li>Gender</li>
+        <li>Address</li>
+        <li>Email</li>
+        <li>Grade</li>
+        <li>Password</li>
+        <li>Country Name</li>
+      </ul>
+      <p>Instead of numbers, they store:</p>
+      <ul>
+        <li>Characters</li>
+        <li>Text</li>
+        <li>Symbols</li>
+      </ul>
+
+      <h2>Definition</h2>
+      <blockquote>
+        <p><strong>Non-numeric data types are data types used to store characters, text, symbols, and other non-numerical information.</strong></p>
+      </blockquote>
+
+      <h2>Classification</h2>
+      <pre><code class="language-none">Non-Numeric Data Types
+│
+├── Character (char)
+└── String</code></pre>
+
+      <h2>Why Do We Need Non-Numeric Data Types?</h2>
+      <p>Imagine a student management system.</p>
+      <p>You need to store:</p>
+      <pre><code class="language-none">Name        : Aman
+Gender      : M
+City        : Ranchi
+Grade       : A</code></pre>
+      <p>Using only integers would not make sense.</p>
+      <p>Therefore C provides:</p>
+      <ul>
+        <li><code>char</code></li>
+        <li>Strings</li>
+      </ul>
+
+      <h2>Part 1: Character (char)</h2>
+      <h3>What is Character Data Type?</h3>
+      <p>A <strong>character</strong> stores <strong>exactly one character</strong>.</p>
+      <p>It can store:</p>
+      <ul>
+        <li>Alphabets</li>
+        <li>Digits</li>
+        <li>Symbols</li>
+        <li>Special characters</li>
+      </ul>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>The <code>char</code> data type stores a single character enclosed in single quotes (<code>' '</code>).</strong></p>
+      </blockquote>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">char variableName;</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">char grade = 'A';</code></pre>
+
+      <h2>Memory Size</h2>
+      <p>Typically</p>
+      <pre><code class="language-none">1 Byte (8 bits)</code></pre>
+
+      <h2>Why Only One Byte?</h2>
+      <p>One byte can represent <strong>256 different values</strong>.</p>
+      <p>These values come from the <strong>ASCII</strong> character set.</p>
+
+      <h2>ASCII (American Standard Code for Information Interchange)</h2>
+      <p>Computers do <strong>not</strong> store characters directly.</p>
+      <p>Instead they store <strong>numbers</strong>.</p>
+      <p>Example</p>
+      <pre><code class="language-none">Character      ASCII Value
+
+A                 65
+B                 66
+C                 67
+a                 97
+b                 98
+0                 48
+1                 49
+Space             32</code></pre>
+
+      <h3>Memory Representation</h3>
+      <p>Program</p>
+      <pre><code class="language-c">char grade = 'A';</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Variable      Stored Value
+
+grade             65</code></pre>
+      <p>Although we wrote:</p>
+      <pre><code class="language-none">'A'</code></pre>
+      <p>Internally it is stored as:</p>
+      <pre><code class="language-none">65</code></pre>
+
+      <h2>Character Examples</h2>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char grade = 'A';
+
+    printf("%c", grade);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">A</code></pre>
+
+      <h3>Example 2</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char digit = '5';
+
+    printf("%c", digit);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">5</code></pre>
+      <p>Notice:</p>
+      <pre><code class="language-none">'5'</code></pre>
+      <p>is a character,</p>
+      <p>not</p>
+      <pre><code class="language-none">5</code></pre>
+      <p>which is an integer.</p>
+
+      <h3>Example 3</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char symbol = '#';
+
+    printf("%c", symbol);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">#</code></pre>
+
+      <h2>Printing ASCII Value</h2>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char ch = 'A';
+
+    printf("%d", ch);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">65</code></pre>
+
+      <h2>ASCII to Character</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char ch = 66;
+
+    printf("%c", ch);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">B</code></pre>
+
+      <h2>Common Escape Characters</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Escape Sequence</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>\n</code></td><td>New Line</td></tr>
+          <tr><td><code>\t</code></td><td>Tab</td></tr>
+          <tr><td><code>\\</code></td><td>Backslash</td></tr>
+          <tr><td><code>\"</code></td><td>Double Quote</td></tr>
+          <tr><td><code>\'</code></td><td>Single Quote</td></tr>
+          <tr><td><code>\0</code></td><td>Null Character</td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">printf("Hello\nWorld");</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Hello
+World</code></pre>
+
+      <h2>Character vs Integer</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Character</th>
+            <th>Integer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>'5'</code></td><td><code>5</code></td></tr>
+          <tr><td>Stored as ASCII</td><td>Stored as binary integer</td></tr>
+          <tr><td><code>%c</code></td><td><code>%d</code></td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">char ch = '5';
+
+int num = 5;</code></pre>
+      <p>These are <strong>not</strong> the same.</p>
+
+      <h2>Character vs String</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Character</th>
+            <th>String</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>One character</td><td>Multiple characters</td></tr>
+          <tr><td><code>'A'</code></td><td><code>"A"</code></td></tr>
+          <tr><td>Single quotes</td><td>Double quotes</td></tr>
+          <tr><td><code>char grade</code></td><td><code>char name[]</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Part 2: String</h2>
+      <h3>What is a String?</h3>
+      <p>A string is a <strong>collection (sequence) of characters</strong>.</p>
+      <p>Example</p>
+      <pre><code class="language-none">Hello
+
+Aman
+
+Programming</code></pre>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>A string is an array of characters terminated by a special null character (<code>\0</code>).</strong></p>
+      </blockquote>
+
+      <h2>Why Doesn't C Have a Built-in String Type?</h2>
+      <p>Unlike languages such as Java or Python, C does <strong>not</strong> have a built-in <code>string</code> data type.</p>
+      <p>Instead,</p>
+      <p>A string is stored as:</p>
+      <pre><code class="language-c">char name[];</code></pre>
+
+      <h2>String Syntax</h2>
+      <pre><code class="language-c">char name[] = "Aman";</code></pre>
+
+      <h2>Memory Representation</h2>
+      <pre><code class="language-c">char name[] = "Aman";</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Index      Character
+
+0             A
+1             m
+2             a
+3             n
+4            \0</code></pre>
+      <p>The last character is automatically:</p>
+      <pre><code class="language-none">Null Character
+
+\0</code></pre>
+      <p>which marks the <strong>end of the string</strong>.</p>
+
+      <h2>Why is <code>\0</code> Important?</h2>
+      <p>Without <code>\0</code></p>
+      <p>the computer would not know where the string ends.</p>
+
+      <h2>Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[] = "Aman";
+
+    printf("%s", name);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Aman</code></pre>
+
+      <h2>Another Example</h2>
+      <pre><code class="language-c">char city[] = "Ranchi";</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">R
+a
+n
+c
+h
+i
+\0</code></pre>
+
+      <h2>Accessing Individual Characters</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[] = "Aman";
+
+    printf("%c\n", name[0]);
+    printf("%c\n", name[1]);
+    printf("%c\n", name[2]);
+    printf("%c\n", name[3]);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">A
+m
+a
+n</code></pre>
+
+      <h2>Modifying Characters</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[] = "Aman";
+
+    name[0] = 'R';
+
+    printf("%s", name);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Rman</code></pre>
+
+      <h2>Character Array vs String</h2>
+      <pre><code class="language-c">char name[5];</code></pre>
+      <p>Only declares memory.</p>
+      <p>No string yet.</p>
+      <pre><code class="language-c">char name[] = "Aman";</code></pre>
+      <p>Creates an actual string.</p>
+
+      <h2>String Input</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[30];
+
+    scanf("%29s", name);
+
+    printf("%s", name);
+
+    return 0;
+}</code></pre>
+      <p>Sample Input</p>
+      <pre><code class="language-none">Aman</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Aman</code></pre>
+      <blockquote>
+        <p><strong>Note:</strong> <code>scanf("%s", ...)</code> stops reading at the first whitespace. To read full names containing spaces, functions like <code>fgets()</code> are preferred (covered later).</p>
+      </blockquote>
+
+      <h2>String Output</h2>
+      <pre><code class="language-c">printf("%s", name);</code></pre>
+      <p><code>%s</code></p>
+      <p>means</p>
+      <pre><code class="language-none">String</code></pre>
+
+      <h2>Memory Diagram</h2>
+      <p>Program</p>
+      <pre><code class="language-c">char word[] = "CAT";</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">+-----+-----+-----+-----+
+|  C  |  A  |  T  | \0  |
++-----+-----+-----+-----+
+  [0]   [1]   [2]   [3]</code></pre>
+
+      <h2>Character vs String</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Character</th>
+            <th>String</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Stores</td><td>One character</td><td>Multiple characters</td></tr>
+          <tr><td>Quotes</td><td><code>' '</code></td><td><code>" "</code></td></tr>
+          <tr><td>Data Type</td><td><code>char</code></td><td><code>char[]</code></td></tr>
+          <tr><td>Format Specifier</td><td><code>%c</code></td><td><code>%s</code></td></tr>
+          <tr><td>Example</td><td><code>'A'</code></td><td><code>"Aman"</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Using Double Quotes for Character</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">char ch = "A";</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">char ch = 'A';</code></pre>
+
+      <h3>2. Using Single Quotes for String</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">char name[] = 'Aman';</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">char name[] = "Aman";</code></pre>
+
+      <h3>3. Forgetting the Null Character</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">char word[3] = {'C','A','T'};</code></pre>
+      <p>This is <strong>not a null-terminated string</strong>.</p>
+      <p>Correct</p>
+      <pre><code class="language-c">char word[] = "CAT";</code></pre>
+      <p>or</p>
+      <pre><code class="language-c">char word[4] = {'C','A','T','\0'};</code></pre>
+
+      <h3>4. Using <code>%d</code> for Characters</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">printf("%d", 'A');</code></pre>
+      <p>This prints the ASCII value (<code>65</code>), not the character.</p>
+      <p>Correct</p>
+      <pre><code class="language-c">printf("%c", 'A');</code></pre>
+
+      <h3>5. Confusing Character and String</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">char ch = 'AB';</code></pre>
+      <p>A <code>char</code> can store only <strong>one character</strong>.</p>
+      <p>Correct</p>
+      <pre><code class="language-c">char ch = 'A';</code></pre>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is a non-numeric data type?</h3>
+      <p>A non-numeric data type stores characters, text, or symbols instead of numerical values.</p>
+
+      <h3>2. What is the size of <code>char</code>?</h3>
+      <p>Typically <strong>1 byte (8 bits)</strong>.</p>
+
+      <h3>3. What is ASCII?</h3>
+      <p>ASCII is a standard character encoding where each character is represented by a numeric value.</p>
+
+      <h3>4. What is a string in C?</h3>
+      <p>A string is a sequence of characters terminated by the null character (<code>\0</code>).</p>
+
+      <h3>5. Why does every string end with <code>\0</code>?</h3>
+      <p>Because <code>\0</code> tells C where the string ends.</p>
+
+      <h3>6. What is the difference between <code>'A'</code> and <code>"A"</code>?</h3>
+      <table>
+        <thead>
+          <tr>
+            <th><code>'A'</code></th>
+            <th><code>"A"</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Character</td><td>String</td></tr>
+          <tr><td>One character</td><td>Two characters in memory: <code>'A'</code> and <code>'\0'</code></td></tr>
+          <tr><td>Type: <code>char</code> value</td><td>Type: character array / string literal</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define a non-numeric data type.</li>
+        <li>Explain the <code>char</code> data type.</li>
+        <li>What is ASCII?</li>
+        <li>What is a string in C?</li>
+        <li>Why is <code>\0</code> necessary in strings?</li>
+        <li>Differentiate between a character and a string.</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Print a character and its ASCII value.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char ch = 'Z';
+
+    printf("Character : %c\n", ch);
+    printf("ASCII     : %d\n", ch);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Character : Z
+ASCII     : 90</code></pre>
+
+      <h4>Q2. Store and print a string.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[] = "Aman";
+
+    printf("Name: %s", name);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Name: Aman</code></pre>
+
+      <h4>Q3. Print each character of a string.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char word[] = "CODE";
+
+    for(int i = 0; word[i] != '\0'; i++)
+    {
+        printf("%c\n", word[i]);
+    }
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">C
+O
+D
+E</code></pre>
+
+      <h2>Exam Tips</h2>
+      <ul>
+        <li>⭐ <code>char</code> stores <strong>only one character</strong>.</li>
+        <li>⭐ A character is written using <strong>single quotes</strong> (<code>'A'</code>).</li>
+        <li>⭐ A string is written using <strong>double quotes</strong> (<code>"Aman"</code>).</li>
+        <li>⭐ Every string automatically ends with <strong><code>\0</code> (null character)</strong>.</li>
+        <li>⭐ <code>%c</code> is used for characters, <code>%s</code> for strings.</li>
+        <li>⭐ <code>char</code> is typically <strong>1 byte</strong> and stores ASCII values internally.</li>
+        <li>⭐ <code>"A"</code> is a string, while <code>'A'</code> is a character.</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <ul>
+        <li><strong>Non-Numeric Data Types</strong> are used to store characters and text.</li>
+        <li>The <strong><code>char</code></strong> data type stores a single character and typically occupies <strong>1 byte</strong>.</li>
+        <li>Characters are internally represented using <strong>ASCII values</strong>.</li>
+        <li>A <strong>string</strong> in C is a sequence of characters stored in a <code>char</code> array and terminated by the <strong>null character (<code>\0</code>)</strong>.</li>
+        <li>Characters use <strong>single quotes</strong>, while strings use <strong>double quotes</strong>.</li>
+        <li>Understanding <code>char</code> and strings is essential because they are widely used in user input, text processing, and file handling.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
