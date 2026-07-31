@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Array-Based Problems — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 6 / Array-Based Problems</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Array-Based Problems</h1>
+
+      <p>Array-based problems are common programming exercises that involve performing operations such as finding the largest element, calculating sums, reversing arrays, rotating arrays, and more. These problems help strengthen logical thinking and are frequently asked in examinations and coding interviews.</p>
+
+      <h2>1. Sum of Array Elements</h2>
+      <h3>Problem</h3>
+      <p>Find the sum of all elements in an array.</p>
+      <h3>Example</h3>
+      <p>Input</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">150</code></pre>
+
+      <h2>Algorithm</h2>
+      <pre><code class="language-none">Start
+
+Read array
+
+sum = 0
+
+Repeat for each element
+
+    sum = sum + element
+
+Print sum
+
+Stop</code></pre>
+
+      <h2>C Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50};
+    int sum=0;
+
+    for(int i=0;i&lt;5;i++)
+        sum+=arr[i];
+
+    printf("Sum = %d",sum);
+
+    return 0;
+}</code></pre>
+
+      <h2>Complexity</h2>
+      <p>Time : <strong>O(n)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>2. Find Maximum Element</h2>
+      <h3>Example</h3>
+      <p>Input</p>
+      <pre><code class="language-none">12 45 67 23 89</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">89</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={12,45,67,23,89};
+    int max=arr[0];
+
+    for(int i=1;i&lt;5;i++)
+    {
+        if(arr[i]&gt;max)
+            max=arr[i];
+    }
+
+    printf("Maximum = %d",max);
+
+    return 0;
+}</code></pre>
+
+      <h2>Complexity</h2>
+      <p>Time : <strong>O(n)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>3. Find Minimum Element</h2>
+      <h3>Example</h3>
+      <p>Input</p>
+      <pre><code class="language-none">12 45 67 23 89</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">12</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={12,45,67,23,89};
+    int min=arr[0];
+
+    for(int i=1;i&lt;5;i++)
+    {
+        if(arr[i]&lt;min)
+            min=arr[i];
+    }
+
+    printf("Minimum = %d",min);
+
+    return 0;
+}</code></pre>
+
+      <h2>4. Find Average</h2>
+      <h3>Formula</h3>
+      <pre><code class="language-none">Average = Sum / Number of Elements</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50};
+    int sum=0;
+    float avg;
+
+    for(int i=0;i&lt;5;i++)
+        sum+=arr[i];
+
+    avg=(float)sum/5;
+
+    printf("Average = %.2f",avg);
+
+    return 0;
+}</code></pre>
+
+      <h2>Complexity</h2>
+      <p>Time : <strong>O(n)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>5. Count Even and Odd Numbers</h2>
+      <h3>Example</h3>
+      <p>Input</p>
+      <pre><code class="language-none">10 21 32 43 54</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Even = 3
+
+Odd = 2</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,21,32,43,54};
+    int even=0,odd=0;
+
+    for(int i=0;i&lt;5;i++)
+    {
+        if(arr[i]%2==0)
+            even++;
+        else
+            odd++;
+    }
+
+    printf("Even = %d\n",even);
+    printf("Odd = %d",odd);
+
+    return 0;
+}</code></pre>
+
+      <h2>6. Find Second Largest Element</h2>
+      <h3>Example</h3>
+      <p>Input</p>
+      <pre><code class="language-none">10 25 8 45 35</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">35</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+#include&lt;limits.h&gt;
+
+int main()
+{
+    int arr[]={10,25,8,45,35};
+    int largest=INT_MIN;
+    int second=INT_MIN;
+
+    for(int i=0;i&lt;5;i++)
+    {
+        if(arr[i]&gt;largest)
+        {
+            second=largest;
+            largest=arr[i];
+        }
+        else if(arr[i]&gt;second &amp;&amp; arr[i]!=largest)
+        {
+            second=arr[i];
+        }
+    }
+
+    printf("Second Largest = %d",second);
+
+    return 0;
+}</code></pre>
+
+      <h2>7. Check if Array is Sorted</h2>
+      <h3>Example</h3>
+      <p>Input</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Sorted</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50};
+    int sorted=1;
+
+    for(int i=0;i&lt;4;i++)
+    {
+        if(arr[i]&gt;arr[i+1])
+        {
+            sorted=0;
+            break;
+        }
+    }
+
+    if(sorted)
+        printf("Sorted");
+    else
+        printf("Not Sorted");
+
+    return 0;
+}</code></pre>
+
+      <h2>Complexity</h2>
+      <p>Time : <strong>O(n)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>8. Copy One Array to Another</h2>
+      <h3>Example</h3>
+      <pre><code class="language-none">Original
+
+10 20 30 40</code></pre>
+      <p>Copied</p>
+      <pre><code class="language-none">10 20 30 40</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40};
+    int copy[4];
+
+    for(int i=0;i&lt;4;i++)
+        copy[i]=arr[i];
+
+    for(int i=0;i&lt;4;i++)
+        printf("%d ",copy[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>9. Merge Two Arrays</h2>
+      <h3>Example</h3>
+      <pre><code class="language-none">Array 1
+
+10 20 30</code></pre>
+      <pre><code class="language-none">Array 2
+
+40 50</code></pre>
+      <p>Result</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int a[]={10,20,30};
+    int b[]={40,50};
+    int c[5];
+
+    int i;
+
+    for(i=0;i&lt;3;i++)
+        c[i]=a[i];
+
+    for(int j=0;j&lt;2;j++)
+        c[i++]=b[j];
+
+    for(i=0;i&lt;5;i++)
+        printf("%d ",c[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>10. Reverse an Array</h2>
+      <h3>Example</h3>
+      <p>Original</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>Reversed</p>
+      <pre><code class="language-none">50 40 30 20 10</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50};
+
+    int start=0,end=4,temp;
+
+    while(start&lt;end)
+    {
+        temp=arr[start];
+        arr[start]=arr[end];
+        arr[end]=temp;
+
+        start++;
+        end--;
+    }
+
+    for(int i=0;i&lt;5;i++)
+        printf("%d ",arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>11. Left Rotate an Array by One Position</h2>
+      <h3>Example</h3>
+      <p>Original</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>Result</p>
+      <pre><code class="language-none">20 30 40 50 10</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50};
+
+    int temp=arr[0];
+
+    for(int i=0;i&lt;4;i++)
+        arr[i]=arr[i+1];
+
+    arr[4]=temp;
+
+    for(int i=0;i&lt;5;i++)
+        printf("%d ",arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>12. Right Rotate an Array by One Position</h2>
+      <h3>Example</h3>
+      <p>Original</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>Result</p>
+      <pre><code class="language-none">50 10 20 30 40</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50};
+
+    int temp=arr[4];
+
+    for(int i=4;i&gt;0;i--)
+        arr[i]=arr[i-1];
+
+    arr[0]=temp;
+
+    for(int i=0;i&lt;5;i++)
+        printf("%d ",arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>13. Remove Duplicate Elements (Sorted Array)</h2>
+      <h3>Example</h3>
+      <p>Input</p>
+      <pre><code class="language-none">10 20 20 30 30 40</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10 20 30 40</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,20,30,30,40};
+    int n=6;
+
+    int j=0;
+
+    for(int i=1;i&lt;n;i++)
+    {
+        if(arr[i]!=arr[j])
+        {
+            j++;
+            arr[j]=arr[i];
+        }
+    }
+
+    for(int i=0;i&lt;=j;i++)
+        printf("%d ",arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>14. Count Frequency of Each Element</h2>
+      <h3>Example</h3>
+      <p>Input</p>
+      <pre><code class="language-none">1 2 2 3 1 2</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1 → 2
+
+2 → 3
+
+3 → 1</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={1,2,2,3,1,2};
+    int n=6;
+
+    for(int i=0;i&lt;n;i++)
+    {
+        int count=1;
+
+        if(arr[i]==-1)
+            continue;
+
+        for(int j=i+1;j&lt;n;j++)
+        {
+            if(arr[i]==arr[j])
+            {
+                count++;
+                arr[j]=-1;
+            }
+        }
+
+        printf("%d occurs %d times\n",arr[i],count);
+    }
+
+    return 0;
+}</code></pre>
+
+      <h2>15. Find Missing Number (1 to n)</h2>
+      <h3>Example</h3>
+      <p>Input</p>
+      <pre><code class="language-none">1 2 3 5</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">4</code></pre>
+
+      <h2>Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={1,2,3,5};
+    int n=5;
+
+    int expected=n*(n+1)/2;
+    int actual=0;
+
+    for(int i=0;i&lt;4;i++)
+        actual+=arr[i];
+
+    printf("Missing Number = %d",expected-actual);
+
+    return 0;
+}</code></pre>
+
+      <h2>Complexity Summary</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Problem</th>
+            <th>Time Complexity</th>
+            <th>Space Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Sum of Elements</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Maximum Element</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Minimum Element</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Average</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Even/Odd Count</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Second Largest</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Check Sorted</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Copy Array</td><td>O(n)</td><td>O(n)</td></tr>
+          <tr><td>Merge Arrays</td><td>O(n + m)</td><td>O(n + m)</td></tr>
+          <tr><td>Reverse Array</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Left Rotation</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Right Rotation</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Remove Duplicates (Sorted)</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Frequency Count</td><td>O(n²)</td><td>O(1)</td></tr>
+          <tr><td>Find Missing Number</td><td>O(n)</td><td>O(1)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Important Interview Questions</h2>
+      <ol>
+        <li>Find the largest and smallest element in an array.</li>
+        <li>Find the second largest and second smallest element.</li>
+        <li>Reverse an array without using another array.</li>
+        <li>Rotate an array left or right by <strong>k</strong> positions.</li>
+        <li>Check whether an array is sorted.</li>
+        <li>Remove duplicate elements from a sorted array.</li>
+        <li>Find the missing number in a sequence.</li>
+        <li>Count the frequency of each element.</li>
+        <li>Merge two sorted arrays.</li>
+        <li>Find the union and intersection of two arrays.</li>
+        <li>Move all zeros to the end while maintaining the order of non-zero elements.</li>
+        <li>Find the majority element in an array.</li>
+        <li>Find all pairs with a given sum.</li>
+        <li>Find the maximum subarray sum (Kadane's Algorithm).</li>
+        <li>Find the equilibrium (pivot) index of an array.</li>
+      </ol>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
