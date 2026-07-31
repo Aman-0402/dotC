@@ -206,6 +206,10 @@
         {
           "title": "Error Handling",
           "path": "lessons/unit5-error-handling.html"
+        },
+        {
+          "title": "File Utilities & Command Line Arguments",
+          "path": "lessons/unit5-file-utilities-command-line-arguments.html"
         }
       ]
     }

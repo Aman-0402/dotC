@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File Utilities & Command Line Arguments — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 5 / File Utilities & Command Line Arguments</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>File Utilities &amp; Command Line Arguments</h1>
+
+      <p>This topic covers some additional file handling functions used for <strong>line input/output, miscellaneous file operations, and passing arguments from the command line</strong>.</p>
+
+      <h2>1. Line Input/Output</h2>
+      <p>Line input/output functions read or write <strong>entire strings (lines)</strong> instead of single characters.</p>
+      <p>The two most commonly used functions are:</p>
+      <ul>
+        <li><code>fgets()</code></li>
+        <li><code>fputs()</code></li>
+      </ul>
+
+      <h2>1.1 fgets()</h2>
+      <h3>Definition</h3>
+      <p>The <code>fgets()</code> function reads an entire line (or a specified number of characters) from a file.</p>
+      <p>It stops reading when:</p>
+      <ul>
+        <li>Newline (<code>\n</code>) is encountered</li>
+        <li>End of File (EOF) is reached</li>
+        <li>Maximum size is reached</li>
+      </ul>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">fgets(array, size, file_pointer);</code></pre>
+      <h4>Parameters</h4>
+      <ul>
+        <li><code>array</code> → Character array to store data</li>
+        <li><code>size</code> → Maximum characters to read</li>
+        <li><code>file_pointer</code> → File to read from</li>
+      </ul>
+
+      <h3>Example</h3>
+      <p>Suppose <strong>message.txt</strong></p>
+      <pre><code class="language-none">Welcome to C Programming.
+File Handling is Easy.</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+    char str[100];
+
+    fp = fopen("message.txt", "r");
+
+    if(fp == NULL)
+    {
+        printf("File cannot be opened.");
+        return 1;
+    }
+
+    fgets(str, sizeof(str), fp);
+
+    printf("%s", str);
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Welcome to C Programming.</code></pre>
+      <p>Only the first line is read.</p>
+
+      <h2>Reading Entire File Line by Line</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+    char str[100];
+
+    fp = fopen("message.txt", "r");
+
+    while(fgets(str, sizeof(str), fp) != NULL)
+    {
+        printf("%s", str);
+    }
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Welcome to C Programming.
+File Handling is Easy.</code></pre>
+
+      <h2>1.2 fputs()</h2>
+      <h3>Definition</h3>
+      <p>The <code>fputs()</code> function writes an entire string into a file.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">fputs(string, file_pointer);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("message.txt", "w");
+
+    fputs("Welcome to C Programming\n", fp);
+    fputs("Learning File Handling", fp);
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>File Content</p>
+      <pre><code class="language-none">Welcome to C Programming
+Learning File Handling</code></pre>
+
+      <h2>fgets() vs fputs()</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>fgets()</code></td><td>Reads a line from a file</td></tr>
+          <tr><td><code>fputs()</code></td><td>Writes a line to a file</td></tr>
+        </tbody>
+      </table>
+
+      <h2>2. Miscellaneous File Functions</h2>
+      <p>Besides reading and writing, C provides several utility functions for file management.</p>
+
+      <h2>2.1 feof()</h2>
+      <h3>Definition</h3>
+      <p>Checks whether the <strong>End of File (EOF)</strong> has been reached.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">feof(file_pointer);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+    char ch;
+
+    fp = fopen("sample.txt","r");
+
+    while(!feof(fp))
+    {
+        ch = fgetc(fp);
+
+        if(!feof(fp))
+            printf("%c", ch);
+    }
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+
+      <h2>2.2 rewind()</h2>
+      <h3>Definition</h3>
+      <p>Moves the file pointer back to the <strong>beginning of the file</strong>.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">rewind(file_pointer);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">FILE *fp;
+
+fp = fopen("sample.txt","r");
+
+/* Read data */
+
+rewind(fp);
+
+/* Read again from the beginning */
+
+fclose(fp);</code></pre>
+
+      <h2>2.3 fflush()</h2>
+      <h3>Definition</h3>
+      <p>The <code>fflush()</code> function clears the output buffer and forces buffered data to be written immediately.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">fflush(file_pointer);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">FILE *fp;
+
+fp = fopen("sample.txt","w");
+
+fprintf(fp,"Hello");
+
+fflush(fp);
+
+fclose(fp);</code></pre>
+      <blockquote>
+        <p><strong>Note:</strong> Using <code>fflush(stdin)</code> is <strong>not standard C</strong> and should be avoided. It is supported only by some compilers.</p>
+      </blockquote>
+
+      <h2>2.4 ftell()</h2>
+      <h3>Definition</h3>
+      <p>Returns the <strong>current position</strong> of the file pointer.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">long position;
+
+position = ftell(file_pointer);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("sample.txt","r");
+
+    fgetc(fp);
+    fgetc(fp);
+
+    printf("%ld", ftell(fp));
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">2</code></pre>
+      <p>The file pointer is currently at the third character (position 2).</p>
+
+      <h2>2.5 fseek()</h2>
+      <h3>Definition</h3>
+      <p>Moves the file pointer to a specified position.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">fseek(file_pointer, offset, origin);</code></pre>
+      <h4>Origin Values</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Origin</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>SEEK_SET</code></td><td>Beginning of file</td></tr>
+          <tr><td><code>SEEK_CUR</code></td><td>Current position</td></tr>
+          <tr><td><code>SEEK_END</code></td><td>End of file</td></tr>
+        </tbody>
+      </table>
+      <h3>Example</h3>
+      <pre><code class="language-c">FILE *fp;
+
+fp = fopen("sample.txt","r");
+
+fseek(fp, 5, SEEK_SET);
+
+fclose(fp);</code></pre>
+      <p>The file pointer moves to the <strong>6th byte</strong> of the file.</p>
+
+      <h2>2.6 rename()</h2>
+      <p>Changes the file name.</p>
+      <pre><code class="language-c">rename("old.txt", "new.txt");</code></pre>
+
+      <h2>2.7 remove()</h2>
+      <p>Deletes a file.</p>
+      <pre><code class="language-c">remove("old.txt");</code></pre>
+
+      <h2>Summary of Miscellaneous Functions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>feof()</code></td><td>Checks end of file</td></tr>
+          <tr><td><code>rewind()</code></td><td>Moves pointer to beginning</td></tr>
+          <tr><td><code>fflush()</code></td><td>Flushes output buffer</td></tr>
+          <tr><td><code>ftell()</code></td><td>Returns current pointer position</td></tr>
+          <tr><td><code>fseek()</code></td><td>Moves file pointer</td></tr>
+          <tr><td><code>rename()</code></td><td>Renames file</td></tr>
+          <tr><td><code>remove()</code></td><td>Deletes file</td></tr>
+        </tbody>
+      </table>
+
+      <h2>3. Command Line Arguments</h2>
+      <h3>Definition</h3>
+      <p>Command Line Arguments allow values to be <strong>passed to a program when it starts executing</strong>, instead of asking the user for input using <code>scanf()</code>.</p>
+      <p>These arguments are supplied after the program name in the command prompt or terminal.</p>
+
+      <h2>Why Use Command Line Arguments?</h2>
+      <ul>
+        <li>Automate program execution</li>
+        <li>Avoid repeated user input</li>
+        <li>Useful for utilities and scripts</li>
+        <li>Common in operating systems and Linux commands</li>
+      </ul>
+
+      <h2>Syntax</h2>
+      <pre><code class="language-c">int main(int argc, char *argv[])
+{
+}</code></pre>
+      <p>or</p>
+      <pre><code class="language-c">int main(int argc, char **argv)
+{
+}</code></pre>
+
+      <h2>Meaning of Parameters</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>argc</code></td><td>Argument Count</td></tr>
+          <tr><td><code>argv</code></td><td>Argument Vector (array of strings)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Example</h2>
+      <p>Suppose the program is executed as:</p>
+      <pre><code class="language-none">program.exe Aman 101 C</code></pre>
+      <p>Then:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Index</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>argv[0]</code></td><td>program.exe</td></tr>
+          <tr><td><code>argv[1]</code></td><td>Aman</td></tr>
+          <tr><td><code>argv[2]</code></td><td>101</td></tr>
+          <tr><td><code>argv[3]</code></td><td>C</td></tr>
+        </tbody>
+      </table>
+      <pre><code class="language-none">argc = 4</code></pre>
+
+      <h2>Program Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(int argc, char *argv[])
+{
+    int i;
+
+    for(i = 0; i &lt; argc; i++)
+    {
+        printf("%s\n", argv[i]);
+    }
+
+    return 0;
+}</code></pre>
+      <p>Execution</p>
+      <pre><code class="language-none">program.exe Hello C Programming</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">program.exe
+Hello
+C
+Programming</code></pre>
+
+      <h2>Example: Adding Two Numbers</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(int argc, char *argv[])
+{
+    int a, b;
+
+    if(argc != 3)
+    {
+        printf("Usage: program number1 number2");
+        return 1;
+    }
+
+    a = atoi(argv[1]);
+    b = atoi(argv[2]);
+
+    printf("Sum = %d", a + b);
+
+    return 0;
+}</code></pre>
+      <p>Execution</p>
+      <pre><code class="language-none">program.exe 25 30</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Sum = 55</code></pre>
+      <p>Here, <code>atoi()</code> converts the string arguments into integers.</p>
+
+      <h2>Advantages of Command Line Arguments</h2>
+      <ul>
+        <li>Faster execution</li>
+        <li>No need for interactive input</li>
+        <li>Useful in automation</li>
+        <li>Easy to pass filenames and options</li>
+        <li>Widely used in system programming</li>
+      </ul>
+
+      <h2>Real-World Applications</h2>
+      <ul>
+        <li>File Copy Utilities</li>
+        <li>Backup Programs</li>
+        <li>Linux Commands (<code>cp</code>, <code>mv</code>, <code>grep</code>)</li>
+        <li>Compilers (<code>gcc</code>)</li>
+        <li>Database Tools</li>
+        <li>Antivirus Software</li>
+        <li>Compression Utilities</li>
+        <li>Batch Processing Programs</li>
+      </ul>
+
+      <h2>File Utilities Workflow</h2>
+      <pre><code class="language-none">Open File
+    │
+    ▼
+Read / Write Data
+    │
+    ▼
+Check EOF (feof)
+    │
+    ▼
+Move Pointer (fseek / rewind)
+    │
+    ▼
+Get Position (ftell)
+    │
+    ▼
+Rename / Delete (Optional)
+    │
+    ▼
+Close File</code></pre>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li><code>fgets()</code> reads an entire line from a file, while <code>fputs()</code> writes an entire string to a file.</li>
+        <li><code>feof()</code> checks whether the end of a file has been reached.</li>
+        <li><code>rewind()</code> resets the file pointer to the beginning of the file.</li>
+        <li><code>ftell()</code> returns the current position of the file pointer, and <code>fseek()</code> moves it to a desired location.</li>
+        <li><code>fflush()</code> forces buffered output to be written to the file immediately.</li>
+        <li><code>rename()</code> and <code>remove()</code> are used to rename and delete files.</li>
+        <li><strong>Command Line Arguments</strong> (<code>argc</code> and <code>argv</code>) allow programs to receive input directly from the command line, making them ideal for automation and system utilities.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
