@@ -272,6 +272,10 @@
         {
           "title": "Quick Sort",
           "path": "lessons/unit7-quick-sort.html"
+        },
+        {
+          "title": "Heap Sort",
+          "path": "lessons/unit7-heap-sort.html"
         }
       ]
     }

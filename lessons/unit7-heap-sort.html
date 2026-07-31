@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heap Sort — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Heap Sort</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Heap Sort</h1>
+
+      <p>Heap Sort is an <strong>efficient comparison-based sorting algorithm</strong> that uses a <strong>Binary Heap</strong> data structure. It works by first converting the array into a <strong>Max Heap</strong>, then repeatedly removing the largest element and placing it at the end of the array.</p>
+      <p>Heap Sort combines the efficiency of <strong>O(n log n)</strong> time complexity with <strong>O(1)</strong> extra space, making it a good choice when memory usage is important.</p>
+
+      <h2>Prerequisite: What is a Heap?</h2>
+      <p>A <strong>Heap</strong> is a special type of <strong>Complete Binary Tree</strong>.</p>
+      <p>A <strong>Complete Binary Tree</strong> is a binary tree where:</p>
+      <ul>
+        <li>Every level is completely filled except possibly the last level.</li>
+        <li>The last level is filled from <strong>left to right</strong>.</li>
+      </ul>
+      <p>There are two types of heaps:</p>
+
+      <h3>1. Max Heap</h3>
+      <p>Every parent node is <strong>greater than or equal to</strong> its children.</p>
+      <pre><code class="language-none">        90
+      /    \
+    70      60
+   /  \    /  \
+ 40   30 20   10</code></pre>
+      <p>The largest element is always at the root.</p>
+
+      <h3>2. Min Heap</h3>
+      <p>Every parent node is <strong>smaller than or equal to</strong> its children.</p>
+      <pre><code class="language-none">        10
+      /    \
+    20      30
+   /  \    /  \
+ 40   50 60   70</code></pre>
+      <p>The smallest element is always at the root.</p>
+
+      <h2>Array Representation of a Heap</h2>
+      <p>A heap is usually stored in an array.</p>
+      <pre><code class="language-none">Index : 0   1   2   3   4   5   6
+
+Value : 90 70 60 40 30 20 10</code></pre>
+      <p>Tree representation:</p>
+      <pre><code class="language-none">            90
+         /      \
+       70        60
+      /  \      /  \
+    40   30   20   10</code></pre>
+
+      <h2>Parent and Child Formula</h2>
+      <p>If an element is at index <strong>i</strong>:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Node</th>
+            <th>Formula</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Left Child</td><td><code>2 × i + 1</code></td></tr>
+          <tr><td>Right Child</td><td><code>2 × i + 2</code></td></tr>
+          <tr><td>Parent</td><td><code>(i - 1) / 2</code></td></tr>
+        </tbody>
+      </table>
+      <p>Example:</p>
+      <pre><code class="language-none">Index : 0 1 2 3 4 5 6
+
+Value :90 70 60 40 30 20 10</code></pre>
+      <p>For index <strong>1 (70)</strong></p>
+      <ul>
+        <li>Left Child = 3 → 40</li>
+        <li>Right Child = 4 → 30</li>
+        <li>Parent = 0 → 90</li>
+      </ul>
+
+      <h2>What is Heapify?</h2>
+      <p><strong>Heapify</strong> is the process of converting a subtree into a valid Max Heap.</p>
+      <p>Suppose we have:</p>
+      <pre><code class="language-none">        20
+      /    \
+    70      60</code></pre>
+      <p>This is <strong>not</strong> a Max Heap because the parent (20) is smaller than its children.</p>
+      <p>After Heapify:</p>
+      <pre><code class="language-none">        70
+      /    \
+    20      60</code></pre>
+      <p>Now the Max Heap property is satisfied.</p>
+
+      <h2>How Heap Sort Works</h2>
+      <p>Consider the array:</p>
+      <pre><code class="language-none">4 10 3 5 1</code></pre>
+
+      <h3>Step 1: Build Max Heap</h3>
+      <p>Convert the array into a Max Heap.</p>
+      <pre><code class="language-none">        10
+      /    \
+     5      3
+    / \
+   4   1</code></pre>
+      <p>Array representation:</p>
+      <pre><code class="language-none">10 5 3 4 1</code></pre>
+
+      <h3>Step 2: Swap Root with Last Element</h3>
+      <p>Swap:</p>
+      <pre><code class="language-none">10 ↔ 1</code></pre>
+      <p>Array:</p>
+      <pre><code class="language-none">1 5 3 4 10</code></pre>
+      <p>Now 10 is in its correct sorted position.</p>
+
+      <h3>Step 3: Heapify Remaining Heap</h3>
+      <p>Heapify first four elements.</p>
+      <pre><code class="language-none">        5
+      /   \
+     4     3
+    /
+   1</code></pre>
+      <p>Array:</p>
+      <pre><code class="language-none">5 4 3 1 10</code></pre>
+
+      <h3>Step 4: Repeat</h3>
+      <p>Swap root with last unsorted element.</p>
+      <pre><code class="language-none">1 4 3 5 10</code></pre>
+      <p>Heapify:</p>
+      <pre><code class="language-none">4 1 3 5 10</code></pre>
+      <p>Repeat until only one element remains.</p>
+
+      <h3>Final Sorted Array</h3>
+      <pre><code class="language-none">1 3 4 5 10</code></pre>
+
+      <h2>Heap Sort Algorithm</h2>
+      <pre><code class="language-none">Build Max Heap
+
+Repeat until heap size becomes 1
+
+    Swap root with last element
+
+    Reduce heap size
+
+    Heapify root</code></pre>
+
+      <h2>Try It Yourself</h2>
+      <div class="viz">
+        <div class="viz-bars" id="viz-bars"></div>
+        <p class="viz-caption" id="viz-caption">Ready — press Play or Step to begin.</p>
+        <input type="range" class="viz-slider" id="viz-slider" min="0" value="0" step="1" />
+        <div class="viz-controls">
+          <button id="viz-shuffle" type="button">Shuffle</button>
+          <button id="viz-play" type="button">Play</button>
+          <button id="viz-step" type="button">Step</button>
+          <button id="viz-reset" type="button">Reset</button>
+        </div>
+      </div>
+
+      <h2>C Program</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void heapify(int arr[], int n, int i)
+{
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left &lt; n &amp;&amp; arr[left] &gt; arr[largest])
+        largest = left;
+
+    if (right &lt; n &amp;&amp; arr[right] &gt; arr[largest])
+        largest = right;
+
+    if (largest != i)
+    {
+        swap(&amp;arr[i], &amp;arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
+
+void heapSort(int arr[], int n)
+{
+    // Build Max Heap
+    for (int i = n / 2 - 1; i &gt;= 0; i--)
+        heapify(arr, n, i);
+
+    // Extract elements one by one
+    for (int i = n - 1; i &gt; 0; i--)
+    {
+        swap(&amp;arr[0], &amp;arr[i]);
+        heapify(arr, i, 0);
+    }
+}
+
+int main()
+{
+    int arr[] = {4, 10, 3, 5, 1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    heapSort(arr, n);
+
+    printf("Sorted Array:\n");
+
+    for (int i = 0; i &lt; n; i++)
+        printf("%d ", arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">Sorted Array:
+1 3 4 5 10</code></pre>
+
+      <h2>Code Explanation</h2>
+
+      <h3>Build Max Heap</h3>
+      <pre><code class="language-c">for (int i = n / 2 - 1; i &gt;= 0; i--)
+    heapify(arr, n, i);</code></pre>
+      <p>Starts from the last non-leaf node and converts the array into a Max Heap.</p>
+
+      <h3>Swap Root</h3>
+      <pre><code class="language-c">swap(&amp;arr[0], &amp;arr[i]);</code></pre>
+      <p>Moves the largest element (root) to its final position.</p>
+
+      <h3>Heapify</h3>
+      <pre><code class="language-c">heapify(arr, i, 0);</code></pre>
+      <p>Restores the Max Heap property after removing the largest element.</p>
+
+      <h2>Time Complexity</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Best Case</td><td><strong>O(n log n)</strong></td></tr>
+          <tr><td>Average Case</td><td><strong>O(n log n)</strong></td></tr>
+          <tr><td>Worst Case</td><td><strong>O(n log n)</strong></td></tr>
+        </tbody>
+      </table>
+      <p>Heap Sort performs consistently well in all cases.</p>
+
+      <h2>Space Complexity</h2>
+      <pre><code class="language-none">O(1)</code></pre>
+      <p>Heap Sort sorts the array <strong>in-place</strong>, requiring only constant extra memory.</p>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Guaranteed <strong>O(n log n)</strong> performance.</li>
+        <li>In-place sorting algorithm.</li>
+        <li>Does not require extra arrays.</li>
+        <li>Suitable for large datasets.</li>
+        <li>Predictable performance regardless of input order.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Not a stable sorting algorithm.</li>
+        <li>Slightly slower than Quick Sort in practice due to more comparisons and heap maintenance.</li>
+        <li>More complex to implement than Bubble, Selection, or Insertion Sort.</li>
+      </ul>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Priority Queue implementation.</li>
+        <li>CPU Scheduling.</li>
+        <li>Graph algorithms (e.g., Dijkstra's and Prim's algorithms use heaps).</li>
+        <li>Embedded systems where memory is limited.</li>
+        <li>Systems requiring predictable worst-case performance.</li>
+      </ul>
+
+      <h2>Comparison of Sorting Algorithms</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Algorithm</th>
+            <th>Best</th>
+            <th>Average</th>
+            <th>Worst</th>
+            <th>Space</th>
+            <th>Stable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Bubble Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>Yes</td></tr>
+          <tr><td>Selection Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>No</td></tr>
+          <tr><td>Insertion Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>Yes</td></tr>
+          <tr><td>Merge Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td><td>Yes</td></tr>
+          <tr><td>Quick Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>O(log n)</td><td>No</td></tr>
+          <tr><td>Heap Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(1)</td><td>No</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>Heap Sort is based on the <strong>Max Heap</strong> data structure.</li>
+        <li>A <strong>Max Heap</strong> stores the largest element at the root.</li>
+        <li>Heapify maintains the heap property after each swap.</li>
+        <li>Heap Sort is <strong>in-place</strong> but <strong>not stable</strong>.</li>
+        <li>Time Complexity is <strong>O(n log n)</strong> in all cases.</li>
+        <li>Space Complexity is <strong>O(1)</strong>.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+  <script>
+    (function () {
+      var initialArray = [4, 10, 3, 5, 1];
+
+      function generateSteps(startArray) {
+        var a = startArray.slice();
+        var steps = [];
+
+        function heapify(n, i) {
+          var largest = i;
+          var left = 2 * i + 1;
+          var right = 2 * i + 2;
+
+          if (left < n) {
+            steps.push({
+              type: 'compare',
+              indices: [left, largest],
+              caption: 'Compare ' + a[left] + ' with ' + a[largest],
+              array: a.slice()
+            });
+            if (a[left] > a[largest]) largest = left;
+          }
+
+          if (right < n) {
+            steps.push({
+              type: 'compare',
+              indices: [right, largest],
+              caption: 'Compare ' + a[right] + ' with ' + a[largest],
+              array: a.slice()
+            });
+            if (a[right] > a[largest]) largest = right;
+          }
+
+          if (largest !== i) {
+            var temp = a[i];
+            a[i] = a[largest];
+            a[largest] = temp;
+            steps.push({
+              type: 'swap',
+              indices: [i, largest],
+              caption: 'Swap ' + a[largest] + ' and ' + a[i],
+              array: a.slice()
+            });
+            heapify(n, largest);
+          }
+        }
+
+        var n = a.length;
+
+        for (var i = Math.floor(n / 2) - 1; i >= 0; i--) {
+          heapify(n, i);
+        }
+
+        for (var i = n - 1; i > 0; i--) {
+          var temp = a[0];
+          a[0] = a[i];
+          a[i] = temp;
+          steps.push({
+            type: 'swap',
+            indices: [0, i],
+            caption: 'Move largest ' + a[i] + ' to index ' + i,
+            array: a.slice()
+          });
+          steps.push({
+            type: 'markSorted',
+            indices: [i],
+            caption: a[i] + ' is now in its correct position',
+            array: a.slice()
+          });
+          heapify(i, 0);
+        }
+
+        steps.push({
+          type: 'markSorted',
+          indices: [0],
+          caption: 'Remaining element at index 0 is sorted',
+          array: a.slice()
+        });
+
+        return steps;
+      }
+
+      function shuffleArray(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+        return arr;
+      }
+
+      var container = document.getElementById('viz-bars');
+      var caption = document.getElementById('viz-caption');
+      var slider = document.getElementById('viz-slider');
+      var shuffleBtn = document.getElementById('viz-shuffle');
+      var playBtn = document.getElementById('viz-play');
+      var stepBtn = document.getElementById('viz-step');
+      var resetBtn = document.getElementById('viz-reset');
+
+      if (!container) return;
+
+      var currentArray = initialArray.slice();
+      var steps = generateSteps(currentArray);
+      var stepIndex = 0;
+      var playing = false;
+      var playTimer = null;
+
+      function maxValue(arr) {
+        var m = arr[0];
+        for (var i = 1; i < arr.length; i++) {
+          if (arr[i] > m) m = arr[i];
+        }
+        return m;
+      }
+
+      function sortedIndicesUpTo(idx) {
+        var sorted = {};
+        for (var i = 0; i <= idx; i++) {
+          if (steps[i].type === 'markSorted') {
+            steps[i].indices.forEach(function (n) {
+              sorted[n] = true;
+            });
+          }
+        }
+        return sorted;
+      }
+
+      function render() {
+        container.innerHTML = '';
+        var step = steps[stepIndex];
+        var arr = step ? step.array : currentArray;
+        var max = maxValue(arr);
+        var sorted = sortedIndicesUpTo(stepIndex);
+
+        arr.forEach(function (value, idx) {
+          var bar = document.createElement('div');
+          bar.className = 'viz-bar';
+          bar.style.height = (value / max * 100) + '%';
+
+          if (step && step.type !== 'markSorted' && step.indices.indexOf(idx) !== -1) {
+            bar.classList.add('viz-bar--comparing');
+          }
+
+          if (sorted[idx]) {
+            bar.classList.add('viz-bar--sorted');
+          }
+
+          var label = document.createElement('span');
+          label.textContent = value;
+          bar.appendChild(label);
+
+          container.appendChild(bar);
+        });
+
+        caption.textContent = step ? step.caption : 'Ready — press Play or Step to begin.';
+        slider.value = stepIndex;
+        stepBtn.disabled = stepIndex >= steps.length - 1;
+
+        if (stepIndex >= steps.length - 1) {
+          pause();
+        }
+      }
+
+      function goToStep(idx) {
+        stepIndex = Math.max(0, Math.min(idx, steps.length - 1));
+        render();
+      }
+
+      function play() {
+        if (playing) return;
+        playing = true;
+        playBtn.textContent = 'Pause';
+        playTimer = setInterval(function () {
+          if (stepIndex >= steps.length - 1) {
+            pause();
+            return;
+          }
+          goToStep(stepIndex + 1);
+        }, 700);
+      }
+
+      function pause() {
+        playing = false;
+        playBtn.textContent = 'Play';
+        if (playTimer) {
+          clearInterval(playTimer);
+          playTimer = null;
+        }
+      }
+
+      shuffleBtn.addEventListener('click', function () {
+        pause();
+        currentArray = shuffleArray(initialArray.slice());
+        steps = generateSteps(currentArray);
+        slider.max = steps.length - 1;
+        goToStep(0);
+      });
+
+      playBtn.addEventListener('click', function () {
+        if (playing) {
+          pause();
+        } else {
+          play();
+        }
+      });
+
+      stepBtn.addEventListener('click', function () {
+        pause();
+        goToStep(stepIndex + 1);
+      });
+
+      resetBtn.addEventListener('click', function () {
+        pause();
+        goToStep(0);
+      });
+
+      slider.addEventListener('input', function () {
+        pause();
+        goToStep(parseInt(slider.value, 10));
+      });
+
+      slider.max = steps.length - 1;
+      render();
+    })();
+  </script>
+</body>
+</html>
