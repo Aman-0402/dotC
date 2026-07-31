@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Integer Variants and Floating-Point Variants — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Integer Variants and Floating-Point Variants</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Integer Variants and Floating-Point Variants</h1>
+
+      <p>These topics explain the different <strong>numeric data type variants</strong> available in C. Variants allow you to choose the appropriate type based on <strong>memory usage, value range, and precision</strong>.</p>
+      <blockquote>
+        <p><strong>Note:</strong> The exact sizes and ranges shown below are <strong>common on modern systems</strong> but are implementation-dependent. Always use <code>sizeof()</code> to verify on your platform.</p>
+      </blockquote>
+
+      <h2>Part 1: Integer Variants</h2>
+
+      <h3>What are Integer Variants?</h3>
+      <p>Integer variants are different forms of integer data types that differ in:</p>
+      <ul>
+        <li>Memory size</li>
+        <li>Range of values</li>
+        <li>Whether they can store negative numbers</li>
+      </ul>
+
+      <h3>Integer Family</h3>
+      <pre><code class="language-none">Integer Variants
+│
+├── short
+├── int
+├── long
+├── long long
+├── signed
+└── unsigned</code></pre>
+
+      <h2>1. short (short int)</h2>
+      <p>Used when storing <strong>small whole numbers</strong>.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">short int marks = 100;</code></pre>
+      <p>or</p>
+      <pre><code class="language-c">short marks = 100;</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    short age = 25;
+
+    printf("%hd", age);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">25</code></pre>
+      <p>Typical Size</p>
+      <pre><code class="language-none">2 bytes</code></pre>
+      <p>Typical Range</p>
+      <pre><code class="language-none">-32,768 to 32,767</code></pre>
+
+      <h2>2. int</h2>
+      <p>The <strong>default integer type</strong> in C.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">int number = 100;</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int salary = 50000;
+
+    printf("%d", salary);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">50000</code></pre>
+      <p>Typical Size</p>
+      <pre><code class="language-none">4 bytes</code></pre>
+      <p>Typical Range</p>
+      <pre><code class="language-none">-2,147,483,648 to 2,147,483,647</code></pre>
+
+      <h2>3. long (long int)</h2>
+      <p>Used for storing larger integer values.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">long population = 1500000000;</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    long population = 1500000000L;
+
+    printf("%ld", population);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1500000000</code></pre>
+      <p>Typical Size</p>
+      <pre><code class="language-none">4 or 8 bytes</code></pre>
+
+      <h2>4. long long (long long int)</h2>
+      <p>Stores <strong>very large integers</strong>.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">long long distance = 1234567890123LL;</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    long long stars = 9876543210123LL;
+
+    printf("%lld", stars);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">9876543210123</code></pre>
+      <p>Typical Size</p>
+      <pre><code class="language-none">8 bytes</code></pre>
+      <p>Typical Range</p>
+      <pre><code class="language-none">-9,223,372,036,854,775,808
+to
+9,223,372,036,854,775,807</code></pre>
+
+      <h2>Signed Integers</h2>
+      <p>A <strong>signed</strong> integer stores:</p>
+      <ul>
+        <li>Negative numbers</li>
+        <li>Positive numbers</li>
+        <li>Zero</li>
+      </ul>
+      <p>Example</p>
+      <pre><code class="language-c">signed int temperature = -25;</code></pre>
+      <p>Possible values</p>
+      <pre><code class="language-none">-100
+-50
+0
+25
+100</code></pre>
+
+      <h2>Unsigned Integers</h2>
+      <p>An <strong>unsigned</strong> integer stores:</p>
+      <ul>
+        <li>Zero</li>
+        <li>Positive numbers only</li>
+      </ul>
+      <p>Example</p>
+      <pre><code class="language-c">unsigned int students = 500;</code></pre>
+      <p>Possible values</p>
+      <pre><code class="language-none">0
+100
+500
+1000</code></pre>
+      <p>Negative values are not allowed.</p>
+
+      <h2>Integer Variant Comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Typical Size</th>
+            <th>Signed Range (Typical)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>short</code></td><td>2 bytes</td><td>-32,768 to 32,767</td></tr>
+          <tr><td><code>int</code></td><td>4 bytes</td><td>-2.1 billion to +2.1 billion</td></tr>
+          <tr><td><code>long</code></td><td>4 or 8 bytes</td><td>Platform-dependent</td></tr>
+          <tr><td><code>long long</code></td><td>8 bytes</td><td>±9.22 × 10¹⁸</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Integer Memory Illustration</h2>
+      <pre><code class="language-c">int age = 25;</code></pre>
+      <pre><code class="language-none">Memory
+
++---------+
+|   25    |
++---------+</code></pre>
+
+      <h2>Integer Format Specifiers</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Format Specifier</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>short</code></td><td><code>%hd</code></td></tr>
+          <tr><td><code>int</code></td><td><code>%d</code></td></tr>
+          <tr><td><code>long</code></td><td><code>%ld</code></td></tr>
+          <tr><td><code>long long</code></td><td><code>%lld</code></td></tr>
+          <tr><td><code>unsigned int</code></td><td><code>%u</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Practical Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    short a = 100;
+    int b = 50000;
+    long c = 1000000L;
+    long long d = 99999999999LL;
+
+    printf("short      : %hd\n", a);
+    printf("int        : %d\n", b);
+    printf("long       : %ld\n", c);
+    printf("long long  : %lld\n", d);
+
+    return 0;
+}</code></pre>
+
+      <h2>Common Integer Mistakes</h2>
+
+      <h3>Wrong</h3>
+      <pre><code class="language-c">short value = 50000;</code></pre>
+      <p><code>50000</code> exceeds the range of a typical <code>short</code>, causing overflow or implementation-defined behavior.</p>
+
+      <h3>Wrong</h3>
+      <pre><code class="language-c">unsigned int x = -10;</code></pre>
+      <p>Unsigned types cannot represent negative values, leading to unexpected results.</p>
+
+      <h2>Part 2: Floating-Point Variants</h2>
+
+      <h3>What are Floating-Point Variants?</h3>
+      <p>Floating-point variants are used to store <strong>decimal numbers</strong> with different levels of <strong>precision</strong> and <strong>range</strong>.</p>
+
+      <h3>Floating-Point Family</h3>
+      <pre><code class="language-none">Floating Variants
+│
+├── float
+├── double
+└── long double</code></pre>
+
+      <h2>1. float</h2>
+      <p>Stores decimal values with <strong>single precision</strong>.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">float pi = 3.14f;</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    float price = 99.95f;
+
+    printf("%.2f", price);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">99.95</code></pre>
+      <p>Typical Size</p>
+      <pre><code class="language-none">4 bytes</code></pre>
+      <p>Approximate Precision</p>
+      <pre><code class="language-none">6–7 decimal digits</code></pre>
+
+      <h2>2. double</h2>
+      <p>Stores decimal values with <strong>double precision</strong>.</p>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    double pi = 3.141592653589793;
+
+    printf("%.15lf", pi);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">3.141592653589793</code></pre>
+      <p>Typical Size</p>
+      <pre><code class="language-none">8 bytes</code></pre>
+      <p>Approximate Precision</p>
+      <pre><code class="language-none">15–16 decimal digits</code></pre>
+
+      <h2>3. long double</h2>
+      <p>Stores decimal values with <strong>extended precision</strong>.</p>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    long double value = 12345.678901234567L;
+
+    printf("%.18Lf", value);
+
+    return 0;
+}</code></pre>
+      <p>Typical Size</p>
+      <pre><code class="language-none">16 bytes (commonly, but implementation-dependent)</code></pre>
+      <p>Approximate Precision</p>
+      <pre><code class="language-none">18+ decimal digits</code></pre>
+
+      <h2>Floating-Point Comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Typical Size</th>
+            <th>Approximate Precision</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>float</code></td><td>4 bytes</td><td>6–7 digits</td></tr>
+          <tr><td><code>double</code></td><td>8 bytes</td><td>15–16 digits</td></tr>
+          <tr><td><code>long double</code></td><td>16 bytes</td><td>18+ digits</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Memory Illustration</h2>
+      <pre><code class="language-c">float price = 99.95f;</code></pre>
+      <pre><code class="language-none">Memory
+
++-------------+
+|   99.95     |
++-------------+</code></pre>
+
+      <h2>Floating-Point Format Specifiers</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Format Specifier</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>float</code></td><td><code>%f</code></td></tr>
+          <tr><td><code>double</code></td><td><code>%lf</code> (commonly used with <code>scanf</code>; <code>printf</code> also uses <code>%f</code>)</td></tr>
+          <tr><td><code>long double</code></td><td><code>%Lf</code></td></tr>
+        </tbody>
+      </table>
+      <blockquote>
+        <p><strong>Important:</strong> In <code>printf</code>, both <code>float</code> and <code>double</code> are printed using <code>%f</code> because <code>float</code> arguments are automatically promoted to <code>double</code>. In <code>scanf</code>, use <code>%f</code> for <code>float</code> and <code>%lf</code> for <code>double</code>.</p>
+      </blockquote>
+
+      <h2>Precision Demonstration</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    float f = 3.141592653589793f;
+    double d = 3.141592653589793;
+
+    printf("Float  : %.15f\n", f);
+    printf("Double : %.15f\n", d);
+
+    return 0;
+}</code></pre>
+      <p>Sample Output</p>
+      <pre><code class="language-none">Float  : 3.141592741012573
+Double : 3.141592653589793</code></pre>
+      <p>Notice that <code>double</code> preserves more precision.</p>
+
+      <h2>Choosing the Right Floating Type</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Situation</th>
+            <th>Recommended Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Simple decimal values</td><td><code>float</code></td></tr>
+          <tr><td>Financial calculations</td><td><code>double</code></td></tr>
+          <tr><td>Scientific calculations</td><td><code>double</code> or <code>long double</code></td></tr>
+          <tr><td>High-precision mathematics</td><td><code>long double</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Common Floating-Point Mistakes</h2>
+
+      <h3>1. Using <code>float</code> for High Precision</h3>
+      <pre><code class="language-c">float pi = 3.141592653589793;</code></pre>
+      <p>Much of the precision is lost.</p>
+      <p>Better</p>
+      <pre><code class="language-c">double pi = 3.141592653589793;</code></pre>
+
+      <h3>2. Comparing Floating-Point Values Directly</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">if (0.1 + 0.2 == 0.3)
+{
+    printf("Equal");
+}</code></pre>
+      <p>Due to floating-point representation, direct equality comparisons can fail. A better approach is to compare the difference against a small tolerance.</p>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What are the integer variants in C?</h3>
+      <ul>
+        <li><code>short</code></li>
+        <li><code>int</code></li>
+        <li><code>long</code></li>
+        <li><code>long long</code></li>
+        <li>Signed and unsigned versions</li>
+      </ul>
+
+      <h3>2. What are the floating-point variants?</h3>
+      <ul>
+        <li><code>float</code></li>
+        <li><code>double</code></li>
+        <li><code>long double</code></li>
+      </ul>
+
+      <h3>3. Why use <code>long long</code> instead of <code>int</code>?</h3>
+      <p>Because it can store much larger integer values.</p>
+
+      <h3>4. What is the difference between <code>float</code> and <code>double</code>?</h3>
+      <table>
+        <thead>
+          <tr>
+            <th><code>float</code></th>
+            <th><code>double</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Typically 4 bytes</td><td>Typically 8 bytes</td></tr>
+          <tr><td>6–7 digits precision</td><td>15–16 digits precision</td></tr>
+          <tr><td>Uses less memory</td><td>Provides higher accuracy</td></tr>
+        </tbody>
+      </table>
+
+      <h3>5. What is the purpose of <code>unsigned int</code>?</h3>
+      <p>It stores only non-negative integers, increasing the maximum positive range for the same memory size.</p>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Explain the different integer variants in C.</li>
+        <li>Differentiate between <code>float</code>, <code>double</code>, and <code>long double</code>.</li>
+        <li>What is the purpose of <code>unsigned</code>?</li>
+        <li>Why is <code>double</code> preferred in scientific applications?</li>
+        <li>Explain the difference between <code>short</code> and <code>long long</code>.</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Display different integer variants.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    short s = 100;
+    int i = 1000;
+    long l = 100000L;
+    long long ll = 10000000000LL;
+
+    printf("%hd\n", s);
+    printf("%d\n", i);
+    printf("%ld\n", l);
+    printf("%lld\n", ll);
+
+    return 0;
+}</code></pre>
+
+      <h4>Q2. Display floating-point variants.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    float f = 3.14f;
+    double d = 3.141592653589793;
+    long double ld = 3.141592653589793L;
+
+    printf("float       : %.2f\n", f);
+    printf("double      : %.15f\n", d);
+    printf("long double : %.18Lf\n", ld);
+
+    return 0;
+}</code></pre>
+
+      <h4>Q3. Print sizes using <code>sizeof</code>.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("short       : %zu bytes\n", sizeof(short));
+    printf("int         : %zu bytes\n", sizeof(int));
+    printf("long        : %zu bytes\n", sizeof(long));
+    printf("long long   : %zu bytes\n", sizeof(long long));
+    printf("float       : %zu bytes\n", sizeof(float));
+    printf("double      : %zu bytes\n", sizeof(double));
+    printf("long double : %zu bytes\n", sizeof(long double));
+
+    return 0;
+}</code></pre>
+
+      <h2>Exam Tips</h2>
+      <ul>
+        <li>⭐ <code>int</code> is the default integer type.</li>
+        <li>⭐ <code>long long</code> is used for very large integer values.</li>
+        <li>⭐ <code>unsigned</code> cannot store negative numbers.</li>
+        <li>⭐ <code>double</code> provides much higher precision than <code>float</code>.</li>
+        <li>⭐ <code>long double</code> offers the highest precision among the standard floating-point types.</li>
+        <li>⭐ Use the correct format specifier (<code>%hd</code>, <code>%d</code>, <code>%ld</code>, <code>%lld</code>, <code>%f</code>, <code>%Lf</code>) to avoid incorrect output.</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <h3>Integer Variants</h3>
+      <ul>
+        <li><code>short</code> → Small integers</li>
+        <li><code>int</code> → General-purpose integers</li>
+        <li><code>long</code> → Larger integer range</li>
+        <li><code>long long</code> → Very large integers</li>
+        <li><code>signed</code> → Positive and negative values</li>
+        <li><code>unsigned</code> → Non-negative values only</li>
+      </ul>
+      <h3>Floating-Point Variants</h3>
+      <ul>
+        <li><code>float</code> → Single precision</li>
+        <li><code>double</code> → Double precision</li>
+        <li><code>long double</code> → Extended precision</li>
+      </ul>
+      <p>Choosing the correct variant improves <strong>memory efficiency</strong>, <strong>performance</strong>, and <strong>accuracy</strong>, making your C programs more reliable and efficient.</p>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

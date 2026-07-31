@@ -115,6 +115,10 @@
         {
           "title": "Numeric Data Types",
           "path": "lessons/unit2-numeric-data-types.html"
+        },
+        {
+          "title": "Integer Variants and Floating-Point Variants",
+          "path": "lessons/unit2-integer-and-floating-variants.html"
         }
       ]
     }
