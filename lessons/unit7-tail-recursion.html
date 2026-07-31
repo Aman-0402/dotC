@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tail Recursion — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Tail Recursion</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Tail Recursion</h1>
+
+      <h2>What is Tail Recursion?</h2>
+      <p><strong>Tail Recursion</strong> is a type of recursion in which <strong>the recursive function call is the last operation performed by the function</strong>.</p>
+      <p>After the recursive call, <strong>no computation remains</strong>.</p>
+      <blockquote>
+        <p><strong>Definition:</strong> A recursive function is called <strong>Tail Recursive</strong> if the recursive call is the <strong>final statement</strong> executed before the function returns.</p>
+      </blockquote>
+
+      <h2>General Structure</h2>
+      <pre><code class="language-c">returnType function(parameters)
+{
+    if(base_condition)
+        return;
+
+    // Some work before recursion
+
+    function(smaller_problem);
+
+    // Nothing after recursive call
+}</code></pre>
+      <p>The important rule is:</p>
+      <pre><code class="language-none">Recursive Call
+
+↓
+
+Function Ends</code></pre>
+      <p>There should be <strong>no statements after the recursive call</strong>.</p>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine walking down a staircase.</p>
+      <pre><code class="language-none">Step 5
+
+↓
+
+Step 4
+
+↓
+
+Step 3
+
+↓
+
+Step 2
+
+↓
+
+Step 1
+
+↓
+
+Ground Floor</code></pre>
+      <p>Once you move to the next step, you never return to perform extra work on the previous step.</p>
+      <p>Tail recursion behaves in the same way.</p>
+
+      <h2>Example 1: Print Numbers (1 to 5)</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void print(int n)
+{
+    if(n &gt; 5)
+        return;
+
+    printf("%d ", n);
+
+    print(n + 1);
+}
+
+int main()
+{
+    print(1);
+
+    return 0;
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h3>Why is it Tail Recursive?</h3>
+      <pre><code class="language-c">printf("%d ", n);
+
+print(n + 1);</code></pre>
+      <p>The recursive call is the <strong>last statement</strong>.</p>
+      <p>Nothing is executed after:</p>
+      <pre><code class="language-c">print(n + 1);</code></pre>
+      <p>Hence, this is <strong>Tail Recursion</strong>.</p>
+
+      <h2>Dry Run</h2>
+      <p>Call:</p>
+      <pre><code class="language-c">print(1);</code></pre>
+      <p>Execution:</p>
+      <pre><code class="language-none">print(1)
+
+↓
+
+Print 1
+
+↓
+
+print(2)
+
+↓
+
+Print 2
+
+↓
+
+print(3)
+
+↓
+
+Print 3
+
+↓
+
+print(4)
+
+↓
+
+Print 4
+
+↓
+
+print(5)
+
+↓
+
+Print 5
+
+↓
+
+print(6)
+
+↓
+
+Base Case
+
+↓
+
+Return</code></pre>
+      <p>Notice that while returning, <strong>no additional work</strong> is performed.</p>
+
+      <h2>Example 2: Countdown</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void countdown(int n)
+{
+    if(n == 0)
+        return;
+
+    printf("%d ", n);
+
+    countdown(n - 1);
+}
+
+int main()
+{
+    countdown(5);
+
+    return 0;
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-none">5 4 3 2 1</code></pre>
+      <p>Again, after:</p>
+      <pre><code class="language-c">countdown(n-1);</code></pre>
+      <p>the function immediately returns.</p>
+
+      <h2>Tail Recursive Factorial</h2>
+      <p>The usual factorial function is <strong>not</strong> tail recursive because multiplication happens <strong>after</strong> the recursive call returns.</p>
+      <p>Normal factorial:</p>
+      <pre><code class="language-c">return n * factorial(n-1);</code></pre>
+      <p>Here, after <code>factorial(n-1)</code> returns, multiplication is still pending.</p>
+      <p>We can rewrite it using an <strong>accumulator</strong>.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int factorialTail(int n, int result)
+{
+    if(n == 0)
+        return result;
+
+    return factorialTail(n - 1, result * n);
+}
+
+int main()
+{
+    printf("%d", factorialTail(5, 1));
+
+    return 0;
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-none">120</code></pre>
+
+      <h3>Dry Run</h3>
+      <p>Call:</p>
+      <pre><code class="language-none">factorialTail(5,1)</code></pre>
+      <p>Execution:</p>
+      <pre><code class="language-none">factorialTail(5,1)
+
+↓
+
+factorialTail(4,5)
+
+↓
+
+factorialTail(3,20)
+
+↓
+
+factorialTail(2,60)
+
+↓
+
+factorialTail(1,120)
+
+↓
+
+factorialTail(0,120)
+
+↓
+
+Return 120</code></pre>
+      <p>The result is carried forward in the <code>result</code> parameter, so no multiplication is left after the recursive call.</p>
+
+      <h2>Call Stack</h2>
+      <p>For:</p>
+      <pre><code class="language-c">print(1);</code></pre>
+      <p>Stack:</p>
+      <pre><code class="language-none">┌───────────┐
+│ print(5)  │
+├───────────┤
+│ print(4)  │
+├───────────┤
+│ print(3)  │
+├───────────┤
+│ print(2)  │
+├───────────┤
+│ print(1)  │
+└───────────┘</code></pre>
+      <p>After reaching the base case, the functions simply return one by one without doing extra work.</p>
+
+      <h2>Tail Call Optimization (TCO)</h2>
+      <p>Some compilers can optimize tail-recursive functions.</p>
+      <p>Instead of keeping every recursive call on the call stack, they reuse the current stack frame.</p>
+      <p>Benefits:</p>
+      <ul>
+        <li>Less memory usage.</li>
+        <li>Faster execution.</li>
+        <li>Prevents stack overflow for deep recursion.</li>
+      </ul>
+      <blockquote>
+        <p><strong>Note:</strong> Standard C does <strong>not guarantee</strong> Tail Call Optimization. Some compilers (such as GCC or Clang with optimization enabled) may perform it automatically.</p>
+      </blockquote>
+
+      <h2>Tail Recursion vs Normal Recursion</h2>
+
+      <h3>Tail Recursion</h3>
+      <pre><code class="language-c">void fun(int n)
+{
+    if(n == 0)
+        return;
+
+    printf("%d ", n);
+
+    fun(n-1);
+}</code></pre>
+      <p>The recursive call is the last operation.</p>
+
+      <h3>Not Tail Recursion</h3>
+      <pre><code class="language-c">void fun(int n)
+{
+    if(n == 0)
+        return;
+
+    fun(n-1);
+
+    printf("%d ", n);
+}</code></pre>
+      <p>The <code>printf()</code> executes <strong>after</strong> the recursive call returns, so this is <strong>Head Recursion</strong>, not Tail Recursion.</p>
+
+      <h2>Tail Recursion vs Iteration</h2>
+      <p>Tail recursion often has an equivalent iterative solution.</p>
+      <p>Tail Recursive Version:</p>
+      <pre><code class="language-c">void print(int n)
+{
+    if(n &gt; 5)
+        return;
+
+    printf("%d ", n);
+
+    print(n+1);
+}</code></pre>
+      <p>Iterative Version:</p>
+      <pre><code class="language-c">for(int i = 1; i &lt;= 5; i++)
+{
+    printf("%d ", i);
+}</code></pre>
+      <p>Both produce:</p>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Simple and easy to understand.</li>
+        <li>Can be optimized by some compilers.</li>
+        <li>Requires no work after the recursive call.</li>
+        <li>Often convertible to loops.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Still uses recursive calls if the compiler does not optimize.</li>
+        <li>Deep recursion may cause stack overflow.</li>
+        <li>Sometimes less intuitive than iteration.</li>
+      </ul>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Countdown timers.</li>
+        <li>Traversing linked lists recursively.</li>
+        <li>Recursive printing.</li>
+        <li>Tail-recursive mathematical computations.</li>
+        <li>Functional programming languages.</li>
+      </ul>
+
+      <h2>Comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Tail Recursion</th>
+            <th>Normal Recursion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Recursive call</td><td>Last operation</td><td>Not necessarily last</td></tr>
+          <tr><td>Work after recursion</td><td>No</td><td>Yes</td></tr>
+          <tr><td>Tail Call Optimization</td><td>Possible</td><td>Not possible</td></tr>
+          <tr><td>Memory usage</td><td>Lower (with optimization)</td><td>Higher</td></tr>
+          <tr><td>Loop conversion</td><td>Easy</td><td>More difficult</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>In <strong>Tail Recursion</strong>, the recursive call is the <strong>last statement</strong>.</li>
+        <li>No computation remains after the recursive call.</li>
+        <li>Tail recursion can sometimes be optimized into iteration by the compiler.</li>
+        <li>A tail-recursive function is generally more memory-efficient than other recursive forms when optimization is available.</li>
+        <li>Not every recursive function can be naturally rewritten as tail recursive.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

@@ -296,6 +296,10 @@
         {
           "title": "Recursion Tree",
           "path": "lessons/unit7-recursion-tree.html"
+        },
+        {
+          "title": "Tail Recursion",
+          "path": "lessons/unit7-tail-recursion.html"
         }
       ]
     }
