@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random Access Files — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 5 / Random Access Files</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Random Access Files</h1>
+
+      <p>Normally, files are read <strong>sequentially</strong>, meaning data is processed from the beginning to the end. However, in many applications, we need to directly access a specific location in a file without reading all previous data.</p>
+      <p>This is called <strong>Random Access File Handling</strong>.</p>
+      <p>Random access is mainly achieved using the following functions:</p>
+      <ul>
+        <li><code>fseek()</code></li>
+        <li><code>ftell()</code></li>
+        <li><code>rewind()</code></li>
+      </ul>
+      <p>These functions are declared in the <strong><code>&lt;stdio.h&gt;</code></strong> header file.</p>
+
+      <h2>What is Random Access?</h2>
+      <p><strong>Random Access</strong> is the ability to move the file pointer directly to any location in a file for reading or writing.</p>
+      <p>Instead of reading every record one by one, the program can jump directly to the required position.</p>
+
+      <h2>Sequential Access vs Random Access</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Sequential Access</th>
+            <th>Random Access</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Reads data from beginning to end</td><td>Accesses any location directly</td></tr>
+          <tr><td>Slower for large files</td><td>Faster for searching records</td></tr>
+          <tr><td>Must read previous records</td><td>No need to read previous records</td></tr>
+          <tr><td>Suitable for text files</td><td>Commonly used with binary files</td></tr>
+        </tbody>
+      </table>
+
+      <h2>File Pointer</h2>
+      <p>Every opened file has a <strong>file pointer</strong>.</p>
+      <p>Initially, it points to the first byte of the file.</p>
+      <pre><code class="language-none">Student File
+
++----+----+----+----+----+
+| R1 | R2 | R3 | R4 | R5 |
++----+----+----+----+----+
+ ^
+File Pointer</code></pre>
+      <p>The pointer moves automatically while reading or writing.</p>
+
+      <h2>Why Random Access?</h2>
+      <ul>
+        <li>Update a specific record</li>
+        <li>Search records quickly</li>
+        <li>Skip unnecessary data</li>
+        <li>Efficient file processing</li>
+        <li>Database applications</li>
+      </ul>
+
+      <h2>1. fseek()</h2>
+      <h3>Definition</h3>
+      <p>The <code>fseek()</code> function moves the file pointer to a specified position in a file.</p>
+
+      <h2>Syntax</h2>
+      <pre><code class="language-c">fseek(file_pointer, offset, origin);</code></pre>
+
+      <h2>Parameters</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>file_pointer</code></td><td>Pointer to the opened file</td></tr>
+          <tr><td><code>offset</code></td><td>Number of bytes to move</td></tr>
+          <tr><td><code>origin</code></td><td>Starting point for movement</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Origin Constants</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Constant</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>SEEK_SET</code></td><td>Beginning of the file</td></tr>
+          <tr><td><code>SEEK_CUR</code></td><td>Current file pointer position</td></tr>
+          <tr><td><code>SEEK_END</code></td><td>End of the file</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Example 1</h2>
+      <p>Move to the 10th byte.</p>
+      <pre><code class="language-c">FILE *fp;
+
+fp = fopen("data.txt", "r");
+
+fseek(fp, 10, SEEK_SET);
+
+fclose(fp);</code></pre>
+
+      <h2>Pointer Movement</h2>
+      <pre><code class="language-none">Before
+
++----------------------------+
+^
+Pointer
+
+After
+
++----------------------------+
+          ^
+       Pointer</code></pre>
+
+      <h2>Example 2</h2>
+      <p>Move forward from the current position.</p>
+      <pre><code class="language-c">fseek(fp, 5, SEEK_CUR);</code></pre>
+      <p>Moves <strong>5 bytes ahead</strong>.</p>
+
+      <h2>Example 3</h2>
+      <p>Move backward from the end.</p>
+      <pre><code class="language-c">fseek(fp, -20, SEEK_END);</code></pre>
+      <p>Moves <strong>20 bytes before the end</strong> of the file.</p>
+
+      <h2>Reading a Specific Record</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+struct Student
+{
+    int roll;
+    char name[20];
+    float marks;
+};
+
+int main()
+{
+    FILE *fp;
+    struct Student s;
+
+    fp = fopen("student.dat", "rb");
+
+    fseek(fp, 2 * sizeof(struct Student), SEEK_SET);
+
+    fread(&amp;s, sizeof(s), 1, fp);
+
+    printf("%d %s %.2f",
+           s.roll,
+           s.name,
+           s.marks);
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>Here,</p>
+      <pre><code class="language-none">Record 0
+
+↓
+
+Record 1
+
+↓
+
+Record 2</code></pre>
+      <p>The program jumps directly to the <strong>third record</strong> (index 2).</p>
+
+      <h2>Applications of fseek()</h2>
+      <ul>
+        <li>Skip records</li>
+        <li>Read specific record</li>
+        <li>Modify records</li>
+        <li>Database systems</li>
+        <li>Binary file processing</li>
+      </ul>
+
+      <h2>2. ftell()</h2>
+      <h3>Definition</h3>
+      <p>The <code>ftell()</code> function returns the <strong>current position of the file pointer</strong>.</p>
+      <p>The returned value represents the number of bytes from the beginning of the file.</p>
+
+      <h2>Syntax</h2>
+      <pre><code class="language-c">long position;
+
+position = ftell(file_pointer);</code></pre>
+
+      <h2>Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("sample.txt", "r");
+
+    fgetc(fp);
+    fgetc(fp);
+    fgetc(fp);
+
+    printf("%ld", ftell(fp));
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">3</code></pre>
+      <p>The file pointer has moved <strong>3 bytes</strong> from the beginning.</p>
+
+      <h2>Example with fseek()</h2>
+      <pre><code class="language-c">FILE *fp;
+
+fp = fopen("sample.txt", "r");
+
+fseek(fp, 20, SEEK_SET);
+
+printf("%ld", ftell(fp));
+
+fclose(fp);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20</code></pre>
+
+      <h2>Applications of ftell()</h2>
+      <ul>
+        <li>Determine current file location</li>
+        <li>Calculate file size</li>
+        <li>Track reading progress</li>
+      </ul>
+
+      <h2>Finding File Size</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("sample.txt", "r");
+
+    fseek(fp, 0, SEEK_END);
+
+    printf("Size = %ld Bytes",
+            ftell(fp));
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>Example Output</p>
+      <pre><code class="language-none">Size = 245 Bytes</code></pre>
+
+      <h2>3. rewind()</h2>
+      <h3>Definition</h3>
+      <p>The <code>rewind()</code> function moves the file pointer back to the <strong>beginning of the file</strong>.</p>
+
+      <h2>Syntax</h2>
+      <pre><code class="language-c">rewind(file_pointer);</code></pre>
+
+      <h2>Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    char ch;
+
+    fp = fopen("sample.txt", "r");
+
+    while((ch = fgetc(fp)) != EOF)
+    {
+        putchar(ch);
+    }
+
+    rewind(fp);
+
+    printf("\n\nReading Again\n\n");
+
+    while((ch = fgetc(fp)) != EOF)
+    {
+        putchar(ch);
+    }
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>The file is read twice because <code>rewind()</code> resets the pointer to the beginning.</p>
+
+      <h2>Pointer Movement</h2>
+      <p>Before</p>
+      <pre><code class="language-none">+--------------------------+
+                        ^
+                     Pointer</code></pre>
+      <p>After</p>
+      <pre><code class="language-none">+--------------------------+
+^
+Pointer</code></pre>
+
+      <h2>Applications of rewind()</h2>
+      <ul>
+        <li>Read the file again</li>
+        <li>Reset file pointer</li>
+        <li>Reprocess data</li>
+        <li>File searching</li>
+      </ul>
+
+      <h2>Comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+            <th>Return Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>fseek()</code></td><td>Moves the file pointer</td><td><code>int</code></td></tr>
+          <tr><td><code>ftell()</code></td><td>Returns current pointer position</td><td><code>long</code></td></tr>
+          <tr><td><code>rewind()</code></td><td>Resets pointer to beginning</td><td><code>void</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Random Access Workflow</h2>
+      <pre><code class="language-none">Open File
+     │
+     ▼
+Move Pointer (fseek)
+     │
+     ▼
+Read / Write Data
+     │
+     ▼
+Check Position (ftell)
+     │
+     ▼
+Reset Pointer (rewind)
+     │
+     ▼
+Close File</code></pre>
+
+      <h2>Real-World Applications</h2>
+      <ul>
+        <li>Student Record Systems</li>
+        <li>Employee Databases</li>
+        <li>Banking Applications</li>
+        <li>Inventory Management</li>
+        <li>Library Management</li>
+        <li>Database Engines</li>
+        <li>Media File Processing</li>
+        <li>Binary Data Storage</li>
+      </ul>
+
+      <h2>Common Mistakes</h2>
+      <p>❌ Using <code>fseek()</code> on a <code>NULL</code> file pointer.</p>
+      <p>❌ Forgetting to open the file before using random access functions.</p>
+      <p>❌ Using the wrong origin (<code>SEEK_SET</code>, <code>SEEK_CUR</code>, <code>SEEK_END</code>).</p>
+      <p>❌ Ignoring the return value of <code>fseek()</code> (it returns <code>0</code> on success and a non-zero value on failure).</p>
+      <p>❌ Assuming <code>ftell()</code> always returns the file size; it only returns the <strong>current file pointer position</strong>.</p>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li><strong>Random access</strong> allows direct movement to any location in a file without reading all previous data.</li>
+        <li><code>fseek()</code> moves the file pointer to a specified byte position relative to the beginning, current position, or end of the file.</li>
+        <li><code>ftell()</code> returns the current position of the file pointer in bytes from the beginning of the file.</li>
+        <li><code>rewind()</code> resets the file pointer to the beginning of the file.</li>
+        <li>Random access is especially useful with <strong>binary files</strong>, where records have a fixed size and can be accessed efficiently.</li>
+        <li>These functions are widely used in database systems, record management, and large file processing applications.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

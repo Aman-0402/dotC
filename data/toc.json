@@ -214,6 +214,10 @@
         {
           "title": "Advanced C Concepts",
           "path": "lessons/unit5-advanced-c-concepts.html"
+        },
+        {
+          "title": "Random Access Files",
+          "path": "lessons/unit5-random-access-files.html"
         }
       ]
     }
