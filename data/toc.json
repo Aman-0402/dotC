@@ -218,6 +218,10 @@
         {
           "title": "Random Access Files",
           "path": "lessons/unit5-random-access-files.html"
+        },
+        {
+          "title": "Dynamic Memory Allocation (DMA)",
+          "path": "lessons/unit5-dynamic-memory-allocation.html"
         }
       ]
     }
