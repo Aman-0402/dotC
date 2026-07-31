@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merge Sort — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Merge Sort</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Merge Sort</h1>
+
+      <p>Merge Sort is an <strong>efficient, stable, comparison-based sorting algorithm</strong> based on the <strong>Divide and Conquer</strong> technique.</p>
+      <p>Unlike Bubble Sort, Selection Sort, and Insertion Sort, Merge Sort <strong>divides the array into smaller parts, sorts them recursively, and then merges them back into a sorted array.</strong></p>
+
+      <h2>What is Divide and Conquer?</h2>
+      <p><strong>Divide and Conquer</strong> is an algorithm design technique that solves a problem in three steps:</p>
+      <ol>
+        <li><strong>Divide</strong> → Split the problem into smaller subproblems.</li>
+        <li><strong>Conquer</strong> → Solve each subproblem recursively.</li>
+        <li><strong>Combine</strong> → Merge the solutions into the final answer.</li>
+      </ol>
+      <p>Merge Sort is one of the best examples of this technique.</p>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine you have a stack of exam papers.</p>
+      <p>Instead of sorting all 100 papers together:</p>
+      <ul>
+        <li>Divide them into two piles of 50.</li>
+        <li>Divide each pile into 25.</li>
+        <li>Continue dividing until each pile has only one paper.</li>
+        <li>Now merge the smaller sorted piles into larger sorted piles.</li>
+        <li>Finally, all papers become sorted.</li>
+      </ul>
+      <p>This is exactly how Merge Sort works.</p>
+
+      <h2>How Merge Sort Works</h2>
+      <p>Consider the array:</p>
+      <pre><code class="language-none">38 27 43 3 9 82 10</code></pre>
+
+      <h3>Step 1: Divide</h3>
+      <p>Split the array into two halves.</p>
+      <pre><code class="language-none">38 27 43 3      9 82 10</code></pre>
+      <p>Again divide.</p>
+      <pre><code class="language-none">38 27     43 3      9 82     10</code></pre>
+      <p>Continue until every subarray has one element.</p>
+      <pre><code class="language-none">38 27 43 3 9 82 10
+│  │  │ │ │ │ │</code></pre>
+      <p>Each single element is already sorted.</p>
+
+      <h2>Step 2: Merge</h2>
+      <p>Merge adjacent subarrays in sorted order.</p>
+      <pre><code class="language-none">38   27
+↓
+27 38</code></pre>
+      <pre><code class="language-none">43   3
+↓
+3 43</code></pre>
+      <pre><code class="language-none">9   82
+↓
+9 82</code></pre>
+      <pre><code class="language-none">10</code></pre>
+
+      <p>Merge again.</p>
+      <pre><code class="language-none">27 38      3 43
+↓
+3 27 38 43</code></pre>
+      <pre><code class="language-none">9 82      10
+↓
+9 10 82</code></pre>
+
+      <h3>Final Merge</h3>
+      <pre><code class="language-none">3 27 38 43
+
+9 10 82</code></pre>
+      <p>↓</p>
+      <pre><code class="language-none">3 9 10 27 38 43 82</code></pre>
+      <p>Sorted!</p>
+
+      <h2>Merge Sort Visualization</h2>
+      <pre><code class="language-none">               38 27 43 3 9 82 10
+                /               \
+        38 27 43 3          9 82 10
+         /      \            /    \
+      38 27    43 3       9 82    10
+      /  \      / \       / \
+    38 27    43  3      9  82
+
+Merge
+
+38 27 → 27 38
+43 3  → 3 43
+9 82  → 9 82
+
+↓
+
+27 38 + 3 43
+
+↓
+
+3 27 38 43
+
+↓
+
+9 10 82
+
+↓
+
+3 9 10 27 38 43 82</code></pre>
+
+      <h2>Try It Yourself</h2>
+      <div class="viz">
+        <div class="viz-bars" id="viz-bars"></div>
+        <p class="viz-caption" id="viz-caption">Ready — press Play or Step to begin.</p>
+        <input type="range" class="viz-slider" id="viz-slider" min="0" value="0" step="1" />
+        <div class="viz-controls">
+          <button id="viz-shuffle" type="button">Shuffle</button>
+          <button id="viz-play" type="button">Play</button>
+          <button id="viz-step" type="button">Step</button>
+          <button id="viz-reset" type="button">Reset</button>
+        </div>
+      </div>
+
+      <h2>Merge Sort Algorithm</h2>
+      <pre><code class="language-none">MergeSort(array)
+
+If array has one element
+
+    Return
+
+Find middle
+
+Divide into left and right halves
+
+MergeSort(left)
+
+MergeSort(right)
+
+Merge(left, right)</code></pre>
+
+      <h2>Merge Algorithm</h2>
+      <pre><code class="language-none">Compare first elements of both arrays
+
+Take the smaller element
+
+Move to next element
+
+Repeat until one array finishes
+
+Copy remaining elements</code></pre>
+
+      <h2>C Program</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void merge(int arr[], int left, int mid, int right)
+{
+    int i, j, k;
+
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    int L[n1], R[n2];
+
+    for(i = 0; i &lt; n1; i++)
+        L[i] = arr[left + i];
+
+    for(j = 0; j &lt; n2; j++)
+        R[j] = arr[mid + 1 + j];
+
+    i = 0;
+    j = 0;
+    k = left;
+
+    while(i &lt; n1 &amp;&amp; j &lt; n2)
+    {
+        if(L[i] &lt;= R[j])
+            arr[k++] = L[i++];
+        else
+            arr[k++] = R[j++];
+    }
+
+    while(i &lt; n1)
+        arr[k++] = L[i++];
+
+    while(j &lt; n2)
+        arr[k++] = R[j++];
+}
+
+void mergeSort(int arr[], int left, int right)
+{
+    if(left &lt; right)
+    {
+        int mid = left + (right - left) / 2;
+
+        mergeSort(arr, left, mid);
+
+        mergeSort(arr, mid + 1, right);
+
+        merge(arr, left, mid, right);
+    }
+}
+
+int main()
+{
+    int arr[] = {38, 27, 43, 3, 9, 82, 10};
+
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    mergeSort(arr, 0, n - 1);
+
+    printf("Sorted Array:\n");
+
+    for(int i = 0; i &lt; n; i++)
+        printf("%d ", arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">Sorted Array:
+3 9 10 27 38 43 82</code></pre>
+
+      <h2>Code Explanation</h2>
+
+      <h3>Recursive Function</h3>
+      <pre><code class="language-c">mergeSort(arr, left, right);</code></pre>
+      <p>Divides the array until only one element remains.</p>
+
+      <h3>Middle Index</h3>
+      <pre><code class="language-c">int mid = left + (right - left)/2;</code></pre>
+      <p>Finds the middle safely without integer overflow.</p>
+
+      <h3>Recursive Calls</h3>
+      <pre><code class="language-c">mergeSort(left);
+mergeSort(right);</code></pre>
+      <p>Sort both halves independently.</p>
+
+      <h3>Merge Function</h3>
+      <pre><code class="language-c">merge(left,right);</code></pre>
+      <p>Combines the two sorted halves into one sorted array.</p>
+
+      <h2>Time Complexity</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Best Case</td><td><strong>O(n log n)</strong></td></tr>
+          <tr><td>Average Case</td><td><strong>O(n log n)</strong></td></tr>
+          <tr><td>Worst Case</td><td><strong>O(n log n)</strong></td></tr>
+        </tbody>
+      </table>
+      <p>Unlike Bubble or Selection Sort, Merge Sort performs consistently well in every case.</p>
+
+      <h2>Space Complexity</h2>
+      <pre><code class="language-none">O(n)</code></pre>
+      <p>Merge Sort requires an additional temporary array while merging.</p>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Fast for large datasets.</li>
+        <li>Stable sorting algorithm.</li>
+        <li>Predictable performance (<strong>O(n log n)</strong>).</li>
+        <li>Works well with linked lists.</li>
+        <li>Ideal for external sorting (large files stored on disk).</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Requires extra memory (<strong>O(n)</strong>).</li>
+        <li>Recursive implementation increases function call overhead.</li>
+        <li>Slower than Quick Sort for many in-memory datasets due to additional memory operations.</li>
+      </ul>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Large database sorting.</li>
+        <li>External sorting (files too large for RAM).</li>
+        <li>Linked list sorting.</li>
+        <li>Parallel processing.</li>
+        <li>Used in many standard library implementations.</li>
+      </ul>
+
+      <h2>Bubble vs Selection vs Insertion vs Merge Sort</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Bubble</th>
+            <th>Selection</th>
+            <th>Insertion</th>
+            <th>Merge</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Best Case</td><td>O(n)</td><td>O(n²)</td><td>O(n)</td><td>O(n log n)</td></tr>
+          <tr><td>Average Case</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(n log n)</td></tr>
+          <tr><td>Worst Case</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(n log n)</td></tr>
+          <tr><td>Stable</td><td>Yes</td><td>No</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>In-place</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+          <tr><td>Extra Memory</td><td>O(1)</td><td>O(1)</td><td>O(1)</td><td>O(n)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>Uses the <strong>Divide and Conquer</strong> technique.</li>
+        <li>Recursively divides the array into halves.</li>
+        <li>Merges sorted halves into a fully sorted array.</li>
+        <li>Stable sorting algorithm.</li>
+        <li>Time Complexity is <strong>O(n log n)</strong> in all cases.</li>
+        <li>Space Complexity is <strong>O(n)</strong> because of temporary arrays.</li>
+        <li>Preferred for large datasets where stable sorting is required.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+  <script>
+    (function () {
+      var initialArray = [38, 27, 43, 3, 9, 82, 10];
+
+      function generateSteps(startArray) {
+        var a = startArray.slice();
+        var steps = [];
+
+        function mergeRange(left, mid, right) {
+          var L = a.slice(left, mid + 1);
+          var R = a.slice(mid + 1, right + 1);
+          var i = 0;
+          var j = 0;
+          var k = left;
+
+          while (i < L.length && j < R.length) {
+            steps.push({
+              type: 'compare',
+              indices: [left + i, mid + 1 + j],
+              caption: 'Compare ' + L[i] + ' and ' + R[j],
+              array: a.slice()
+            });
+
+            if (L[i] <= R[j]) {
+              a[k] = L[i];
+              steps.push({
+                type: 'write',
+                indices: [k],
+                caption: 'Write ' + L[i] + ' at index ' + k,
+                array: a.slice()
+              });
+              i++;
+            } else {
+              a[k] = R[j];
+              steps.push({
+                type: 'write',
+                indices: [k],
+                caption: 'Write ' + R[j] + ' at index ' + k,
+                array: a.slice()
+              });
+              j++;
+            }
+            k++;
+          }
+
+          while (i < L.length) {
+            a[k] = L[i];
+            steps.push({
+              type: 'write',
+              indices: [k],
+              caption: 'Write ' + L[i] + ' at index ' + k,
+              array: a.slice()
+            });
+            i++;
+            k++;
+          }
+
+          while (j < R.length) {
+            a[k] = R[j];
+            steps.push({
+              type: 'write',
+              indices: [k],
+              caption: 'Write ' + R[j] + ' at index ' + k,
+              array: a.slice()
+            });
+            j++;
+            k++;
+          }
+
+          var rangeIndices = [];
+          for (var idx = left; idx <= right; idx++) {
+            rangeIndices.push(idx);
+          }
+          steps.push({
+            type: 'markSorted',
+            indices: rangeIndices,
+            caption: 'Indices ' + left + ' to ' + right + ' are now merged and sorted',
+            array: a.slice()
+          });
+        }
+
+        function mergeSortRange(left, right) {
+          if (left >= right) {
+            steps.push({
+              type: 'markSorted',
+              indices: [left],
+              caption: 'Single element at index ' + left + ' is trivially sorted',
+              array: a.slice()
+            });
+            return;
+          }
+
+          var mid = left + Math.floor((right - left) / 2);
+          mergeSortRange(left, mid);
+          mergeSortRange(mid + 1, right);
+          mergeRange(left, mid, right);
+        }
+
+        mergeSortRange(0, a.length - 1);
+        return steps;
+      }
+
+      function shuffleArray(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+        return arr;
+      }
+
+      var container = document.getElementById('viz-bars');
+      var caption = document.getElementById('viz-caption');
+      var slider = document.getElementById('viz-slider');
+      var shuffleBtn = document.getElementById('viz-shuffle');
+      var playBtn = document.getElementById('viz-play');
+      var stepBtn = document.getElementById('viz-step');
+      var resetBtn = document.getElementById('viz-reset');
+
+      if (!container) return;
+
+      var currentArray = initialArray.slice();
+      var steps = generateSteps(currentArray);
+      var stepIndex = 0;
+      var playing = false;
+      var playTimer = null;
+
+      function maxValue(arr) {
+        var m = arr[0];
+        for (var i = 1; i < arr.length; i++) {
+          if (arr[i] > m) m = arr[i];
+        }
+        return m;
+      }
+
+      function sortedIndicesUpTo(idx) {
+        var sorted = {};
+        for (var i = 0; i <= idx; i++) {
+          if (steps[i].type === 'markSorted') {
+            steps[i].indices.forEach(function (n) {
+              sorted[n] = true;
+            });
+          }
+        }
+        return sorted;
+      }
+
+      function render() {
+        container.innerHTML = '';
+        var step = steps[stepIndex];
+        var arr = step ? step.array : currentArray;
+        var max = maxValue(arr);
+        var sorted = sortedIndicesUpTo(stepIndex);
+
+        arr.forEach(function (value, idx) {
+          var bar = document.createElement('div');
+          bar.className = 'viz-bar';
+          bar.style.height = (value / max * 100) + '%';
+
+          if (step && step.type !== 'markSorted' && step.indices.indexOf(idx) !== -1) {
+            bar.classList.add('viz-bar--comparing');
+          }
+
+          if (sorted[idx]) {
+            bar.classList.add('viz-bar--sorted');
+          }
+
+          var label = document.createElement('span');
+          label.textContent = value;
+          bar.appendChild(label);
+
+          container.appendChild(bar);
+        });
+
+        caption.textContent = step ? step.caption : 'Ready — press Play or Step to begin.';
+        slider.value = stepIndex;
+        stepBtn.disabled = stepIndex >= steps.length - 1;
+
+        if (stepIndex >= steps.length - 1) {
+          pause();
+        }
+      }
+
+      function goToStep(idx) {
+        stepIndex = Math.max(0, Math.min(idx, steps.length - 1));
+        render();
+      }
+
+      function play() {
+        if (playing) return;
+        playing = true;
+        playBtn.textContent = 'Pause';
+        playTimer = setInterval(function () {
+          if (stepIndex >= steps.length - 1) {
+            pause();
+            return;
+          }
+          goToStep(stepIndex + 1);
+        }, 700);
+      }
+
+      function pause() {
+        playing = false;
+        playBtn.textContent = 'Play';
+        if (playTimer) {
+          clearInterval(playTimer);
+          playTimer = null;
+        }
+      }
+
+      shuffleBtn.addEventListener('click', function () {
+        pause();
+        currentArray = shuffleArray(initialArray.slice());
+        steps = generateSteps(currentArray);
+        slider.max = steps.length - 1;
+        goToStep(0);
+      });
+
+      playBtn.addEventListener('click', function () {
+        if (playing) {
+          pause();
+        } else {
+          play();
+        }
+      });
+
+      stepBtn.addEventListener('click', function () {
+        pause();
+        goToStep(stepIndex + 1);
+      });
+
+      resetBtn.addEventListener('click', function () {
+        pause();
+        goToStep(0);
+      });
+
+      slider.addEventListener('input', function () {
+        pause();
+        goToStep(parseInt(slider.value, 10));
+      });
+
+      slider.max = steps.length - 1;
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -264,6 +264,10 @@
         {
           "title": "Insertion Sort",
           "path": "lessons/unit7-insertion-sort.html"
+        },
+        {
+          "title": "Merge Sort",
+          "path": "lessons/unit7-merge-sort.html"
         }
       ]
     }
