@@ -156,6 +156,10 @@
         {
           "title": "Looping Statements",
           "path": "lessons/unit3-looping-statements.html"
+        },
+        {
+          "title": "Arrays (One-Dimensional Arrays)",
+          "path": "lessons/unit3-one-dimensional-arrays.html"
         }
       ]
     }

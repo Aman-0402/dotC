@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arrays (One-Dimensional Arrays) — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 3 / Arrays (One-Dimensional Arrays)</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Arrays (One-Dimensional Arrays)</h1>
+
+      <h2>Introduction</h2>
+      <p>Until now, we have stored only <strong>one value</strong> in one variable.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <p>If we need to store the marks of <strong>100 students</strong>, creating 100 separate variables is impractical.</p>
+      <pre><code class="language-c">int marks1;
+int marks2;
+int marks3;
+...
+int marks100;</code></pre>
+      <p>This approach is:</p>
+      <ul>
+        <li>Time-consuming</li>
+        <li>Difficult to manage</li>
+        <li>Difficult to process using loops</li>
+      </ul>
+      <p>To solve this problem, C provides <strong>Arrays</strong>.</p>
+
+      <h2>What is an Array?</h2>
+      <p>An <strong>Array</strong> is a collection of elements of the <strong>same data type</strong>, stored in <strong>contiguous (continuous) memory locations</strong>, and accessed using a <strong>single variable name</strong> with an <strong>index</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">Marks of 5 Students
+
+Marks
+ ┌────┬────┬────┬────┬────┐
+ │ 85 │ 72 │ 90 │ 65 │ 88 │
+ └────┴────┴────┴────┴────┘
+   0    1    2    3    4</code></pre>
+      <p>Here,</p>
+      <ul>
+        <li>Array Name = <code>marks</code></li>
+        <li>Total Elements = 5</li>
+        <li>Index starts from <strong>0</strong></li>
+      </ul>
+
+      <h2>Why Use Arrays?</h2>
+      <p>Without Array</p>
+      <pre><code class="language-c">int m1 = 80;
+int m2 = 75;
+int m3 = 90;
+int m4 = 88;
+int m5 = 95;</code></pre>
+      <p>With Array</p>
+      <pre><code class="language-c">int marks[5];</code></pre>
+      <p>Advantages:</p>
+      <ul>
+        <li>Less code</li>
+        <li>Easy to process with loops</li>
+        <li>Easy searching and sorting</li>
+        <li>Better memory organization</li>
+      </ul>
+
+      <h2>Characteristics of Arrays</h2>
+      <ul>
+        <li>Stores <strong>same type</strong> of data.</li>
+        <li>Elements are stored in <strong>contiguous memory</strong>.</li>
+        <li>Uses a <strong>single variable name</strong>.</li>
+        <li>Elements are accessed using an <strong>index</strong>.</li>
+        <li>Size is fixed after declaration.</li>
+      </ul>
+
+      <h2>Memory Representation</h2>
+      <p>Suppose</p>
+      <pre><code class="language-c">int marks[5];</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Array Name : marks
+
+Index
+
+      0      1      2      3      4
+
+     ┌────┬────┬────┬────┬────┐
+     │    │    │    │    │    │
+     └────┴────┴────┴────┴────┘</code></pre>
+      <p>If integers occupy 4 bytes,</p>
+      <pre><code class="language-none">Address
+
+1000
+1004
+1008
+1012
+1016</code></pre>
+      <p>Each element occupies equal memory.</p>
+
+      <h2>One-Dimensional Array</h2>
+      <p>A <strong>One-Dimensional Array (1D Array)</strong> stores data in a <strong>single row</strong>.</p>
+      <p>Example</p>
+      <pre><code class="language-none">Numbers
+
+10 20 30 40 50</code></pre>
+
+      <h2>Declaration of Array</h2>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">data_type array_name[size];</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">int marks[5];
+
+float salary[10];
+
+char name[20];</code></pre>
+      <p>Explanation</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Part</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>int</td><td>Data Type</td></tr>
+          <tr><td>marks</td><td>Array Name</td></tr>
+          <tr><td>5</td><td>Number of Elements</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Valid Declarations</h2>
+      <pre><code class="language-c">int a[10];
+
+float price[50];
+
+char name[30];
+
+double value[15];</code></pre>
+
+      <h2>Invalid Declarations</h2>
+      <pre><code class="language-c">int marks[];</code></pre>
+      <p>Size missing.</p>
+      <pre><code class="language-c">int 5marks[10];</code></pre>
+      <p>Variable name cannot start with a number.</p>
+      <pre><code class="language-c">int marks[-5];</code></pre>
+      <p>Negative size is not allowed.</p>
+
+      <h2>Initialization of Array</h2>
+      <p>Values can be assigned during declaration.</p>
+
+      <h3>Method 1</h3>
+      <pre><code class="language-c">int marks[5] = {80,70,90,60,85};</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Index
+
+0   1   2   3   4
+
+80 70 90 60 85</code></pre>
+
+      <h3>Method 2</h3>
+      <p>Compiler counts the size automatically.</p>
+      <pre><code class="language-c">int marks[] = {10,20,30,40,50};</code></pre>
+      <p>Size becomes <strong>5</strong>.</p>
+
+      <h3>Method 3</h3>
+      <p>Partial Initialization</p>
+      <pre><code class="language-c">int arr[5] = {10,20};</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">10
+20
+0
+0
+0</code></pre>
+      <p>Remaining elements become <strong>0</strong>.</p>
+
+      <h3>Method 4</h3>
+      <p>Initialize all elements to zero.</p>
+      <pre><code class="language-c">int arr[5] = {0};</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">0 0 0 0 0</code></pre>
+
+      <h2>Indexing</h2>
+      <p>Each array element has an <strong>index</strong>.</p>
+      <p>Index always starts from <strong>0</strong>.</p>
+      <pre><code class="language-none">marks
+
+┌────┬────┬────┬────┬────┐
+│ 80 │ 70 │ 90 │ 60 │ 85 │
+└────┴────┴────┴────┴────┘
+
+  0    1    2    3    4</code></pre>
+      <p>Accessing Elements</p>
+      <pre><code class="language-c">marks[0]
+
+marks[1]
+
+marks[2]</code></pre>
+
+      <h2>Accessing Array Elements</h2>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int marks[5] = {80,70,90,60,85};
+
+    printf("%d\n", marks[0]);
+    printf("%d\n", marks[3]);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">80
+60</code></pre>
+
+      <h2>Modifying Array Elements</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int marks[5] = {80,70,90,60,85};
+
+    marks[2] = 100;
+
+    printf("%d", marks[2]);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">100</code></pre>
+
+      <h2>Input in Array</h2>
+      <p>Using Loop</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[5];
+    int i;
+
+    printf("Enter 5 numbers:\n");
+
+    for(i = 0; i &lt; 5; i++)
+    {
+        scanf("%d", &amp;arr[i]);
+    }
+
+    return 0;
+}</code></pre>
+
+      <h2>Output from Array</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[5] = {5,10,15,20,25};
+    int i;
+
+    for(i = 0; i &lt; 5; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">5 10 15 20 25</code></pre>
+
+      <h2>Array Operations</h2>
+      <p>Arrays support several common operations.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Operation</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Traversing</td><td>Visit every element</td></tr>
+          <tr><td>Insertion</td><td>Add an element (manual shifting required)</td></tr>
+          <tr><td>Deletion</td><td>Remove an element (manual shifting required)</td></tr>
+          <tr><td>Searching</td><td>Find an element</td></tr>
+          <tr><td>Updating</td><td>Modify an element</td></tr>
+          <tr><td>Sorting</td><td>Arrange elements</td></tr>
+          <tr><td>Merging</td><td>Combine two arrays</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Traversing an Array</h2>
+      <p>Traversing means visiting every element once.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[5] = {2,4,6,8,10};
+    int i;
+
+    for(i = 0; i &lt; 5; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">2 4 6 8 10</code></pre>
+
+      <h2>Updating an Element</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[3] = {10,20,30};
+
+    arr[1] = 50;
+
+    printf("%d", arr[1]);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">50</code></pre>
+
+      <h2>Searching an Element</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[5] = {10,20,30,40,50};
+    int i, key = 30;
+
+    for(i = 0; i &lt; 5; i++)
+    {
+        if(arr[i] == key)
+        {
+            printf("Found at Index %d", i);
+        }
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Found at Index 2</code></pre>
+
+      <h2>Insertion (Concept)</h2>
+      <p>Suppose</p>
+      <pre><code class="language-none">Before
+
+10 20 40 50</code></pre>
+      <p>Insert <strong>30</strong> at index <strong>2</strong></p>
+      <pre><code class="language-none">Shift Right
+
+10 20 40 50
+
+↓
+
+10 20 40 40
+
+↓
+
+10 20 30 40 50</code></pre>
+
+      <h2>Deletion (Concept)</h2>
+      <p>Suppose</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>Delete <strong>30</strong></p>
+      <pre><code class="language-none">Shift Left
+
+10 20 40 50</code></pre>
+
+      <h2>Common Array Programs</h2>
+
+      <h3>Program 1</h3>
+      <p>Print all elements.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[5] = {5,10,15,20,25};
+    int i;
+
+    for(i = 0; i &lt; 5; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">5 10 15 20 25</code></pre>
+
+      <h3>Program 2</h3>
+      <p>Find Sum of Elements.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[5] = {10,20,30,40,50};
+    int sum = 0, i;
+
+    for(i = 0; i &lt; 5; i++)
+    {
+        sum += arr[i];
+    }
+
+    printf("Sum = %d", sum);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Sum = 150</code></pre>
+
+      <h3>Program 3</h3>
+      <p>Find Average.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[5] = {10,20,30,40,50};
+    int i, sum = 0;
+    float avg;
+
+    for(i = 0; i &lt; 5; i++)
+    {
+        sum += arr[i];
+    }
+
+    avg = (float)sum / 5;
+
+    printf("Average = %.2f", avg);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Average = 30.00</code></pre>
+
+      <h3>Program 4</h3>
+      <p>Find Largest Element.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[5] = {20,45,15,80,35};
+    int i, max;
+
+    max = arr[0];
+
+    for(i = 1; i &lt; 5; i++)
+    {
+        if(arr[i] > max)
+        {
+            max = arr[i];
+        }
+    }
+
+    printf("Largest = %d", max);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Largest = 80</code></pre>
+
+      <h3>Program 5</h3>
+      <p>Find Smallest Element.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[5] = {20,45,15,80,35};
+    int i, min;
+
+    min = arr[0];
+
+    for(i = 1; i &lt; 5; i++)
+    {
+        if(arr[i] &lt; min)
+        {
+            min = arr[i];
+        }
+    }
+
+    printf("Smallest = %d", min);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Smallest = 15</code></pre>
+
+      <h3>Program 6</h3>
+      <p>Reverse an Array.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[5] = {10,20,30,40,50};
+    int i;
+
+    for(i = 4; i >= 0; i--)
+    {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">50 40 30 20 10</code></pre>
+
+      <h2>Common Mistakes</h2>
+
+      <h3>Accessing an Invalid Index</h3>
+      <p>❌ Incorrect</p>
+      <pre><code class="language-c">int arr[5];
+
+printf("%d", arr[5]);</code></pre>
+      <p>Valid indices are <code>0</code> to <code>4</code>. Accessing <code>arr[5]</code> is <strong>out of bounds</strong> and results in <strong>undefined behavior</strong>.</p>
+
+      <h3>Using a Negative Index</h3>
+      <p>❌ Incorrect</p>
+      <pre><code class="language-c">arr[-1];</code></pre>
+      <p>Negative indices are not valid in C.</p>
+
+      <h3>Exceeding Array Size</h3>
+      <p>❌ Incorrect</p>
+      <pre><code class="language-c">int arr[3] = {1,2,3,4};</code></pre>
+      <p>Too many initializers for the declared array size.</p>
+
+      <h2>Advantages of Arrays</h2>
+      <ul>
+        <li>Store multiple values using one variable.</li>
+        <li>Easy to process with loops.</li>
+        <li>Faster access using indices.</li>
+        <li>Efficient memory usage due to contiguous storage.</li>
+        <li>Useful for sorting, searching, and other algorithms.</li>
+      </ul>
+
+      <h2>Limitations of Arrays</h2>
+      <ul>
+        <li>Fixed size after declaration.</li>
+        <li>Can store only one data type.</li>
+        <li>Insertion and deletion require shifting elements.</li>
+        <li>Accessing an invalid index causes undefined behavior.</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>An <strong>array</strong> stores multiple values of the same data type in contiguous memory locations.</li>
+        <li>A <strong>one-dimensional array</strong> represents data in a single sequence and is declared using <code>data_type array_name[size];</code>.</li>
+        <li>Array elements are accessed using <strong>zero-based indexing</strong>.</li>
+        <li>Common operations include <strong>traversing, searching, updating, insertion, deletion, sorting, and merging</strong>.</li>
+        <li>Loops are commonly used to process arrays efficiently.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
