@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recursion Tree — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Recursion Tree</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Recursion Tree</h1>
+
+      <p>A <strong>Recursion Tree</strong> is a <strong>tree-like diagram</strong> that represents how a recursive function calls itself.</p>
+      <p>It helps us understand:</p>
+      <ul>
+        <li>How recursive calls are generated.</li>
+        <li>The order in which functions are executed.</li>
+        <li>The number of recursive calls.</li>
+        <li>Time complexity analysis.</li>
+      </ul>
+      <p>A recursion tree is one of the easiest ways to visualize recursion.</p>
+
+      <h2>Why Do We Need a Recursion Tree?</h2>
+      <p>Suppose we call:</p>
+      <pre><code class="language-c">factorial(5);</code></pre>
+      <p>Instead of imagining many function calls, we can draw them as a tree.</p>
+      <p>A recursion tree makes it easier to:</p>
+      <ul>
+        <li>Visualize recursive execution.</li>
+        <li>Count the number of function calls.</li>
+        <li>Analyze algorithm efficiency.</li>
+      </ul>
+
+      <h2>Example 1: Factorial</h2>
+      <p>Recursive function:</p>
+      <pre><code class="language-c">int factorial(int n)
+{
+    if(n == 0)
+        return 1;
+
+    return n * factorial(n - 1);
+}</code></pre>
+      <p>Call:</p>
+      <pre><code class="language-c">factorial(5);</code></pre>
+
+      <h3>Recursion Tree</h3>
+      <pre><code class="language-none">factorial(5)
+      │
+      ▼
+factorial(4)
+      │
+      ▼
+factorial(3)
+      │
+      ▼
+factorial(2)
+      │
+      ▼
+factorial(1)
+      │
+      ▼
+factorial(0)</code></pre>
+      <p>Notice that each function makes <strong>only one recursive call</strong>, so the recursion tree is actually a <strong>straight chain</strong>.</p>
+
+      <h3>Returning Phase</h3>
+      <p>Once the base case is reached:</p>
+      <pre><code class="language-none">factorial(0) = 1
+
+↓
+
+factorial(1) = 1 × 1 = 1
+
+↓
+
+factorial(2) = 2 × 1 = 2
+
+↓
+
+factorial(3) = 3 × 2 = 6
+
+↓
+
+factorial(4) = 4 × 6 = 24
+
+↓
+
+factorial(5) = 5 × 24 = 120</code></pre>
+
+      <h2>Example 2: Sum of N Numbers</h2>
+      <pre><code class="language-c">int sum(int n)
+{
+    if(n == 0)
+        return 0;
+
+    return n + sum(n-1);
+}</code></pre>
+      <p>Call:</p>
+      <pre><code class="language-c">sum(4);</code></pre>
+      <p>Recursion Tree:</p>
+      <pre><code class="language-none">sum(4)
+  │
+  ▼
+sum(3)
+  │
+  ▼
+sum(2)
+  │
+  ▼
+sum(1)
+  │
+  ▼
+sum(0)</code></pre>
+      <p>Returning:</p>
+      <pre><code class="language-none">sum(0)=0
+
+↓
+
+sum(1)=1
+
+↓
+
+sum(2)=3
+
+↓
+
+sum(3)=6
+
+↓
+
+sum(4)=10</code></pre>
+      <p>Again, only <strong>one recursive call</strong> is made each time.</p>
+
+      <h2>Example 3: Fibonacci Recursion Tree</h2>
+      <p>Recursive function:</p>
+      <pre><code class="language-c">int fib(int n)
+{
+    if(n &lt;= 1)
+        return n;
+
+    return fib(n-1) + fib(n-2);
+}</code></pre>
+      <p>Call:</p>
+      <pre><code class="language-c">fib(5);</code></pre>
+      <p>Recursion Tree:</p>
+      <pre><code class="language-none">                    fib(5)
+                  /        \
+             fib(4)       fib(3)
+            /     \       /     \
+        fib(3) fib(2) fib(2) fib(1)
+        /   \    / \    / \
+   fib(2) fib(1)1  0   1   0
+    / \
+   1   0</code></pre>
+
+      <h2>Observation</h2>
+      <p>Look carefully.</p>
+      <pre><code class="language-none">fib(3)</code></pre>
+      <p>is calculated multiple times.</p>
+      <p>Also,</p>
+      <pre><code class="language-none">fib(2)</code></pre>
+      <p>is calculated several times.</p>
+      <p>This repeated computation makes recursive Fibonacci inefficient.</p>
+
+      <h2>Number of Calls</h2>
+      <p>For:</p>
+      <pre><code class="language-none">fib(5)</code></pre>
+      <p>Calls made include:</p>
+      <pre><code class="language-none">fib(5)
+
+fib(4)
+
+fib(3)
+
+fib(3)
+
+fib(2)
+
+fib(2)
+
+fib(2)
+
+fib(1)
+
+fib(1)
+
+fib(1)
+
+fib(0)
+
+fib(0)
+
+fib(0)</code></pre>
+      <p>Many calls are repeated.</p>
+
+      <h2>Time Complexity Using Recursion Tree</h2>
+
+      <h3>Factorial</h3>
+      <p>Tree:</p>
+      <pre><code class="language-none">5
+
+↓
+
+4
+
+↓
+
+3
+
+↓
+
+2
+
+↓
+
+1
+
+↓
+
+0</code></pre>
+      <p>Number of levels = <strong>n</strong></p>
+      <p>Work per level = <strong>O(1)</strong></p>
+      <p>Total Time:</p>
+      <pre><code class="language-none">O(n)</code></pre>
+
+      <h3>Sum of N Numbers</h3>
+      <p>Exactly the same.</p>
+      <pre><code class="language-none">O(n)</code></pre>
+
+      <h3>Fibonacci</h3>
+      <p>Tree branches into two recursive calls.</p>
+      <pre><code class="language-none">fib(n)
+
+↓
+
+fib(n-1)
+
+↓
+
+fib(n-2)</code></pre>
+      <p>The number of nodes grows exponentially.</p>
+      <p>Time Complexity:</p>
+      <pre><code class="language-none">O(2ⁿ)</code></pre>
+      <p>This is why the naive recursive Fibonacci algorithm is slow.</p>
+
+      <h3>Merge Sort Recursion Tree</h3>
+      <p>Array:</p>
+      <pre><code class="language-none">8 elements</code></pre>
+      <p>Tree:</p>
+      <pre><code class="language-none">                8
+             /     \
+            4       4
+          /  \    /   \
+         2    2  2     2
+        / \  / \/ \   / \
+       1 1 1 1 1 1 1 1</code></pre>
+
+      <h4>Levels</h4>
+      <pre><code class="language-none">Level 0 : 8
+
+Level 1 : 4 + 4
+
+Level 2 : 2 + 2 + 2 + 2
+
+Level 3 : 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1</code></pre>
+      <p>Each level processes <strong>n elements</strong>.</p>
+      <p>Number of levels:</p>
+      <pre><code class="language-none">log₂ n</code></pre>
+      <p>Total Time:</p>
+      <pre><code class="language-none">O(n log n)</code></pre>
+
+      <h3>Quick Sort (Best Case)</h3>
+      <p>Best-case recursion tree:</p>
+      <pre><code class="language-none">             n
+           /   \
+        n/2   n/2
+       / \     / \
+    n/4 n/4 n/4 n/4</code></pre>
+      <p>Levels:</p>
+      <pre><code class="language-none">log₂ n</code></pre>
+      <p>Work per level:</p>
+      <pre><code class="language-none">n</code></pre>
+      <p>Total:</p>
+      <pre><code class="language-none">O(n log n)</code></pre>
+
+      <h3>Quick Sort (Worst Case)</h3>
+      <p>Worst case:</p>
+      <pre><code class="language-none">n
+
+↓
+
+n-1
+
+↓
+
+n-2
+
+↓
+
+n-3</code></pre>
+      <p>Only one side contains elements.</p>
+      <p>Levels:</p>
+      <pre><code class="language-none">n</code></pre>
+      <p>Work:</p>
+      <pre><code class="language-none">n + (n-1) + (n-2)...
+
+=
+
+O(n²)</code></pre>
+
+      <h2>Advantages of Recursion Tree</h2>
+      <ul>
+        <li>Easy to visualize recursion.</li>
+        <li>Helps understand recursive execution.</li>
+        <li>Useful for analyzing time complexity.</li>
+        <li>Shows repeated computations.</li>
+        <li>Helps optimize recursive algorithms.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Large trees become difficult to draw.</li>
+        <li>Exponential trees consume a lot of space.</li>
+        <li>Complex for deeply nested recursive algorithms.</li>
+      </ul>
+
+      <h2>Common Algorithms Using Recursion Trees</h2>
+      <ul>
+        <li>Fibonacci</li>
+        <li>Merge Sort</li>
+        <li>Quick Sort</li>
+        <li>Binary Search</li>
+        <li>Tower of Hanoi</li>
+        <li>Divide and Conquer algorithms</li>
+      </ul>
+
+      <h2>Comparison of Recursion Trees</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Algorithm</th>
+            <th>Tree Shape</th>
+            <th>Time Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Factorial</td><td>Linear</td><td>O(n)</td></tr>
+          <tr><td>Sum of N Numbers</td><td>Linear</td><td>O(n)</td></tr>
+          <tr><td>Binary Search</td><td>Balanced</td><td>O(log n)</td></tr>
+          <tr><td>Merge Sort</td><td>Balanced</td><td>O(n log n)</td></tr>
+          <tr><td>Quick Sort (Best)</td><td>Balanced</td><td>O(n log n)</td></tr>
+          <tr><td>Quick Sort (Worst)</td><td>Linear</td><td>O(n²)</td></tr>
+          <tr><td>Fibonacci</td><td>Binary</td><td>O(2ⁿ)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>A <strong>Recursion Tree</strong> visually represents recursive function calls.</li>
+        <li>Each node represents a function call.</li>
+        <li>The tree grows until the <strong>base case</strong> is reached.</li>
+        <li>Linear recursion (e.g., Factorial) forms a chain of calls.</li>
+        <li>Binary recursion (e.g., Fibonacci) branches into two calls at each level.</li>
+        <li>Recursion trees are useful for understanding and analyzing recursive algorithms, especially their time complexity.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

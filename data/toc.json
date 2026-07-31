@@ -292,6 +292,10 @@
         {
           "title": "Recursive Functions",
           "path": "lessons/unit7-recursive-functions.html"
+        },
+        {
+          "title": "Recursion Tree",
+          "path": "lessons/unit7-recursion-tree.html"
         }
       ]
     }
