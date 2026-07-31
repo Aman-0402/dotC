@@ -103,6 +103,10 @@
         {
           "title": "Binding",
           "path": "lessons/unit2-binding.html"
+        },
+        {
+          "title": "Storage Classes",
+          "path": "lessons/unit2-storage-classes.html"
         }
       ]
     }

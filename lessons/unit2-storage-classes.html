@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Storage Classes — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Storage Classes</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Storage Classes</h1>
+
+      <p>Storage classes are one of the <strong>most important topics</strong> in C and are frequently asked in <strong>interviews, university exams, and competitive programming</strong>.</p>
+
+      <h2>What is a Storage Class?</h2>
+      <p>A <strong>storage class</strong> defines the properties of a variable or function, such as:</p>
+      <ul>
+        <li>Where it is stored in memory</li>
+        <li>Its scope (visibility)</li>
+        <li>Its lifetime (how long it exists)</li>
+        <li>Its linkage (whether it can be accessed from other files)</li>
+      </ul>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>A storage class specifies the scope, lifetime, memory location, and linkage of variables and functions in C.</strong></p>
+      </blockquote>
+
+      <h2>Why Do We Need Storage Classes?</h2>
+      <p>Suppose you have two variables:</p>
+      <pre><code class="language-c">int a = 10;</code></pre>
+      <pre><code class="language-c">static int b = 20;</code></pre>
+      <p>Although both store integers, they behave differently.</p>
+      <p>Questions like these are answered by storage classes:</p>
+      <ul>
+        <li>Where are they stored?</li>
+        <li>Who can access them?</li>
+        <li>How long do they exist?</li>
+        <li>Can another file use them?</li>
+      </ul>
+
+      <h2>Types of Storage Classes</h2>
+      <p>There are <strong>4 storage classes</strong> in C.</p>
+      <pre><code class="language-none">Storage Classes
+│
+├── auto
+├── register
+├── static
+└── extern</code></pre>
+
+      <h2>Storage Class Overview</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Storage Class</th>
+            <th>Scope</th>
+            <th>Lifetime</th>
+            <th>Default Value</th>
+            <th>Memory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>auto</code></td><td>Local</td><td>Function execution</td><td>Garbage (indeterminate)</td><td>Stack</td></tr>
+          <tr><td><code>register</code></td><td>Local</td><td>Function execution</td><td>Garbage (indeterminate)</td><td>CPU Register (if possible)</td></tr>
+          <tr><td><code>static</code></td><td>Local/Global</td><td>Entire program</td><td>0</td><td>Data Segment</td></tr>
+          <tr><td><code>extern</code></td><td>Global</td><td>Entire program</td><td>0</td><td>Data Segment</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Memory Layout of a C Program</h2>
+      <p>Before learning storage classes, understand where variables are stored.</p>
+      <pre><code class="language-none">+-------------------------+
+| Code (Text Segment)     |
++-------------------------+
+| Initialized Data        |
++-------------------------+
+| Uninitialized Data (BSS)|
++-------------------------+
+| Heap                    |
+| (Dynamic Memory)        |
++-------------------------+
+|                         |
+|     Free Memory         |
+|                         |
++-------------------------+
+| Stack                   |
+| (Local Variables)       |
++-------------------------+</code></pre>
+      <ul>
+        <li><strong>Stack</strong> → Local (<code>auto</code>) variables</li>
+        <li><strong>Heap</strong> → <code>malloc()</code>, <code>calloc()</code></li>
+        <li><strong>Data Segment</strong> → <code>static</code> and global variables</li>
+        <li><strong>Code Segment</strong> → Program instructions</li>
+      </ul>
+
+      <h2>1. auto Storage Class</h2>
+      <p><code>auto</code> is the <strong>default storage class</strong> for local variables.</p>
+      <p>You normally don't write it because the compiler assumes it automatically.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">auto int age;</code></pre>
+      <p>Equivalent to:</p>
+      <pre><code class="language-c">int age;</code></pre>
+
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    auto int x = 10;
+
+    printf("%d", x);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10</code></pre>
+
+      <h3>Memory</h3>
+      <pre><code class="language-none">main()
+
+Stack Memory
+
++-----------+
+| x = 10    |
++-----------+</code></pre>
+      <p>When <code>main()</code> finishes:</p>
+      <pre><code class="language-none">Stack Cleared
+
+x destroyed</code></pre>
+
+      <h3>Characteristics of <code>auto</code></h3>
+      <ul>
+        <li>Default for local variables</li>
+        <li>Stored in Stack Memory</li>
+        <li>Exists only while the function executes</li>
+        <li>Not accessible outside the function</li>
+      </ul>
+
+      <h2>2. register Storage Class</h2>
+      <p>The <code>register</code> keyword <strong>requests</strong> the compiler to store a variable in a <strong>CPU register</strong> instead of RAM for faster access.</p>
+      <blockquote>
+        <p><strong>Important:</strong> It is only a request. The compiler may ignore it if there are not enough CPU registers or if optimization decides otherwise.</p>
+      </blockquote>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">register int count;</code></pre>
+
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    register int i;
+
+    for(i = 1; i &lt;= 5; i++)
+    {
+        printf("%d ", i);
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h3>Characteristics of <code>register</code></h3>
+      <ul>
+        <li>Local scope</li>
+        <li>Function lifetime</li>
+        <li>Faster access (if stored in a CPU register)</li>
+        <li>Default value is indeterminate (garbage)</li>
+        <li>Address cannot normally be taken using <code>&amp;</code></li>
+      </ul>
+
+      <h3>Wrong Example</h3>
+      <pre><code class="language-c">register int x = 10;
+
+printf("%p", &amp;x);</code></pre>
+      <p>This is <strong>not allowed</strong> because a register variable may not have a memory address that can be accessed.</p>
+
+      <h2>3. static Storage Class</h2>
+      <p><code>static</code> is one of the most important storage classes.</p>
+      <p>A <code>static</code> variable:</p>
+      <ul>
+        <li>Is initialized only once.</li>
+        <li>Retains its value between function calls.</li>
+        <li>Exists throughout the program execution.</li>
+      </ul>
+
+      <h3>Static Local Variable</h3>
+      <h4>Example</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void counter()
+{
+    static int count = 0;
+
+    count++;
+
+    printf("%d\n", count);
+}
+
+int main()
+{
+    counter();
+    counter();
+    counter();
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1
+2
+3</code></pre>
+
+      <h4>Memory</h4>
+      <p>First call</p>
+      <pre><code class="language-none">count = 0
+
+↓
+
+count++
+
+↓
+
+1</code></pre>
+      <p>Second call</p>
+      <pre><code class="language-none">count already exists
+
+↓
+
+2</code></pre>
+      <p>Third call</p>
+      <pre><code class="language-none">count
+
+↓
+
+3</code></pre>
+      <p>The variable is <strong>not recreated</strong> every time.</p>
+
+      <h3>Compare with auto</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void counter()
+{
+    int count = 0;
+
+    count++;
+
+    printf("%d\n", count);
+}
+
+int main()
+{
+    counter();
+    counter();
+    counter();
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1
+1
+1</code></pre>
+      <p>Each function call creates a <strong>new local variable</strong>.</p>
+
+      <h3>Static Global Variable</h3>
+      <pre><code class="language-c">static int total = 100;</code></pre>
+      <p>This variable:</p>
+      <ul>
+        <li>Exists throughout the program.</li>
+        <li>Is accessible <strong>only within the current source file</strong> (internal linkage).</li>
+      </ul>
+
+      <h3>Characteristics of <code>static</code></h3>
+      <ul>
+        <li>Lifetime: Entire program</li>
+        <li>Default value: <code>0</code></li>
+        <li>Stored in Data Segment</li>
+        <li>Retains value between function calls</li>
+        <li>Can restrict visibility of global variables/functions to the current file</li>
+      </ul>
+
+      <h2>4. extern Storage Class</h2>
+      <p><code>extern</code> is used to declare a variable that is <strong>defined elsewhere</strong>.</p>
+      <p>It tells the compiler:</p>
+      <blockquote>
+        <p>"The actual variable exists in another place."</p>
+      </blockquote>
+
+      <h3>Example (Single File)</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int number = 100;
+
+int main()
+{
+    extern int number;
+
+    printf("%d", number);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">100</code></pre>
+
+      <h3>Multi-File Example</h3>
+      <h4>file1.c</h4>
+      <pre><code class="language-c">int marks = 95;</code></pre>
+      <h4>file2.c</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+extern int marks;
+
+int main()
+{
+    printf("%d", marks);
+
+    return 0;
+}</code></pre>
+      <p>Here:</p>
+      <ul>
+        <li><code>marks</code> is defined in <code>file1.c</code></li>
+        <li><code>extern</code> allows <code>file2.c</code> to use it</li>
+      </ul>
+
+      <h3>Characteristics of <code>extern</code></h3>
+      <ul>
+        <li>Refers to an existing global variable</li>
+        <li>Does not create new storage</li>
+        <li>Lifetime: Entire program</li>
+        <li>Default value: 0 (for the actual global variable if not explicitly initialized)</li>
+        <li>Stored in Data Segment</li>
+      </ul>
+
+      <h2>Comparison of All Storage Classes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>auto</th>
+            <th>register</th>
+            <th>static</th>
+            <th>extern</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Keyword</td><td><code>auto</code></td><td><code>register</code></td><td><code>static</code></td><td><code>extern</code></td></tr>
+          <tr><td>Scope</td><td>Local</td><td>Local</td><td>Local/Global</td><td>Global</td></tr>
+          <tr><td>Lifetime</td><td>Function</td><td>Function</td><td>Entire program</td><td>Entire program</td></tr>
+          <tr><td>Default Value</td><td>Indeterminate</td><td>Indeterminate</td><td>0</td><td>0 (for the defined global variable)</td></tr>
+          <tr><td>Memory</td><td>Stack</td><td>CPU Register (if possible)</td><td>Data Segment</td><td>Data Segment</td></tr>
+          <tr><td>Retains Value</td><td>❌ No</td><td>❌ No</td><td>✅ Yes</td><td>✅ Yes</td></tr>
+          <tr><td>Linkage</td><td>None</td><td>None</td><td>Internal (for global declarations)</td><td>External</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Scope vs Lifetime vs Linkage</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Scope</td><td>Where the variable can be accessed</td></tr>
+          <tr><td>Lifetime</td><td>How long the variable exists</td></tr>
+          <tr><td>Linkage</td><td>Whether it can be shared across source files</td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">static int x;</code></pre>
+      <ul>
+        <li>Scope → File</li>
+        <li>Lifetime → Entire program</li>
+        <li>Linkage → Internal</li>
+      </ul>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Expecting <code>auto</code> Variables to Remember Values</h3>
+      <pre><code class="language-c">void test()
+{
+    int x = 0;
+    x++;
+}</code></pre>
+      <p><code>x</code> becomes <code>1</code> every time the function is called because it is recreated on each call.</p>
+
+      <h3>2. Using <code>&amp;</code> with <code>register</code></h3>
+      <pre><code class="language-c">register int x;
+
+printf("%p", &amp;x);</code></pre>
+      <p>Not allowed.</p>
+
+      <h3>3. Forgetting <code>static</code> Preserves Values</h3>
+      <pre><code class="language-c">static int count;</code></pre>
+      <p>The value is <strong>not reset</strong> every time the function is called.</p>
+
+      <h3>4. Confusing <code>extern</code> with Variable Definition</h3>
+      <pre><code class="language-c">extern int x;</code></pre>
+      <p>This <strong>declares</strong> <code>x</code>; it does not create storage.</p>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is a storage class?</h3>
+      <p>A storage class specifies the scope, lifetime, memory location, and linkage of variables and functions.</p>
+
+      <h3>2. Name the four storage classes in C.</h3>
+      <ul>
+        <li><code>auto</code></li>
+        <li><code>register</code></li>
+        <li><code>static</code></li>
+        <li><code>extern</code></li>
+      </ul>
+
+      <h3>3. What is the difference between <code>auto</code> and <code>static</code>?</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>auto</th>
+            <th>static</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Created each function call</td><td>Created once</td></tr>
+          <tr><td>Destroyed when function ends</td><td>Exists for the entire program</td></tr>
+          <tr><td>Does not retain value</td><td>Retains value between calls</td></tr>
+        </tbody>
+      </table>
+
+      <h3>4. Why is <code>register</code> used?</h3>
+      <p>To request faster access by storing a variable in a CPU register when possible.</p>
+
+      <h3>5. What is the purpose of <code>extern</code>?</h3>
+      <p>It allows access to a global variable defined in another source file or another location in the program.</p>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define a storage class.</li>
+        <li>Explain the characteristics of each storage class.</li>
+        <li>Differentiate between <code>static</code> and <code>extern</code>.</li>
+        <li>Why can't you normally use <code>&amp;</code> with a <code>register</code> variable?</li>
+        <li>Explain the memory layout of a C program.</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Demonstrate <code>auto</code></h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    auto int x = 10;
+
+    printf("%d", x);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">10</code></pre>
+
+      <h4>Q2. Demonstrate <code>static</code></h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void counter()
+{
+    static int count = 0;
+    count++;
+    printf("%d\n", count);
+}
+
+int main()
+{
+    counter();
+    counter();
+    counter();
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">1
+2
+3</code></pre>
+
+      <h4>Q3. Demonstrate <code>extern</code></h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int total = 50;
+
+int main()
+{
+    extern int total;
+
+    printf("%d", total);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">50</code></pre>
+
+      <h2>Exam Tips</h2>
+      <ul>
+        <li>⭐ <strong><code>auto</code></strong> → Default local variable → <strong>Stack</strong></li>
+        <li>⭐ <strong><code>register</code></strong> → Fast access → <strong>CPU Register (if possible)</strong></li>
+        <li>⭐ <strong><code>static</code></strong> → Retains value → <strong>Entire Program</strong></li>
+        <li>⭐ <strong><code>extern</code></strong> → Uses a global variable defined elsewhere</li>
+        <li>⭐ Scope ≠ Lifetime ≠ Linkage</li>
+        <li>⭐ <code>static</code> is one of the <strong>most frequently asked interview topics</strong>.</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>Storage classes define <strong>scope, lifetime, memory location, and linkage</strong>.</li>
+        <li>C has <strong>four storage classes</strong>: <code>auto</code>, <code>register</code>, <code>static</code>, and <code>extern</code>.</li>
+        <li><code>auto</code> and <code>register</code> are local and exist only during function execution.</li>
+        <li><code>static</code> variables retain their values throughout the program and can have internal linkage.</li>
+        <li><code>extern</code> is used to access global variables defined elsewhere without allocating new storage.</li>
+        <li>Understanding storage classes is essential for writing efficient and maintainable C programs.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
