@@ -107,6 +107,19 @@
       </table>
       <p>Notice that after each pass, <strong>one largest unsorted element reaches its final position</strong>.</p>
 
+      <h2>Try It Yourself</h2>
+      <div class="viz">
+        <div class="viz-bars" id="viz-bars"></div>
+        <p class="viz-caption" id="viz-caption">Ready — press Play or Step to begin.</p>
+        <input type="range" class="viz-slider" id="viz-slider" min="0" value="0" step="1" />
+        <div class="viz-controls">
+          <button id="viz-shuffle" type="button">Shuffle</button>
+          <button id="viz-play" type="button">Play</button>
+          <button id="viz-step" type="button">Step</button>
+          <button id="viz-reset" type="button">Reset</button>
+        </div>
+      </div>
+
       <h2>Bubble Sort Algorithm</h2>
       <pre><code class="language-none">Start
 
@@ -288,5 +301,200 @@ int main()
   <script src="../js/theme.js"></script>
   <script src="../js/sidebar.js"></script>
   <script src="../js/nav.js"></script>
+  <script>
+    (function () {
+      var initialArray = [5, 3, 8, 4, 2];
+
+      function generateSteps(startArray) {
+        var a = startArray.slice();
+        var steps = [];
+        var n = a.length;
+
+        for (var i = 0; i < n - 1; i++) {
+          for (var j = 0; j < n - i - 1; j++) {
+            steps.push({
+              type: 'compare',
+              indices: [j, j + 1],
+              caption: 'Compare ' + a[j] + ' and ' + a[j + 1],
+              array: a.slice()
+            });
+
+            if (a[j] > a[j + 1]) {
+              var valJ = a[j];
+              var valJ1 = a[j + 1];
+              var temp = a[j];
+              a[j] = a[j + 1];
+              a[j + 1] = temp;
+              steps.push({
+                type: 'swap',
+                indices: [j, j + 1],
+                caption: 'Swap ' + valJ + ' and ' + valJ1,
+                array: a.slice()
+              });
+            }
+          }
+
+          steps.push({
+            type: 'markSorted',
+            indices: [n - 1 - i],
+            caption: 'Index ' + (n - 1 - i) + ' is now sorted',
+            array: a.slice()
+          });
+        }
+
+        steps.push({
+          type: 'markSorted',
+          indices: [0],
+          caption: 'Index 0 is now sorted',
+          array: a.slice()
+        });
+
+        return steps;
+      }
+
+      function shuffleArray(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+        return arr;
+      }
+
+      var container = document.getElementById('viz-bars');
+      var caption = document.getElementById('viz-caption');
+      var slider = document.getElementById('viz-slider');
+      var shuffleBtn = document.getElementById('viz-shuffle');
+      var playBtn = document.getElementById('viz-play');
+      var stepBtn = document.getElementById('viz-step');
+      var resetBtn = document.getElementById('viz-reset');
+
+      if (!container) return;
+
+      var currentArray = initialArray.slice();
+      var steps = generateSteps(currentArray);
+      var stepIndex = 0;
+      var playing = false;
+      var playTimer = null;
+
+      function maxValue(arr) {
+        var m = arr[0];
+        for (var i = 1; i < arr.length; i++) {
+          if (arr[i] > m) m = arr[i];
+        }
+        return m;
+      }
+
+      function sortedIndicesUpTo(idx) {
+        var sorted = {};
+        for (var i = 0; i <= idx; i++) {
+          if (steps[i].type === 'markSorted') {
+            steps[i].indices.forEach(function (n) {
+              sorted[n] = true;
+            });
+          }
+        }
+        return sorted;
+      }
+
+      function render() {
+        container.innerHTML = '';
+        var step = steps[stepIndex];
+        var arr = step ? step.array : currentArray;
+        var max = maxValue(arr);
+        var sorted = sortedIndicesUpTo(stepIndex);
+
+        arr.forEach(function (value, idx) {
+          var bar = document.createElement('div');
+          bar.className = 'viz-bar';
+          bar.style.height = (value / max * 100) + '%';
+
+          if (step && step.indices.indexOf(idx) !== -1) {
+            bar.classList.add('viz-bar--comparing');
+          }
+
+          if (sorted[idx]) {
+            bar.classList.add('viz-bar--sorted');
+          }
+
+          var label = document.createElement('span');
+          label.textContent = value;
+          bar.appendChild(label);
+
+          container.appendChild(bar);
+        });
+
+        caption.textContent = step ? step.caption : 'Ready — press Play or Step to begin.';
+        slider.value = stepIndex;
+        stepBtn.disabled = stepIndex >= steps.length - 1;
+
+        if (stepIndex >= steps.length - 1) {
+          pause();
+        }
+      }
+
+      function goToStep(idx) {
+        stepIndex = Math.max(0, Math.min(idx, steps.length - 1));
+        render();
+      }
+
+      function play() {
+        if (playing) return;
+        playing = true;
+        playBtn.textContent = 'Pause';
+        playTimer = setInterval(function () {
+          if (stepIndex >= steps.length - 1) {
+            pause();
+            return;
+          }
+          goToStep(stepIndex + 1);
+        }, 700);
+      }
+
+      function pause() {
+        playing = false;
+        playBtn.textContent = 'Play';
+        if (playTimer) {
+          clearInterval(playTimer);
+          playTimer = null;
+        }
+      }
+
+      shuffleBtn.addEventListener('click', function () {
+        pause();
+        currentArray = shuffleArray(initialArray.slice());
+        steps = generateSteps(currentArray);
+        slider.max = steps.length - 1;
+        goToStep(0);
+      });
+
+      playBtn.addEventListener('click', function () {
+        if (playing) {
+          pause();
+        } else {
+          play();
+        }
+      });
+
+      stepBtn.addEventListener('click', function () {
+        pause();
+        goToStep(stepIndex + 1);
+      });
+
+      resetBtn.addEventListener('click', function () {
+        pause();
+        goToStep(0);
+      });
+
+      slider.addEventListener('input', function () {
+        pause();
+        goToStep(parseInt(slider.value, 10));
+      });
+
+      slider.max = steps.length - 1;
+      render();
+    })();
+  </script>
 </body>
 </html>
