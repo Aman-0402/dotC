@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Numeric Data Types — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Numeric Data Types</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Numeric Data Types</h1>
+
+      <p>Numeric Data Types are used to store <strong>numbers</strong>. They are among the most frequently used data types in C because most programs perform mathematical calculations.</p>
+
+      <h2>What are Numeric Data Types?</h2>
+      <p>A <strong>Numeric Data Type</strong> is a data type that stores <strong>numerical values</strong>.</p>
+      <p>These values may be:</p>
+      <ul>
+        <li>Whole numbers (Integers)</li>
+        <li>Decimal numbers (Floating-point numbers)</li>
+      </ul>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>Numeric data types are data types that store numbers and allow arithmetic operations such as addition, subtraction, multiplication, and division.</strong></p>
+      </blockquote>
+
+      <h2>Why Do We Need Numeric Data Types?</h2>
+      <p>Imagine a program for a school.</p>
+      <p>You need to store:</p>
+      <ul>
+        <li>Student Age → 20</li>
+        <li>Marks → 95</li>
+        <li>Height → 172.5</li>
+        <li>Salary → 45000.75</li>
+      </ul>
+      <p>All of these are numbers, but not all are the same kind of number.</p>
+      <p>That's why C provides different numeric data types.</p>
+
+      <h2>Classification of Numeric Data Types</h2>
+      <pre><code class="language-none">Numeric Data Types
+│
+├── Integer Data Types
+│
+└── Floating-Point Data Types</code></pre>
+
+      <h2>1. Integer Data Types</h2>
+      <p>Integer data types store <strong>whole numbers</strong>.</p>
+      <p>Examples</p>
+      <pre><code class="language-none">10
+25
+0
+-100
+5000</code></pre>
+      <p>They <strong>cannot</strong> store decimal values.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+
+      <h2>2. Floating-Point Data Types</h2>
+      <p>Floating-point data types store <strong>decimal numbers</strong>.</p>
+      <p>Examples</p>
+      <pre><code class="language-none">3.14
+99.99
+0.001
+-15.75</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">float pi = 3.14;</code></pre>
+
+      <h2>Numeric Data Type Family</h2>
+      <pre><code class="language-none">                    Numeric Data Types
+                           │
+          ┌────────────────┴────────────────┐
+          │                                 │
+      Integer Types                 Floating Types
+          │                                 │
+      short int                      float
+      int                            double
+      long int                       long double
+      long long int</code></pre>
+
+      <h2>Integer Data Types</h2>
+      <p>The integer family includes:</p>
+      <pre><code class="language-none">short
+int
+long
+long long</code></pre>
+      <p>These differ mainly in:</p>
+      <ul>
+        <li>Memory size</li>
+        <li>Range of values</li>
+      </ul>
+      <p>Example</p>
+      <pre><code class="language-c">short int a = 10;
+int b = 100;
+long int c = 100000;
+long long int d = 1234567890123;</code></pre>
+
+      <h2>Floating-Point Data Types</h2>
+      <p>The floating-point family includes:</p>
+      <pre><code class="language-none">float
+double
+long double</code></pre>
+      <p>They differ mainly in:</p>
+      <ul>
+        <li>Precision</li>
+        <li>Range</li>
+        <li>Memory usage</li>
+      </ul>
+      <p>Example</p>
+      <pre><code class="language-c">float price = 99.95;
+double pi = 3.141592653589793;
+long double value = 12345.678901234567L;</code></pre>
+
+      <h2>Integer vs Floating-Point Numbers</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Integer</th>
+            <th>Floating Point</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Whole numbers</td><td>Decimal numbers</td></tr>
+          <tr><td>Faster calculations</td><td>Slightly slower</td></tr>
+          <tr><td>No fractional part</td><td>Fractional part allowed</td></tr>
+          <tr><td>Exact for integers</td><td>May have rounding errors</td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">int age = 20;
+float height = 5.9;</code></pre>
+
+      <h2>Examples</h2>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int marks = 95;
+
+    printf("%d", marks);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">95</code></pre>
+
+      <h3>Example 2</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    float temperature = 36.5;
+
+    printf("%.1f", temperature);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">36.5</code></pre>
+
+      <h3>Example 3</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    double pi = 3.141592653589793;
+
+    printf("%.15lf", pi);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">3.141592653589793</code></pre>
+
+      <h2>Signed and Unsigned Numbers</h2>
+      <p>Numeric types can be:</p>
+      <pre><code class="language-none">Signed
+Unsigned</code></pre>
+
+      <h3>Signed</h3>
+      <p>Stores:</p>
+      <ul>
+        <li>Positive numbers</li>
+        <li>Negative numbers</li>
+        <li>Zero</li>
+      </ul>
+      <p>Example</p>
+      <pre><code class="language-c">int temperature = -10;</code></pre>
+      <p>Possible values</p>
+      <pre><code class="language-none">-100
+-50
+0
+10
+100</code></pre>
+
+      <h3>Unsigned</h3>
+      <p>Stores:</p>
+      <ul>
+        <li>Only zero and positive numbers</li>
+      </ul>
+      <p>Example</p>
+      <pre><code class="language-c">unsigned int population = 500000;</code></pre>
+      <p>Possible values</p>
+      <pre><code class="language-none">0
+1
+100
+1000
+50000</code></pre>
+      <p>Negative values are not allowed.</p>
+
+      <h2>Memory Representation</h2>
+      <p>Program</p>
+      <pre><code class="language-c">int age = 20;
+float marks = 95.5;</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Address      Variable      Type       Value
+--------------------------------------------
+1000         age           int         20
+1004         marks         float       95.5</code></pre>
+
+      <h2>Typical Memory Sizes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Typical Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>short</td><td>2 bytes</td></tr>
+          <tr><td>int</td><td>4 bytes</td></tr>
+          <tr><td>long</td><td>4 or 8 bytes</td></tr>
+          <tr><td>long long</td><td>8 bytes</td></tr>
+          <tr><td>float</td><td>4 bytes</td></tr>
+          <tr><td>double</td><td>8 bytes</td></tr>
+          <tr><td>long double</td><td>16 bytes (platform-dependent)</td></tr>
+        </tbody>
+      </table>
+      <blockquote>
+        <p><strong>Note:</strong> Sizes are implementation-dependent. They may vary depending on the compiler and architecture.</p>
+      </blockquote>
+
+      <h2>Precision</h2>
+      <p>Precision means <strong>how many digits can be stored accurately</strong>.</p>
+      <p>Example</p>
+      <pre><code class="language-c">float value = 3.141592653589793;</code></pre>
+      <p>Stored approximately as</p>
+      <pre><code class="language-none">3.141593</code></pre>
+      <p>Using <code>double</code></p>
+      <pre><code class="language-c">double value = 3.141592653589793;</code></pre>
+      <p>Stored approximately as</p>
+      <pre><code class="language-none">3.141592653589793</code></pre>
+
+      <h2>Accuracy Comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Approximate Decimal Precision</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>float</td><td>6–7 digits</td></tr>
+          <tr><td>double</td><td>15–16 digits</td></tr>
+          <tr><td>long double</td><td>18+ digits (implementation-dependent)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Using <code>sizeof</code></h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("int = %zu\n", sizeof(int));
+    printf("float = %zu\n", sizeof(float));
+    printf("double = %zu\n", sizeof(double));
+    printf("long double = %zu\n", sizeof(long double));
+
+    return 0;
+}</code></pre>
+      <p><strong>Sample Output</strong></p>
+      <pre><code class="language-none">int = 4
+float = 4
+double = 8
+long double = 16</code></pre>
+
+      <h2>Choosing the Correct Numeric Type</h2>
+
+      <h3>Store Student Age</h3>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <p>Good choice because age is a whole number.</p>
+
+      <h3>Store Salary</h3>
+      <pre><code class="language-c">float salary = 25000.50;</code></pre>
+      <p>Good because salary includes decimals.</p>
+
+      <h3>Scientific Calculation</h3>
+      <pre><code class="language-c">double pi = 3.141592653589793;</code></pre>
+      <p>Better than <code>float</code> because it provides higher precision.</p>
+
+      <h3>Large Population Count</h3>
+      <pre><code class="language-c">long long population = 1450000000;</code></pre>
+      <p>Suitable for very large integer values.</p>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Using <code>int</code> for Decimal Numbers</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">int price = 99.95;</code></pre>
+      <p>Stored value</p>
+      <pre><code class="language-none">99</code></pre>
+      <p>The fractional part is discarded.</p>
+      <p>Correct</p>
+      <pre><code class="language-c">float price = 99.95;</code></pre>
+
+      <h3>2. Using <code>float</code> for High Precision</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">float pi = 3.141592653589793;</code></pre>
+      <p>Much of the precision is lost.</p>
+      <p>Better</p>
+      <pre><code class="language-c">double pi = 3.141592653589793;</code></pre>
+
+      <h3>3. Using <code>unsigned</code> for Negative Values</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">unsigned int temperature = -20;</code></pre>
+      <p>This produces unexpected results because unsigned types cannot represent negative numbers.</p>
+
+      <h3>4. Assuming Sizes Are Fixed</h3>
+      <p>Avoid assuming:</p>
+      <pre><code class="language-none">int = 4 bytes
+long = 8 bytes</code></pre>
+      <p>These sizes depend on the platform. Use <code>sizeof()</code> when exact sizes matter.</p>
+
+      <h2>Real-World Examples</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Application</th>
+            <th>Data Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Student Age</td><td><code>int</code></td></tr>
+          <tr><td>Bank Balance</td><td><code>double</code></td></tr>
+          <tr><td>Temperature</td><td><code>float</code></td></tr>
+          <tr><td>Population</td><td><code>long long</code></td></tr>
+          <tr><td>Product Quantity</td><td><code>unsigned int</code></td></tr>
+          <tr><td>Distance Measurement</td><td><code>double</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What are numeric data types?</h3>
+      <p>Numeric data types store numerical values and support arithmetic operations.</p>
+
+      <h3>2. What are the two main categories of numeric data types?</h3>
+      <ul>
+        <li>Integer data types</li>
+        <li>Floating-point data types</li>
+      </ul>
+
+      <h3>3. What is the difference between <code>int</code> and <code>float</code>?</h3>
+      <table>
+        <thead>
+          <tr>
+            <th><code>int</code></th>
+            <th><code>float</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Stores whole numbers</td><td>Stores decimal numbers</td></tr>
+          <tr><td>No fractional part</td><td>Fractional part allowed</td></tr>
+          <tr><td>Exact integer representation</td><td>Limited decimal precision</td></tr>
+        </tbody>
+      </table>
+
+      <h3>4. Why is <code>double</code> more accurate than <code>float</code>?</h3>
+      <p><code>double</code> uses more memory (typically 8 bytes), allowing it to store more significant digits.</p>
+
+      <h3>5. What is the purpose of <code>unsigned</code>?</h3>
+      <p><code>unsigned</code> allows only non-negative values, increasing the maximum positive range for the same memory size.</p>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define numeric data types.</li>
+        <li>Explain the difference between integer and floating-point data types.</li>
+        <li>What is precision?</li>
+        <li>Differentiate between <code>float</code> and <code>double</code>.</li>
+        <li>What is the purpose of <code>unsigned</code>?</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Store integer and floating-point values.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 20;
+    float height = 5.8;
+
+    printf("Age = %d\n", age);
+    printf("Height = %.1f\n", height);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Age = 20
+Height = 5.8</code></pre>
+
+      <h4>Q2. Display the sizes of numeric data types.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("short       : %zu bytes\n", sizeof(short));
+    printf("int         : %zu bytes\n", sizeof(int));
+    printf("long        : %zu bytes\n", sizeof(long));
+    printf("long long   : %zu bytes\n", sizeof(long long));
+    printf("float       : %zu bytes\n", sizeof(float));
+    printf("double      : %zu bytes\n", sizeof(double));
+
+    return 0;
+}</code></pre>
+
+      <h4>Q3. Demonstrate precision.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    float f = 3.141592653589793f;
+    double d = 3.141592653589793;
+
+    printf("Float  : %.15f\n", f);
+    printf("Double : %.15lf\n", d);
+
+    return 0;
+}</code></pre>
+      <p><strong>Sample Output</strong></p>
+      <pre><code class="language-none">Float  : 3.141592741012573
+Double : 3.141592653589793</code></pre>
+      <p>Notice that <code>double</code> retains much more precision than <code>float</code>.</p>
+
+      <h2>Exam Tips</h2>
+      <ul>
+        <li>⭐ <strong>Numeric data types</strong> are divided into <strong>Integer</strong> and <strong>Floating-Point</strong> types.</li>
+        <li>⭐ Use <strong><code>int</code></strong> for whole numbers and <strong><code>float</code>/<code>double</code></strong> for decimal numbers.</li>
+        <li>⭐ <strong><code>double</code></strong> provides higher precision than <strong><code>float</code></strong>.</li>
+        <li>⭐ <strong><code>unsigned</code></strong> types cannot represent negative values.</li>
+        <li>⭐ Use <strong><code>sizeof()</code></strong> to check the actual size of a type on your system.</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>Numeric data types store numerical values used in calculations.</li>
+        <li>They are divided into <strong>Integer</strong> (<code>short</code>, <code>int</code>, <code>long</code>, <code>long long</code>) and <strong>Floating-Point</strong> (<code>float</code>, <code>double</code>, <code>long double</code>) types.</li>
+        <li>Choose the data type based on the kind of value, required range, and precision.</li>
+        <li><code>double</code> is preferred over <code>float</code> when higher accuracy is required.</li>
+        <li>Always remember that the exact size of a numeric type is <strong>implementation-dependent</strong>.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

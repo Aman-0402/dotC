@@ -111,6 +111,10 @@
         {
           "title": "Data Types",
           "path": "lessons/unit2-data-types.html"
+        },
+        {
+          "title": "Numeric Data Types",
+          "path": "lessons/unit2-numeric-data-types.html"
         }
       ]
     }
