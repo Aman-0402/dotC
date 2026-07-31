@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Binding — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Binding</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Binding</h1>
+
+      <h2>What is Binding?</h2>
+      <p><strong>Binding</strong> is the process of <strong>associating (linking) a name with an entity</strong> such as a variable, function, data type, or memory location.</p>
+      <p>In simple words:</p>
+      <blockquote>
+        <p><strong>Binding means connecting a name with what it represents.</strong></p>
+      </blockquote>
+      <p>For example:</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <p>Here,</p>
+      <ul>
+        <li><code>age</code> → Name (Identifier)</li>
+        <li><code>int</code> → Data Type</li>
+        <li><code>20</code> → Value</li>
+      </ul>
+      <p>The compiler binds:</p>
+      <ul>
+        <li>The name <code>age</code> to its <strong>data type (<code>int</code>)</strong></li>
+        <li>The name <code>age</code> to a <strong>memory location</strong></li>
+        <li>The name <code>age</code> to its <strong>stored value</strong></li>
+      </ul>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine a classroom.</p>
+      <p>A teacher says:</p>
+      <blockquote>
+        <p><strong>"Aman, stand up."</strong></p>
+      </blockquote>
+      <p>The name <strong>Aman</strong> is bound to a specific student.</p>
+      <p>Similarly, in C,</p>
+      <pre><code class="language-c">int marks = 95;</code></pre>
+      <p>The name <strong>marks</strong> is bound to:</p>
+      <ul>
+        <li>Integer type</li>
+        <li>Memory address</li>
+        <li>Value <code>95</code></li>
+      </ul>
+
+      <h2>Why is Binding Important?</h2>
+      <p>Binding allows the compiler to know:</p>
+      <ul>
+        <li>Where data is stored</li>
+        <li>What type of data it is</li>
+        <li>Which function to execute</li>
+        <li>How much memory to allocate</li>
+        <li>Which operations are allowed</li>
+      </ul>
+      <p>Without binding, the compiler would not know what each name refers to.</p>
+
+      <h2>Binding Process in C</h2>
+      <p>Consider the following code:</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <p>The compiler performs these steps:</p>
+      <pre><code class="language-none">Identifier (age)
+        │
+        ▼
+Data Type (int)
+        │
+        ▼
+Memory Allocation (4 bytes on most systems)
+        │
+        ▼
+Store Value (20)</code></pre>
+      <p>So <code>age</code> becomes associated with:</p>
+      <ul>
+        <li>Data type</li>
+        <li>Memory location</li>
+        <li>Stored value</li>
+      </ul>
+
+      <h2>Types of Binding</h2>
+      <p>There are <strong>two major types</strong> of binding.</p>
+      <pre><code class="language-none">Binding
+│
+├── Static Binding (Early Binding)
+└── Dynamic Binding (Late Binding)</code></pre>
+
+      <h2>1. Static Binding (Early Binding)</h2>
+      <p>Static binding happens <strong>during compilation</strong>.</p>
+      <p>The compiler already knows:</p>
+      <ul>
+        <li>Variable types</li>
+        <li>Function names</li>
+        <li>Memory requirements (for local/static variables)</li>
+      </ul>
+      <p>C primarily uses <strong>static binding</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int number = 10;
+
+    printf("%d", number);
+
+    return 0;
+}</code></pre>
+      <p>During compilation:</p>
+      <pre><code class="language-none">number
+   │
+   ▼
+int
+   │
+   ▼
+Memory Allocated</code></pre>
+      <p>Everything is decided before execution.</p>
+
+      <h3>Another Example</h3>
+      <pre><code class="language-c">int sum(int a, int b)
+{
+    return a + b;
+}</code></pre>
+      <p>When the compiler sees:</p>
+      <pre><code class="language-c">sum(10, 20);</code></pre>
+      <p>It already knows:</p>
+      <ul>
+        <li>Function name</li>
+        <li>Return type</li>
+        <li>Parameters</li>
+      </ul>
+      <p>This is static binding.</p>
+
+      <h2>2. Dynamic Binding (Late Binding)</h2>
+      <p>Dynamic binding occurs <strong>during program execution (runtime)</strong>.</p>
+      <p>The decision about which function or object to use is made while the program is running.</p>
+
+      <h3>Important Note</h3>
+      <p><strong>Traditional C does not support dynamic binding (runtime polymorphism) like C++ or Java.</strong></p>
+      <p>Dynamic binding is mainly associated with <strong>object-oriented programming</strong> using features such as virtual functions.</p>
+      <p>In C, almost all binding is <strong>static</strong>.</p>
+
+      <h2>Compile-Time Binding vs Run-Time Binding</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Compile-Time Binding</th>
+            <th>Run-Time Binding</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Happens during compilation</td><td>Happens during execution</td></tr>
+          <tr><td>Faster</td><td>Slightly slower</td></tr>
+          <tr><td>Used by C</td><td>Used by languages like C++ (virtual functions) and Java</td></tr>
+          <tr><td>Also called Early Binding</td><td>Also called Late Binding</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Name Binding</h2>
+      <p>Name binding is the association between an <strong>identifier</strong> and its meaning.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">int salary = 50000;</code></pre>
+      <p>Binding:</p>
+      <pre><code class="language-none">salary
+   │
+   ▼
+int
+   │
+   ▼
+Memory Address
+   │
+   ▼
+50000</code></pre>
+
+      <h2>Type Binding</h2>
+      <p>A variable is bound to a data type.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">char grade = 'A';</code></pre>
+      <p>Binding:</p>
+      <pre><code class="language-none">grade
+   │
+   ▼
+char</code></pre>
+      <p>The compiler now knows:</p>
+      <ul>
+        <li>It stores one character.</li>
+        <li>It should use <code>%c</code> with <code>printf</code>.</li>
+        <li>Operations are based on the <code>char</code> type.</li>
+      </ul>
+
+      <h2>Memory Binding</h2>
+      <p>Each variable gets a memory location.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">int marks = 90;</code></pre>
+      <p>Memory:</p>
+      <pre><code class="language-none">Address      Variable      Value
+--------------------------------
+1000         marks          90</code></pre>
+      <p>The compiler binds:</p>
+      <pre><code class="language-none">marks
+   │
+   ▼
+Address 1000</code></pre>
+
+      <h2>Value Binding</h2>
+      <p>The variable is associated with its current value.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <p>Initially:</p>
+      <pre><code class="language-none">age
+ │
+ ▼
+20</code></pre>
+      <p>Later:</p>
+      <pre><code class="language-c">age = 25;</code></pre>
+      <p>Now:</p>
+      <pre><code class="language-none">age
+ │
+ ▼
+25</code></pre>
+      <p>The binding to the memory location stays the same, but the stored value changes.</p>
+
+      <h2>Function Binding</h2>
+      <p>Functions are also bound.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void greet()
+{
+    printf("Hello");
+}
+
+int main()
+{
+    greet();
+
+    return 0;
+}</code></pre>
+      <p>Compiler Binding:</p>
+      <pre><code class="language-none">greet()
+
+↓
+
+Function Address
+
+↓
+
+Call Function</code></pre>
+
+      <h2>Binding During Compilation</h2>
+      <p>Example:</p>
+      <pre><code class="language-c">int x = 10;</code></pre>
+      <p>Compilation process:</p>
+      <pre><code class="language-none">Source Code
+      │
+      ▼
+Lexical Analysis
+      │
+      ▼
+Syntax Analysis
+      │
+      ▼
+Semantic Analysis
+      │
+      ▼
+Binding
+      │
+      ▼
+Machine Code</code></pre>
+      <p>Binding occurs during the compiler's semantic analysis phase.</p>
+
+      <h2>Example Program</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 21;
+    float salary = 50000.50;
+    char grade = 'A';
+
+    printf("%d\n", age);
+    printf("%.2f\n", salary);
+    printf("%c\n", grade);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">21
+50000.50
+A</code></pre>
+      <p>Bindings created:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>age</code></td><td><code>int</code></td><td>21</td></tr>
+          <tr><td><code>salary</code></td><td><code>float</code></td><td>50000.50</td></tr>
+          <tr><td><code>grade</code></td><td><code>char</code></td><td>'A'</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Binding and Scope</h2>
+      <p>Binding works together with scope.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int x = 100;
+
+int main()
+{
+    int x = 50;
+
+    printf("%d", x);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">50</code></pre>
+      <p>Explanation:</p>
+      <ul>
+        <li>Global <code>x</code> is bound globally.</li>
+        <li>Local <code>x</code> is bound inside <code>main()</code>.</li>
+        <li>Inside <code>main()</code>, the local binding takes precedence (variable shadowing).</li>
+      </ul>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Thinking Binding Means Assignment</h3>
+      <p>Wrong idea:</p>
+      <pre><code class="language-none">Binding = assigning a value</code></pre>
+      <p>Correct:</p>
+      <p>Binding is the association between a <strong>name</strong> and an entity (type, memory, function, etc.). Assignment changes the value stored.</p>
+
+      <h3>2. Confusing Binding with Scope</h3>
+      <ul>
+        <li><strong>Binding</strong> → Associates a name with an entity.</li>
+        <li><strong>Scope</strong> → Determines where that name can be accessed.</li>
+      </ul>
+
+      <h3>3. Assuming C Supports Dynamic Binding</h3>
+      <p>C primarily uses <strong>static (early) binding</strong>.</p>
+      <p>Dynamic binding is a feature of object-oriented languages like C++ and Java.</p>
+
+      <h3>4. Believing Memory Changes During Assignment</h3>
+      <pre><code class="language-c">int age = 20;
+
+age = 30;</code></pre>
+      <p>The <strong>memory address usually remains the same</strong>; only the stored value changes.</p>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is binding in C?</h3>
+      <p>Binding is the process of associating a name with an entity such as a variable, function, data type, or memory location.</p>
+
+      <h3>2. What are the types of binding?</h3>
+      <ul>
+        <li>Static (Early) Binding</li>
+        <li>Dynamic (Late) Binding</li>
+      </ul>
+
+      <h3>3. Which type of binding is used in C?</h3>
+      <p>C primarily uses <strong>static (early) binding</strong>.</p>
+
+      <h3>4. What is the difference between binding and scope?</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Binding</th>
+            <th>Scope</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Associates a name with an entity</td><td>Defines where that name can be accessed</td></tr>
+        </tbody>
+      </table>
+
+      <h3>5. Does C support dynamic binding?</h3>
+      <p>No. Traditional C does not support runtime polymorphism or dynamic binding as found in object-oriented languages.</p>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define binding in C.</li>
+        <li>Explain static binding and dynamic binding.</li>
+        <li>Why is C considered a statically bound language?</li>
+        <li>Differentiate between binding and scope.</li>
+        <li>Explain name binding with an example.</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Demonstrate variable binding.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int marks = 90;
+
+    printf("%d", marks);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">90</code></pre>
+
+      <h4>Q2. Demonstrate function binding.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void greet()
+{
+    printf("Welcome to C Programming!");
+}
+
+int main()
+{
+    greet();
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Welcome to C Programming!</code></pre>
+
+      <h4>Q3. Show local binding.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int value = 100;
+
+int main()
+{
+    int value = 50;
+
+    printf("%d", value);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">50</code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li><strong>Binding</strong> is the process of associating a name with a program entity such as a variable, function, data type, or memory location.</li>
+        <li>C primarily uses <strong>static (early) binding</strong>, where most decisions are made during compilation.</li>
+        <li><strong>Dynamic (late) binding</strong> is generally <strong>not supported in traditional C</strong>.</li>
+        <li>Binding works together with <strong>scope</strong> and <strong>memory allocation</strong> to allow the compiler to correctly interpret program elements.</li>
+        <li>Understanding binding helps explain how variables, functions, and types are connected during compilation.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

@@ -99,6 +99,10 @@
         {
           "title": "Scope",
           "path": "lessons/unit2-scope.html"
+        },
+        {
+          "title": "Binding",
+          "path": "lessons/unit2-binding.html"
         }
       ]
     }
