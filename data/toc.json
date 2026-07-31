@@ -152,6 +152,10 @@
         {
           "title": "Unconditional Statements",
           "path": "lessons/unit3-unconditional-statements.html"
+        },
+        {
+          "title": "Looping Statements",
+          "path": "lessons/unit3-looping-statements.html"
         }
       ]
     }

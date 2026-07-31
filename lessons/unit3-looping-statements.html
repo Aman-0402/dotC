@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Looping Statements — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 3 / Looping Statements</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Looping Statements</h1>
+
+      <h2>Introduction</h2>
+      <p>Many programming tasks require performing the <strong>same operation repeatedly</strong>.</p>
+      <p>Examples:</p>
+      <ul>
+        <li>Print numbers from <strong>1 to 100</strong>.</li>
+        <li>Display a multiplication table.</li>
+        <li>Calculate the sum of numbers.</li>
+        <li>Process records in a file.</li>
+        <li>Display a menu until the user chooses to exit.</li>
+      </ul>
+      <p>Instead of writing the same code multiple times, we use <strong>loops</strong>.</p>
+
+      <h2>What is a Loop?</h2>
+      <p>A <strong>loop</strong> is a control structure that repeatedly executes a block of code as long as a specified condition remains true.</p>
+      <p>Without Loop</p>
+      <pre><code class="language-c">printf("Hello\n");
+printf("Hello\n");
+printf("Hello\n");
+printf("Hello\n");
+printf("Hello\n");</code></pre>
+      <p>With Loop</p>
+      <pre><code class="language-c">for(int i = 1; i &lt;= 5; i++)
+{
+    printf("Hello\n");
+}</code></pre>
+      <p>Both produce the same output, but the loop is much shorter and easier to maintain.</p>
+
+      <h2>Types of Loops in C</h2>
+      <p>There are three looping statements in C.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Loop</th>
+            <th>Best Used When</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>for</code></td><td>Number of iterations is known</td></tr>
+          <tr><td><code>while</code></td><td>Number of iterations is unknown</td></tr>
+          <tr><td><code>do...while</code></td><td>Loop must execute at least once</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Components of a Loop</h2>
+      <p>Every loop has three important parts.</p>
+      <ol>
+        <li>Initialization</li>
+        <li>Condition</li>
+        <li>Update (Increment/Decrement)</li>
+      </ol>
+      <p>Example</p>
+      <pre><code class="language-c">for(i = 1; i &lt;= 5; i++)</code></pre>
+      <table>
+        <thead>
+          <tr>
+            <th>Part</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>i = 1</code></td><td>Initialization</td></tr>
+          <tr><td><code>i &lt;= 5</code></td><td>Condition</td></tr>
+          <tr><td><code>i++</code></td><td>Update</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Loop Execution Flow</h2>
+      <pre><code class="language-none">Initialization
+      |
+      V
+Condition
+   |
+True?
+   |
+Execute Statements
+   |
+Update
+   |
+Condition Again
+   |
+False
+   |
+Exit Loop</code></pre>
+
+      <h2>1. for Loop</h2>
+      <p>The <strong>for loop</strong> is used when the number of iterations is known in advance.</p>
+      <p>It combines initialization, condition, and update into one statement.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">for(initialization; condition; update)
+{
+    // statements
+}</code></pre>
+
+      <h3>Flow</h3>
+      <pre><code class="language-none">Initialization
+      |
+Condition
+      |
+True?
+      |
+Statements
+      |
+Update
+      |
+Condition</code></pre>
+
+      <h3>Example 1</h3>
+      <p>Print numbers from 1 to 5.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i;
+
+    for(i = 1; i &lt;= 5; i++)
+    {
+        printf("%d\n", i);
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">1
+2
+3
+4
+5</code></pre>
+
+      <h3>Example 2</h3>
+      <p>Print even numbers.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i;
+
+    for(i = 2; i &lt;= 10; i += 2)
+    {
+        printf("%d ", i);
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">2 4 6 8 10</code></pre>
+
+      <h3>Example 3</h3>
+      <p>Print numbers in reverse order.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i;
+
+    for(i = 5; i >= 1; i--)
+    {
+        printf("%d ", i);
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">5 4 3 2 1</code></pre>
+
+      <h3>Example 4</h3>
+      <p>Find the sum of first 10 natural numbers.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i, sum = 0;
+
+    for(i = 1; i &lt;= 10; i++)
+    {
+        sum = sum + i;
+    }
+
+    printf("Sum = %d", sum);
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">Sum = 55</code></pre>
+
+      <h2>Infinite for Loop</h2>
+      <p>A loop without a terminating condition runs forever.</p>
+      <pre><code class="language-c">for(;;)
+{
+    printf("Infinite Loop");
+}</code></pre>
+
+      <h2>2. while Loop</h2>
+      <p>The <strong>while loop</strong> executes as long as the condition is true.</p>
+      <p>The condition is checked <strong>before</strong> entering the loop.</p>
+      <p>If the condition is false initially, the loop will not execute even once.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">while(condition)
+{
+    // statements
+}</code></pre>
+
+      <h3>Flow</h3>
+      <pre><code class="language-none">Condition
+   |
+True?
+   |
+Statements
+   |
+Update
+   |
+Condition
+   |
+False
+   |
+Exit</code></pre>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i = 1;
+
+    while(i &lt;= 5)
+    {
+        printf("%d ", i);
+        i++;
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h3>Example 2</h3>
+      <p>Print odd numbers.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i = 1;
+
+    while(i &lt;= 10)
+    {
+        printf("%d ", i);
+        i += 2;
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">1 3 5 7 9</code></pre>
+
+      <h3>Example 3</h3>
+      <p>Factorial of a number.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int n = 5;
+    int fact = 1;
+
+    while(n > 0)
+    {
+        fact *= n;
+        n--;
+    }
+
+    printf("%d", fact);
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">120</code></pre>
+
+      <h2>Infinite while Loop</h2>
+      <pre><code class="language-c">while(1)
+{
+    printf("Running...");
+}</code></pre>
+
+      <h2>3. do...while Loop</h2>
+      <p>The <strong>do...while loop</strong> executes the loop body first and checks the condition afterward.</p>
+      <p>Therefore, the loop executes <strong>at least once</strong>, even if the condition is false.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">do
+{
+    // statements
+}
+while(condition);</code></pre>
+      <p><strong>Notice:</strong> The semicolon (<code>;</code>) after <code>while(condition)</code> is mandatory.</p>
+
+      <h3>Flow</h3>
+      <pre><code class="language-none">Statements
+     |
+Condition
+     |
+True?
+     |
+Statements
+     |
+False
+     |
+Exit</code></pre>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i = 1;
+
+    do
+    {
+        printf("%d ", i);
+        i++;
+    }
+    while(i &lt;= 5);
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h3>Example 2</h3>
+      <p>Condition is false initially.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i = 10;
+
+    do
+    {
+        printf("%d", i);
+    }
+    while(i &lt; 5);
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">10</code></pre>
+      <p>The loop executes once because the condition is checked after the loop body.</p>
+
+      <h3>Example 3</h3>
+      <p>Menu-driven program.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int choice;
+
+    do
+    {
+        printf("\n1. Add");
+        printf("\n2. Delete");
+        printf("\n3. Exit");
+
+        printf("\nEnter Choice: ");
+        scanf("%d", &amp;choice);
+
+    } while(choice != 3);
+
+    return 0;
+}</code></pre>
+      <p>The menu continues until the user selects <strong>3</strong>.</p>
+
+      <h2>Difference Between while and do...while</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>while</th>
+            <th>do...while</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Condition checked</td><td>Before loop</td><td>After loop</td></tr>
+          <tr><td>Minimum executions</td><td>0</td><td>1</td></tr>
+          <tr><td>Semicolon after condition</td><td>No</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Nested Loops</h2>
+      <p>A <strong>Nested Loop</strong> is a loop inside another loop.</p>
+      <p>The outer loop executes first, and for each iteration of the outer loop, the inner loop executes completely.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">for(initialization; condition; update)
+{
+    for(initialization; condition; update)
+    {
+        // statements
+    }
+}</code></pre>
+
+      <h3>Flow</h3>
+      <pre><code class="language-none">Outer Loop
+
+   |
+
+Inner Loop
+
+   |
+
+Statements</code></pre>
+
+      <h3>Example 1</h3>
+      <p>Print a 3 × 3 grid.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i, j;
+
+    for(i = 1; i &lt;= 3; i++)
+    {
+        for(j = 1; j &lt;= 3; j++)
+        {
+            printf("* ");
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">* * *
+* * *
+* * *</code></pre>
+
+      <h3>Example 2</h3>
+      <p>Multiplication Table (1–5)</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i, j;
+
+    for(i = 1; i &lt;= 5; i++)
+    {
+        for(j = 1; j &lt;= 5; j++)
+        {
+            printf("%3d", i * j);
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">  1  2  3  4  5
+  2  4  6  8 10
+  3  6  9 12 15
+  4  8 12 16 20
+  5 10 15 20 25</code></pre>
+
+      <h3>Example 3</h3>
+      <p>Right Triangle Pattern</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i, j;
+
+    for(i = 1; i &lt;= 5; i++)
+    {
+        for(j = 1; j &lt;= i; j++)
+        {
+            printf("* ");
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">*
+* *
+* * *
+* * * *
+* * * * *</code></pre>
+
+      <h3>Example 4</h3>
+      <p>Number Pattern</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i, j;
+
+    for(i = 1; i &lt;= 5; i++)
+    {
+        for(j = 1; j &lt;= 5; j++)
+        {
+            printf("%d ", j);
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">1 2 3 4 5
+1 2 3 4 5
+1 2 3 4 5
+1 2 3 4 5
+1 2 3 4 5</code></pre>
+
+      <h2>Comparison of Loops</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th><code>for</code></th>
+            <th><code>while</code></th>
+            <th><code>do...while</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Initialization</td><td>Inside loop statement</td><td>Before loop</td><td>Before loop</td></tr>
+          <tr><td>Condition Check</td><td>Before each iteration</td><td>Before each iteration</td><td>After each iteration</td></tr>
+          <tr><td>Minimum Executions</td><td>0</td><td>0</td><td>1</td></tr>
+          <tr><td>Best Use</td><td>Fixed number of iterations</td><td>Unknown number of iterations</td><td>Menu-driven programs, input validation</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Common Mistakes</h2>
+
+      <h3>Forgetting to update the loop variable</h3>
+      <pre><code class="language-c">int i = 1;
+
+while(i &lt;= 5)
+{
+    printf("%d", i);
+}</code></pre>
+      <p>This creates an <strong>infinite loop</strong> because <code>i</code> never changes.</p>
+
+      <h3>Using <code>=</code> instead of <code>==</code></h3>
+      <p>❌ Incorrect</p>
+      <pre><code class="language-c">if(i = 5)</code></pre>
+      <p>✔ Correct</p>
+      <pre><code class="language-c">if(i == 5)</code></pre>
+
+      <h3>Missing semicolon in <code>do...while</code></h3>
+      <p>❌ Incorrect</p>
+      <pre><code class="language-c">while(i &lt;= 5)</code></pre>
+      <p>✔ Correct</p>
+      <pre><code class="language-c">while(i &lt;= 5);</code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>A <strong>loop</strong> repeats a block of code until a condition becomes false.</li>
+        <li><strong><code>for</code></strong> is best when the number of iterations is known.</li>
+        <li><strong><code>while</code></strong> is ideal when the number of iterations is unknown and the condition must be checked before execution.</li>
+        <li><strong><code>do...while</code></strong> guarantees at least one execution because the condition is checked after the loop body.</li>
+        <li><strong>Nested loops</strong> are used for working with patterns, multiplication tables, matrices, and multidimensional data.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
