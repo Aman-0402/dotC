@@ -300,6 +300,10 @@
         {
           "title": "Tail Recursion",
           "path": "lessons/unit7-tail-recursion.html"
+        },
+        {
+          "title": "Head Recursion",
+          "path": "lessons/unit7-head-recursion.html"
         }
       ]
     }

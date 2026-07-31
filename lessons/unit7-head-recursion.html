@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Head Recursion — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Head Recursion</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Head Recursion</h1>
+
+      <h2>What is Head Recursion?</h2>
+      <p><strong>Head Recursion</strong> is a type of recursion in which the <strong>recursive function call is the first operation performed</strong>.</p>
+      <p>After the recursive call returns, the function performs the remaining operations.</p>
+      <blockquote>
+        <p><strong>Definition:</strong> A recursive function is called <strong>Head Recursive</strong> if the recursive call occurs <strong>before any other processing</strong>.</p>
+      </blockquote>
+
+      <h2>General Structure</h2>
+      <pre><code class="language-c">returnType function(parameters)
+{
+    if(base_condition)
+        return;
+
+    function(smaller_problem);
+
+    // Work is done after recursion
+}</code></pre>
+      <p>The important rule is:</p>
+      <pre><code class="language-none">Recursive Call
+
+↓
+
+Return
+
+↓
+
+Remaining Work</code></pre>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine climbing a ladder.</p>
+      <pre><code class="language-none">Ground
+
+↓
+
+Step 1
+
+↓
+
+Step 2
+
+↓
+
+Step 3
+
+↓
+
+Top</code></pre>
+      <p>While climbing, you don't do any work.</p>
+      <p>Only after reaching the top do you start coming down and perform work on each step.</p>
+      <p>This is exactly how <strong>Head Recursion</strong> works.</p>
+
+      <h2>Example 1: Print Numbers (1 to 5)</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void print(int n)
+{
+    if(n == 0)
+        return;
+
+    print(n - 1);
+
+    printf("%d ", n);
+}
+
+int main()
+{
+    print(5);
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h2>Why is it Head Recursive?</h2>
+      <p>Notice:</p>
+      <pre><code class="language-c">print(n - 1);
+
+printf("%d ", n);</code></pre>
+      <p>The recursive call happens <strong>first</strong>.</p>
+      <p>The <code>printf()</code> statement executes <strong>after</strong> the recursive call returns.</p>
+      <p>Therefore, this is <strong>Head Recursion</strong>.</p>
+
+      <h2>Dry Run</h2>
+      <p>Call:</p>
+      <pre><code class="language-c">print(5);</code></pre>
+      <p>Recursive Calls:</p>
+      <pre><code class="language-none">print(5)
+
+↓
+
+print(4)
+
+↓
+
+print(3)
+
+↓
+
+print(2)
+
+↓
+
+print(1)
+
+↓
+
+print(0)
+
+↓
+
+Base Case</code></pre>
+      <p>Nothing is printed while going down.</p>
+
+      <h2>Returning Phase</h2>
+      <p>When the base case is reached, the function returns.</p>
+      <pre><code class="language-none">Return to print(1)
+
+↓
+
+Print 1
+
+↓
+
+Return to print(2)
+
+↓
+
+Print 2
+
+↓
+
+Return to print(3)
+
+↓
+
+Print 3
+
+↓
+
+Return to print(4)
+
+↓
+
+Print 4
+
+↓
+
+Return to print(5)
+
+↓
+
+Print 5</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h2>Visualization</h2>
+      <pre><code class="language-none">Calling Phase
+
+print(5)
+   │
+print(4)
+   │
+print(3)
+   │
+print(2)
+   │
+print(1)
+   │
+print(0)
+
+Base Case</code></pre>
+      <p>Returning Phase</p>
+      <pre><code class="language-none">print(1) → Print 1
+
+↓
+
+print(2) → Print 2
+
+↓
+
+print(3) → Print 3
+
+↓
+
+print(4) → Print 4
+
+↓
+
+print(5) → Print 5</code></pre>
+
+      <h2>Example 2: Print Characters</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void display(char ch)
+{
+    if(ch &gt; 'E')
+        return;
+
+    display(ch + 1);
+
+    printf("%c ", ch);
+}
+
+int main()
+{
+    display('A');
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">E D C B A</code></pre>
+
+      <h3>Why?</h3>
+      <p>The recursive calls occur in this order:</p>
+      <pre><code class="language-none">display(A)
+
+↓
+
+display(B)
+
+↓
+
+display(C)
+
+↓
+
+display(D)
+
+↓
+
+display(E)
+
+↓
+
+display(F)
+
+↓
+
+Return</code></pre>
+      <p>Printing happens while returning:</p>
+      <pre><code class="language-none">E
+
+↓
+
+D
+
+↓
+
+C
+
+↓
+
+B
+
+↓
+
+A</code></pre>
+
+      <h2>Example 3: Sum of N Numbers (Head Recursive)</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int sum(int n)
+{
+    if(n == 0)
+        return 0;
+
+    int s = sum(n - 1);
+
+    return s + n;
+}
+
+int main()
+{
+    printf("%d", sum(5));
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">15</code></pre>
+      <p>The addition (<code>s + n</code>) is performed <strong>after</strong> the recursive call returns, making it head recursive.</p>
+
+      <h2>Call Stack</h2>
+      <p>For:</p>
+      <pre><code class="language-c">print(3);</code></pre>
+      <p>During recursive calls:</p>
+      <pre><code class="language-none">┌───────────┐
+│ print(0)  │
+├───────────┤
+│ print(1)  │
+├───────────┤
+│ print(2)  │
+├───────────┤
+│ print(3)  │
+└───────────┘</code></pre>
+      <p>Returning:</p>
+      <pre><code class="language-none">print(0)
+
+↓
+
+print(1)
+
+↓
+
+print(2)
+
+↓
+
+print(3)</code></pre>
+      <p>Each function prints its value only after the deeper recursive call has finished.</p>
+
+      <h2>Head Recursion vs Tail Recursion</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Head Recursion</th>
+            <th>Tail Recursion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Recursive call</td><td>First operation</td><td>Last operation</td></tr>
+          <tr><td>Work after recursion</td><td>Yes</td><td>No</td></tr>
+          <tr><td>Output generated</td><td>While returning</td><td>While calling</td></tr>
+          <tr><td>Tail Call Optimization</td><td>Not possible</td><td>Possible (compiler dependent)</td></tr>
+          <tr><td>Loop conversion</td><td>Difficult</td><td>Easier</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Example Comparison</h2>
+
+      <h3>Head Recursion</h3>
+      <pre><code class="language-c">void fun(int n)
+{
+    if(n == 0)
+        return;
+
+    fun(n - 1);
+
+    printf("%d ", n);
+}</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h3>Tail Recursion</h3>
+      <pre><code class="language-c">void fun(int n)
+{
+    if(n == 0)
+        return;
+
+    printf("%d ", n);
+
+    fun(n - 1);
+}</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">5 4 3 2 1</code></pre>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Simple way to process data after recursive calls complete.</li>
+        <li>Useful when results from smaller subproblems are needed before further computation.</li>
+        <li>Natural for algorithms that build results while returning from recursion.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Cannot benefit from Tail Call Optimization.</li>
+        <li>Uses more stack memory for deep recursion.</li>
+        <li>Often slower than equivalent iterative solutions.</li>
+      </ul>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Tree traversals (Postorder Traversal).</li>
+        <li>Recursive mathematical computations.</li>
+        <li>Building results after recursive calls.</li>
+        <li>Expression evaluation.</li>
+        <li>Divide and Conquer algorithms.</li>
+      </ul>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>In <strong>Head Recursion</strong>, the recursive call happens <strong>before</strong> any processing.</li>
+        <li>The actual work is performed <strong>while the function returns</strong>.</li>
+        <li>Head recursion cannot be optimized using Tail Call Optimization.</li>
+        <li>The output often appears in the reverse order of the recursive calls.</li>
+        <li>It is useful when later computation depends on results from deeper recursive calls.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
