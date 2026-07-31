@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conditional Statements — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 3 / Conditional Statements</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Conditional Statements</h1>
+
+      <h2>Introduction</h2>
+      <p>Until now, every C program you've written has executed <strong>line by line</strong> from top to bottom.</p>
+      <p>But in real-life applications, programs need to <strong>make decisions</strong>.</p>
+      <p>Examples:</p>
+      <ul>
+        <li>Should the student pass or fail?</li>
+        <li>Is the password correct?</li>
+        <li>Can a user log in?</li>
+        <li>Is a number even or odd?</li>
+        <li>Should the ATM allow withdrawal?</li>
+      </ul>
+      <p>Decision-making is done using <strong>Conditional Statements</strong>.</p>
+
+      <h2>What is a Conditional Statement?</h2>
+      <p>A <strong>Conditional Statement</strong> allows a program to execute different blocks of code depending on whether a condition is <strong>true or false</strong>.</p>
+      <p>Think of it like real life.</p>
+      <pre><code class="language-none">If it is raining
+    Take an umbrella
+Else
+    Wear sunglasses</code></pre>
+      <p>The computer works exactly the same way.</p>
+      <pre><code class="language-none">Condition → True → Execute one block
+
+Condition → False → Execute another block</code></pre>
+
+      <h2>Types of Conditional Statements in C</h2>
+      <p>There are five major decision-making statements.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Statement</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>if</td><td>Executes code only if condition is true</td></tr>
+          <tr><td>if...else</td><td>Chooses between two blocks</td></tr>
+          <tr><td>else if Ladder</td><td>Checks multiple conditions</td></tr>
+          <tr><td>Nested if</td><td>if inside another if</td></tr>
+          <tr><td>switch-case</td><td>Selects one option among many</td></tr>
+        </tbody>
+      </table>
+
+      <h2>1. if Statement</h2>
+      <p>The <strong>if statement</strong> is the simplest conditional statement.</p>
+      <p>It executes code <strong>only when the condition is true</strong>.</p>
+      <p>If the condition is false, nothing happens.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">if (condition)
+{
+    // statements
+}</code></pre>
+
+      <h3>Flow</h3>
+      <pre><code class="language-none">Condition
+
+   |
+   |
+True? -------- No
+ |
+Yes
+ |
+Execute Block
+ |
+Next Statement</code></pre>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 20;
+
+    if(age >= 18)
+    {
+        printf("Eligible to vote");
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">Eligible to vote</code></pre>
+
+      <h3>Example 2</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int marks = 80;
+
+    if(marks >= 40)
+    {
+        printf("Pass");
+    }
+
+    printf("\nProgram End");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Pass
+Program End</code></pre>
+
+      <h3>Example 3</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int marks = 30;
+
+    if(marks >= 40)
+    {
+        printf("Pass");
+    }
+
+    printf("Program End");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Program End</code></pre>
+      <p>The <code>if</code> block is skipped because the condition is false.</p>
+
+      <h2>Relational Operators Used in Conditions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>&gt;</td><td>Greater than</td></tr>
+          <tr><td>&lt;</td><td>Less than</td></tr>
+          <tr><td>&gt;=</td><td>Greater than or equal</td></tr>
+          <tr><td>&lt;=</td><td>Less than or equal</td></tr>
+          <tr><td>==</td><td>Equal to</td></tr>
+          <tr><td>!=</td><td>Not equal</td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">if(a == b)
+
+if(age >= 18)
+
+if(num != 0)</code></pre>
+
+      <h2>Logical Operators in Conditions</h2>
+      <p>Sometimes multiple conditions are checked.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>&amp;&amp;</td><td>AND</td></tr>
+          <tr><td>||</td><td>OR</td></tr>
+          <tr><td>!</td><td>NOT</td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">if(age >=18 &amp;&amp; age &lt;=60)
+
+if(username == 1 || admin == 1)
+
+if(!(marks &lt; 40))</code></pre>
+
+      <h2>2. if...else Statement</h2>
+      <p>Sometimes we want <strong>one action when the condition is true</strong> and <strong>another when it is false</strong>.</p>
+      <p>For this, we use <strong>if...else</strong>.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">if(condition)
+{
+    // True block
+}
+else
+{
+    // False block
+}</code></pre>
+
+      <h3>Flow</h3>
+      <pre><code class="language-none">          Condition
+             |
+      ----------------
+      |              |
+    True          False
+      |              |
+ True Block     False Block
+      |
+ Next Statement</code></pre>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 16;
+
+    if(age >=18)
+    {
+        printf("Eligible to vote");
+    }
+    else
+    {
+        printf("Not eligible");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Not eligible</code></pre>
+
+      <h3>Example 2</h3>
+      <p>Even or Odd</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int num = 15;
+
+    if(num % 2 == 0)
+    {
+        printf("Even");
+    }
+    else
+    {
+        printf("Odd");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Odd</code></pre>
+
+      <h2>3. else if Ladder</h2>
+      <p>When there are <strong>more than two choices</strong>, we use <strong>else if</strong>.</p>
+      <p>The program checks conditions <strong>from top to bottom</strong>.</p>
+      <p>The first true condition is executed.</p>
+      <p>The remaining conditions are skipped.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">if(condition1)
+{
+
+}
+else if(condition2)
+{
+
+}
+else if(condition3)
+{
+
+}
+else
+{
+
+}</code></pre>
+
+      <h3>Flow</h3>
+      <pre><code class="language-none">Condition 1
+     |
+True? ----Yes--> Block 1
+ |
+No
+ |
+Condition 2
+ |
+True? ----Yes--> Block 2
+ |
+No
+ |
+Condition 3
+ |
+True? ----Yes--> Block 3
+ |
+No
+ |
+Else Block</code></pre>
+
+      <h3>Example</h3>
+      <p>Student Grade</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int marks = 76;
+
+    if(marks >=90)
+    {
+        printf("Grade A");
+    }
+    else if(marks >=75)
+    {
+        printf("Grade B");
+    }
+    else if(marks >=60)
+    {
+        printf("Grade C");
+    }
+    else if(marks >=40)
+    {
+        printf("Grade D");
+    }
+    else
+    {
+        printf("Fail");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Grade B</code></pre>
+
+      <h3>Example</h3>
+      <pre><code class="language-c">int number = 0;
+
+if(number > 0)
+{
+    printf("Positive");
+}
+else if(number &lt; 0)
+{
+    printf("Negative");
+}
+else
+{
+    printf("Zero");
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Zero</code></pre>
+
+      <h2>4. Nested if</h2>
+      <p>A <strong>Nested if</strong> means placing one <code>if</code> statement inside another <code>if</code> statement.</p>
+      <p>It is useful when a second condition should only be checked if the first one is true.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">if(condition1)
+{
+    if(condition2)
+    {
+
+    }
+}</code></pre>
+
+      <h3>Flow</h3>
+      <pre><code class="language-none">Condition 1
+     |
+True?
+ |
+Yes
+ |
+Condition 2
+ |
+True?
+ |
+Execute Block</code></pre>
+
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 22;
+    int citizen = 1;
+
+    if(age >=18)
+    {
+        if(citizen == 1)
+        {
+            printf("Eligible to vote");
+        }
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Eligible to vote</code></pre>
+
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int username = 1;
+    int password = 1;
+
+    if(username == 1)
+    {
+        if(password == 1)
+        {
+            printf("Login Successful");
+        }
+        else
+        {
+            printf("Wrong Password");
+        }
+    }
+    else
+    {
+        printf("Invalid Username");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Login Successful</code></pre>
+
+      <h2>5. switch-case Statement</h2>
+      <p>The <strong>switch statement</strong> is used when one variable needs to be compared with multiple constant values.</p>
+      <p>It is a cleaner alternative to writing many <code>else if</code> statements.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">switch(expression)
+{
+    case value1:
+        statements;
+        break;
+
+    case value2:
+        statements;
+        break;
+
+    default:
+        statements;
+}</code></pre>
+
+      <h3>How switch Works</h3>
+      <ol>
+        <li>The expression is evaluated once.</li>
+        <li>Its value is compared with each <code>case</code>.</li>
+        <li>If a match is found, that case executes.</li>
+        <li><code>break</code> exits the switch.</li>
+        <li>If no case matches, the <code>default</code> block executes.</li>
+      </ol>
+
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int day = 3;
+
+    switch(day)
+    {
+        case 1:
+            printf("Monday");
+            break;
+
+        case 2:
+            printf("Tuesday");
+            break;
+
+        case 3:
+            printf("Wednesday");
+            break;
+
+        case 4:
+            printf("Thursday");
+            break;
+
+        default:
+            printf("Invalid Day");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Wednesday</code></pre>
+
+      <h3>Example</h3>
+      <p>Calculator</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 20, b = 10;
+    char op = '+';
+
+    switch(op)
+    {
+        case '+':
+            printf("%d", a + b);
+            break;
+
+        case '-':
+            printf("%d", a - b);
+            break;
+
+        case '*':
+            printf("%d", a * b);
+            break;
+
+        case '/':
+            printf("%d", a / b);
+            break;
+
+        default:
+            printf("Invalid Operator");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">30</code></pre>
+
+      <h2>Importance of <code>break</code></h2>
+      <p>Without <code>break</code>, execution continues into the next case. This behavior is called <strong>fall-through</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int num = 2;
+
+    switch(num)
+    {
+        case 1:
+            printf("One\n");
+
+        case 2:
+            printf("Two\n");
+
+        case 3:
+            printf("Three\n");
+
+        default:
+            printf("End\n");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Two
+Three
+End</code></pre>
+      <p>Because there is no <code>break</code>, execution continues through all following cases.</p>
+
+      <h2>Rules of switch-case</h2>
+      <ul>
+        <li>The expression must evaluate to an <strong>integer</strong>, <strong>character</strong>, or <strong>enumeration</strong> type.</li>
+        <li>Each <code>case</code> value must be <strong>unique</strong>.</li>
+        <li><code>case</code> values must be <strong>constant expressions</strong>.</li>
+        <li><code>default</code> is optional but recommended.</li>
+        <li><code>break</code> is optional, but omitting it causes fall-through.</li>
+      </ul>
+
+      <h2>Comparison of Conditional Statements</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Statement</th>
+            <th>Used For</th>
+            <th>Number of Conditions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>if</code></td><td>Execute code only when a condition is true</td><td>1</td></tr>
+          <tr><td><code>if...else</code></td><td>Choose between two alternatives</td><td>2</td></tr>
+          <tr><td><code>else if</code> Ladder</td><td>Check multiple conditions in order</td><td>Multiple</td></tr>
+          <tr><td>Nested <code>if</code></td><td>Verify a secondary condition after a primary one</td><td>Multiple (hierarchical)</td></tr>
+          <tr><td><code>switch-case</code></td><td>Compare one expression against several constant values</td><td>Multiple constant values</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>Conditional statements enable programs to make decisions.</li>
+        <li><code>if</code> executes code only when a condition is true.</li>
+        <li><code>if...else</code> selects between two possible actions.</li>
+        <li><code>else if</code> ladders are ideal for handling multiple conditions.</li>
+        <li>Nested <code>if</code> statements allow decision-making within another decision.</li>
+        <li><code>switch-case</code> provides a clean way to choose among multiple constant options and commonly uses <code>break</code> to prevent fall-through.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

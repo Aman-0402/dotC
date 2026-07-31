@@ -141,6 +141,15 @@
           "path": "lessons/unit2-input-output.html"
         }
       ]
+    },
+    {
+      "title": "Unit 3",
+      "lessons": [
+        {
+          "title": "Conditional Statements",
+          "path": "lessons/unit3-conditional-statements.html"
+        }
+      ]
     }
   ]
 }
