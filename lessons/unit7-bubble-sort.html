@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bubble Sort — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Bubble Sort</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Bubble Sort</h1>
+
+      <p>Bubble Sort is the <strong>simplest sorting algorithm</strong>. It repeatedly compares <strong>two adjacent elements</strong> and swaps them if they are in the wrong order. This process continues until the entire array is sorted.</p>
+      <p>The largest element "bubbles up" to its correct position at the end of the array after each pass, which is why it is called <strong>Bubble Sort</strong>.</p>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine bubbles rising in a glass of water.</p>
+      <ul>
+        <li>Small bubbles stay near the bottom.</li>
+        <li>Bigger bubbles rise to the top.</li>
+      </ul>
+      <p>Similarly, in Bubble Sort, the <strong>largest element moves toward the end</strong> of the array after every pass.</p>
+
+      <h2>How Bubble Sort Works</h2>
+      <p>Suppose we have the following array:</p>
+      <pre><code class="language-none">5 3 8 4 2</code></pre>
+      <p>We compare adjacent elements one by one.</p>
+
+      <h3>Pass 1</h3>
+      <p>Compare <strong>5</strong> and <strong>3</strong></p>
+      <pre><code class="language-none">5 3 8 4 2</code></pre>
+      <p>Since <strong>5 &gt; 3</strong>, swap them.</p>
+      <pre><code class="language-none">3 5 8 4 2</code></pre>
+
+      <p>Compare <strong>5</strong> and <strong>8</strong></p>
+      <pre><code class="language-none">3 5 8 4 2</code></pre>
+      <p>Correct order, so no swap.</p>
+
+      <p>Compare <strong>8</strong> and <strong>4</strong></p>
+      <pre><code class="language-none">3 5 8 4 2</code></pre>
+      <p>Swap.</p>
+      <pre><code class="language-none">3 5 4 8 2</code></pre>
+
+      <p>Compare <strong>8</strong> and <strong>2</strong></p>
+      <p>Swap.</p>
+      <pre><code class="language-none">3 5 4 2 8</code></pre>
+      <p>After Pass 1, the <strong>largest element (8)</strong> has reached its correct position.</p>
+
+      <h3>Pass 2</h3>
+      <p>Start from the beginning again.</p>
+      <pre><code class="language-none">3 5 4 2 8</code></pre>
+      <p>Compare <strong>3</strong> and <strong>5</strong></p>
+      <p>No swap.</p>
+
+      <p>Compare <strong>5</strong> and <strong>4</strong></p>
+      <p>Swap.</p>
+      <pre><code class="language-none">3 4 5 2 8</code></pre>
+
+      <p>Compare <strong>5</strong> and <strong>2</strong></p>
+      <p>Swap.</p>
+      <pre><code class="language-none">3 4 2 5 8</code></pre>
+      <p>After Pass 2, <strong>5</strong> reaches its correct position.</p>
+
+      <h3>Pass 3</h3>
+      <pre><code class="language-none">3 4 2 5 8</code></pre>
+      <p>Compare <strong>3</strong> and <strong>4</strong></p>
+      <p>No swap.</p>
+      <p>Compare <strong>4</strong> and <strong>2</strong></p>
+      <p>Swap.</p>
+      <pre><code class="language-none">3 2 4 5 8</code></pre>
+
+      <h3>Pass 4</h3>
+      <pre><code class="language-none">3 2 4 5 8</code></pre>
+      <p>Compare <strong>3</strong> and <strong>2</strong></p>
+      <p>Swap.</p>
+      <pre><code class="language-none">2 3 4 5 8</code></pre>
+      <p>Array is now sorted.</p>
+
+      <h2>Pass Summary</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pass</th>
+            <th>Array</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Initial</td><td>5 3 8 4 2</td></tr>
+          <tr><td>Pass 1</td><td>3 5 4 2 8</td></tr>
+          <tr><td>Pass 2</td><td>3 4 2 5 8</td></tr>
+          <tr><td>Pass 3</td><td>3 2 4 5 8</td></tr>
+          <tr><td>Pass 4</td><td>2 3 4 5 8</td></tr>
+        </tbody>
+      </table>
+      <p>Notice that after each pass, <strong>one largest unsorted element reaches its final position</strong>.</p>
+
+      <h2>Bubble Sort Algorithm</h2>
+      <pre><code class="language-none">Start
+
+Repeat (n - 1) times
+
+    Compare adjacent elements
+
+    If left element > right element
+
+        Swap them
+
+Stop</code></pre>
+
+      <h2>Bubble Sort Flow</h2>
+      <pre><code class="language-none">Start
+   │
+Compare Adjacent Elements
+   │
+Swap if Left > Right
+   │
+Move to Next Pair
+   │
+End of Pass?
+   │
+No ───────────────► Continue
+   │
+Yes
+   │
+Repeat Next Pass
+   │
+Sorted</code></pre>
+
+      <h2>C Program</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[] = {5, 3, 8, 4, 2};
+    int n = 5;
+
+    for (int i = 0; i &lt; n - 1; i++)
+    {
+        for (int j = 0; j &lt; n - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+
+    printf("Sorted Array:\n");
+
+    for (int i = 0; i &lt; n; i++)
+        printf("%d ", arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-none">Sorted Array:
+2 3 4 5 8</code></pre>
+
+      <h2>Explanation of the Code</h2>
+
+      <h3>Outer Loop</h3>
+      <pre><code class="language-c">for(int i = 0; i &lt; n - 1; i++)</code></pre>
+      <ul>
+        <li>Controls the number of passes.</li>
+        <li>Total passes = <strong>n − 1</strong>.</li>
+      </ul>
+
+      <h3>Inner Loop</h3>
+      <pre><code class="language-c">for(int j = 0; j &lt; n - i - 1; j++)</code></pre>
+      <ul>
+        <li>Compares adjacent elements.</li>
+        <li>The <code>-i</code> avoids comparing elements that are already in their correct positions at the end of the array.</li>
+      </ul>
+
+      <h3>Swap Condition</h3>
+      <pre><code class="language-c">if(arr[j] > arr[j + 1])</code></pre>
+      <p>If the left element is greater than the right element, they are exchanged.</p>
+
+      <h2>Optimized Bubble Sort</h2>
+      <p>If no swaps occur during a pass, the array is already sorted, so we can stop early.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[] = {5, 3, 8, 4, 2};
+    int n = 5;
+
+    for (int i = 0; i &lt; n - 1; i++)
+    {
+        int swapped = 0;
+
+        for (int j = 0; j &lt; n - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                swapped = 1;
+            }
+        }
+
+        if (!swapped)
+            break;
+    }
+
+    for (int i = 0; i &lt; n; i++)
+        printf("%d ", arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>Time Complexity</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Best Case (already sorted, optimized)</td><td><strong>O(n)</strong></td></tr>
+          <tr><td>Average Case</td><td><strong>O(n²)</strong></td></tr>
+          <tr><td>Worst Case (reverse order)</td><td><strong>O(n²)</strong></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Space Complexity</h2>
+      <pre><code class="language-none">O(1)</code></pre>
+      <p>Bubble Sort uses only one temporary variable for swapping, so it requires constant extra memory.</p>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Easy to understand and implement.</li>
+        <li>In-place sorting (no extra array needed).</li>
+        <li>Stable sorting algorithm (equal elements keep their original order).</li>
+        <li>Efficient for very small datasets.</li>
+        <li>Optimized version performs well on nearly sorted arrays.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Very slow for large datasets.</li>
+        <li>Requires many comparisons and swaps.</li>
+        <li>Not suitable for performance-critical applications.</li>
+      </ul>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Educational purposes to learn sorting concepts.</li>
+        <li>Sorting very small datasets.</li>
+        <li>Detecting whether a list is already sorted (using the optimized version).</li>
+        <li>Embedded systems with tiny data sizes.</li>
+      </ul>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>Bubble Sort compares <strong>adjacent elements</strong>.</li>
+        <li>The <strong>largest unsorted element moves to the end</strong> after each pass.</li>
+        <li>Number of passes = <strong>n − 1</strong>.</li>
+        <li>It is <strong>stable</strong> and <strong>in-place</strong>.</li>
+        <li>Best Case: <strong>O(n)</strong> (optimized version).</li>
+        <li>Average/Worst Case: <strong>O(n²)</strong>.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
