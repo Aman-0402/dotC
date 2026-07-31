@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction to Recursion — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Introduction to Recursion</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Introduction to Recursion</h1>
+
+      <h2>What is Recursion?</h2>
+      <p><strong>Recursion</strong> is a programming technique in which a <strong>function calls itself</strong> to solve a problem.</p>
+      <p>Instead of solving the entire problem at once, the function breaks it into <strong>smaller versions of the same problem</strong> until it reaches a stopping condition.</p>
+      <blockquote>
+        <p><strong>Definition:</strong> A function that calls itself directly or indirectly is called a <strong>Recursive Function</strong>.</p>
+      </blockquote>
+
+      <h2>Real-Life Analogy</h2>
+
+      <h3>Example 1: Russian Dolls (Matryoshka)</h3>
+      <p>Imagine opening a Russian doll.</p>
+      <pre><code class="language-none">Big Doll
+   ↓
+Medium Doll
+   ↓
+Small Doll
+   ↓
+Tiny Doll</code></pre>
+      <p>Each doll contains another smaller doll.</p>
+      <p>Similarly, a recursive function keeps calling itself with a <strong>smaller problem</strong> until no smaller problem remains.</p>
+
+      <h3>Example 2: Climbing Stairs</h3>
+      <p>Suppose you want to climb <strong>5 stairs</strong>.</p>
+      <p>Instead of thinking:</p>
+      <blockquote>
+        <p>"I need to climb 5 stairs."</p>
+      </blockquote>
+      <p>Think:</p>
+      <pre><code class="language-none">To climb 5 stairs
+
+↓
+
+First climb 4 stairs
+
+↓
+
+First climb 3 stairs
+
+↓
+
+First climb 2 stairs
+
+↓
+
+First climb 1 stair
+
+↓
+
+Done</code></pre>
+      <p>The problem becomes smaller with every recursive call.</p>
+
+      <h2>Components of Recursion</h2>
+      <p>Every recursive function has <strong>two essential parts</strong>.</p>
+
+      <h3>1. Base Case</h3>
+      <p>The condition where recursion stops.</p>
+      <p>Without a base case, the function keeps calling itself forever.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">if(n == 0)
+    return;</code></pre>
+
+      <h3>2. Recursive Case</h3>
+      <p>The function calls itself with a smaller problem.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">function(n - 1);</code></pre>
+
+      <h2>General Structure</h2>
+      <pre><code class="language-c">returnType function(parameters)
+{
+    if(base_condition)
+    {
+        return value;
+    }
+
+    return function(smaller_problem);
+}</code></pre>
+
+      <h2>First Recursive Program</h2>
+      <p>Print numbers from <strong>1 to 5</strong>.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void print(int n)
+{
+    if(n == 6)
+        return;
+
+    printf("%d ", n);
+
+    print(n + 1);
+}
+
+int main()
+{
+    print(1);
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h2>Step-by-Step Execution</h2>
+      <p>Call:</p>
+      <pre><code class="language-c">print(1);</code></pre>
+
+      <h3>First Call</h3>
+      <pre><code class="language-none">print(1)
+
+Print 1
+
+↓
+
+print(2)</code></pre>
+
+      <h3>Second Call</h3>
+      <pre><code class="language-none">print(2)
+
+Print 2
+
+↓
+
+print(3)</code></pre>
+
+      <h3>Third Call</h3>
+      <pre><code class="language-none">print(3)
+
+Print 3
+
+↓
+
+print(4)</code></pre>
+
+      <h3>Fourth Call</h3>
+      <pre><code class="language-none">print(4)
+
+Print 4
+
+↓
+
+print(5)</code></pre>
+
+      <h3>Fifth Call</h3>
+      <pre><code class="language-none">print(5)
+
+Print 5
+
+↓
+
+print(6)</code></pre>
+
+      <h3>Sixth Call</h3>
+      <pre><code class="language-none">print(6)
+
+Base Case
+
+Return</code></pre>
+
+      <h2>Recursion Flow</h2>
+      <pre><code class="language-none">print(1)
+
+↓
+
+print(2)
+
+↓
+
+print(3)
+
+↓
+
+print(4)
+
+↓
+
+print(5)
+
+↓
+
+print(6)
+
+↓
+
+Return
+
+↑
+
+Return
+
+↑
+
+Return
+
+↑
+
+Return
+
+↑
+
+Return
+
+↑
+
+Program Ends</code></pre>
+      <p>Notice that after reaching the <strong>base case</strong>, all function calls return one by one.</p>
+
+      <h2>Factorial Example</h2>
+      <p>The factorial of a number is defined as:</p>
+      <pre><code class="language-none">5! = 5 × 4 × 3 × 2 × 1
+
+= 120</code></pre>
+      <p>Recursive definition:</p>
+      <pre><code class="language-none">n! = n × (n − 1)!
+
+0! = 1</code></pre>
+
+      <h3>Recursive Program</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int factorial(int n)
+{
+    if(n == 0)
+        return 1;
+
+    return n * factorial(n - 1);
+}
+
+int main()
+{
+    printf("%d", factorial(5));
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">120</code></pre>
+
+      <h2>How Factorial Works</h2>
+      <pre><code class="language-none">factorial(5)
+
+↓
+
+5 × factorial(4)
+
+↓
+
+5 × 4 × factorial(3)
+
+↓
+
+5 × 4 × 3 × factorial(2)
+
+↓
+
+5 × 4 × 3 × 2 × factorial(1)
+
+↓
+
+5 × 4 × 3 × 2 × 1 × factorial(0)
+
+↓
+
+1</code></pre>
+      <p>Now the values return upward:</p>
+      <pre><code class="language-none">1
+
+↓
+
+1
+
+↓
+
+2
+
+↓
+
+6
+
+↓
+
+24
+
+↓
+
+120</code></pre>
+
+      <h2>What Happens Inside Memory?</h2>
+      <p>Every recursive call is stored in a special memory area called the <strong>Call Stack</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">factorial(3)
+
+↓
+
+factorial(2)
+
+↓
+
+factorial(1)
+
+↓
+
+factorial(0)</code></pre>
+      <p>Call Stack:</p>
+      <pre><code class="language-none">┌──────────────┐
+│ factorial(0) │
+├──────────────┤
+│ factorial(1) │
+├──────────────┤
+│ factorial(2) │
+├──────────────┤
+│ factorial(3) │
+└──────────────┘</code></pre>
+      <p>After the base case is reached, each function is removed from the stack in <strong>Last In, First Out (LIFO)</strong> order.</p>
+
+      <h2>Advantages of Recursion</h2>
+      <ul>
+        <li>Code is shorter and easier to understand for many problems.</li>
+        <li>Naturally solves divide-and-conquer problems.</li>
+        <li>Useful for tree and graph traversals.</li>
+        <li>Simplifies problems like factorial, Fibonacci, and Tower of Hanoi.</li>
+      </ul>
+
+      <h2>Disadvantages of Recursion</h2>
+      <ul>
+        <li>Uses extra memory due to the call stack.</li>
+        <li>Can be slower than iteration because of function call overhead.</li>
+        <li>Missing a proper base case can lead to infinite recursion and <strong>Stack Overflow</strong>.</li>
+      </ul>
+
+      <h2>Recursion vs Iteration</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Recursion</th>
+            <th>Iteration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Uses</td><td>Function calls</td><td>Loops (<code>for</code>, <code>while</code>)</td></tr>
+          <tr><td>Memory</td><td>More (Call Stack)</td><td>Less</td></tr>
+          <tr><td>Speed</td><td>Usually slower</td><td>Usually faster</td></tr>
+          <tr><td>Code</td><td>Shorter</td><td>Longer</td></tr>
+          <tr><td>Best For</td><td>Divide &amp; Conquer, Trees</td><td>Simple repetitive tasks</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Applications of Recursion</h2>
+      <ul>
+        <li>Factorial</li>
+        <li>Fibonacci Series</li>
+        <li>Binary Search</li>
+        <li>Merge Sort</li>
+        <li>Quick Sort</li>
+        <li>Tower of Hanoi</li>
+        <li>Tree Traversal</li>
+        <li>Graph Traversal</li>
+        <li>Backtracking (N-Queens, Sudoku)</li>
+        <li>Divide and Conquer algorithms</li>
+      </ul>
+
+      <h2>Common Mistakes</h2>
+
+      <h3>1. Missing Base Case</h3>
+      <pre><code class="language-c">void fun()
+{
+    fun();
+}</code></pre>
+      <p>❌ Infinite recursion → Stack Overflow.</p>
+
+      <h3>2. Base Case Never Reached</h3>
+      <pre><code class="language-c">void fun(int n)
+{
+    if(n == 0)
+        return;
+
+    fun(n + 1);
+}</code></pre>
+      <p>❌ <code>n</code> keeps increasing, so <code>n == 0</code> is never reached.</p>
+
+      <h3>3. Wrong Recursive Call</h3>
+      <pre><code class="language-c">factorial(n);</code></pre>
+      <p>❌ The problem size never decreases.</p>
+      <p>Correct:</p>
+      <pre><code class="language-c">factorial(n - 1);</code></pre>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>A recursive function <strong>calls itself</strong>.</li>
+        <li>Every recursive function needs a <strong>base case</strong>.</li>
+        <li>The recursive call should work on a <strong>smaller problem</strong>.</li>
+        <li>Function calls are stored in the <strong>call stack</strong>.</li>
+        <li>Recursion is ideal for divide-and-conquer and hierarchical problems.</li>
+        <li>Without a proper base case, recursion results in <strong>infinite recursion</strong> and <strong>stack overflow</strong>.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

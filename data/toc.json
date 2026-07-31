@@ -284,6 +284,10 @@
         {
           "title": "Radix Sort",
           "path": "lessons/unit7-radix-sort.html"
+        },
+        {
+          "title": "Introduction to Recursion",
+          "path": "lessons/unit7-introduction-to-recursion.html"
         }
       ]
     }
