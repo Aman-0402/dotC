@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Names — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Names</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Names</h1>
+
+      <h2>What are Names in C?</h2>
+      <p>A <strong>name</strong> is a human-readable label given to different program elements so that programmers can easily identify and use them.</p>
+      <p>In C, names are used for:</p>
+      <ul>
+        <li>Variables</li>
+        <li>Functions</li>
+        <li>Arrays</li>
+        <li>Structures</li>
+        <li>Unions</li>
+        <li>Enums</li>
+        <li>Labels</li>
+        <li>Typedefs</li>
+      </ul>
+      <p>A <strong>name</strong> is usually an <strong>identifier</strong>, but the term <strong>name</strong> is more general.</p>
+
+      <h2>Definition</h2>
+      <blockquote>
+        <p><strong>A name is a meaningful label given by the programmer to identify a program element.</strong></p>
+      </blockquote>
+
+      <h2>Why Do We Need Names?</h2>
+      <p>Imagine a program without names.</p>
+      <p>Instead of writing:</p>
+      <pre><code class="language-c">int studentMarks = 95;</code></pre>
+      <p>Suppose you had to remember only memory addresses:</p>
+      <pre><code class="language-none">Memory Address: 0x7ffe5a20</code></pre>
+      <p>That would be extremely difficult.</p>
+      <p>Names make programs:</p>
+      <ul>
+        <li>Easy to read</li>
+        <li>Easy to write</li>
+        <li>Easy to debug</li>
+        <li>Easy to maintain</li>
+      </ul>
+
+      <h2>Examples of Names</h2>
+      <pre><code class="language-c">int age = 20;
+float salary = 50000.50;
+char grade = 'A';</code></pre>
+      <p>Names are:</p>
+      <ul>
+        <li><code>age</code></li>
+        <li><code>salary</code></li>
+        <li><code>grade</code></li>
+      </ul>
+      <p>Another example:</p>
+      <pre><code class="language-c">int add(int a, int b)
+{
+    return a + b;
+}</code></pre>
+      <p>Names are:</p>
+      <ul>
+        <li><code>add</code></li>
+        <li><code>a</code></li>
+        <li><code>b</code></li>
+      </ul>
+
+      <h2>Types of Names in C</h2>
+
+      <h3>1. Variable Name</h3>
+      <pre><code class="language-c">int marks = 90;</code></pre>
+      <p>Name:</p>
+      <pre><code class="language-none">marks</code></pre>
+
+      <h3>2. Function Name</h3>
+      <pre><code class="language-c">void display()
+{
+}</code></pre>
+      <p>Name:</p>
+      <pre><code class="language-none">display</code></pre>
+
+      <h3>3. Array Name</h3>
+      <pre><code class="language-c">int numbers[5];</code></pre>
+      <p>Name:</p>
+      <pre><code class="language-none">numbers</code></pre>
+
+      <h3>4. Structure Name</h3>
+      <pre><code class="language-c">struct Student
+{
+    int id;
+};</code></pre>
+      <p>Name:</p>
+      <pre><code class="language-none">Student</code></pre>
+
+      <h3>5. Union Name</h3>
+      <pre><code class="language-c">union Data
+{
+    int x;
+};</code></pre>
+      <p>Name:</p>
+      <pre><code class="language-none">Data</code></pre>
+
+      <h3>6. Enumeration Name</h3>
+      <pre><code class="language-c">enum Day
+{
+    MON,
+    TUE
+};</code></pre>
+      <p>Name:</p>
+      <pre><code class="language-none">Day</code></pre>
+
+      <h3>7. Label Name</h3>
+      <pre><code class="language-c">start:
+
+printf("Hello");</code></pre>
+      <p>Label name:</p>
+      <pre><code class="language-none">start</code></pre>
+
+      <h2>Rules for Naming</h2>
+      <p>Since names are identifiers, they follow the same rules.</p>
+
+      <h3>Rule 1</h3>
+      <p>Must begin with</p>
+      <ul>
+        <li>Letter</li>
+        <li>Underscore</li>
+      </ul>
+      <p>Correct</p>
+      <pre><code class="language-c">student
+_total</code></pre>
+      <p>Wrong</p>
+      <pre><code class="language-c">2student</code></pre>
+
+      <h3>Rule 2</h3>
+      <p>Digits are allowed after the first character.</p>
+      <p>Correct</p>
+      <pre><code class="language-c">student1
+roll2026</code></pre>
+
+      <h3>Rule 3</h3>
+      <p>Spaces are not allowed.</p>
+      <p>Wrong</p>
+      <pre><code class="language-c">student age</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">studentAge</code></pre>
+
+      <h3>Rule 4</h3>
+      <p>Special symbols are not allowed except <code>_</code>.</p>
+      <p>Wrong</p>
+      <pre><code class="language-c">salary@</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">salary</code></pre>
+
+      <h3>Rule 5</h3>
+      <p>Cannot use keywords.</p>
+      <p>Wrong</p>
+      <pre><code class="language-c">int if;</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">int marks;</code></pre>
+
+      <h3>Rule 6</h3>
+      <p>Names are case-sensitive.</p>
+      <pre><code class="language-c">age
+Age
+AGE</code></pre>
+      <p>These represent three different names.</p>
+
+      <h2>Good Names vs Bad Names</h2>
+
+      <h3>Poor</h3>
+      <pre><code class="language-c">int a;
+int b;
+int c;</code></pre>
+      <p>What do these variables represent?</p>
+      <p>It is impossible to know without reading the entire program.</p>
+
+      <h3>Better</h3>
+      <pre><code class="language-c">int marks;
+int age;
+int salary;</code></pre>
+      <p>Now the purpose is clear.</p>
+
+      <h3>Best</h3>
+      <pre><code class="language-c">int studentTotalMarks;</code></pre>
+      <p>The name clearly indicates its purpose.</p>
+
+      <h2>Naming Styles</h2>
+
+      <h3>1. camelCase (Most Common)</h3>
+      <pre><code class="language-c">studentAge
+totalMarks
+employeeSalary</code></pre>
+      <p>First word starts with a lowercase letter, and each following word starts with an uppercase letter.</p>
+
+      <h3>2. snake_case</h3>
+      <pre><code class="language-c">student_age
+total_marks
+employee_salary</code></pre>
+      <p>Words are separated by underscores.</p>
+
+      <h3>3. PascalCase</h3>
+      <pre><code class="language-c">StudentAge
+EmployeeSalary</code></pre>
+      <p>Usually used for structure names or type names in many coding styles.</p>
+
+      <h3>4. UPPER_CASE</h3>
+      <p>Usually used for symbolic constants or macros.</p>
+      <pre><code class="language-c">#define MAX_SIZE 100
+
+#define PI 3.14159</code></pre>
+
+      <h2>Choosing Meaningful Names</h2>
+
+      <h3>Poor</h3>
+      <pre><code class="language-c">int x;</code></pre>
+
+      <h3>Better</h3>
+      <pre><code class="language-c">int number;</code></pre>
+
+      <h3>Best</h3>
+      <pre><code class="language-c">int totalStudentMarks;</code></pre>
+      <p>Another example</p>
+      <p>Poor</p>
+      <pre><code class="language-c">int d;</code></pre>
+      <p>Better</p>
+      <pre><code class="language-c">int days;</code></pre>
+      <p>Best</p>
+      <pre><code class="language-c">int numberOfWorkingDays;</code></pre>
+
+      <h2>Examples</h2>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int studentAge = 20;
+
+    printf("%d", studentAge);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20</code></pre>
+      <p>Good name:</p>
+      <pre><code class="language-none">studentAge</code></pre>
+
+      <h3>Example 2</h3>
+      <pre><code class="language-c">float monthlySalary = 50000.50;</code></pre>
+      <p>Good descriptive name.</p>
+
+      <h3>Example 3</h3>
+      <pre><code class="language-c">char studentGrade = 'A';</code></pre>
+      <p>Clear and meaningful.</p>
+
+      <h3>Example 4</h3>
+      <pre><code class="language-c">int calculateArea(int length, int width)
+{
+    return length * width;
+}</code></pre>
+      <p>Meaningful names:</p>
+      <ul>
+        <li><code>calculateArea</code></li>
+        <li><code>length</code></li>
+        <li><code>width</code></li>
+      </ul>
+
+      <h2>Bad Naming Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 10;
+    int b = 20;
+
+    int c = a + b;
+
+    printf("%d", c);
+
+    return 0;
+}</code></pre>
+      <p>Works correctly, but the names do not explain their purpose.</p>
+
+      <h2>Improved Version</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int firstNumber = 10;
+    int secondNumber = 20;
+
+    int sum = firstNumber + secondNumber;
+
+    printf("%d", sum);
+
+    return 0;
+}</code></pre>
+      <p>Now the code is much easier to understand.</p>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Using meaningless names</h3>
+      <p>Poor</p>
+      <pre><code class="language-c">int abc;</code></pre>
+      <p>Better</p>
+      <pre><code class="language-c">int studentMarks;</code></pre>
+
+      <h3>2. Using keywords</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">int while;</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">int total;</code></pre>
+
+      <h3>3. Using spaces</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">int total marks;</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">int totalMarks;</code></pre>
+
+      <h3>4. Mixing naming styles</h3>
+      <p>Avoid</p>
+      <pre><code class="language-c">studentAge
+student_age
+StudentAge</code></pre>
+      <p>in the same project unless a coding standard requires it.</p>
+      <p>Instead, use one style consistently.</p>
+
+      <h3>5. Using confusing abbreviations</h3>
+      <p>Poor</p>
+      <pre><code class="language-c">int stdmrks;</code></pre>
+      <p>Better</p>
+      <pre><code class="language-c">int studentMarks;</code></pre>
+
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Use <strong>meaningful names</strong>.</li>
+        <li>Follow <strong>one naming convention</strong> throughout the project.</li>
+        <li>Avoid unnecessary abbreviations.</li>
+        <li>Keep names readable.</li>
+        <li>Use <strong>camelCase</strong> or <strong>snake_case</strong> consistently.</li>
+        <li>Use <strong>UPPER_CASE</strong> for macros and symbolic constants.</li>
+        <li>Use nouns for variables and verbs for functions.</li>
+      </ul>
+      <p>Examples:</p>
+      <pre><code class="language-c">int studentCount;
+float averageMarks;
+char grade;</code></pre>
+      <p>Function names:</p>
+      <pre><code class="language-c">calculateTotal();
+printReport();
+findMaximum();</code></pre>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is a name in C?</h3>
+      <p>A name is a meaningful label given by the programmer to identify program elements such as variables, functions, arrays, and structures.</p>
+
+      <h3>2. What is the difference between a name and an identifier?</h3>
+      <ul>
+        <li><strong>Identifier</strong> is the technical term defined by the C language.</li>
+        <li><strong>Name</strong> is a general term referring to what the programmer calls a program element.</li>
+      </ul>
+      <p>In practice, most names in C are identifiers.</p>
+
+      <h3>3. Why should names be meaningful?</h3>
+      <p>Meaningful names improve readability, maintenance, debugging, and collaboration.</p>
+
+      <h3>4. Which naming style is most commonly used for variables in C?</h3>
+      <p><strong>camelCase</strong> and <strong>snake_case</strong> are the most commonly used styles.</p>
+
+      <h3>5. How should constants be named?</h3>
+      <p>Constants defined using <code>#define</code> are commonly written in <strong>UPPER_CASE</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">#define MAX_SIZE 100</code></pre>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define a name in C.</li>
+        <li>Differentiate between a name and an identifier.</li>
+        <li>Explain different naming styles.</li>
+        <li>Why are meaningful names important?</li>
+        <li>What naming style is generally used for macros?</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Write a program using meaningful variable names.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int studentAge = 20;
+    float studentPercentage = 89.5;
+
+    printf("Age: %d\n", studentAge);
+    printf("Percentage: %.1f\n", studentPercentage);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Age: 20
+Percentage: 89.5</code></pre>
+
+      <h4>Q2. Write a function with a meaningful name.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int calculateSquare(int number)
+{
+    return number * number;
+}
+
+int main()
+{
+    printf("%d", calculateSquare(5));
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">25</code></pre>
+
+      <h4>Q3. Improve the following names.</h4>
+      <p><strong>Poor Version</strong></p>
+      <pre><code class="language-c">int a;
+int b;
+int c;</code></pre>
+      <p><strong>Better Version</strong></p>
+      <pre><code class="language-c">int firstNumber;
+int secondNumber;
+int totalSum;</code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>A <strong>name</strong> is a meaningful label given to program elements.</li>
+        <li>All names in C follow the <strong>identifier naming rules</strong>.</li>
+        <li>Use <strong>descriptive and meaningful names</strong> to improve readability.</li>
+        <li>Follow a <strong>consistent naming convention</strong> such as <strong>camelCase</strong> or <strong>snake_case</strong>.</li>
+        <li>Use <strong>UPPER_CASE</strong> for macros and symbolic constants.</li>
+        <li>Good naming practices make programs easier to understand, debug, and maintain.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
