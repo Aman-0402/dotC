@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Functions — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 4 / Functions</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Functions</h1>
+
+      <h2>What is a Function?</h2>
+      <p>A <strong>function</strong> is a block of code that performs a specific task. Instead of writing the same code multiple times, we can place it inside a function and call it whenever needed.</p>
+      <p>Functions make programs:</p>
+      <ul>
+        <li>Modular</li>
+        <li>Reusable</li>
+        <li>Easy to understand</li>
+        <li>Easy to debug</li>
+        <li>Easy to maintain</li>
+      </ul>
+
+      <h2>Advantages of Functions</h2>
+      <ul>
+        <li>Reduces code duplication</li>
+        <li>Improves readability</li>
+        <li>Makes debugging easier</li>
+        <li>Simplifies program maintenance</li>
+        <li>Encourages code reusability</li>
+      </ul>
+
+      <h2>Types of Functions</h2>
+      <p>Functions in C are mainly divided into two types.</p>
+
+      <h3>1. Library Functions</h3>
+      <p>These are predefined functions provided by the C Standard Library.</p>
+      <p>Examples:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Header File</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>printf()</code></td><td><code>&lt;stdio.h&gt;</code></td><td>Display output</td></tr>
+          <tr><td><code>scanf()</code></td><td><code>&lt;stdio.h&gt;</code></td><td>Read input</td></tr>
+          <tr><td><code>strlen()</code></td><td><code>&lt;string.h&gt;</code></td><td>Find string length</td></tr>
+          <tr><td><code>sqrt()</code></td><td><code>&lt;math.h&gt;</code></td><td>Square root</td></tr>
+          <tr><td><code>pow()</code></td><td><code>&lt;math.h&gt;</code></td><td>Power calculation</td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello World");
+
+    return 0;
+}</code></pre>
+      <p>Here, <code>printf()</code> is a library function.</p>
+
+      <h3>2. User-Defined Functions</h3>
+      <p>These are functions created by the programmer to perform a specific task.</p>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void display()
+{
+    printf("Welcome to C Programming");
+}
+
+int main()
+{
+    display();
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Welcome to C Programming</code></pre>
+
+      <h2>Components of a Function</h2>
+      <p>A function has three important parts.</p>
+      <ol>
+        <li>Function Declaration (Prototype)</li>
+        <li>Function Definition</li>
+        <li>Function Call</li>
+      </ol>
+
+      <h2>Function Declaration (Prototype)</h2>
+      <p>A function declaration tells the compiler:</p>
+      <ul>
+        <li>Function name</li>
+        <li>Return type</li>
+        <li>Number of parameters</li>
+        <li>Type of parameters</li>
+      </ul>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">return_type function_name(parameter_list);</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">int add(int, int);</code></pre>
+
+      <h2>Function Definition</h2>
+      <p>The definition contains the actual code that executes when the function is called.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">return_type function_name(parameters)
+{
+    // statements
+}</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">int add(int a, int b)
+{
+    return a + b;
+}</code></pre>
+
+      <h2>Function Call</h2>
+      <p>A function call transfers program control to the function.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">function_name(arguments);</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">sum = add(10,20);</code></pre>
+
+      <h2>Complete Function Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int add(int, int);
+
+int main()
+{
+    int result;
+
+    result = add(10,20);
+
+    printf("Sum = %d", result);
+
+    return 0;
+}
+
+int add(int a, int b)
+{
+    return a+b;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Sum = 30</code></pre>
+
+      <h2>Function Flow</h2>
+      <pre><code class="language-none">main()
+    |
+    |
+Function Call
+    |
+    |
+Function Executes
+    |
+    |
+Return Value
+    |
+    |
+main() Continues</code></pre>
+
+      <h2>Anatomy of a Function</h2>
+      <pre><code class="language-c">int multiply(int a, int b)
+{
+    return a*b;
+}</code></pre>
+      <table>
+        <thead>
+          <tr>
+            <th>Part</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>int</code></td><td>Return type</td></tr>
+          <tr><td><code>multiply</code></td><td>Function name</td></tr>
+          <tr><td><code>int a,int b</code></td><td>Parameters</td></tr>
+          <tr><td><code>return a*b;</code></td><td>Return statement</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Return Type</h2>
+      <p>The return type specifies what value the function sends back to the caller.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int square(int n)
+{
+    return n*n;
+}</code></pre>
+      <p>Returns an integer.</p>
+
+      <p>Example</p>
+      <pre><code class="language-c">float average(float a,float b)
+{
+    return (a+b)/2;
+}</code></pre>
+      <p>Returns a floating-point value.</p>
+
+      <p>Example</p>
+      <pre><code class="language-c">void message()
+{
+    printf("Hello");
+}</code></pre>
+      <p>Returns nothing because the return type is <code>void</code>.</p>
+
+      <h2>Parameters and Arguments</h2>
+      <h3>Parameters</h3>
+      <p>Variables declared in the function definition.</p>
+      <pre><code class="language-c">int add(int a,int b)</code></pre>
+      <p>Here,</p>
+      <p><code>a</code> and <code>b</code> are <strong>parameters</strong>.</p>
+
+      <h3>Arguments</h3>
+      <p>Actual values passed during function call.</p>
+      <pre><code class="language-c">add(10,20);</code></pre>
+      <p>Here,</p>
+      <p><code>10</code> and <code>20</code> are <strong>arguments</strong>.</p>
+
+      <h2>Types of User-Defined Functions</h2>
+      <p>Functions can be classified based on parameters and return values.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Arguments</th>
+            <th>Return Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Type 1</td><td>No</td><td>No</td></tr>
+          <tr><td>Type 2</td><td>Yes</td><td>No</td></tr>
+          <tr><td>Type 3</td><td>No</td><td>Yes</td></tr>
+          <tr><td>Type 4</td><td>Yes</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Type 1: No Arguments, No Return Value</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void display()
+{
+    printf("Welcome");
+}
+
+int main()
+{
+    display();
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Welcome</code></pre>
+
+      <h2>Type 2: Arguments, No Return Value</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void add(int a,int b)
+{
+    printf("%d",a+b);
+}
+
+int main()
+{
+    add(10,20);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">30</code></pre>
+
+      <h2>Type 3: No Arguments, Return Value</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int getNumber()
+{
+    return 100;
+}
+
+int main()
+{
+    int x;
+
+    x = getNumber();
+
+    printf("%d",x);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">100</code></pre>
+
+      <h2>Type 4: Arguments and Return Value</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int multiply(int a,int b)
+{
+    return a*b;
+}
+
+int main()
+{
+    int ans;
+
+    ans = multiply(5,4);
+
+    printf("%d",ans);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20</code></pre>
+
+      <h2>Call by Value</h2>
+      <p>In <strong>Call by Value</strong>, a copy of the actual argument is passed to the function.</p>
+      <p>Changes made inside the function <strong>do not affect</strong> the original variable.</p>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void change(int x)
+{
+    x = 100;
+}
+
+int main()
+{
+    int a = 10;
+
+    change(a);
+
+    printf("%d",a);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10</code></pre>
+      <p>The value of <code>a</code> remains unchanged because only a copy was modified.</p>
+
+      <h2>Call by Reference</h2>
+      <p>In <strong>Call by Reference</strong>, the address of the variable is passed to the function using pointers.</p>
+      <p>Changes made inside the function <strong>affect</strong> the original variable.</p>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void change(int *x)
+{
+    *x = 100;
+}
+
+int main()
+{
+    int a = 10;
+
+    change(&amp;a);
+
+    printf("%d",a);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">100</code></pre>
+      <p>The original variable is modified because the function receives its memory address.</p>
+
+      <h2>Difference Between Call by Value and Call by Reference</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Call by Value</th>
+            <th>Call by Reference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>What is Passed?</td><td>Copy of value</td><td>Address of variable</td></tr>
+          <tr><td>Original Value Changes?</td><td>No</td><td>Yes</td></tr>
+          <tr><td>Uses Pointers?</td><td>No</td><td>Yes</td></tr>
+          <tr><td>Memory Usage</td><td>More (copy created)</td><td>Less (same memory used)</td></tr>
+          <tr><td>Suitable For</td><td>Read-only operations</td><td>Updating variables</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Complete Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int square(int n)
+{
+    return n*n;
+}
+
+void message()
+{
+    printf("Learning Functions in C\n");
+}
+
+int main()
+{
+    int num = 6;
+
+    message();
+
+    printf("Square = %d\n", square(num));
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Learning Functions in C
+Square = 36</code></pre>
+
+      <h2>Important Notes</h2>
+      <ul>
+        <li>A function is a reusable block of code that performs a specific task.</li>
+        <li>Every function has a <strong>return type</strong>, <strong>function name</strong>, and <strong>parameter list</strong>.</li>
+        <li>A function generally involves three steps: <strong>declaration</strong>, <strong>definition</strong>, and <strong>call</strong>.</li>
+        <li>Library functions are predefined, while user-defined functions are created by the programmer.</li>
+        <li>Functions can have arguments, return values, both, or neither.</li>
+        <li>In <strong>Call by Value</strong>, changes made inside the function do not affect the original variable.</li>
+        <li>In <strong>Call by Reference</strong>, the original variable can be modified because its address is passed.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

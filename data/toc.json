@@ -177,6 +177,10 @@
         {
           "title": "String Handling Functions",
           "path": "lessons/unit4-string-handling-functions.html"
+        },
+        {
+          "title": "Functions",
+          "path": "lessons/unit4-functions.html"
         }
       ]
     }
