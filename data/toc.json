@@ -198,6 +198,10 @@
         {
           "title": "File Handling",
           "path": "lessons/unit5-file-handling.html"
+        },
+        {
+          "title": "File Operations",
+          "path": "lessons/unit5-file-operations.html"
         }
       ]
     }

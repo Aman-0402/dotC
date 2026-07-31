@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File Operations — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 5 / File Operations</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>File Operations</h1>
+
+      <p>File operations are the functions provided by C to <strong>create, open, read, write, modify, rename, and delete files</strong>.</p>
+      <p>All file handling functions are declared in the <strong><code>&lt;stdio.h&gt;</code></strong> header file.</p>
+
+      <h2>File Operations Overview</h2>
+      <pre><code class="language-none">                File Operations
+                     │
+      ┌──────────────┼──────────────┐
+      │              │              │
+    Open          Read           Write
+      │              │              │
+      └──────────────┼──────────────┘
+                     │
+                 Close File
+                     │
+          Rename / Delete File</code></pre>
+
+      <h2>1. fopen()</h2>
+      <h3>Definition</h3>
+      <p>The <code>fopen()</code> function is used to <strong>open an existing file or create a new file</strong>.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">FILE *fp;
+
+fp = fopen("filename", "mode");</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">FILE *fp;
+
+fp = fopen("student.txt", "r");</code></pre>
+      <p>If successful</p>
+      <pre><code class="language-none">fp → Valid Address</code></pre>
+      <p>If unsuccessful</p>
+      <pre><code class="language-none">fp = NULL</code></pre>
+      <h3>Example with Error Checking</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("student.txt", "r");
+
+    if(fp == NULL)
+    {
+        printf("Cannot Open File");
+        return 1;
+    }
+
+    printf("File Opened Successfully");
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+
+      <h2>2. fclose()</h2>
+      <h3>Definition</h3>
+      <p>The <code>fclose()</code> function closes an opened file.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">fclose(fp);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">FILE *fp;
+
+fp = fopen("student.txt","r");
+
+fclose(fp);</code></pre>
+      <h3>Why Close Files?</h3>
+      <ul>
+        <li>Saves data</li>
+        <li>Releases memory</li>
+        <li>Prevents corruption</li>
+        <li>Avoids resource leaks</li>
+      </ul>
+
+      <h2>3. fprintf()</h2>
+      <h3>Definition</h3>
+      <p>Writes <strong>formatted data</strong> into a text file.</p>
+      <p>Works similarly to <code>printf()</code>.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">fprintf(file_pointer, "format", values);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("data.txt","w");
+
+    fprintf(fp,"%d\n",100);
+    fprintf(fp,"%s\n","Aman");
+    fprintf(fp,"%.2f\n",95.5);
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>File Content</p>
+      <pre><code class="language-none">100
+Aman
+95.50</code></pre>
+
+      <h2>4. fscanf()</h2>
+      <h3>Definition</h3>
+      <p>Reads formatted data from a text file.</p>
+      <p>Works similarly to <code>scanf()</code>.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">fscanf(file_pointer,"format",&amp;variables);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    int roll;
+    char name[20];
+
+    fp = fopen("data.txt","r");
+
+    fscanf(fp,"%d",&amp;roll);
+    fscanf(fp,"%s",name);
+
+    printf("%d\n",roll);
+    printf("%s",name);
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">100
+Aman</code></pre>
+
+      <h2>5. fgetc()</h2>
+      <h3>Definition</h3>
+      <p>Reads <strong>one character</strong> from a file.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">character = fgetc(file_pointer);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    char ch;
+
+    fp = fopen("data.txt","r");
+
+    while((ch = fgetc(fp)) != EOF)
+    {
+        printf("%c", ch);
+    }
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+
+      <h2>6. fputc()</h2>
+      <h3>Definition</h3>
+      <p>Writes <strong>one character</strong> into a file.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">fputc(character, file_pointer);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("letters.txt","w");
+
+    fputc('A', fp);
+    fputc('B', fp);
+    fputc('C', fp);
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>File Content</p>
+      <pre><code class="language-none">ABC</code></pre>
+
+      <h2>7. fgets()</h2>
+      <h3>Definition</h3>
+      <p>Reads an entire line (or a specified number of characters) from a file.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">fgets(array, size, file_pointer);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    char str[100];
+
+    fp = fopen("data.txt","r");
+
+    fgets(str,100,fp);
+
+    printf("%s",str);
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+
+      <h2>8. fputs()</h2>
+      <h3>Definition</h3>
+      <p>Writes an entire string into a file.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">fputs(string, file_pointer);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("message.txt","w");
+
+    fputs("Welcome to C Programming", fp);
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>File Content</p>
+      <pre><code class="language-none">Welcome to C Programming</code></pre>
+
+      <h2>9. fread()</h2>
+      <h3>Definition</h3>
+      <p>Reads binary data from a binary file.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">fread(address, size, count, file_pointer);</code></pre>
+      <p>Parameters</p>
+      <ul>
+        <li><strong>address</strong> → Variable address</li>
+        <li><strong>size</strong> → Size of one record</li>
+        <li><strong>count</strong> → Number of records</li>
+        <li><strong>file_pointer</strong> → Binary file</li>
+      </ul>
+      <h3>Example</h3>
+      <pre><code class="language-c">struct Student s;
+
+FILE *fp;
+
+fp = fopen("student.dat","rb");
+
+fread(&amp;s, sizeof(s), 1, fp);
+
+fclose(fp);</code></pre>
+
+      <h2>10. fwrite()</h2>
+      <h3>Definition</h3>
+      <p>Writes binary data into a binary file.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">fwrite(address, size, count, file_pointer);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">struct Student s =
+{
+    101,
+    "Aman",
+    95.5
+};
+
+FILE *fp;
+
+fp = fopen("student.dat","wb");
+
+fwrite(&amp;s, sizeof(s), 1, fp);
+
+fclose(fp);</code></pre>
+
+      <h2>11. remove()</h2>
+      <h3>Definition</h3>
+      <p>Deletes a file permanently.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">remove("filename");</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    remove("student.txt");
+
+    printf("File Deleted");
+
+    return 0;
+}</code></pre>
+
+      <h2>12. rename()</h2>
+      <h3>Definition</h3>
+      <p>Changes the name of a file.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">rename("oldname","newname");</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    rename("student.txt","record.txt");
+
+    printf("File Renamed");
+
+    return 0;
+}</code></pre>
+
+      <h2>Summary of File Functions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+            <th>File Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>fopen()</code></td><td>Open/Create file</td><td>Text &amp; Binary</td></tr>
+          <tr><td><code>fclose()</code></td><td>Close file</td><td>Text &amp; Binary</td></tr>
+          <tr><td><code>fprintf()</code></td><td>Write formatted data</td><td>Text</td></tr>
+          <tr><td><code>fscanf()</code></td><td>Read formatted data</td><td>Text</td></tr>
+          <tr><td><code>fgetc()</code></td><td>Read one character</td><td>Text</td></tr>
+          <tr><td><code>fputc()</code></td><td>Write one character</td><td>Text</td></tr>
+          <tr><td><code>fgets()</code></td><td>Read one line/string</td><td>Text</td></tr>
+          <tr><td><code>fputs()</code></td><td>Write one line/string</td><td>Text</td></tr>
+          <tr><td><code>fread()</code></td><td>Read binary data</td><td>Binary</td></tr>
+          <tr><td><code>fwrite()</code></td><td>Write binary data</td><td>Binary</td></tr>
+          <tr><td><code>remove()</code></td><td>Delete file</td><td>Both</td></tr>
+          <tr><td><code>rename()</code></td><td>Rename file</td><td>Both</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Complete File Handling Flow</h2>
+      <pre><code class="language-none">            Start
+              │
+              ▼
+      Create FILE Pointer
+              │
+              ▼
+      Open File (fopen)
+              │
+              ▼
+      File Opened?
+        │          │
+       No         Yes
+        │          │
+ Display Error     ▼
+               Read/Write
+                  │
+                  ▼
+            Close File
+             (fclose)
+                  │
+                  ▼
+         Rename/Delete (Optional)
+                  │
+                  ▼
+                 End</code></pre>
+
+      <h2>Example Program (Write and Read)</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+    char name[30];
+
+    fp = fopen("student.txt","w");
+
+    fprintf(fp,"Aman");
+
+    fclose(fp);
+
+    fp = fopen("student.txt","r");
+
+    fscanf(fp,"%s",name);
+
+    printf("Name : %s",name);
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Name : Aman</code></pre>
+
+      <h2>Real-World Applications</h2>
+      <ul>
+        <li>Student Record Management</li>
+        <li>Banking Systems</li>
+        <li>Payroll Systems</li>
+        <li>Hospital Databases</li>
+        <li>Inventory Management</li>
+        <li>Configuration Files</li>
+        <li>Log Files</li>
+        <li>Game Save Files</li>
+        <li>Employee Management</li>
+        <li>Data Backup Systems</li>
+      </ul>
+
+      <h2>Common Mistakes</h2>
+      <p>❌ Forgetting to check if <code>fopen()</code> returns <code>NULL</code>.</p>
+      <p>❌ Forgetting to call <code>fclose()</code>.</p>
+      <p>❌ Using <code>"r"</code> mode for a file that doesn't exist.</p>
+      <p>❌ Reading binary files using text functions (<code>fprintf()</code>, <code>fscanf()</code>).</p>
+      <p>❌ Opening binary files without <code>b</code> mode (<code>"rb"</code>, <code>"wb"</code>).</p>
+      <p>❌ Reading beyond the end of a file without checking <code>EOF</code>.</p>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li><code>fopen()</code> opens or creates a file.</li>
+        <li><code>fclose()</code> closes the file and saves changes.</li>
+        <li><code>fprintf()</code> and <code>fscanf()</code> work with formatted text data.</li>
+        <li><code>fgetc()</code> and <code>fputc()</code> handle one character at a time.</li>
+        <li><code>fgets()</code> and <code>fputs()</code> work with complete strings or lines.</li>
+        <li><code>fread()</code> and <code>fwrite()</code> are used for efficient binary file operations.</li>
+        <li><code>remove()</code> deletes a file permanently, while <code>rename()</code> changes its name.</li>
+        <li>Always verify successful file opening and close every file after use to ensure safe and reliable file handling.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
