@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Variables — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Variables</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Variables</h1>
+
+      <h2>What is a Variable?</h2>
+      <p>A <strong>variable</strong> is a <strong>named memory location</strong> used to store data. The value stored in a variable can change during program execution, which is why it is called a <strong>variable</strong>.</p>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>A variable is a named memory location that stores a value, and its value can be changed during program execution.</strong></p>
+      </blockquote>
+
+      <h2>Why Do We Need Variables?</h2>
+      <p>Suppose you want to store a student's age.</p>
+      <p>Without a variable:</p>
+      <pre><code class="language-c">printf("%d", 20);</code></pre>
+      <p>If the age changes to 21, you must modify the code.</p>
+      <p>With a variable:</p>
+      <pre><code class="language-c">int age = 20;
+
+age = 21;</code></pre>
+      <p>Now only the value changes, not the program structure.</p>
+
+      <h2>Memory Representation</h2>
+      <p>When a variable is created, the operating system allocates memory for it.</p>
+      <pre><code class="language-none">Variable Name        Memory Address        Stored Value
+------------------------------------------------------
+age                  1000                  20
+marks                1004                  85
+salary               1008                  45000.50</code></pre>
+      <p><strong>Note:</strong> The addresses above are examples. Actual memory addresses vary each time the program runs.</p>
+
+      <h2>Syntax of Variable Declaration</h2>
+      <pre><code class="language-c">data_type variable_name;</code></pre>
+      <p>Example:</p>
+      <pre><code class="language-c">int age;</code></pre>
+      <p>Here:</p>
+      <ul>
+        <li><code>int</code> → Data type</li>
+        <li><code>age</code> → Variable name</li>
+      </ul>
+
+      <h2>Variable Initialization</h2>
+      <p>Assigning a value to a variable when it is declared is called <strong>initialization</strong>.</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <p>Here,</p>
+      <ul>
+        <li>Declaration → <code>int age</code></li>
+        <li>Initialization → <code>= 20</code></li>
+      </ul>
+
+      <h2>Variable Assignment</h2>
+      <p>You can also assign a value after declaration.</p>
+      <pre><code class="language-c">int age;
+
+age = 20;</code></pre>
+
+      <h2>Complete Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age;
+
+    age = 20;
+
+    printf("%d", age);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20</code></pre>
+
+      <h2>Declaring Multiple Variables</h2>
+      <pre><code class="language-c">int a, b, c;</code></pre>
+      <p>or</p>
+      <pre><code class="language-c">int a = 10, b = 20, c = 30;</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int x = 5, y = 10;
+
+    printf("%d %d", x, y);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">5 10</code></pre>
+
+      <h2>Types of Variables</h2>
+
+      <h3>1. Local Variable</h3>
+      <p>Declared inside a function or block.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int x = 10;
+
+    printf("%d", x);
+
+    return 0;
+}</code></pre>
+      <p>Here, <code>x</code> is a <strong>local variable</strong>.</p>
+      <p>It exists only inside <code>main()</code>.</p>
+
+      <h3>2. Global Variable</h3>
+      <p>Declared outside all functions.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int x = 100;
+
+int main()
+{
+    printf("%d", x);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">100</code></pre>
+      <p>Global variables can be accessed by all functions in the same file (unless restricted).</p>
+
+      <h2>Variable Naming Rules</h2>
+      <p>A variable name:</p>
+
+      <h3>Rule 1</h3>
+      <p>Must start with</p>
+      <ul>
+        <li>Letter</li>
+        <li>Underscore (_)</li>
+      </ul>
+      <p>Correct</p>
+      <pre><code class="language-c">int age;
+int _count;</code></pre>
+      <p>Wrong</p>
+      <pre><code class="language-c">int 2age;</code></pre>
+
+      <h3>Rule 2</h3>
+      <p>Cannot contain spaces.</p>
+      <p>Wrong</p>
+      <pre><code class="language-c">int student age;</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">int studentAge;</code></pre>
+
+      <h3>Rule 3</h3>
+      <p>Cannot use special symbols except <code>_</code>.</p>
+      <p>Wrong</p>
+      <pre><code class="language-c">int salary$;</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">int salary;</code></pre>
+
+      <h3>Rule 4</h3>
+      <p>Cannot use keywords.</p>
+      <p>Wrong</p>
+      <pre><code class="language-c">int if;</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">int marks;</code></pre>
+
+      <h3>Rule 5</h3>
+      <p>Variable names are case-sensitive.</p>
+      <pre><code class="language-c">int age = 20;
+int Age = 30;</code></pre>
+      <p>These are <strong>two different variables</strong>.</p>
+
+      <h2>Naming Examples</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Valid</th>
+            <th>Invalid</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>age</code></td><td><code>2age</code></td><td>Starts with digit</td></tr>
+          <tr><td><code>_marks</code></td><td><code>student age</code></td><td>Contains space</td></tr>
+          <tr><td><code>totalMarks</code></td><td><code>float</code></td><td>Keyword</td></tr>
+          <tr><td><code>salary2026</code></td><td><code>salary@</code></td><td>Invalid character</td></tr>
+          <tr><td><code>student_name</code></td><td><code>#value</code></td><td>Invalid character</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Variable Declaration vs Initialization</h2>
+
+      <h3>Declaration</h3>
+      <pre><code class="language-c">int age;</code></pre>
+      <p>Only memory is reserved.</p>
+
+      <h3>Initialization</h3>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <p>Memory is reserved and a value is assigned.</p>
+
+      <h3>Assignment</h3>
+      <pre><code class="language-c">age = 30;</code></pre>
+      <p>Changes the existing value.</p>
+
+      <h2>Changing Variable Values</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 20;
+
+    printf("%d\n", age);
+
+    age = 25;
+
+    printf("%d", age);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20
+25</code></pre>
+
+      <h2>Memory Visualization</h2>
+      <p>Program</p>
+      <pre><code class="language-c">int marks = 80;</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Address        Variable        Value
+------------------------------------
+1000           marks            80</code></pre>
+      <p>After</p>
+      <pre><code class="language-c">marks = 95;</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Address        Variable        Value
+------------------------------------
+1000           marks            95</code></pre>
+      <p>The <strong>address remains the same</strong>, but the stored value changes.</p>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Using an undeclared variable</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">age = 20;</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">int age;
+
+age = 20;</code></pre>
+
+      <h3>2. Using reserved keywords</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">int return;</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">int result;</code></pre>
+
+      <h3>3. Forgetting initialization (when a value is expected)</h3>
+      <pre><code class="language-c">int age;
+
+printf("%d", age);</code></pre>
+      <p>The variable contains an <strong>indeterminate (garbage) value</strong> because it has not been initialized.</p>
+      <p>Better</p>
+      <pre><code class="language-c">int age = 0;</code></pre>
+
+      <h3>4. Duplicate declaration</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">int age;
+
+int age;</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">int age;</code></pre>
+
+      <h3>5. Confusing assignment with comparison</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">int age = 20;
+
+age == 30;</code></pre>
+      <p>This compares values but does <strong>not</strong> change <code>age</code>.</p>
+      <p>Correct</p>
+      <pre><code class="language-c">age = 30;</code></pre>
+
+      <h2>Real-World Example</h2>
+      <p>Suppose we want to store employee information.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int employeeID = 101;
+    float salary = 50000.50;
+    char grade = 'A';
+
+    printf("Employee ID : %d\n", employeeID);
+    printf("Salary      : %.2f\n", salary);
+    printf("Grade       : %c\n", grade);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Employee ID : 101
+Salary      : 50000.50
+Grade       : A</code></pre>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is a variable?</h3>
+      <p>A variable is a named memory location used to store data whose value can change during program execution.</p>
+
+      <h3>2. What is the difference between declaration and initialization?</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Declaration</th>
+            <th>Initialization</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Creates the variable</td>
+            <td>Assigns its first value</td>
+          </tr>
+          <tr>
+            <td><code>int age;</code></td>
+            <td><code>int age = 20;</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>3. Can a variable name start with a digit?</h3>
+      <p>No. A variable name must start with a letter or an underscore (<code>_</code>).</p>
+
+      <h3>4. Are variable names case-sensitive?</h3>
+      <p>Yes.</p>
+      <pre><code class="language-c">age
+Age
+AGE</code></pre>
+      <p>These are three different identifiers.</p>
+
+      <h3>5. What happens if you use an uninitialized local variable?</h3>
+      <p>It contains an <strong>indeterminate value</strong> (often referred to as a garbage value), and using it can lead to unpredictable results.</p>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define a variable.</li>
+        <li>Differentiate between declaration, initialization, and assignment.</li>
+        <li>Explain local and global variables.</li>
+        <li>Write five rules for naming variables.</li>
+        <li>Why should local variables be initialized before use?</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Declare and print a variable.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 21;
+
+    printf("Age = %d", age);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Age = 21</code></pre>
+
+      <h4>Q2. Store and print three variables.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int rollNo = 15;
+    float percentage = 88.75;
+    char grade = 'A';
+
+    printf("Roll No    : %d\n", rollNo);
+    printf("Percentage : %.2f\n", percentage);
+    printf("Grade      : %c\n", grade);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Roll No    : 15
+Percentage : 88.75
+Grade      : A</code></pre>
+
+      <h4>Q3. Swap two variable values (using a third variable).</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 10, b = 20, temp;
+
+    temp = a;
+    a = b;
+    b = temp;
+
+    printf("a = %d\n", a);
+    printf("b = %d\n", b);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">a = 20
+b = 10</code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>A <strong>variable</strong> is a named memory location used to store data.</li>
+        <li>Variables must be <strong>declared before use</strong>.</li>
+        <li>Initialization assigns the first value; assignment updates it later.</li>
+        <li>Variable names must follow C naming rules.</li>
+        <li>Variables can be <strong>local</strong> or <strong>global</strong>.</li>
+        <li>Local variables should always be initialized before they are used.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

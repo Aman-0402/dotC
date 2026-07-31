@@ -75,6 +75,10 @@
         {
           "title": "Keywords",
           "path": "lessons/unit2-keywords.html"
+        },
+        {
+          "title": "Variables",
+          "path": "lessons/unit2-variables.html"
         }
       ]
     }
