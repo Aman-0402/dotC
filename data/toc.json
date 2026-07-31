@@ -79,6 +79,10 @@
         {
           "title": "Variables",
           "path": "lessons/unit2-variables.html"
+        },
+        {
+          "title": "Identifiers",
+          "path": "lessons/unit2-identifiers.html"
         }
       ]
     }

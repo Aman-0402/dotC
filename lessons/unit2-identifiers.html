@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Identifiers — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Identifiers</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Identifiers</h1>
+
+      <h2>What are Identifiers?</h2>
+      <p>An <strong>identifier</strong> is a <strong>name given by the programmer</strong> to program elements such as variables, functions, arrays, structures, unions, enums, labels, etc.</p>
+      <p>Identifiers make programs readable and help us refer to data or functions by meaningful names.</p>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>An identifier is a user-defined name used to identify variables, functions, arrays, structures, and other program elements in C.</strong></p>
+      </blockquote>
+
+      <h2>Why Do We Need Identifiers?</h2>
+      <p>Imagine writing a program without names.</p>
+      <p>Instead of writing:</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <p>You would have to remember memory addresses, which is practically impossible.</p>
+      <p>Identifiers provide meaningful names like:</p>
+      <ul>
+        <li><code>age</code></li>
+        <li><code>salary</code></li>
+        <li><code>totalMarks</code></li>
+        <li><code>calculateArea</code></li>
+      </ul>
+      <p>making programs easier to understand and maintain.</p>
+
+      <h2>Examples of Identifiers</h2>
+      <pre><code class="language-c">int age;
+float salary;
+char grade;</code></pre>
+      <p>Identifiers:</p>
+      <ul>
+        <li><code>age</code></li>
+        <li><code>salary</code></li>
+        <li><code>grade</code></li>
+      </ul>
+      <p>Another example:</p>
+      <pre><code class="language-c">int add(int a, int b)
+{
+    return a + b;
+}</code></pre>
+      <p>Identifiers are:</p>
+      <ul>
+        <li><code>add</code></li>
+        <li><code>a</code></li>
+        <li><code>b</code></li>
+      </ul>
+
+      <h2>Types of Identifiers</h2>
+
+      <h3>1. Variable Identifier</h3>
+      <pre><code class="language-c">int marks;</code></pre>
+      <p>Identifier:</p>
+      <pre><code class="language-none">marks</code></pre>
+
+      <h3>2. Function Identifier</h3>
+      <pre><code class="language-c">void display()
+{
+}</code></pre>
+      <p>Identifier:</p>
+      <pre><code class="language-none">display</code></pre>
+
+      <h3>3. Array Identifier</h3>
+      <pre><code class="language-c">int numbers[10];</code></pre>
+      <p>Identifier:</p>
+      <pre><code class="language-none">numbers</code></pre>
+
+      <h3>4. Structure Identifier</h3>
+      <pre><code class="language-c">struct Student
+{
+    int id;
+};</code></pre>
+      <p>Identifier:</p>
+      <pre><code class="language-none">Student</code></pre>
+
+      <h3>5. Enum Identifier</h3>
+      <pre><code class="language-c">enum Day
+{
+    MON,
+    TUE
+};</code></pre>
+      <p>Identifier:</p>
+      <pre><code class="language-none">Day</code></pre>
+
+      <h2>Rules for Naming Identifiers</h2>
+      <p>There are <strong>8 important rules</strong>.</p>
+
+      <h3>Rule 1: Must Begin with a Letter or Underscore</h3>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">int age;
+int _count;</code></pre>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">int 2age;</code></pre>
+      <p>Reason:</p>
+      <p>Identifiers cannot begin with a digit.</p>
+
+      <h3>Rule 2: Digits Are Allowed After the First Character</h3>
+      <p>✅ Correct</p>
+      <pre><code class="language-none">student1
+roll2026
+value100</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">int marks2026;</code></pre>
+
+      <h3>Rule 3: No Spaces Allowed</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-none">student age</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-none">studentAge</code></pre>
+      <p>or</p>
+      <pre><code class="language-none">student_age</code></pre>
+
+      <h3>Rule 4: No Special Characters</h3>
+      <p>Except <code>_</code>, special characters are not allowed.</p>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">salary@</code></pre>
+      <pre><code class="language-c">marks#</code></pre>
+      <pre><code class="language-c">student-name</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">salary
+student_name
+marks1</code></pre>
+
+      <h3>Rule 5: Cannot Be a Keyword</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">int while;</code></pre>
+      <pre><code class="language-c">int return;</code></pre>
+      <pre><code class="language-c">int if;</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">int number;</code></pre>
+
+      <h3>Rule 6: Case Sensitive</h3>
+      <p>These are all different identifiers.</p>
+      <pre><code class="language-c">age
+Age
+AGE</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">int age = 20;
+int Age = 30;
+
+printf("%d %d", age, Age);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20 30</code></pre>
+
+      <h3>Rule 7: No Length Restriction (Practically)</h3>
+      <p>Modern C compilers support long identifier names.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int totalNumberOfStudentsInComputerScienceDepartment;</code></pre>
+      <p>Although valid, extremely long names may reduce readability.</p>
+
+      <h3>Rule 8: Should Be Meaningful</h3>
+      <p>Bad</p>
+      <pre><code class="language-c">int x;</code></pre>
+      <p>Better</p>
+      <pre><code class="language-c">int totalMarks;</code></pre>
+      <p>Best</p>
+      <pre><code class="language-c">int totalStudentMarks;</code></pre>
+      <p>Meaningful identifiers make code easier to read and maintain.</p>
+
+      <h2>Valid and Invalid Identifiers</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Identifier</th>
+            <th>Valid</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>age</code></td><td>✅</td><td>Starts with a letter</td></tr>
+          <tr><td><code>_salary</code></td><td>✅</td><td>Starts with <code>_</code></td></tr>
+          <tr><td><code>marks2026</code></td><td>✅</td><td>Digits allowed after first character</td></tr>
+          <tr><td><code>student_name</code></td><td>✅</td><td><code>_</code> is allowed</td></tr>
+          <tr><td><code>2age</code></td><td>❌</td><td>Starts with a digit</td></tr>
+          <tr><td><code>student age</code></td><td>❌</td><td>Contains a space</td></tr>
+          <tr><td><code>salary@</code></td><td>❌</td><td><code>@</code> not allowed</td></tr>
+          <tr><td><code>float</code></td><td>❌</td><td>Keyword</td></tr>
+          <tr><td><code>roll-no</code></td><td>❌</td><td><code>-</code> not allowed</td></tr>
+          <tr><td><code>#count</code></td><td>❌</td><td><code>#</code> not allowed</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Identifier vs Keyword</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Identifier</th>
+            <th>Keyword</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>User-defined</td><td>Reserved by C</td></tr>
+          <tr><td>Can be chosen by the programmer</td><td>Predefined by the language</td></tr>
+          <tr><td>Used to name variables/functions</td><td>Used to define language syntax</td></tr>
+          <tr><td>Example: <code>marks</code></td><td>Example: <code>int</code></td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">int marks;</code></pre>
+      <ul>
+        <li><code>int</code> → Keyword</li>
+        <li><code>marks</code> → Identifier</li>
+      </ul>
+
+      <h2>Identifier vs Variable</h2>
+      <p>Many beginners confuse these terms.</p>
+      <p>A <strong>variable</strong> is a storage location.</p>
+      <p>An <strong>identifier</strong> is the name of that storage location.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <ul>
+        <li>Variable → Stores the value <code>20</code></li>
+        <li>Identifier → <code>age</code></li>
+      </ul>
+
+      <h2>Examples</h2>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int studentAge = 20;
+
+    printf("%d", studentAge);
+
+    return 0;
+}</code></pre>
+      <p>Identifier:</p>
+      <pre><code class="language-none">studentAge</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20</code></pre>
+
+      <h3>Example 2</h3>
+      <pre><code class="language-c">float salary = 50000.75;</code></pre>
+      <p>Identifier</p>
+      <pre><code class="language-none">salary</code></pre>
+
+      <h3>Example 3</h3>
+      <pre><code class="language-c">char grade = 'A';</code></pre>
+      <p>Identifier</p>
+      <pre><code class="language-none">grade</code></pre>
+
+      <h3>Example 4</h3>
+      <pre><code class="language-c">int calculateSum(int a, int b)
+{
+    return a + b;
+}</code></pre>
+      <p>Identifiers:</p>
+      <ul>
+        <li><code>calculateSum</code></li>
+        <li><code>a</code></li>
+        <li><code>b</code></li>
+      </ul>
+
+      <h2>Best Practices</h2>
+
+      <h3>Use Descriptive Names</h3>
+      <p>Poor</p>
+      <pre><code class="language-c">int x;</code></pre>
+      <p>Better</p>
+      <pre><code class="language-c">int total;</code></pre>
+      <p>Best</p>
+      <pre><code class="language-c">int totalMarks;</code></pre>
+
+      <h3>Follow One Naming Style</h3>
+      <p>Example (camelCase)</p>
+      <pre><code class="language-c">studentName
+studentAge
+totalMarks</code></pre>
+
+      <h3>Avoid Single-Letter Names</h3>
+      <p>Avoid</p>
+      <pre><code class="language-c">int a;</code></pre>
+      <p>Prefer</p>
+      <pre><code class="language-c">int studentCount;</code></pre>
+
+      <h3>Avoid Unnecessary Abbreviations</h3>
+      <p>Bad</p>
+      <pre><code class="language-c">int stdmrk;</code></pre>
+      <p>Better</p>
+      <pre><code class="language-c">int studentMarks;</code></pre>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Starting with a digit</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">int 100marks;</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">int marks100;</code></pre>
+
+      <h3>2. Using spaces</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">int total marks;</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">int totalMarks;</code></pre>
+
+      <h3>3. Using keywords</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">int switch;</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">int switchCount;</code></pre>
+
+      <h3>4. Using special characters</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">int total@marks;</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">int total_marks;</code></pre>
+
+      <h3>5. Using confusing names</h3>
+      <p>Poor</p>
+      <pre><code class="language-c">int abc;</code></pre>
+      <p>Better</p>
+      <pre><code class="language-c">int studentMarks;</code></pre>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is an identifier?</h3>
+      <p>An identifier is a user-defined name used to identify variables, functions, arrays, structures, and other program elements in C.</p>
+
+      <h3>2. Can an identifier start with a number?</h3>
+      <p>No. It must start with a letter or an underscore (<code>_</code>).</p>
+
+      <h3>3. Can an identifier contain spaces?</h3>
+      <p>No. Spaces are not allowed.</p>
+
+      <h3>4. Is <code>_count</code> a valid identifier?</h3>
+      <p>Yes. Identifiers can begin with an underscore.</p>
+
+      <h3>5. What is the difference between an identifier and a keyword?</h3>
+      <ul>
+        <li>An <strong>identifier</strong> is a user-defined name.</li>
+        <li>A <strong>keyword</strong> is a reserved word with a predefined meaning in C.</li>
+      </ul>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define an identifier.</li>
+        <li>List the rules for naming identifiers.</li>
+        <li>Differentiate between an identifier and a keyword.</li>
+        <li>Why are meaningful identifiers preferred?</li>
+        <li>Explain why C identifiers are case-sensitive.</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Declare variables using valid identifiers.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int studentAge = 20;
+    float totalMarks = 87.5;
+    char studentGrade = 'A';
+
+    printf("Age: %d\n", studentAge);
+    printf("Marks: %.1f\n", totalMarks);
+    printf("Grade: %c\n", studentGrade);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Age: 20
+Marks: 87.5
+Grade: A</code></pre>
+
+      <h4>Q2. Demonstrate case sensitivity.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int value = 10;
+    int Value = 20;
+
+    printf("value = %d\n", value);
+    printf("Value = %d\n", Value);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">value = 10
+Value = 20</code></pre>
+
+      <h4>Q3. Identify the valid identifiers.</h4>
+      <p>Which of the following are valid?</p>
+      <pre><code class="language-none">student
+_student
+student1
+1student
+student-name
+student_name
+float
+StudentAge</code></pre>
+      <p><strong>Answer</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th>Identifier</th>
+            <th>Valid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>student</code></td><td>✅</td></tr>
+          <tr><td><code>_student</code></td><td>✅</td></tr>
+          <tr><td><code>student1</code></td><td>✅</td></tr>
+          <tr><td><code>1student</code></td><td>❌</td></tr>
+          <tr><td><code>student-name</code></td><td>❌</td></tr>
+          <tr><td><code>student_name</code></td><td>✅</td></tr>
+          <tr><td><code>float</code></td><td>❌</td></tr>
+          <tr><td><code>StudentAge</code></td><td>✅</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>An <strong>identifier</strong> is a user-defined name for program elements.</li>
+        <li>It must begin with a <strong>letter</strong> or an <strong>underscore (<code>_</code>)</strong>.</li>
+        <li>It <strong>cannot</strong> start with a digit, contain spaces, or use special characters (except <code>_</code>).</li>
+        <li>Identifiers are <strong>case-sensitive</strong>.</li>
+        <li>Keywords cannot be used as identifiers.</li>
+        <li>Choosing <strong>meaningful and consistent names</strong> makes programs easier to read and maintain.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
