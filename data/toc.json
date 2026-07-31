@@ -329,6 +329,10 @@
         {
           "title": "Advantages and Disadvantages of Linked Lists",
           "path": "lessons/unit8-advantages-disadvantages.html"
+        },
+        {
+          "title": "Singly Linked List – Creation",
+          "path": "lessons/unit8-singly-linked-list-creation.html"
         }
       ]
     }
