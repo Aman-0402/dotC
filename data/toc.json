@@ -166,6 +166,15 @@
           "path": "lessons/unit3-two-dimensional-arrays.html"
         }
       ]
+    },
+    {
+      "title": "Unit 4",
+      "lessons": [
+        {
+          "title": "Strings",
+          "path": "lessons/unit4-strings.html"
+        }
+      ]
     }
   ]
 }

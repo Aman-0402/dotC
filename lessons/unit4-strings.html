@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strings — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 4 / Strings</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Strings</h1>
+
+      <h2>What is a String?</h2>
+      <p>A <strong>string</strong> is a sequence of characters stored in a <strong>character array</strong> and terminated by a special character called the <strong>null character (<code>'\0'</code>)</strong>.</p>
+      <p>Unlike some programming languages, <strong>C does not have a built-in string data type</strong>. Instead, strings are represented using arrays of type <code>char</code>.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">H  e  l  l  o  \0</code></pre>
+      <p>Memory Representation:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Index</th>
+            <th>0</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Value</td>
+            <td>H</td>
+            <td>e</td>
+            <td>l</td>
+            <td>l</td>
+            <td>o</td>
+            <td>\0</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Why Strings are Important?</h2>
+      <p>Strings are used for storing:</p>
+      <ul>
+        <li>Names</li>
+        <li>Addresses</li>
+        <li>Passwords</li>
+        <li>Sentences</li>
+        <li>File names</li>
+        <li>Email IDs</li>
+        <li>User input</li>
+      </ul>
+      <p>Almost every real-world C program uses strings.</p>
+
+      <h2>String Declaration</h2>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">char string_name[size];</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">char name[20];</code></pre>
+      <p>This creates a character array capable of storing <strong>19 characters + 1 null character (<code>'\0'</code>)</strong>.</p>
+
+      <h2>String Initialization</h2>
+      <p>There are several ways to initialize strings.</p>
+
+      <h3>Method 1</h3>
+      <pre><code class="language-c">char name[] = "Aman";</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">A
+m
+a
+n
+\0</code></pre>
+      <p>Compiler automatically adds the null character.</p>
+
+      <h3>Method 2</h3>
+      <pre><code class="language-c">char name[10] = "Aman";</code></pre>
+      <p>Remaining positions become unused.</p>
+      <pre><code class="language-none">A
+m
+a
+n
+\0</code></pre>
+
+      <h3>Method 3</h3>
+      <p>Initialize Character by Character</p>
+      <pre><code class="language-c">char name[] = {'A','m','a','n','\0'};</code></pre>
+      <p>You must manually add <code>'\0'</code>.</p>
+
+      <h3>Incorrect Initialization</h3>
+      <pre><code class="language-c">char name[] = {'A','m','a','n'};</code></pre>
+      <p>Missing <code>'\0'</code>.</p>
+      <p>This is <strong>not</strong> considered a proper C string.</p>
+
+      <h2>Basic String Operations</h2>
+      <p>The most common operations performed on strings are:</p>
+      <ul>
+        <li>Input</li>
+        <li>Output</li>
+        <li>Reading characters</li>
+        <li>Writing characters</li>
+        <li>Printing formatted strings</li>
+      </ul>
+
+      <h2>gets()</h2>
+      <p>Used to read an entire line of text including spaces.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">gets(string);</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[50];
+
+    printf("Enter Name: ");
+    gets(name);
+
+    printf("%s", name);
+
+    return 0;
+}</code></pre>
+      <h3>Input</h3>
+      <pre><code class="language-none">Aman Kumar</code></pre>
+      <h3>Output</h3>
+      <pre><code class="language-none">Aman Kumar</code></pre>
+
+      <h3>Advantages</h3>
+      <ul>
+        <li>Reads spaces.</li>
+        <li>Reads complete line.</li>
+      </ul>
+
+      <h3>Disadvantages</h3>
+      <ul>
+        <li>Does <strong>not</strong> check array size.</li>
+        <li>Can cause <strong>buffer overflow</strong>.</li>
+        <li>Removed from the modern C standard.</li>
+        <li>Avoid using it in real applications.</li>
+      </ul>
+
+      <h2>puts()</h2>
+      <p>Displays a string and automatically moves the cursor to the next line.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">puts(string);</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[] = "Aman";
+
+    puts(name);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Aman</code></pre>
+      <p>Equivalent to</p>
+      <pre><code class="language-c">printf("%s\n", name);</code></pre>
+
+      <h2>getchar()</h2>
+      <p>Reads <strong>one character</strong> from the keyboard.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">char variable = getchar();</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char ch;
+
+    printf("Enter Character: ");
+    ch = getchar();
+
+    printf("%c", ch);
+
+    return 0;
+}</code></pre>
+      <p>Input</p>
+      <pre><code class="language-none">A</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">A</code></pre>
+
+      <h2>putchar()</h2>
+      <p>Displays one character.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">putchar(character);</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char ch = 'A';
+
+    putchar(ch);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">A</code></pre>
+
+      <h2>printf()</h2>
+      <p>Used to display formatted output.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">printf("format", variables);</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[] = "Aman";
+
+    printf("%s", name);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Aman</code></pre>
+
+      <h2>Difference Between printf() and puts()</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>printf()</th>
+            <th>puts()</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Formatted Output</td><td>✔ Yes</td><td>✘ No</td></tr>
+          <tr><td>Print String</td><td>✔ Yes</td><td>✔ Yes</td></tr>
+          <tr><td>Print Variables</td><td>✔ Yes</td><td>✘ No</td></tr>
+          <tr><td>Automatically New Line</td><td>✘ No</td><td>✔ Yes</td></tr>
+          <tr><td>Format Specifiers</td><td>✔ Yes</td><td>✘ No</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Difference Between getchar() and putchar()</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>getchar()</td><td>Reads one character</td></tr>
+          <tr><td>putchar()</td><td>Prints one character</td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">char ch;
+
+ch = getchar();
+
+putchar(ch);</code></pre>
+
+      <h2>Complete Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[50];
+    char ch;
+
+    printf("Enter Your Name: ");
+    gets(name);
+
+    printf("Enter a Character: ");
+    ch = getchar();
+
+    printf("\nUsing printf(): %s\n", name);
+
+    puts("Using puts():");
+    puts(name);
+
+    printf("Using putchar(): ");
+    putchar(ch);
+
+    return 0;
+}</code></pre>
+      <h3>Sample Input</h3>
+      <pre><code class="language-none">Enter Your Name: Aman Kumar
+Enter a Character: A</code></pre>
+      <h3>Sample Output</h3>
+      <pre><code class="language-none">Using printf(): Aman Kumar
+Using puts():
+Aman Kumar
+Using putchar(): A</code></pre>
+
+      <h2>Important Notes</h2>
+      <ul>
+        <li>A string is a character array ending with <code>'\0'</code>.</li>
+        <li><code>gets()</code> reads a full line but is <strong>unsafe</strong> and should generally be avoided.</li>
+        <li><code>puts()</code> prints a string and automatically adds a newline.</li>
+        <li><code>getchar()</code> reads a single character.</li>
+        <li><code>putchar()</code> prints a single character.</li>
+        <li><code>printf()</code> is the most flexible output function because it supports formatted output.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
