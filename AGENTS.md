@@ -85,7 +85,16 @@ highlighting. See `docs/superpowers/specs/2026-07-31-magazine-ebook-rebuild-desi
 one self-contained script per lesson (no shared JS engine, by design). See
 `docs/superpowers/specs/2026-08-01-sorting-visualizer-design.md`.
 
-**Lesson content — 57 lessons across 7 units:**
+**Interactive linked-list pointer visualizer:** node/pointer step-through
+widget (flexbox node boxes + CSS-drawn arrows, no SVG) embedded in
+linked-list lessons, page-local `<style>` block + self-contained script per
+lesson (same no-shared-engine philosophy as the sorting visualizer). The
+Introduction lesson uses Insert/Delete mode tabs; the Traversal lesson
+reuses the same `.ll-node`/`.ll-arrow` visual pattern for a single moving
+`temp` pointer instead. See
+`docs/superpowers/specs/2026-08-01-linked-list-visualizer-design.md`.
+
+**Lesson content — 75 lessons across 8 units:**
 
 | Unit | Topic | Lessons |
 | --- | --- | --- |
@@ -95,12 +104,20 @@ one self-contained script per lesson (no shared JS engine, by design). See
 | 4 | Strings, Functions & Pointers | 4 |
 | 5 | Structures, File Handling & Advanced Concepts | 8 |
 | 6 | Algorithm Analysis & Arrays (Part 2) | 4 |
-| 7 | Sorting & Recursion (in progress) | 3 |
+| 7 | Sorting & Recursion | 16 |
+| 8 | Linked Lists (in progress) | 5 |
 
-Unit 7 is the current unit being written — Introduction to Sorting, Bubble
-Sort, and Selection Sort are done (both sort lessons have the interactive
-visualizer); remaining sorting algorithms (Insertion, Merge, Quick, Heap,
-Counting, Radix) and Recursion topics are still to come.
+Unit 7 is complete: all 8 sorting algorithms (Introduction, Bubble,
+Selection, Insertion, Merge, Quick, Heap, Counting, Radix) plus all 7
+recursion topics (Introduction, Recursive Functions, Recursion Tree, Tail
+Recursion, Head Recursion, Indirect Recursion, Applications of Recursion).
+
+Unit 8 is the current unit being written — Introduction to Linked Lists
+(with Insert/Delete visualizer), Dynamic Memory Concept, Advantages and
+Disadvantages of Linked Lists, Singly Linked List – Creation, and Singly
+Linked List – Traversal (with pointer-walk visualizer) are done. Remaining
+topics (Insertion, Deletion, Searching, Doubly/Circular variants, etc.)
+are still to come.
 
 ## Testing
 
