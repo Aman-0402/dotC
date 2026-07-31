@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Searching Algorithms — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 6 / Searching Algorithms</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Searching Algorithms</h1>
+
+      <p>A <strong>Searching Algorithm</strong> is used to find the location of a particular element (called the <strong>key</strong>) in a collection of data.</p>
+      <p>If the element exists, the algorithm returns its position; otherwise, it reports that the element is not found.</p>
+
+      <h2>Types of Searching Algorithms</h2>
+      <p>The two most common searching algorithms are:</p>
+      <ol>
+        <li><strong>Linear Search</strong></li>
+        <li><strong>Binary Search</strong></li>
+      </ol>
+      <table>
+        <thead>
+          <tr>
+            <th>Searching Algorithm</th>
+            <th>Array Requirement</th>
+            <th>Time Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Linear Search</td><td>Sorted or Unsorted</td><td>O(n)</td></tr>
+          <tr><td>Binary Search</td><td><strong>Sorted Only</strong></td><td>O(log n)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>1. Linear Search</h2>
+      <h3>Definition</h3>
+      <p><strong>Linear Search</strong> (Sequential Search) searches for an element by checking <strong>each element one by one</strong> from the beginning until the desired element is found or the array ends.</p>
+      <p>It is the simplest searching technique.</p>
+
+      <h3>Working Principle</h3>
+      <ol>
+        <li>Start from the first element.</li>
+        <li>Compare it with the key.</li>
+        <li>If equal, return the index.</li>
+        <li>Otherwise, move to the next element.</li>
+        <li>Repeat until the key is found or the array ends.</li>
+      </ol>
+
+      <h3>Example</h3>
+      <p>Array</p>
+      <pre><code class="language-none">Index : 0   1   2   3   4
+
+Value :10  20  30  40  50</code></pre>
+      <p>Search Key</p>
+      <pre><code class="language-none">40</code></pre>
+      <p>Comparisons</p>
+      <pre><code class="language-none">10 ✗
+
+20 ✗
+
+30 ✗
+
+40 ✓</code></pre>
+      <p>Found at Index <strong>3</strong></p>
+
+      <h2>Algorithm</h2>
+      <pre><code class="language-none">Start
+
+Read array
+
+Read key
+
+For i = 0 to n−1
+
+    If arr[i] == key
+
+        Print index
+
+        Stop
+
+Print "Not Found"
+
+Stop</code></pre>
+
+      <h2>Flow</h2>
+      <pre><code class="language-none">Start
+
+↓
+
+Compare First Element
+
+↓
+
+Found?
+
+↓
+
+Yes → Print Position → Stop
+
+↓
+
+No
+
+↓
+
+Move to Next Element
+
+↓
+
+Repeat Until End
+
+↓
+
+Not Found
+
+↓
+
+Stop</code></pre>
+
+      <h2>C Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50};
+    int key=40;
+    int found=0;
+
+    for(int i=0;i&lt;5;i++)
+    {
+        if(arr[i]==key)
+        {
+            printf("Element found at index %d",i);
+            found=1;
+            break;
+        }
+    }
+
+    if(found==0)
+        printf("Element not found");
+
+    return 0;
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-none">Element found at index 3</code></pre>
+
+      <h2>Complexity Analysis</h2>
+      <h3>Best Case</h3>
+      <p>Element is first.</p>
+      <pre><code class="language-none">10 20 30 40 50
+
+Search 10</code></pre>
+      <p>Comparisons</p>
+      <pre><code class="language-none">1</code></pre>
+      <p>Time Complexity</p>
+      <pre><code class="language-none">Ω(1)</code></pre>
+
+      <h3>Worst Case</h3>
+      <p>Element is last or absent.</p>
+      <pre><code class="language-none">10 20 30 40 50
+
+Search 50</code></pre>
+      <p>Comparisons</p>
+      <pre><code class="language-none">5</code></pre>
+      <p>Time Complexity</p>
+      <pre><code class="language-none">O(n)</code></pre>
+
+      <h3>Average Case</h3>
+      <p>Average comparisons</p>
+      <pre><code class="language-none">n/2</code></pre>
+      <p>Time Complexity</p>
+      <pre><code class="language-none">Θ(n)</code></pre>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Very easy to implement.</li>
+        <li>Works on sorted and unsorted arrays.</li>
+        <li>No preprocessing required.</li>
+        <li>Suitable for small datasets.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Slow for large datasets.</li>
+        <li>Checks every element sequentially.</li>
+        <li>Inefficient compared to Binary Search.</li>
+      </ul>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Small datasets.</li>
+        <li>Unsorted arrays.</li>
+        <li>Linked Lists.</li>
+        <li>Simple searching tasks.</li>
+      </ul>
+
+      <h2>2. Binary Search</h2>
+      <h3>Definition</h3>
+      <p><strong>Binary Search</strong> is a fast searching algorithm that repeatedly divides a <strong>sorted array</strong> into two halves until the required element is found.</p>
+      <blockquote>
+        <p><strong>Important:</strong> Binary Search works <strong>only on sorted arrays</strong>.</p>
+      </blockquote>
+
+      <h3>Working Principle</h3>
+      <ol>
+        <li>Find the middle element.</li>
+        <li>Compare it with the key.</li>
+        <li>If equal, search ends.</li>
+        <li>If key is smaller, search the left half.</li>
+        <li>If key is larger, search the right half.</li>
+        <li>Repeat until the element is found or the search interval becomes empty.</li>
+      </ol>
+
+      <h2>Example</h2>
+      <p>Sorted Array</p>
+      <pre><code class="language-none">Index : 0   1   2   3   4   5   6
+
+Value :10 20 30 40 50 60 70</code></pre>
+      <p>Search</p>
+      <pre><code class="language-none">60</code></pre>
+
+      <h3>Step 1</h3>
+      <pre><code class="language-none">Low = 0
+
+High = 6
+
+Mid = (0+6)/2 = 3</code></pre>
+      <p>Middle Element</p>
+      <pre><code class="language-none">40</code></pre>
+      <p>Since</p>
+      <pre><code class="language-none">60 > 40</code></pre>
+      <p>Search Right Half</p>
+
+      <h3>Step 2</h3>
+      <pre><code class="language-none">Low = 4
+
+High = 6
+
+Mid = (4+6)/2 = 5</code></pre>
+      <p>Middle Element</p>
+      <pre><code class="language-none">60</code></pre>
+      <p>Found.</p>
+
+      <h2>Algorithm</h2>
+      <pre><code class="language-none">Start
+
+Low = 0
+
+High = n−1
+
+While Low ≤ High
+
+    Mid = (Low + High)/2
+
+    If arr[Mid] == key
+
+        Print Position
+
+        Stop
+
+    Else If key &lt; arr[Mid]
+
+        High = Mid−1
+
+    Else
+
+        Low = Mid+1
+
+Print "Not Found"
+
+Stop</code></pre>
+
+      <h2>Flow</h2>
+      <pre><code class="language-none">Start
+
+↓
+
+Find Middle
+
+↓
+
+Key == Middle?
+
+↓
+
+Yes → Found
+
+↓
+
+No
+
+↓
+
+Key Smaller?
+
+↓
+
+Yes → Left Half
+
+↓
+
+No
+
+↓
+
+Right Half
+
+↓
+
+Repeat
+
+↓
+
+Not Found
+
+↓
+
+Stop</code></pre>
+
+      <h2>C Program</h2>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50,60,70};
+
+    int key=60;
+
+    int low=0;
+
+    int high=6;
+
+    while(low&lt;=high)
+    {
+        int mid=(low+high)/2;
+
+        if(arr[mid]==key)
+        {
+            printf("Element found at index %d",mid);
+            return 0;
+        }
+
+        else if(key&lt;arr[mid])
+
+            high=mid-1;
+
+        else
+
+            low=mid+1;
+    }
+
+    printf("Element not found");
+
+    return 0;
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-none">Element found at index 5</code></pre>
+
+      <h2>Complexity Analysis</h2>
+      <h3>Best Case</h3>
+      <p>Element found at middle.</p>
+      <pre><code class="language-none">Time = Ω(1)</code></pre>
+
+      <h3>Worst Case</h3>
+      <p>Array keeps dividing.</p>
+      <p>Number of comparisons</p>
+      <pre><code class="language-none">log₂ n</code></pre>
+      <p>Time Complexity</p>
+      <pre><code class="language-none">O(log n)</code></pre>
+
+      <h3>Average Case</h3>
+      <pre><code class="language-none">Θ(log n)</code></pre>
+
+      <h2>Binary Search Example</h2>
+      <p>Suppose</p>
+      <pre><code class="language-none">1 2 3 4 5 6 7 8</code></pre>
+      <p>Search</p>
+      <pre><code class="language-none">8</code></pre>
+      <p>Steps</p>
+      <pre><code class="language-none">Middle = 4
+
+↓
+
+Right Half
+
+↓
+
+Middle = 6
+
+↓
+
+Right Half
+
+↓
+
+Middle = 8
+
+↓
+
+Found</code></pre>
+      <p>Only <strong>3 comparisons</strong> instead of <strong>8</strong>.</p>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Very fast.</li>
+        <li>Efficient for large datasets.</li>
+        <li>Requires very few comparisons.</li>
+        <li>Excellent performance on sorted arrays.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Array must be sorted.</li>
+        <li>Not suitable for linked lists.</li>
+        <li>More complex than Linear Search.</li>
+      </ul>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Searching in sorted arrays.</li>
+        <li>Dictionary search.</li>
+        <li>Phone directories.</li>
+        <li>Database indexing.</li>
+        <li>Library management systems.</li>
+      </ul>
+
+      <h2>Linear Search vs Binary Search</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Linear Search</th>
+            <th>Binary Search</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Data Requirement</td><td>Sorted or Unsorted</td><td>Sorted Only</td></tr>
+          <tr><td>Searching Method</td><td>Sequential</td><td>Divide and Conquer</td></tr>
+          <tr><td>Best Case</td><td>Ω(1)</td><td>Ω(1)</td></tr>
+          <tr><td>Average Case</td><td>Θ(n)</td><td>Θ(log n)</td></tr>
+          <tr><td>Worst Case</td><td>O(n)</td><td>O(log n)</td></tr>
+          <tr><td>Suitable For</td><td>Small Data</td><td>Large Sorted Data</td></tr>
+          <tr><td>Implementation</td><td>Simple</td><td>Moderate</td></tr>
+          <tr><td>Memory</td><td>O(1)</td><td>O(1) (Iterative)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Time Complexity Comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Number of Elements (n)</th>
+            <th>Linear Search (Worst Case)</th>
+            <th>Binary Search (Worst Case)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>10</td><td>10 comparisons</td><td>4 comparisons</td></tr>
+          <tr><td>100</td><td>100 comparisons</td><td>7 comparisons</td></tr>
+          <tr><td>1,000</td><td>1,000 comparisons</td><td>10 comparisons</td></tr>
+          <tr><td>1,000,000</td><td>1,000,000 comparisons</td><td>20 comparisons</td></tr>
+        </tbody>
+      </table>
+
+      <h2>When to Use Which?</h2>
+      <h3>Use <strong>Linear Search</strong> when:</h3>
+      <ul>
+        <li>Data is <strong>unsorted</strong>.</li>
+        <li>Dataset is <strong>small</strong>.</li>
+        <li>Simplicity is more important than speed.</li>
+      </ul>
+
+      <h3>Use <strong>Binary Search</strong> when:</h3>
+      <ul>
+        <li>Data is <strong>sorted</strong>.</li>
+        <li>Dataset is <strong>large</strong>.</li>
+        <li>High performance is required.</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>A <strong>Searching Algorithm</strong> finds the position of a target element in a collection.</li>
+        <li><strong>Linear Search</strong> checks elements one by one and works with both sorted and unsorted arrays.</li>
+        <li><strong>Binary Search</strong> repeatedly divides a <strong>sorted array</strong> into halves, making it much faster for large datasets.</li>
+        <li><strong>Linear Search</strong> has:
+          <ul>
+            <li>Best Case: <strong>Ω(1)</strong></li>
+            <li>Average Case: <strong>Θ(n)</strong></li>
+            <li>Worst Case: <strong>O(n)</strong></li>
+          </ul>
+        </li>
+        <li><strong>Binary Search</strong> has:
+          <ul>
+            <li>Best Case: <strong>Ω(1)</strong></li>
+            <li>Average Case: <strong>Θ(log n)</strong></li>
+            <li>Worst Case: <strong>O(log n)</strong></li>
+          </ul>
+        </li>
+        <li>Binary Search is significantly more efficient than Linear Search for large, sorted datasets.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

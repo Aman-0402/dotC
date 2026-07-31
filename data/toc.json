@@ -235,6 +235,10 @@
         {
           "title": "Arrays (Advanced)",
           "path": "lessons/unit6-arrays-advanced.html"
+        },
+        {
+          "title": "Searching Algorithms",
+          "path": "lessons/unit6-searching-algorithms.html"
         }
       ]
     }
