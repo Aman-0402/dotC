@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction to Sorting — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Introduction to Sorting</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Introduction to Sorting</h1>
+
+      <h2>What is Sorting?</h2>
+      <p><strong>Sorting</strong> is the process of arranging data in a particular order.</p>
+      <p>The order can be:</p>
+      <ul>
+        <li>Ascending Order (Small → Large)</li>
+        <li>Descending Order (Large → Small)</li>
+      </ul>
+      <p>For example,</p>
+
+      <h3>Unsorted Array</h3>
+      <pre><code class="language-none">45 12 89 34 10</code></pre>
+
+      <h3>Ascending Order</h3>
+      <pre><code class="language-none">10 12 34 45 89</code></pre>
+
+      <h3>Descending Order</h3>
+      <pre><code class="language-none">89 45 34 12 10</code></pre>
+      <p>Sorting does <strong>not</strong> change the values—it only changes their positions.</p>
+
+      <h2>Why Do We Need Sorting?</h2>
+      <p>Imagine you have a class of 500 students.</p>
+      <p>Without sorting:</p>
+      <pre><code class="language-none">Roll No:
+54
+12
+78
+3
+40
+...</code></pre>
+      <p>Finding Roll No. <strong>78</strong> requires checking many records one by one.</p>
+      <p>After sorting:</p>
+      <pre><code class="language-none">3
+12
+40
+54
+78
+...</code></pre>
+      <p>Now faster searching techniques like <strong>Binary Search</strong> can be used.</p>
+      <p>Sorting is one of the most frequently used operations in computer science.</p>
+
+      <h2>Real-World Examples</h2>
+
+      <h3>Example 1: Mobile Contacts</h3>
+      <pre><code class="language-none">Aman
+Arjun
+Karan
+Rahul
+Vikas</code></pre>
+      <p>Contacts are sorted alphabetically.</p>
+
+      <h3>Example 2: Online Shopping</h3>
+      <p>Amazon sorts products by</p>
+      <ul>
+        <li>Price: Low → High</li>
+        <li>Price: High → Low</li>
+        <li>Customer Rating</li>
+        <li>Newest Arrivals</li>
+      </ul>
+
+      <h3>Example 3: School Results</h3>
+      <p>Students are sorted by</p>
+      <ul>
+        <li>Roll Number</li>
+        <li>Marks</li>
+        <li>Rank</li>
+        <li>Name</li>
+      </ul>
+
+      <h3>Example 4: Cricket Scoreboard</h3>
+      <p>Players are sorted by</p>
+      <ul>
+        <li>Highest Runs</li>
+        <li>Highest Wickets</li>
+        <li>Strike Rate</li>
+      </ul>
+
+      <h3>Example 5: Banking</h3>
+      <p>Transactions are sorted by</p>
+      <ul>
+        <li>Date</li>
+        <li>Amount</li>
+        <li>Account Number</li>
+      </ul>
+
+      <h2>Types of Sorting Order</h2>
+
+      <h3>1. Ascending Order</h3>
+      <p>Smallest value comes first.</p>
+      <pre><code class="language-none">2 5 8 11 20</code></pre>
+
+      <h3>2. Descending Order</h3>
+      <p>Largest value comes first.</p>
+      <pre><code class="language-none">20 11 8 5 2</code></pre>
+
+      <h2>How Does Sorting Work?</h2>
+      <p>Suppose we have</p>
+      <pre><code class="language-none">8 3 5 1</code></pre>
+      <p>After sorting:</p>
+      <pre><code class="language-none">1 3 5 8</code></pre>
+      <p>The algorithm repeatedly compares elements and rearranges them until every element is in its correct position.</p>
+      <p>Different sorting algorithms use different strategies:</p>
+      <ul>
+        <li>Bubble Sort → Swaps adjacent elements.</li>
+        <li>Selection Sort → Selects the minimum element each pass.</li>
+        <li>Insertion Sort → Inserts each element into its correct position.</li>
+        <li>Merge Sort → Divides the array into halves and merges them.</li>
+        <li>Quick Sort → Uses a pivot to partition the array.</li>
+        <li>Heap Sort → Uses a heap data structure.</li>
+        <li>Counting Sort → Counts occurrences of values.</li>
+        <li>Radix Sort → Sorts numbers digit by digit.</li>
+      </ul>
+
+      <h2>Characteristics of a Good Sorting Algorithm</h2>
+      <p>A good sorting algorithm should be:</p>
+      <ul>
+        <li>Correct: Produces the properly sorted order.</li>
+        <li>Efficient: Uses less time.</li>
+        <li>Memory Efficient: Uses less extra memory.</li>
+        <li>Scalable: Handles both small and large datasets.</li>
+        <li>Stable (when required): Preserves the relative order of equal elements.</li>
+      </ul>
+
+      <h2>Applications of Sorting</h2>
+      <p>Sorting is used in many areas, including:</p>
+      <ul>
+        <li>Searching (especially Binary Search)</li>
+        <li>Database management</li>
+        <li>E-commerce websites</li>
+        <li>Payroll systems</li>
+        <li>Student management systems</li>
+        <li>Banking applications</li>
+        <li>Data analysis</li>
+        <li>Artificial Intelligence</li>
+        <li>Machine Learning (data preprocessing)</li>
+        <li>Operating systems (task scheduling)</li>
+      </ul>
+
+      <h2>Advantages of Sorting</h2>
+      <ul>
+        <li>Faster searching</li>
+        <li>Easier data analysis</li>
+        <li>Efficient duplicate detection</li>
+        <li>Better organization of data</li>
+        <li>Improved performance of many algorithms</li>
+      </ul>
+
+      <h2>Disadvantages of Sorting</h2>
+      <ul>
+        <li>Some algorithms are slow for large datasets.</li>
+        <li>Some require additional memory.</li>
+        <li>Sorting itself takes time before other operations can benefit from the ordered data.</li>
+      </ul>
+
+      <h2>Example</h2>
+      <p>Given the array:</p>
+      <pre><code class="language-none">50 20 40 10 30</code></pre>
+      <p>Ascending order:</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>Descending order:</p>
+      <pre><code class="language-none">50 40 30 20 10</code></pre>
+
+      <h2>Popular Sorting Algorithms</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Algorithm</th>
+            <th>Best Case</th>
+            <th>Average Case</th>
+            <th>Worst Case</th>
+            <th>Stable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Bubble Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>Yes</td></tr>
+          <tr><td>Selection Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>No</td></tr>
+          <tr><td>Insertion Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>Yes</td></tr>
+          <tr><td>Merge Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>Yes</td></tr>
+          <tr><td>Quick Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>No</td></tr>
+          <tr><td>Heap Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>No</td></tr>
+          <tr><td>Counting Sort</td><td>O(n + k)</td><td>O(n + k)</td><td>O(n + k)</td><td>Yes</td></tr>
+          <tr><td>Radix Sort</td><td>O(d × (n + k))</td><td>O(d × (n + k))</td><td>O(d × (n + k))</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+      <blockquote>
+        <p><strong>Notation:</strong></p>
+        <p><strong>n</strong> = Number of elements</p>
+        <p><strong>k</strong> = Range of input values</p>
+        <p><strong>d</strong> = Number of digits in the largest number</p>
+      </blockquote>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li>Sorting arranges data in ascending or descending order.</li>
+        <li>It improves searching and data organization.</li>
+        <li>Different algorithms are suited to different situations.</li>
+        <li>Simpler algorithms (Bubble, Selection, Insertion) are easier to understand, while advanced algorithms (Merge, Quick, Heap, Counting, Radix) offer better performance for larger datasets.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

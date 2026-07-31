@@ -245,6 +245,15 @@
           "path": "lessons/unit6-array-based-problems.html"
         }
       ]
+    },
+    {
+      "title": "Unit 7",
+      "lessons": [
+        {
+          "title": "Introduction to Sorting",
+          "path": "lessons/unit7-introduction-to-sorting.html"
+        }
+      ]
     }
   ]
 }
