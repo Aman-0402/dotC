@@ -107,6 +107,10 @@
         {
           "title": "Storage Classes",
           "path": "lessons/unit2-storage-classes.html"
+        },
+        {
+          "title": "Data Types",
+          "path": "lessons/unit2-data-types.html"
         }
       ]
     }

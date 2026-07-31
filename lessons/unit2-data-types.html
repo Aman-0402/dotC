@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Types — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Data Types</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Data Types</h1>
+
+      <p>Data Types are one of the <strong>fundamental building blocks</strong> of C programming. Every variable, constant, function, and expression is associated with a data type.</p>
+
+      <h2>What is a Data Type?</h2>
+      <p>A <strong>data type</strong> tells the compiler:</p>
+      <ul>
+        <li>What kind of data will be stored.</li>
+        <li>How much memory should be allocated.</li>
+        <li>What operations can be performed on the data.</li>
+        <li>How the data should be interpreted.</li>
+      </ul>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>A data type is a specification that tells the compiler what type of value a variable can store, how much memory it requires, and what operations are valid on it.</strong></p>
+      </blockquote>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine you have different containers:</p>
+      <pre><code class="language-none">🪣 Bucket       → Water
+📦 Box          → Books
+🧴 Bottle       → Oil
+💰 Wallet       → Money</code></pre>
+      <p>Each container is designed for a specific type of item.</p>
+      <p>Similarly in C:</p>
+      <pre><code class="language-c">int age;
+float salary;
+char grade;</code></pre>
+      <ul>
+        <li><code>age</code> stores <strong>integers</strong></li>
+        <li><code>salary</code> stores <strong>decimal numbers</strong></li>
+        <li><code>grade</code> stores <strong>characters</strong></li>
+      </ul>
+
+      <h2>Why Do We Need Data Types?</h2>
+      <p>Suppose C had no data types.</p>
+      <pre><code class="language-none">20
+'A'
+3.14
+"Hello"</code></pre>
+      <p>The compiler would not know:</p>
+      <ul>
+        <li>Is <code>20</code> a number or a character?</li>
+        <li>Is <code>3.14</code> an integer?</li>
+        <li>How much memory should be allocated?</li>
+        <li>Which format specifier should be used?</li>
+      </ul>
+      <p>Data types solve these problems.</p>
+
+      <h2>Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 20;
+    float percentage = 92.5;
+    char grade = 'A';
+
+    printf("%d\n", age);
+    printf("%.1f\n", percentage);
+    printf("%c\n", grade);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">20
+92.5
+A</code></pre>
+
+      <h2>How Does the Compiler Use Data Types?</h2>
+      <p>Consider:</p>
+      <pre><code class="language-c">int number = 10;</code></pre>
+      <p>The compiler performs these steps:</p>
+      <pre><code class="language-none">number
+   │
+   ▼
+Data Type = int
+   │
+   ▼
+Allocate Memory (typically 4 bytes)
+   │
+   ▼
+Store Value = 10</code></pre>
+      <p>Without the data type, the compiler would not know how to store or interpret <code>10</code>.</p>
+
+      <h2>Classification of Data Types</h2>
+      <p>C data types can be divided into <strong>four major categories</strong>.</p>
+      <pre><code class="language-none">Data Types
+│
+├── Primary (Basic / Primitive)
+├── Derived
+├── User-Defined
+└── Void</code></pre>
+      <p>Let's understand each one.</p>
+
+      <h2>1. Primary (Basic / Primitive) Data Types</h2>
+      <p>These are the <strong>built-in data types</strong> provided by the C language.</p>
+      <pre><code class="language-none">Primary Data Types
+│
+├── int
+├── char
+├── float
+└── double</code></pre>
+      <h3>Examples</h3>
+      <pre><code class="language-c">int age = 20;
+char grade = 'A';
+float price = 99.99;
+double pi = 3.1415926535;</code></pre>
+      <p>These are the most commonly used data types in C.</p>
+
+      <h2>2. Derived Data Types</h2>
+      <p>Derived data types are created using the basic data types.</p>
+      <p>Examples:</p>
+      <pre><code class="language-none">Arrays
+Pointers
+Functions</code></pre>
+
+      <h3>Array</h3>
+      <pre><code class="language-c">int marks[5];</code></pre>
+
+      <h3>Pointer</h3>
+      <pre><code class="language-c">int *ptr;</code></pre>
+
+      <h3>Function</h3>
+      <pre><code class="language-c">int add(int a, int b);</code></pre>
+      <p>These will be covered in later units.</p>
+
+      <h2>3. User-Defined Data Types</h2>
+      <p>These are created by the programmer.</p>
+      <p>Examples:</p>
+      <pre><code class="language-none">struct
+union
+enum
+typedef</code></pre>
+
+      <h3>Structure</h3>
+      <pre><code class="language-c">struct Student
+{
+    int id;
+    char name[30];
+};</code></pre>
+
+      <h3>Enumeration</h3>
+      <pre><code class="language-c">enum Day
+{
+    MON,
+    TUE,
+    WED
+};</code></pre>
+
+      <h3>typedef</h3>
+      <pre><code class="language-c">typedef unsigned int uint;</code></pre>
+
+      <h2>4. Void Data Type</h2>
+      <p><code>void</code> means <strong>no value</strong> or <strong>no data type</strong>.</p>
+      <p>It is commonly used in functions.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">void display()
+{
+    printf("Hello");
+}</code></pre>
+      <p>Here the function returns nothing.</p>
+      <p>Another example:</p>
+      <pre><code class="language-c">void *ptr;</code></pre>
+      <p>A <code>void</code> pointer can point to any data type.</p>
+
+      <h2>Data Type Hierarchy</h2>
+      <pre><code class="language-none">                    Data Types
+                        │
+ ┌──────────────────────┼──────────────────────┐
+ │                      │                      │
+Primary             Derived              User-Defined
+ │                      │                      │
+int                Array                struct
+char               Pointer              union
+float              Function             enum
+double                                   typedef
+
+                 Void</code></pre>
+
+      <h2>Memory Allocation</h2>
+      <p>Different data types require different amounts of memory.</p>
+      <p>Typical sizes on modern systems:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Data Type</th>
+            <th>Typical Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>char</code></td><td>1 byte</td></tr>
+          <tr><td><code>int</code></td><td>4 bytes</td></tr>
+          <tr><td><code>float</code></td><td>4 bytes</td></tr>
+          <tr><td><code>double</code></td><td>8 bytes</td></tr>
+        </tbody>
+      </table>
+      <blockquote>
+        <p><strong>Note:</strong> These sizes are implementation-dependent. They may vary across compilers and hardware architectures.</p>
+      </blockquote>
+
+      <h2>Why Different Sizes?</h2>
+      <p>Suppose:</p>
+      <pre><code class="language-c">char grade = 'A';</code></pre>
+      <p>Only one character needs to be stored.</p>
+      <p>So <strong>1 byte</strong> is usually enough.</p>
+      <p>Now:</p>
+      <pre><code class="language-c">double pi = 3.141592653589793;</code></pre>
+      <p>A much larger and more precise value needs more memory, so <code>double</code> typically uses <strong>8 bytes</strong>.</p>
+
+      <h2>Using <code>sizeof</code></h2>
+      <p>C provides the <code>sizeof</code> operator to determine the size of a data type or variable.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("int = %zu bytes\n", sizeof(int));
+    printf("char = %zu bytes\n", sizeof(char));
+    printf("float = %zu bytes\n", sizeof(float));
+    printf("double = %zu bytes\n", sizeof(double));
+
+    return 0;
+}</code></pre>
+      <p><strong>Sample Output</strong></p>
+      <pre><code class="language-none">int = 4 bytes
+char = 1 byte
+float = 4 bytes
+double = 8 bytes</code></pre>
+
+      <h2>Memory Representation</h2>
+      <pre><code class="language-c">int age = 20;
+char grade = 'A';
+float marks = 95.5;</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Address      Variable      Type      Value
+----------------------------------------------
+1000         age           int        20
+1004         grade         char       A
+1005         marks         float      95.5</code></pre>
+      <p>The addresses shown are <strong>illustrative</strong>, not actual memory addresses.</p>
+
+      <h2>Choosing the Correct Data Type</h2>
+
+      <h3>Wrong</h3>
+      <pre><code class="language-c">int pi = 3.14;</code></pre>
+      <p>Stored value:</p>
+      <pre><code class="language-none">3</code></pre>
+      <p>The decimal part is lost.</p>
+
+      <h3>Correct</h3>
+      <pre><code class="language-c">float pi = 3.14;</code></pre>
+      <p>Stored value:</p>
+      <pre><code class="language-none">3.14</code></pre>
+      <p>Another example:</p>
+      <p>Wrong</p>
+      <pre><code class="language-c">char age = 25;</code></pre>
+      <p>Although it may compile, <code>char</code> is intended for character data and has a limited range. Using it for age is poor design.</p>
+      <p>Better</p>
+      <pre><code class="language-c">int age = 25;</code></pre>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Storing Decimal Numbers in <code>int</code></h3>
+      <pre><code class="language-c">int salary = 25000.75;</code></pre>
+      <p>Stored value:</p>
+      <pre><code class="language-none">25000</code></pre>
+      <p>The fractional part is discarded.</p>
+
+      <h3>2. Using <code>char</code> for Strings</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">char name = "Aman";</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">char name[] = "Aman";</code></pre>
+
+      <h3>3. Confusing Characters and Integers</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">char grade = 65;</code></pre>
+      <p>While this stores the ASCII value for <code>'A'</code>, it is less readable.</p>
+      <p>Better</p>
+      <pre><code class="language-c">char grade = 'A';</code></pre>
+
+      <h3>4. Assuming Fixed Sizes Everywhere</h3>
+      <p>Do not assume:</p>
+      <pre><code class="language-none">int = 4 bytes</code></pre>
+      <p>on every platform. Always use <code>sizeof()</code> if the exact size matters.</p>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is a data type?</h3>
+      <p>A data type specifies the kind of data a variable can store, the memory required, and the operations that can be performed on it.</p>
+
+      <h3>2. Why are data types needed?</h3>
+      <p>They help the compiler allocate memory, interpret data correctly, and perform valid operations.</p>
+
+      <h3>3. What are the categories of data types in C?</h3>
+      <ul>
+        <li>Primary (Basic)</li>
+        <li>Derived</li>
+        <li>User-Defined</li>
+        <li>Void</li>
+      </ul>
+
+      <h3>4. What is the purpose of <code>void</code>?</h3>
+      <p><code>void</code> represents the absence of a value or type. It is commonly used for functions that return nothing and for generic pointers (<code>void *</code>).</p>
+
+      <h3>5. How can you determine the size of a data type?</h3>
+      <p>By using the <code>sizeof</code> operator.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">sizeof(int)</code></pre>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define a data type.</li>
+        <li>Why are data types necessary in C?</li>
+        <li>Explain the four categories of data types.</li>
+        <li>What is the purpose of <code>void</code>?</li>
+        <li>Explain the difference between primitive and derived data types.</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Store different data types.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 21;
+    float marks = 95.5;
+    char grade = 'A';
+
+    printf("Age = %d\n", age);
+    printf("Marks = %.1f\n", marks);
+    printf("Grade = %c\n", grade);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Age = 21
+Marks = 95.5
+Grade = A</code></pre>
+
+      <h4>Q2. Print the sizes of basic data types.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("char   : %zu bytes\n", sizeof(char));
+    printf("int    : %zu bytes\n", sizeof(int));
+    printf("float  : %zu bytes\n", sizeof(float));
+    printf("double : %zu bytes\n", sizeof(double));
+
+    return 0;
+}</code></pre>
+
+      <h4>Q3. Demonstrate the effect of using the wrong data type.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int value = 9.99;
+
+    printf("%d", value);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">9</code></pre>
+      <p>The decimal part is truncated because <code>int</code> stores only whole numbers.</p>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>A <strong>data type</strong> tells the compiler what kind of data is stored, how much memory is needed, and which operations are valid.</li>
+        <li>C classifies data types into <strong>Primary</strong>, <strong>Derived</strong>, <strong>User-Defined</strong>, and <strong>Void</strong>.</li>
+        <li>The four primary data types are <code>int</code>, <code>char</code>, <code>float</code>, and <code>double</code>.</li>
+        <li>Different data types generally require different amounts of memory.</li>
+        <li>Use the <strong><code>sizeof</code></strong> operator to determine the size of a data type or variable.</li>
+        <li>Choosing the correct data type helps avoid memory waste and data loss.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
