@@ -314,6 +314,15 @@
           "path": "lessons/unit7-applications-of-recursion.html"
         }
       ]
+    },
+    {
+      "title": "Unit 8",
+      "lessons": [
+        {
+          "title": "Introduction to Linked Lists",
+          "path": "lessons/unit8-introduction-to-linked-lists.html"
+        }
+      ]
     }
   ]
 }
