@@ -16,9 +16,9 @@
     <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
   </nav>
 
-  <main style="max-width: 760px; margin: 2rem auto; padding: 0 1.5rem;">
+  <main style="max-width: 100%; margin: 2rem auto; padding: 0 2rem;">
     <h1>Table of Contents</h1>
-    <div id="toc-root"></div>
+    <div id="toc-root" class="toc-columns"></div>
   </main>
 
   <script src="js/theme.js"></script>
@@ -29,7 +29,7 @@
         var root = document.getElementById("toc-root");
         toc.chapters.forEach(function (chapter) {
           var details = document.createElement("details");
-          details.className = "toc-chapter";
+          details.className = "toc-chapter toc-column";
           details.open = true;
 
           var summary = document.createElement("summary");

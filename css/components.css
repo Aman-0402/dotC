@@ -28,8 +28,20 @@ pre[class*="language-"] {
   text-shadow: none;
 }
 
+.toc-columns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 2.5rem;
+}
+
 .toc-chapter {
   margin-bottom: 0.75rem;
+}
+
+.toc-column {
+  flex: 0 0 280px;
+  width: 280px;
 }
 
 .toc-chapter summary {
@@ -45,6 +57,13 @@ pre[class*="language-"] {
 
 .toc-lesson-list li {
   padding: 0.35rem 0;
+}
+
+@media (max-width: 640px) {
+  .toc-column {
+    flex: 1 1 100%;
+    width: 100%;
+  }
 }
 
 .sidebar-chapter {
