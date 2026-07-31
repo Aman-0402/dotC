@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Algorithm Analysis — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 6 / Algorithm Analysis</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Algorithm Analysis</h1>
+
+      <p>Algorithm Analysis is the process of evaluating the efficiency of an algorithm by measuring the resources it requires, mainly:</p>
+      <ul>
+        <li><strong>Execution Time (Time Complexity)</strong></li>
+        <li><strong>Memory Usage (Space Complexity)</strong></li>
+      </ul>
+      <p>It helps us determine which algorithm performs better for a given problem, especially when the input size becomes very large.</p>
+
+      <h2>1. Introduction to Data Structures &amp; Algorithms (DSA)</h2>
+      <h3>What is a Data Structure?</h3>
+      <p>A <strong>Data Structure</strong> is a way of organizing and storing data so that it can be accessed and modified efficiently.</p>
+
+      <h3>Examples</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Data Structure</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Array</td><td>Store multiple values of same type</td></tr>
+          <tr><td>Linked List</td><td>Dynamic memory storage</td></tr>
+          <tr><td>Stack</td><td>LIFO operations</td></tr>
+          <tr><td>Queue</td><td>FIFO operations</td></tr>
+          <tr><td>Tree</td><td>Hierarchical data</td></tr>
+          <tr><td>Graph</td><td>Networks and maps</td></tr>
+          <tr><td>Hash Table</td><td>Fast searching</td></tr>
+        </tbody>
+      </table>
+
+      <h3>What is an Algorithm?</h3>
+      <p>An <strong>Algorithm</strong> is a step-by-step procedure to solve a problem or perform a specific task.</p>
+      <p>It is like a recipe that tells the computer exactly what to do.</p>
+
+      <h3>Example</h3>
+      <p>Problem: Add two numbers.</p>
+      <p>Algorithm:</p>
+      <pre><code class="language-none">Step 1: Start
+
+Step 2: Read A and B
+
+Step 3: Sum = A + B
+
+Step 4: Print Sum
+
+Step 5: Stop</code></pre>
+
+      <h3>Relationship between Data Structure and Algorithm</h3>
+      <ul>
+        <li>Data Structure stores data.</li>
+        <li>Algorithm processes data.</li>
+      </ul>
+      <p>Example:</p>
+      <pre><code class="language-none">Array → Binary Search
+
+Stack → Expression Evaluation
+
+Queue → CPU Scheduling
+
+Tree → Searching</code></pre>
+
+      <h3>Why Study DSA?</h3>
+      <ul>
+        <li>Improves problem-solving skills</li>
+        <li>Helps write faster programs</li>
+        <li>Reduces memory usage</li>
+        <li>Essential for software development</li>
+        <li>Important for coding interviews</li>
+      </ul>
+
+      <h2>2. Characteristics of an Algorithm</h2>
+      <p>A good algorithm must satisfy the following characteristics.</p>
+
+      <h3>1. Input</h3>
+      <p>An algorithm should accept zero or more inputs.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">Enter two numbers
+5 10</code></pre>
+      <p>Input = 5 and 10</p>
+
+      <h3>2. Output</h3>
+      <p>An algorithm should produce at least one output.</p>
+      <p>Example</p>
+      <p>Input</p>
+      <pre><code class="language-none">5 10</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">15</code></pre>
+
+      <h3>3. Definiteness</h3>
+      <p>Every step should be clear and unambiguous.</p>
+      <p>Correct</p>
+      <pre><code class="language-none">Multiply A and B</code></pre>
+      <p>Incorrect</p>
+      <pre><code class="language-none">Do something with A</code></pre>
+
+      <h3>4. Finiteness</h3>
+      <p>Algorithm must terminate after a finite number of steps.</p>
+      <p>Correct</p>
+      <pre><code class="language-none">Repeat 10 times</code></pre>
+      <p>Incorrect</p>
+      <pre><code class="language-none">Repeat forever</code></pre>
+
+      <h3>5. Effectiveness</h3>
+      <p>Every instruction should be simple and executable.</p>
+      <p>Example</p>
+      <pre><code class="language-none">A = A + 1</code></pre>
+      <p>This can be performed easily.</p>
+
+      <h3>6. Correctness</h3>
+      <p>Algorithm should produce the correct output for every valid input.</p>
+      <p>Example</p>
+      <pre><code class="language-none">Input:
+4 5
+
+Output:
+9</code></pre>
+
+      <h3>7. Generality</h3>
+      <p>Algorithm should solve all valid cases, not just one example.</p>
+      <p>Correct</p>
+      <pre><code class="language-none">Add any two numbers</code></pre>
+      <p>Incorrect</p>
+      <pre><code class="language-none">Add only 5 and 10</code></pre>
+
+      <h2>Example Algorithm</h2>
+      <p>Find Maximum of Two Numbers</p>
+      <pre><code class="language-none">Start
+
+Read A and B
+
+If A > B
+    Print A
+Else
+    Print B
+
+Stop</code></pre>
+
+      <h2>3. Time Complexity</h2>
+      <h3>Definition</h3>
+      <p><strong>Time Complexity</strong> measures how the running time of an algorithm grows as the input size (<strong>n</strong>) increases.</p>
+      <p>It does <strong>not</strong> measure the actual time in seconds. Instead, it counts how the number of operations increases with input size.</p>
+
+      <h3>Why Time Complexity?</h3>
+      <p>Suppose there are two programs:</p>
+      <p>Program A</p>
+      <pre><code class="language-none">100 operations</code></pre>
+      <p>Program B</p>
+      <pre><code class="language-none">10,000 operations</code></pre>
+      <p>For small input, both may seem fast.</p>
+      <p>For very large input:</p>
+      <ul>
+        <li>Program A finishes quickly.</li>
+        <li>Program B becomes much slower.</li>
+      </ul>
+      <p>Time complexity helps compare algorithms independent of hardware or programming language.</p>
+
+      <h3>Common Time Complexities</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Complexity</th>
+            <th>Name</th>
+            <th>Performance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>O(1)</td><td>Constant</td><td>Excellent</td></tr>
+          <tr><td>O(log n)</td><td>Logarithmic</td><td>Excellent</td></tr>
+          <tr><td>O(n)</td><td>Linear</td><td>Good</td></tr>
+          <tr><td>O(n log n)</td><td>Linearithmic</td><td>Good</td></tr>
+          <tr><td>O(n²)</td><td>Quadratic</td><td>Slow</td></tr>
+          <tr><td>O(n³)</td><td>Cubic</td><td>Very Slow</td></tr>
+          <tr><td>O(2ⁿ)</td><td>Exponential</td><td>Extremely Slow</td></tr>
+          <tr><td>O(n!)</td><td>Factorial</td><td>Worst</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Example 1: Constant Time — O(1)</h3>
+      <pre><code class="language-c">int x = arr[5];</code></pre>
+      <p>Only one operation.</p>
+      <p>Regardless of array size:</p>
+      <ul>
+        <li>10 elements</li>
+        <li>1000 elements</li>
+        <li>1 million elements</li>
+      </ul>
+      <p>Execution time remains approximately the same.</p>
+      <p><strong>Time Complexity:</strong> <strong>O(1)</strong></p>
+
+      <h3>Example 2: Linear Time — O(n)</h3>
+      <pre><code class="language-c">for(int i=0;i&lt;n;i++)
+{
+    printf("%d ",arr[i]);
+}</code></pre>
+      <p>If:</p>
+      <p>n = 5 → 5 operations</p>
+      <p>n = 100 → 100 operations</p>
+      <p>n = 1000 → 1000 operations</p>
+      <p><strong>Time Complexity:</strong> <strong>O(n)</strong></p>
+
+      <h3>Example 3: Quadratic Time — O(n²)</h3>
+      <pre><code class="language-c">for(int i=0;i&lt;n;i++)
+{
+    for(int j=0;j&lt;n;j++)
+    {
+        printf("*");
+    }
+}</code></pre>
+      <p>Operations:</p>
+      <pre><code class="language-none">n × n = n²</code></pre>
+      <p>If n = 100</p>
+      <p>Operations = 10,000</p>
+      <p><strong>Time Complexity:</strong> <strong>O(n²)</strong></p>
+
+      <h2>4. Space Complexity</h2>
+      <h3>Definition</h3>
+      <p><strong>Space Complexity</strong> measures the total amount of memory an algorithm requires during execution.</p>
+      <p>It includes:</p>
+      <ul>
+        <li>Input storage</li>
+        <li>Variables</li>
+        <li>Auxiliary (extra) memory</li>
+        <li>Function call stack (if applicable)</li>
+      </ul>
+
+      <h3>Formula</h3>
+      <pre><code class="language-none">Space Complexity =
+Input Space + Auxiliary Space</code></pre>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">int a;</code></pre>
+      <p>Uses one integer variable.</p>
+      <p>Space Complexity:</p>
+      <pre><code class="language-none">O(1)</code></pre>
+
+      <h3>Example 2</h3>
+      <pre><code class="language-c">int arr[n];</code></pre>
+      <p>Memory depends on <code>n</code>.</p>
+      <p>Space Complexity:</p>
+      <pre><code class="language-none">O(n)</code></pre>
+
+      <h3>Example 3</h3>
+      <pre><code class="language-c">int matrix[n][n];</code></pre>
+      <p>Memory required:</p>
+      <pre><code class="language-none">n × n</code></pre>
+      <p>Space Complexity:</p>
+      <pre><code class="language-none">O(n²)</code></pre>
+
+      <h3>Example 4 (Recursive Function)</h3>
+      <pre><code class="language-c">void fun(int n)
+{
+    if(n==0)
+        return;
+
+    fun(n-1);
+}</code></pre>
+      <p>Each recursive call uses stack memory.</p>
+      <p>Space Complexity:</p>
+      <pre><code class="language-none">O(n)</code></pre>
+
+      <h2>Difference Between Time Complexity and Space Complexity</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Time Complexity</th>
+            <th>Space Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Measures execution time</td><td>Measures memory usage</td></tr>
+          <tr><td>Counts operations</td><td>Counts memory consumed</td></tr>
+          <tr><td>Faster algorithms are preferred</td><td>Lower memory usage is preferred</td></tr>
+          <tr><td>Example: O(n)</td><td>Example: O(n)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>5. Asymptotic Notations</h2>
+      <h3>Definition</h3>
+      <p><strong>Asymptotic Notations</strong> describe the growth rate of an algorithm as the input size (<strong>n</strong>) becomes very large.</p>
+      <p>They ignore:</p>
+      <ul>
+        <li>Machine speed</li>
+        <li>Programming language</li>
+        <li>Compiler optimization</li>
+        <li>Constant factors</li>
+      </ul>
+      <p>Instead, they focus on how performance scales with increasing input size.</p>
+
+      <h3>Types of Asymptotic Notations</h3>
+      <ol>
+        <li><strong>Big O (O)</strong> – Upper Bound (Worst Case)</li>
+        <li><strong>Big Omega (Ω)</strong> – Lower Bound (Best Case)</li>
+        <li><strong>Big Theta (Θ)</strong> – Tight Bound (Average/Exact Growth)</li>
+      </ol>
+
+      <h2>6. Big O Notation (O)</h2>
+      <h3>Definition</h3>
+      <p><strong>Big O</strong> represents the <strong>maximum time</strong> an algorithm can take for an input of size <code>n</code>.</p>
+      <p>It describes the <strong>worst-case performance</strong>.</p>
+
+      <h3>Example</h3>
+      <p>Linear Search (searching the last element):</p>
+      <pre><code class="language-c">for(int i=0;i&lt;n;i++)
+{
+    if(arr[i]==key)
+        return i;
+}</code></pre>
+      <p>If the key is at the last position or absent, all <code>n</code> elements are checked.</p>
+      <p><strong>Time Complexity:</strong> <strong>O(n)</strong></p>
+
+      <h3>Common Big O Examples</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Algorithm</th>
+            <th>Big O</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Array Index Access</td><td>O(1)</td></tr>
+          <tr><td>Linear Search</td><td>O(n)</td></tr>
+          <tr><td>Binary Search</td><td>O(log n)</td></tr>
+          <tr><td>Bubble Sort</td><td>O(n²)</td></tr>
+          <tr><td>Merge Sort</td><td>O(n log n)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>7. Big Omega (Ω)</h2>
+      <h3>Definition</h3>
+      <p><strong>Big Omega (Ω)</strong> represents the <strong>minimum time</strong> an algorithm takes.</p>
+      <p>It describes the <strong>best-case performance</strong>.</p>
+
+      <h3>Example</h3>
+      <p>Linear Search:</p>
+      <pre><code class="language-c">for(int i=0;i&lt;n;i++)
+{
+    if(arr[i]==key)
+        return i;
+}</code></pre>
+      <p>If the key is the first element, only one comparison is made.</p>
+      <p><strong>Time Complexity:</strong> <strong>Ω(1)</strong></p>
+
+      <h3>Example</h3>
+      <p>Searching for <code>10</code>:</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>Key = 10</p>
+      <p>Only one comparison is needed.</p>
+      <p><strong>Best Case:</strong> <strong>Ω(1)</strong></p>
+
+      <h2>8. Big Theta (Θ)</h2>
+      <h3>Definition</h3>
+      <p><strong>Big Theta (Θ)</strong> represents the <strong>tight bound</strong> of an algorithm.</p>
+      <p>It describes the situation where the algorithm's running time grows at the same rate in both upper and lower bounds.</p>
+      <p>In simple terms, it represents the <strong>average or exact growth rate</strong>.</p>
+
+      <h3>Example</h3>
+      <p>Printing every array element:</p>
+      <pre><code class="language-c">for(int i=0;i&lt;n;i++)
+{
+    printf("%d ",arr[i]);
+}</code></pre>
+      <p>The loop always executes exactly <code>n</code> times.</p>
+      <p>Best Case = <code>n</code></p>
+      <p>Worst Case = <code>n</code></p>
+      <p>Therefore:</p>
+      <p><strong>Θ(n)</strong></p>
+
+      <h2>Comparison of Asymptotic Notations</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Notation</th>
+            <th>Meaning</th>
+            <th>Case</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Big O (O)</td><td>Upper Bound</td><td>Worst Case</td></tr>
+          <tr><td>Big Omega (Ω)</td><td>Lower Bound</td><td>Best Case</td></tr>
+          <tr><td>Big Theta (Θ)</td><td>Tight Bound</td><td>Average/Exact Growth</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Real-Life Example: Searching a Book in a Library</h2>
+      <p>Imagine you're looking for a book on a shelf containing <code>n</code> books:</p>
+      <ul>
+        <li><strong>Best Case (Ω(1))</strong>: The book is the first one you check.</li>
+        <li><strong>Worst Case (O(n))</strong>: The book is the last one or not present.</li>
+        <li><strong>Average/Typical Case (Θ(n))</strong>: On average, you check about half the books, which still grows linearly with <code>n</code>.</li>
+      </ul>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li><strong>Data Structure</strong> organizes data; an <strong>Algorithm</strong> processes data.</li>
+        <li>A good algorithm should have <strong>Input, Output, Definiteness, Finiteness, Effectiveness, Correctness, and Generality</strong>.</li>
+        <li><strong>Time Complexity</strong> measures how execution time grows with input size.</li>
+        <li><strong>Space Complexity</strong> measures how memory usage grows with input size.</li>
+        <li><strong>Big O (O)</strong> represents the <strong>Worst Case</strong>.</li>
+        <li><strong>Big Omega (Ω)</strong> represents the <strong>Best Case</strong>.</li>
+        <li><strong>Big Theta (Θ)</strong> represents the <strong>Tight/Average Growth</strong>.</li>
+        <li>Preferred time complexities are <strong>O(1)</strong>, <strong>O(log n)</strong>, and <strong>O(n)</strong>, while <strong>O(n²)</strong> and beyond become inefficient for large inputs.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

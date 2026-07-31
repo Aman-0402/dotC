@@ -224,6 +224,15 @@
           "path": "lessons/unit5-dynamic-memory-allocation.html"
         }
       ]
+    },
+    {
+      "title": "Unit 6",
+      "lessons": [
+        {
+          "title": "Algorithm Analysis",
+          "path": "lessons/unit6-algorithm-analysis.html"
+        }
+      ]
     }
   ]
 }
