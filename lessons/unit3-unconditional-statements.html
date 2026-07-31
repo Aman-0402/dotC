@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unconditional Statements — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 3 / Unconditional Statements</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Unconditional Statements</h1>
+
+      <p>Unconditional statements are statements that <strong>change the normal flow of program execution immediately</strong>, without checking any condition at that moment.</p>
+      <p>Normally, a C program executes statements one after another.</p>
+      <pre><code class="language-none">Statement 1
+    ↓
+Statement 2
+    ↓
+Statement 3
+    ↓
+Statement 4</code></pre>
+      <p>Unconditional statements can interrupt this flow.</p>
+      <p>For example:</p>
+      <ul>
+        <li>Exit a loop immediately.</li>
+        <li>Skip the remaining part of the current loop iteration.</li>
+        <li>Jump directly to another part of the program.</li>
+      </ul>
+
+      <h2>Types of Unconditional Statements</h2>
+      <p>There are three commonly used unconditional statements in C.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Statement</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>break</code></td><td>Terminates the nearest loop or switch</td></tr>
+          <tr><td><code>continue</code></td><td>Skips the remaining statements of the current loop iteration</td></tr>
+          <tr><td><code>goto</code></td><td>Jumps directly to a labeled statement</td></tr>
+        </tbody>
+      </table>
+
+      <h2>1. break Statement</h2>
+      <p>The <strong>break</strong> statement immediately terminates the <strong>nearest loop</strong> (<code>for</code>, <code>while</code>, <code>do-while</code>) or a <strong>switch-case</strong> statement.</p>
+      <p>As soon as <code>break</code> is executed:</p>
+      <ul>
+        <li>The loop ends immediately.</li>
+        <li>Control moves to the statement after the loop.</li>
+      </ul>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">break;</code></pre>
+
+      <h3>Flow</h3>
+      <pre><code class="language-none">Loop Starts
+      |
+      V
+Statements
+      |
+break Encountered
+      |
+Loop Ends Immediately
+      |
+Next Statement</code></pre>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i;
+
+    for(i = 1; i &lt;= 10; i++)
+    {
+        if(i == 6)
+        {
+            break;
+        }
+
+        printf("%d ", i);
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h4>Explanation</h4>
+      <p>Iteration:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>i</th>
+            <th>Output</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>1</td></tr>
+          <tr><td>2</td><td>2</td></tr>
+          <tr><td>3</td><td>3</td></tr>
+          <tr><td>4</td><td>4</td></tr>
+          <tr><td>5</td><td>5</td></tr>
+          <tr><td>6</td><td>break executes</td></tr>
+        </tbody>
+      </table>
+      <p>The loop stops when <code>i</code> becomes 6.</p>
+
+      <h3>Example 2</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int num;
+
+    while(1)
+    {
+        printf("Enter 0 to exit: ");
+        scanf("%d",&amp;num);
+
+        if(num == 0)
+        {
+            break;
+        }
+
+        printf("You entered %d\n",num);
+    }
+
+    printf("Program End");
+
+    return 0;
+}</code></pre>
+      <h4>Sample Output</h4>
+      <pre><code class="language-none">Enter 0 to exit: 5
+You entered 5
+
+Enter 0 to exit: 10
+You entered 10
+
+Enter 0 to exit: 0
+Program End</code></pre>
+
+      <h3>break in switch-case</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int choice = 2;
+
+    switch(choice)
+    {
+        case 1:
+            printf("Java");
+            break;
+
+        case 2:
+            printf("C");
+            break;
+
+        case 3:
+            printf("Python");
+            break;
+
+        default:
+            printf("Invalid");
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">C</code></pre>
+      <p>Without <code>break</code>, execution continues to the next case.</p>
+
+      <h2>2. continue Statement</h2>
+      <p>The <strong>continue</strong> statement skips the remaining statements of the <strong>current iteration</strong> of a loop.</p>
+      <p>Instead of ending the loop, it immediately starts the <strong>next iteration</strong>.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">continue;</code></pre>
+
+      <h3>Flow</h3>
+      <pre><code class="language-none">Loop Starts
+      |
+      V
+Statements
+      |
+continue
+      |
+Next Iteration</code></pre>
+
+      <h3>Difference between break and continue</h3>
+      <pre><code class="language-none">break
+↓
+
+Loop Ends
+
+continue
+↓
+
+Current Iteration Ends
+↓
+
+Next Iteration Starts</code></pre>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i;
+
+    for(i = 1; i &lt;= 5; i++)
+    {
+        if(i == 3)
+        {
+            continue;
+        }
+
+        printf("%d ", i);
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">1 2 4 5</code></pre>
+
+      <h4>Explanation</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>i</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Print</td></tr>
+          <tr><td>2</td><td>Print</td></tr>
+          <tr><td>3</td><td>continue</td></tr>
+          <tr><td>4</td><td>Print</td></tr>
+          <tr><td>5</td><td>Print</td></tr>
+        </tbody>
+      </table>
+      <p>The value <strong>3</strong> is skipped.</p>
+
+      <h3>Example 2</h3>
+      <p>Print only odd numbers.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i;
+
+    for(i = 1; i &lt;= 10; i++)
+    {
+        if(i % 2 == 0)
+        {
+            continue;
+        }
+
+        printf("%d ",i);
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">1 3 5 7 9</code></pre>
+
+      <h3>Example 3</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int i = 0;
+
+    while(i &lt; 5)
+    {
+        i++;
+
+        if(i == 3)
+        {
+            continue;
+        }
+
+        printf("%d ",i);
+    }
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">1 2 4 5</code></pre>
+
+      <h2>3. goto Statement</h2>
+      <p>The <strong>goto</strong> statement transfers program control directly to another labeled statement within the same function.</p>
+      <p>Unlike loops or conditional statements, <code>goto</code> performs an unconditional jump.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">goto label;
+
+/* statements */
+
+label:
+    statement;</code></pre>
+
+      <h3>Flow</h3>
+      <pre><code class="language-none">Statement
+    |
+goto label
+    |
+Jump
+    |
+label:
+Statements</code></pre>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Welcome\n");
+
+    goto end;
+
+    printf("This line will never execute\n");
+
+end:
+    printf("Program Finished");
+
+    return 0;
+}</code></pre>
+      <h4>Output</h4>
+      <pre><code class="language-none">Welcome
+Program Finished</code></pre>
+
+      <h3>Example 2</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int num;
+
+start:
+
+    printf("Enter a positive number: ");
+    scanf("%d",&amp;num);
+
+    if(num &lt; 0)
+    {
+        printf("Invalid Input\n");
+        goto start;
+    }
+
+    printf("Valid Number");
+
+    return 0;
+}</code></pre>
+      <h4>Sample Output</h4>
+      <pre><code class="language-none">Enter a positive number: -5
+Invalid Input
+
+Enter a positive number: -10
+Invalid Input
+
+Enter a positive number: 20
+Valid Number</code></pre>
+
+      <h2>Why is goto Discouraged?</h2>
+      <p>Although <code>goto</code> works correctly, excessive use makes programs difficult to understand and maintain.</p>
+      <p>Problems include:</p>
+      <ul>
+        <li>Creates confusing program flow.</li>
+        <li>Makes debugging difficult.</li>
+        <li>Reduces code readability.</li>
+        <li>Can lead to <strong>Spaghetti Code</strong> (code with many uncontrolled jumps).</li>
+      </ul>
+
+      <h3>Bad Example</h3>
+      <pre><code class="language-none">goto A
+goto B
+goto C
+goto D
+goto A
+goto C
+goto B</code></pre>
+      <p>This becomes very difficult to follow.</p>
+
+      <h3>When is goto Acceptable?</h3>
+      <p>Although generally avoided, <code>goto</code> is occasionally useful for:</p>
+      <ul>
+        <li>Exiting multiple nested loops.</li>
+        <li>Error handling in low-level system programming.</li>
+        <li>Resource cleanup (closing files, freeing memory) before exiting a function.</li>
+      </ul>
+
+      <h2>break vs continue vs goto</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>break</th>
+            <th>continue</th>
+            <th>goto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Ends loop</td><td>✅ Yes</td><td>❌ No</td><td>Depends on jump</td></tr>
+          <tr><td>Skips current iteration</td><td>❌ No</td><td>✅ Yes</td><td>❌ No</td></tr>
+          <tr><td>Jumps to label</td><td>❌ No</td><td>❌ No</td><td>✅ Yes</td></tr>
+          <tr><td>Used in switch</td><td>✅ Yes</td><td>❌ No</td><td>❌ No</td></tr>
+          <tr><td>Recommended for normal programming</td><td>✅ Yes</td><td>✅ Yes</td><td>❌ Rarely</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Comparison</h2>
+
+      <h3>break</h3>
+      <pre><code class="language-none">1
+2
+3
+break
+↓
+
+Loop Ends</code></pre>
+
+      <h3>continue</h3>
+      <pre><code class="language-none">1
+2
+continue
+↓
+
+Skip Remaining Statements
+
+↓
+
+Next Iteration</code></pre>
+
+      <h3>goto</h3>
+      <pre><code class="language-none">Statement
+
+↓
+
+goto label
+
+↓
+
+Jump
+
+↓
+
+label:</code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li><strong><code>break</code></strong> immediately exits the nearest loop or <code>switch</code> statement.</li>
+        <li><strong><code>continue</code></strong> skips the rest of the current iteration and proceeds with the next iteration of the loop.</li>
+        <li><strong><code>goto</code></strong> transfers control directly to a labeled statement in the same function.</li>
+        <li>Prefer <strong><code>break</code></strong> and <strong><code>continue</code></strong> for structured programming. Use <strong><code>goto</code></strong> only in rare, well-justified situations where it simplifies cleanup or error handling.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

@@ -148,6 +148,10 @@
         {
           "title": "Conditional Statements",
           "path": "lessons/unit3-conditional-statements.html"
+        },
+        {
+          "title": "Unconditional Statements",
+          "path": "lessons/unit3-unconditional-statements.html"
         }
       ]
     }
