@@ -377,7 +377,237 @@
   <script src="../js/sidebar.js"></script>
   <script src="../js/nav.js"></script>
   <script>
-  <!-- ll-viz script body added in Task 2 -->
+    (function () {
+      var initialList = [
+        { id: 'n10', value: 10 },
+        { id: 'n20', value: 20 },
+        { id: 'n30', value: 30 }
+      ];
+
+      function cloneList(list) {
+        return list.map(function (node) {
+          return { id: node.id, value: node.value };
+        });
+      }
+
+      function generateInsertSteps() {
+        var steps = [];
+        var list = cloneList(initialList);
+        var newNode = { id: 'n25', value: 25 };
+
+        steps.push({
+          list: cloneList(list),
+          detached: { id: newNode.id, value: newNode.value, nextTarget: null },
+          highlightNodeIds: [],
+          highlightArrowFrom: null,
+          caption: 'Create new node X with data 25.'
+        });
+
+        steps.push({
+          list: cloneList(list),
+          detached: { id: newNode.id, value: newNode.value, nextTarget: 'n30' },
+          highlightNodeIds: [newNode.id],
+          highlightArrowFrom: 'detached',
+          caption: "Point X's next to node 30 (the node after 20)."
+        });
+
+        steps.push({
+          list: cloneList(list),
+          detached: { id: newNode.id, value: newNode.value, nextTarget: 'n30' },
+          highlightNodeIds: ['n20'],
+          highlightArrowFrom: 'n20',
+          caption: "Point node 20's next to X."
+        });
+
+        var finalList = [list[0], list[1], newNode, list[2]];
+        steps.push({
+          list: cloneList(finalList),
+          detached: null,
+          highlightNodeIds: [],
+          highlightArrowFrom: null,
+          caption: 'X is now linked into the list between 20 and 30.'
+        });
+
+        return steps;
+      }
+
+      function generateDeleteSteps() {
+        var steps = [];
+        var list = cloneList(initialList);
+
+        steps.push({
+          list: cloneList(list),
+          detached: null,
+          highlightNodeIds: ['n10', 'n20'],
+          highlightArrowFrom: null,
+          caption: 'Locate node 20 and its predecessor, node 10.'
+        });
+
+        steps.push({
+          list: [list[0], list[2]],
+          detached: { id: 'n20', value: 20, nextTarget: 'n30' },
+          highlightNodeIds: ['n10'],
+          highlightArrowFrom: 'n10',
+          caption: "Point node 10's next to node 30, bypassing node 20."
+        });
+
+        steps.push({
+          list: [list[0], list[2]],
+          detached: { id: 'n20', value: 20, nextTarget: 'n30' },
+          highlightNodeIds: [],
+          highlightArrowFrom: null,
+          caption: 'Node 20 is now removed from the list.'
+        });
+
+        return steps;
+      }
+
+      var insertSteps = generateInsertSteps();
+      var deleteSteps = generateDeleteSteps();
+
+      var row = document.getElementById('ll-row');
+      var detachedRow = document.getElementById('ll-detached-row');
+      var caption = document.getElementById('ll-caption');
+      var slider = document.getElementById('ll-slider');
+      var stepBtn = document.getElementById('ll-step');
+      var resetBtn = document.getElementById('ll-reset');
+      var tabInsert = document.getElementById('ll-tab-insert');
+      var tabDelete = document.getElementById('ll-tab-delete');
+
+      if (!row) return;
+
+      var currentSteps = insertSteps;
+      var stepIndex = 0;
+
+      function findNodeById(list, id) {
+        for (var i = 0; i < list.length; i++) {
+          if (list[i].id === id) return list[i];
+        }
+        return null;
+      }
+
+      function buildNodeEl(node, nextLabel, highlighted, detached) {
+        var el = document.createElement('div');
+        el.className = 'll-node';
+        if (highlighted) el.classList.add('ll-node--highlight');
+        if (detached) el.classList.add('ll-node--detached');
+
+        var dataEl = document.createElement('div');
+        dataEl.className = 'll-node-data';
+        dataEl.textContent = node.value;
+
+        var nextEl = document.createElement('div');
+        nextEl.className = 'll-node-next';
+        nextEl.textContent = 'next: ' + nextLabel;
+
+        el.appendChild(dataEl);
+        el.appendChild(nextEl);
+        return el;
+      }
+
+      function buildArrow(highlighted, isNull) {
+        var arrow = document.createElement('div');
+        arrow.className = 'll-arrow';
+        if (isNull) arrow.classList.add('ll-arrow--null');
+        if (highlighted) arrow.classList.add('ll-arrow--highlight');
+        return arrow;
+      }
+
+      function render() {
+        var step = currentSteps[stepIndex];
+        row.innerHTML = '';
+        detachedRow.innerHTML = '';
+
+        step.list.forEach(function (node, idx) {
+          var isLast = idx === step.list.length - 1;
+          var nextLabel = isLast ? 'NULL' : '•';
+          var highlighted = step.highlightNodeIds.indexOf(node.id) !== -1;
+          row.appendChild(buildNodeEl(node, nextLabel, highlighted, false));
+
+          var arrowHighlighted = step.highlightArrowFrom === node.id;
+          row.appendChild(buildArrow(arrowHighlighted, isLast));
+
+          if (isLast) {
+            var nullLabel = document.createElement('span');
+            nullLabel.className = 'll-null-label';
+            nullLabel.textContent = 'null';
+            row.appendChild(nullLabel);
+          }
+        });
+
+        if (step.detached) {
+          var nextLabel = step.detached.nextTarget
+            ? findNodeIdLabel(step.detached.nextTarget)
+            : 'null';
+          var detachedEl = buildNodeEl(
+            { value: step.detached.value },
+            step.detached.nextTarget ? '•' : 'null',
+            false,
+            true
+          );
+          detachedRow.appendChild(detachedEl);
+
+          if (step.detached.nextTarget) {
+            var arrowHighlighted = step.highlightArrowFrom === 'detached';
+            detachedRow.appendChild(buildArrow(arrowHighlighted, false));
+            var targetLabel = document.createElement('span');
+            targetLabel.className = 'll-null-label';
+            targetLabel.textContent = '→ node ' + nextLabel;
+            detachedRow.appendChild(targetLabel);
+          }
+
+          var label = document.createElement('span');
+          label.className = 'll-detached-label';
+          label.textContent = 'Outside the list';
+          detachedRow.appendChild(label);
+        }
+
+        caption.textContent = step.caption;
+        slider.max = currentSteps.length - 1;
+        slider.value = stepIndex;
+        stepBtn.disabled = stepIndex >= currentSteps.length - 1;
+      }
+
+      function findNodeIdLabel(id) {
+        var found = findNodeById(currentSteps[stepIndex].list, id);
+        return found ? found.value : id;
+      }
+
+      function goToStep(idx) {
+        stepIndex = Math.max(0, Math.min(idx, currentSteps.length - 1));
+        render();
+      }
+
+      function switchMode(mode) {
+        currentSteps = mode === 'delete' ? deleteSteps : insertSteps;
+        tabInsert.classList.toggle('ll-tab--active', mode === 'insert');
+        tabDelete.classList.toggle('ll-tab--active', mode === 'delete');
+        goToStep(0);
+      }
+
+      tabInsert.addEventListener('click', function () {
+        switchMode('insert');
+      });
+
+      tabDelete.addEventListener('click', function () {
+        switchMode('delete');
+      });
+
+      stepBtn.addEventListener('click', function () {
+        goToStep(stepIndex + 1);
+      });
+
+      resetBtn.addEventListener('click', function () {
+        goToStep(0);
+      });
+
+      slider.addEventListener('input', function () {
+        goToStep(parseInt(slider.value, 10));
+      });
+
+      slider.max = currentSteps.length - 1;
+      render();
+    })();
   </script>
 </body>
 </html>
