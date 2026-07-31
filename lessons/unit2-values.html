@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Values — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Values</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Values</h1>
+
+      <h2>What is a Value?</h2>
+      <p>A <strong>value</strong> is the <strong>actual data stored in memory</strong> or used in an expression during program execution.</p>
+      <p>Everything a program processes is ultimately a value.</p>
+      <p>For example:</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <ul>
+        <li><code>age</code> → Variable</li>
+        <li><code>20</code> → Value</li>
+      </ul>
+      <p>Here, the variable <strong>age</strong> stores the value <strong>20</strong>.</p>
+
+      <h2>Definition</h2>
+      <blockquote>
+        <p><strong>A value is the actual piece of data stored in a variable, constant, or produced by an expression.</strong></p>
+      </blockquote>
+
+      <h2>Why are Values Important?</h2>
+      <p>Programs work by:</p>
+      <ul>
+        <li>Taking input values</li>
+        <li>Processing those values</li>
+        <li>Producing output values</li>
+      </ul>
+      <p>Example:</p>
+      <pre><code class="language-c">int a = 10;
+int b = 20;
+
+int sum = a + b;</code></pre>
+      <p>Values involved:</p>
+      <pre><code class="language-none">10
+20
+30</code></pre>
+
+      <h2>Types of Values in C</h2>
+      <p>There are several kinds of values.</p>
+      <pre><code class="language-none">Values
+│
+├── Integer Values
+├── Floating-Point Values
+├── Character Values
+├── String Values
+├── Boolean-like Values
+└── Expression Values</code></pre>
+
+      <h2>1. Integer Values</h2>
+      <p>Whole numbers.</p>
+      <p>Examples</p>
+      <pre><code class="language-c">10
+25
+-100
+0
+500</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int marks = 95;
+
+    printf("%d", marks);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">95</code></pre>
+
+      <h2>2. Floating-Point Values</h2>
+      <p>Decimal numbers.</p>
+      <p>Examples</p>
+      <pre><code class="language-c">3.14
+99.99
+0.5
+-25.6</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    float pi = 3.14;
+
+    printf("%.2f", pi);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">3.14</code></pre>
+
+      <h2>3. Character Values</h2>
+      <p>Single characters enclosed in <strong>single quotes</strong>.</p>
+      <p>Examples</p>
+      <pre><code class="language-c">'A'
+'Z'
+'7'
+'#'</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char grade = 'A';
+
+    printf("%c", grade);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">A</code></pre>
+
+      <h2>4. String Values</h2>
+      <p>Sequence of characters enclosed in <strong>double quotes</strong>.</p>
+      <p>Examples</p>
+      <pre><code class="language-c">"Hello"
+"India"
+"C Programming"</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[] = "Aman";
+
+    printf("%s", name);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Aman</code></pre>
+
+      <h2>5. Boolean-like Values</h2>
+      <p>C (before C99) does not have a built-in Boolean type. Instead:</p>
+      <pre><code class="language-none">0      → False
+Non-zero → True</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("%d\n", 5 > 3);
+
+    printf("%d", 5 &lt; 3);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1
+0</code></pre>
+
+      <h2>6. Expression Values</h2>
+      <p>Expressions produce values.</p>
+      <p>Example</p>
+      <pre><code class="language-c">10 + 20</code></pre>
+      <p>Result:</p>
+      <pre><code class="language-none">30</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int result = 10 + 20;
+
+    printf("%d", result);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">30</code></pre>
+
+      <h2>Literal Values</h2>
+      <p>A <strong>literal</strong> is a value written directly in the source code.</p>
+      <p>Examples</p>
+      <pre><code class="language-c">100
+3.14
+'A'
+"Hello"</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <p>Here,</p>
+      <pre><code class="language-none">20</code></pre>
+      <p>is a <strong>literal value</strong>.</p>
+
+      <h2>Variable Value</h2>
+      <p>Variables store values.</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Variable      Value
+-------------------
+age             20</code></pre>
+      <p>Later</p>
+      <pre><code class="language-c">age = 25;</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Variable      Value
+-------------------
+age             25</code></pre>
+      <p>The <strong>variable remains the same</strong>, but its <strong>value changes</strong>.</p>
+
+      <h2>Constant Value</h2>
+      <p>Constants never change.</p>
+      <pre><code class="language-c">const int MAX = 100;</code></pre>
+      <p>Value</p>
+      <pre><code class="language-none">100</code></pre>
+      <p>remains fixed.</p>
+
+      <h2>Input Values</h2>
+      <p>Users can provide values during execution.</p>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age;
+
+    scanf("%d", &amp;age);
+
+    printf("%d", age);
+
+    return 0;
+}</code></pre>
+      <p>Input</p>
+      <pre><code class="language-none">25</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">25</code></pre>
+
+      <h2>Output Values</h2>
+      <p>Programs produce values using <code>printf()</code>.</p>
+      <pre><code class="language-c">printf("%d", 50);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">50</code></pre>
+
+      <h2>Temporary Values</h2>
+      <p>Some values exist only while evaluating an expression.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int result = (10 + 20) * 5;</code></pre>
+      <p>Calculation:</p>
+      <pre><code class="language-none">10 + 20 = 30
+
+30 × 5 = 150</code></pre>
+      <p>Here,</p>
+      <pre><code class="language-none">30</code></pre>
+      <p>is a temporary intermediate value.</p>
+
+      <h2>Memory Representation</h2>
+      <p>Program</p>
+      <pre><code class="language-c">int marks = 90;</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Address        Variable        Value
+------------------------------------
+1000            marks            90</code></pre>
+      <p>After</p>
+      <pre><code class="language-c">marks = 95;</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Address        Variable        Value
+------------------------------------
+1000            marks            95</code></pre>
+      <p>Only the <strong>value changes</strong>.</p>
+
+      <h2>Value vs Variable</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Name of memory</td><td>Actual stored data</td></tr>
+          <tr><td>Can hold different values</td><td>Data stored in memory</td></tr>
+          <tr><td>Example: <code>marks</code></td><td>Example: <code>95</code></td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">int marks = 95;</code></pre>
+      <ul>
+        <li>Variable → <code>marks</code></li>
+        <li>Value → <code>95</code></li>
+      </ul>
+
+      <h2>Value vs Constant</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Value</th>
+            <th>Constant</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Any data</td><td>Fixed value</td></tr>
+          <tr><td>May change (if stored in a variable)</td><td>Never changes</td></tr>
+          <tr><td>Example: <code>20</code> in a variable</td><td>Example: <code>const int MAX = 100;</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Examples</h2>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 21;
+
+    printf("%d", age);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">21</code></pre>
+      <p>Value stored:</p>
+      <pre><code class="language-none">21</code></pre>
+
+      <h3>Example 2</h3>
+      <pre><code class="language-c">float salary = 50000.50;</code></pre>
+      <p>Stored value</p>
+      <pre><code class="language-none">50000.50</code></pre>
+
+      <h3>Example 3</h3>
+      <pre><code class="language-c">char grade = 'A';</code></pre>
+      <p>Stored value</p>
+      <pre><code class="language-none">A</code></pre>
+
+      <h3>Example 4</h3>
+      <pre><code class="language-c">char city[] = "Ranchi";</code></pre>
+      <p>Stored value</p>
+      <pre><code class="language-none">Ranchi</code></pre>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Confusing Variable and Value</h3>
+      <p>Wrong understanding:</p>
+      <pre><code class="language-none">age is the value.</code></pre>
+      <p>Correct:</p>
+      <pre><code class="language-none">age → Variable
+
+20 → Value</code></pre>
+
+      <h3>2. Using the Wrong Data Type</h3>
+      <pre><code class="language-c">int pi = 3.14;</code></pre>
+      <p>Stored value:</p>
+      <pre><code class="language-none">3</code></pre>
+      <p>The decimal part is lost because <code>int</code> stores only whole numbers.</p>
+      <p>Correct</p>
+      <pre><code class="language-c">float pi = 3.14;</code></pre>
+
+      <h3>3. Using Double Quotes for Characters</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">char ch = "A";</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">char ch = 'A';</code></pre>
+
+      <h3>4. Forgetting Initialization</h3>
+      <pre><code class="language-c">int age;
+
+printf("%d", age);</code></pre>
+      <p>The printed value is <strong>indeterminate (garbage)</strong> because <code>age</code> was never initialized.</p>
+
+      <h3>5. Assigning Text to an Integer</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">int age = "Twenty";</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">int age = 20;</code></pre>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is a value in C?</h3>
+      <p>A value is the actual data stored in a variable, constant, or produced by an expression.</p>
+
+      <h3>2. What is the difference between a variable and a value?</h3>
+      <ul>
+        <li>A <strong>variable</strong> is a named memory location.</li>
+        <li>A <strong>value</strong> is the data stored in that memory location.</li>
+      </ul>
+
+      <h3>3. What is a literal value?</h3>
+      <p>A literal is a value written directly in the program, such as <code>100</code>, <code>3.14</code>, <code>'A'</code>, or <code>"Hello"</code>.</p>
+
+      <h3>4. Can a variable's value change?</h3>
+      <p>Yes. The value of a variable can change during program execution unless the variable is declared with <code>const</code>.</p>
+
+      <h3>5. What values represent true and false in C?</h3>
+      <ul>
+        <li><code>0</code> → False</li>
+        <li>Any non-zero value → True</li>
+      </ul>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define a value in C.</li>
+        <li>Differentiate between a variable and a value.</li>
+        <li>What is a literal value? Give examples.</li>
+        <li>Explain Boolean-like values in C.</li>
+        <li>Why is <code>3.14</code> stored incorrectly in an <code>int</code> variable?</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Store and print different types of values.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 20;
+    float height = 5.9;
+    char grade = 'A';
+    char name[] = "Aman";
+
+    printf("Age: %d\n", age);
+    printf("Height: %.1f\n", height);
+    printf("Grade: %c\n", grade);
+    printf("Name: %s\n", name);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Age: 20
+Height: 5.9
+Grade: A
+Name: Aman</code></pre>
+
+      <h4>Q2. Evaluate an expression.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int result = (15 + 5) * 2;
+
+    printf("%d", result);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">40</code></pre>
+
+      <h4>Q3. Read and display a value.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int number;
+
+    printf("Enter a number: ");
+    scanf("%d", &amp;number);
+
+    printf("You entered: %d", number);
+
+    return 0;
+}</code></pre>
+      <p><strong>Sample Input</strong></p>
+      <pre><code class="language-none">45</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Enter a number: 45
+You entered: 45</code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>A <strong>value</strong> is the actual data stored in memory or produced by an expression.</li>
+        <li>Values can be <strong>integer, floating-point, character, string, Boolean-like, or expression results</strong>.</li>
+        <li><strong>Literals</strong> are values written directly in the source code.</li>
+        <li>Variables hold values, and those values can change during execution.</li>
+        <li>Choosing the correct data type is essential to preserve the intended value.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

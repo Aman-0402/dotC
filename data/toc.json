@@ -87,6 +87,10 @@
         {
           "title": "Constants",
           "path": "lessons/unit2-constants.html"
+        },
+        {
+          "title": "Values",
+          "path": "lessons/unit2-values.html"
         }
       ]
     }
