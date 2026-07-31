@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constants — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Constants</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Constants</h1>
+
+      <h2>What are Constants?</h2>
+      <p>A <strong>constant</strong> is a <strong>fixed value</strong> that <strong>cannot be changed</strong> during program execution.</p>
+      <p>Unlike variables, whose values can change, constants always remain the same.</p>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>A constant is a fixed value that does not change during the execution of a program.</strong></p>
+      </blockquote>
+
+      <h2>Variable vs Constant</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Constant</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Value can change</td>
+            <td>Value cannot change</td>
+          </tr>
+          <tr>
+            <td>Stored in memory</td>
+            <td>Also stored in memory (if declared using <code>const</code>) or embedded directly in code (literals)</td>
+          </tr>
+          <tr>
+            <td>Example: <code>age = 20;</code></td>
+            <td>Example: <code>3.14</code>, <code>'A'</code>, <code>"Hello"</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Example:</p>
+      <pre><code class="language-c">int age = 20;
+
+age = 25;      // Allowed</code></pre>
+      <pre><code class="language-c">const int age = 20;
+
+age = 25;      // Error</code></pre>
+
+      <h2>Types of Constants in C</h2>
+      <p>There are <strong>five major types</strong> of constants.</p>
+      <pre><code class="language-none">Constants
+│
+├── Integer Constants
+├── Floating-Point Constants
+├── Character Constants
+├── String Constants (String Literals)
+└── Enumeration Constants</code></pre>
+      <p>We'll also cover <strong>Symbolic Constants (<code>#define</code>)</strong> and the <strong><code>const</code> keyword</strong>, which are commonly used in real programs.</p>
+
+      <h2>1. Integer Constants</h2>
+      <p>Integer constants are whole numbers without a decimal point.</p>
+      <p>Examples:</p>
+      <pre><code class="language-c">10
+250
+-45
+0
+9999</code></pre>
+      <p>Program:</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("%d", 100);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">100</code></pre>
+
+      <h3>Integer Constant Formats</h3>
+
+      <h4>Decimal (Base 10)</h4>
+      <pre><code class="language-c">25
+100
+500</code></pre>
+
+      <h4>Octal (Base 8)</h4>
+      <p>Starts with <code>0</code>.</p>
+      <pre><code class="language-c">025
+012</code></pre>
+      <p>Example:</p>
+      <pre><code class="language-c">int x = 025;</code></pre>
+      <p><code>025</code> (octal) equals <strong>21</strong> in decimal.</p>
+
+      <h4>Hexadecimal (Base 16)</h4>
+      <p>Starts with <code>0x</code> or <code>0X</code>.</p>
+      <pre><code class="language-c">0x1A
+0XFF</code></pre>
+      <p>Example:</p>
+      <pre><code class="language-c">int x = 0xA;</code></pre>
+      <p><code>0xA</code> equals <strong>10</strong> in decimal.</p>
+
+      <h2>2. Floating-Point Constants</h2>
+      <p>Floating-point constants contain decimal values.</p>
+      <p>Examples:</p>
+      <pre><code class="language-c">3.14
+0.5
+100.25
+-45.67</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    float pi = 3.14;
+
+    printf("%.2f", pi);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">3.14</code></pre>
+
+      <h3>Scientific Notation</h3>
+      <p>Large or very small numbers can be written using exponential notation.</p>
+      <pre><code class="language-c">3.5e2</code></pre>
+      <p>Means:</p>
+      <pre><code class="language-none">3.5 × 10² = 350</code></pre>
+      <p>Another example</p>
+      <pre><code class="language-c">1.2e-3</code></pre>
+      <p>Means</p>
+      <pre><code class="language-none">0.0012</code></pre>
+
+      <h2>3. Character Constants</h2>
+      <p>A character constant contains <strong>exactly one character</strong> enclosed in <strong>single quotes</strong>.</p>
+      <p>Examples</p>
+      <pre><code class="language-c">'A'
+'B'
+'7'
+'#'</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char grade = 'A';
+
+    printf("%c", grade);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">A</code></pre>
+
+      <h3>ASCII Representation</h3>
+      <p>Every character has an ASCII value.</p>
+      <p>Example</p>
+      <pre><code class="language-c">'A'</code></pre>
+      <p>ASCII value:</p>
+      <pre><code class="language-none">65</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char ch = 'A';
+
+    printf("%d", ch);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">65</code></pre>
+
+      <h2>Escape Character Constants</h2>
+      <p>Escape sequences begin with a backslash (<code>\</code>).</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Escape Sequence</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>\n</code></td><td>New line</td></tr>
+          <tr><td><code>\t</code></td><td>Horizontal tab</td></tr>
+          <tr><td><code>\\</code></td><td>Backslash</td></tr>
+          <tr><td><code>\"</code></td><td>Double quote</td></tr>
+          <tr><td><code>\'</code></td><td>Single quote</td></tr>
+          <tr><td><code>\r</code></td><td>Carriage return</td></tr>
+          <tr><td><code>\b</code></td><td>Backspace</td></tr>
+          <tr><td><code>\0</code></td><td>Null character</td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">printf("Hello\nWorld");</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Hello
+World</code></pre>
+
+      <h2>4. String Constants (String Literals)</h2>
+      <p>A string is a sequence of characters enclosed in <strong>double quotes</strong>.</p>
+      <p>Examples</p>
+      <pre><code class="language-c">"Hello"
+"India"
+"C Programming"</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Welcome");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Welcome</code></pre>
+
+      <h3>Character vs String</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Character</th>
+            <th>String</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>'A'</code></td><td><code>"A"</code></td></tr>
+          <tr><td>Single quotes</td><td>Double quotes</td></tr>
+          <tr><td>One character</td><td>One or more characters</td></tr>
+          <tr><td>Type: <code>char</code></td><td>Stored as an array of <code>char</code> ending with <code>'\0'</code></td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">char ch = 'A';
+char name[] = "Aman";</code></pre>
+
+      <h2>5. Enumeration Constants</h2>
+      <p>Enumeration constants are defined using <code>enum</code>.</p>
+      <p>Example</p>
+      <pre><code class="language-c">enum Day
+{
+    MON,
+    TUE,
+    WED
+};</code></pre>
+      <p>Here,</p>
+      <ul>
+        <li><code>MON</code></li>
+        <li><code>TUE</code></li>
+        <li><code>WED</code></li>
+      </ul>
+      <p>are enumeration constants.</p>
+      <p>By default:</p>
+      <pre><code class="language-none">MON = 0
+TUE = 1
+WED = 2</code></pre>
+
+      <h2>Symbolic Constants (<code>#define</code>)</h2>
+      <p>A symbolic constant is created using the <strong>preprocessor directive</strong> <code>#define</code>.</p>
+      <p>Syntax</p>
+      <pre><code class="language-c">#define NAME value</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">#define PI 3.14159</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+#define PI 3.14159
+
+int main()
+{
+    printf("%.5f", PI);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">3.14159</code></pre>
+      <p><strong>Note:</strong> <code>#define</code> performs <strong>text substitution</strong> before compilation.</p>
+
+      <h2>Constants Using <code>const</code></h2>
+      <p>The <code>const</code> keyword creates a variable whose value cannot be modified after initialization.</p>
+      <p>Syntax</p>
+      <pre><code class="language-c">const data_type variable = value;</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">const int MAX = 100;</code></pre>
+      <p>Program</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    const int MAX = 100;
+
+    printf("%d", MAX);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">100</code></pre>
+      <p>Attempting to modify it:</p>
+      <pre><code class="language-c">MAX = 200;</code></pre>
+      <p>Results in a <strong>compilation error</strong>.</p>
+
+      <h2><code>const</code> vs <code>#define</code></h2>
+      <table>
+        <thead>
+          <tr>
+            <th><code>const</code></th>
+            <th><code>#define</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Creates a typed constant</td><td>Performs text substitution</td></tr>
+          <tr><td>Type checked by compiler</td><td>No type checking</td></tr>
+          <tr><td>Occupies memory (typically)</td><td>Does not allocate memory for the macro itself</td></tr>
+          <tr><td>Can have an address</td><td>Cannot have an address</td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">const float PI = 3.14;</code></pre>
+      <pre><code class="language-c">#define PI 3.14</code></pre>
+
+      <h2>Real-World Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+#define PASS_MARKS 40
+
+int main()
+{
+    int marks = 55;
+
+    if(marks >= PASS_MARKS)
+        printf("Pass");
+    else
+        printf("Fail");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Pass</code></pre>
+      <p>Using symbolic constants makes code easier to update. If the pass mark changes, you only need to modify one line.</p>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Using Double Quotes for a Character</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">char grade = "A";</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">char grade = 'A';</code></pre>
+
+      <h3>2. Using Single Quotes for a String</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">printf('Hello');</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">printf("Hello");</code></pre>
+
+      <h3>3. Modifying a <code>const</code> Variable</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">const int MAX = 100;
+
+MAX = 200;</code></pre>
+      <p>Compilation error.</p>
+
+      <h3>4. Forgetting the Value in <code>#define</code></h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">#define PI</code></pre>
+      <p>✅ Correct</p>
+      <pre><code class="language-c">#define PI 3.14</code></pre>
+
+      <h3>5. Forgetting the Null Terminator Concept</h3>
+      <p>A string in C is automatically terminated with <code>'\0'</code>.</p>
+      <pre><code class="language-c">char name[] = "Aman";</code></pre>
+      <p>Memory:</p>
+      <pre><code class="language-none">+-----+-----+-----+-----+------+
+| 'A' | 'm' | 'a' | 'n' | '\0' |
++-----+-----+-----+-----+------+</code></pre>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is a constant?</h3>
+      <p>A constant is a fixed value that does not change during program execution.</p>
+
+      <h3>2. What is the difference between a variable and a constant?</h3>
+      <p>A variable can change its value, while a constant retains the same value throughout program execution.</p>
+
+      <h3>3. What is the difference between <code>'A'</code> and <code>"A"</code>?</h3>
+      <table>
+        <thead>
+          <tr>
+            <th><code>'A'</code></th>
+            <th><code>"A"</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Character constant</td><td>String literal</td></tr>
+          <tr><td>Single character</td><td>Two characters in memory: <code>'A'</code> and <code>'\0'</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>4. What is the difference between <code>const</code> and <code>#define</code>?</h3>
+      <ul>
+        <li><code>const</code> creates a typed constant checked by the compiler.</li>
+        <li><code>#define</code> creates a macro using preprocessor text substitution.</li>
+      </ul>
+
+      <h3>5. What are escape sequences?</h3>
+      <p>Escape sequences are special character combinations beginning with <code>\</code> that represent non-printable or special characters such as newline (<code>\n</code>) and tab (<code>\t</code>).</p>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define a constant.</li>
+        <li>List the different types of constants in C.</li>
+        <li>Explain the difference between <code>const</code> and <code>#define</code>.</li>
+        <li>Differentiate between a character constant and a string literal.</li>
+        <li>What is scientific notation in C?</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Print different types of constants.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("%d\n", 100);
+    printf("%.2f\n", 3.14);
+    printf("%c\n", 'A');
+    printf("%s\n", "Hello");
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">100
+3.14
+A
+Hello</code></pre>
+
+      <h4>Q2. Use a symbolic constant.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+#define TAX 18
+
+int main()
+{
+    printf("GST = %d%%", TAX);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">GST = 18%</code></pre>
+
+      <h4>Q3. Use the <code>const</code> keyword.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    const float PI = 3.14159;
+
+    printf("PI = %.5f", PI);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">PI = 3.14159</code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>A <strong>constant</strong> is a fixed value that cannot change during program execution.</li>
+        <li>The main types are <strong>integer, floating-point, character, string, and enumeration constants</strong>.</li>
+        <li><strong>Character constants</strong> use <strong>single quotes (<code>' '</code>)</strong>.</li>
+        <li><strong>String literals</strong> use <strong>double quotes (<code>" "</code>)</strong>.</li>
+        <li><strong>Escape sequences</strong> represent special characters like <code>\n</code> and <code>\t</code>.</li>
+        <li><strong><code>#define</code></strong> creates symbolic constants through preprocessor substitution.</li>
+        <li><strong><code>const</code></strong> creates typed constants that the compiler protects from modification.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
