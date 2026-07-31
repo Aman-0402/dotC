@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indirect Recursion — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Indirect Recursion</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Indirect Recursion</h1>
+
+      <h2>What is Indirect Recursion?</h2>
+      <p><strong>Indirect Recursion</strong> (also called <strong>Mutual Recursion</strong>) occurs when <strong>two or more functions call each other recursively</strong> instead of a function calling itself directly.</p>
+      <blockquote>
+        <p><strong>Definition:</strong> A function <strong>A()</strong> calls <strong>B()</strong>, and <strong>B()</strong> calls <strong>A()</strong> (directly or through other functions). This is called <strong>Indirect Recursion</strong>.</p>
+      </blockquote>
+      <p>Unlike <strong>Direct Recursion</strong>, the recursive call happens <strong>through another function</strong>.</p>
+
+      <h2>Direct vs Indirect Recursion</h2>
+
+      <h3>Direct Recursion</h3>
+      <p>A function calls itself directly.</p>
+      <pre><code class="language-c">void fun(int n)
+{
+    if(n == 0)
+        return;
+
+    fun(n - 1);
+}</code></pre>
+      <p>Flow:</p>
+      <pre><code class="language-none">fun()
+
+↓
+
+fun()
+
+↓
+
+fun()
+
+↓
+
+Base Case</code></pre>
+
+      <h3>Indirect Recursion</h3>
+      <p>Function <strong>A()</strong> calls <strong>B()</strong>, and <strong>B()</strong> calls <strong>A()</strong>.</p>
+      <pre><code class="language-none">A()
+
+↓
+
+B()
+
+↓
+
+A()
+
+↓
+
+B()
+
+↓
+
+A()
+
+↓
+
+Base Case</code></pre>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine two friends helping each other solve a task.</p>
+      <pre><code class="language-none">Rahul
+
+↓
+
+asks
+
+↓
+
+Aman
+
+↓
+
+asks
+
+↓
+
+Rahul
+
+↓
+
+asks
+
+↓
+
+Aman</code></pre>
+      <p>Neither person is repeating the work alone—they rely on each other.</p>
+      <p>Similarly:</p>
+      <pre><code class="language-none">Function A
+
+↓
+
+Function B
+
+↓
+
+Function A
+
+↓
+
+Function B</code></pre>
+
+      <h2>Structure of Indirect Recursion</h2>
+      <pre><code class="language-none">Function A
+
+↓
+
+Function B
+
+↓
+
+Function A
+
+↓
+
+Function B
+
+↓
+
+Base Case</code></pre>
+
+      <h2>Example 1: Print Numbers</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void funB(int);
+
+void funA(int n)
+{
+    if(n &lt;= 0)
+        return;
+
+    printf("%d ", n);
+
+    funB(n - 1);
+}
+
+void funB(int n)
+{
+    if(n &lt;= 0)
+        return;
+
+    printf("%d ", n);
+
+    funA(n - 1);
+}
+
+int main()
+{
+    funA(5);
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">5 4 3 2 1</code></pre>
+
+      <h2>Dry Run</h2>
+      <p>Call:</p>
+      <pre><code class="language-none">funA(5)</code></pre>
+      <p>Execution:</p>
+      <pre><code class="language-none">funA(5)
+
+Print 5
+
+↓
+
+funB(4)
+
+Print 4
+
+↓
+
+funA(3)
+
+Print 3
+
+↓
+
+funB(2)
+
+Print 2
+
+↓
+
+funA(1)
+
+Print 1
+
+↓
+
+funB(0)
+
+↓
+
+Base Case</code></pre>
+
+      <h2>Visualization</h2>
+      <pre><code class="language-none">funA(5)
+      │
+      ▼
+funB(4)
+      │
+      ▼
+funA(3)
+      │
+      ▼
+funB(2)
+      │
+      ▼
+funA(1)
+      │
+      ▼
+funB(0)
+      │
+      ▼
+Return</code></pre>
+
+      <h2>Example 2: Even and Odd Numbers</h2>
+      <p>This example checks whether a number is <strong>even</strong> or <strong>odd</strong> using two mutually recursive functions.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int isOdd(int);
+
+int isEven(int n)
+{
+    if(n == 0)
+        return 1;
+
+    return isOdd(n - 1);
+}
+
+int isOdd(int n)
+{
+    if(n == 0)
+        return 0;
+
+    return isEven(n - 1);
+}
+
+int main()
+{
+    if(isEven(8))
+        printf("Even");
+    else
+        printf("Odd");
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">Even</code></pre>
+
+      <h2>How It Works</h2>
+      <p>Call:</p>
+      <pre><code class="language-none">isEven(4)</code></pre>
+      <p>Execution:</p>
+      <pre><code class="language-none">isEven(4)
+
+↓
+
+isOdd(3)
+
+↓
+
+isEven(2)
+
+↓
+
+isOdd(1)
+
+↓
+
+isEven(0)
+
+↓
+
+Return 1</code></pre>
+      <p>The return value travels back through the call chain, indicating that 4 is even.</p>
+
+      <h2>Call Stack</h2>
+      <p>For:</p>
+      <pre><code class="language-none">funA(3)</code></pre>
+      <p>During execution:</p>
+      <pre><code class="language-none">┌───────────┐
+│ funB(0)   │
+├───────────┤
+│ funA(1)   │
+├───────────┤
+│ funB(2)   │
+├───────────┤
+│ funA(3)   │
+└───────────┘</code></pre>
+      <p>After reaching the base case, functions return one by one.</p>
+
+      <h2>Why is the Base Case Important?</h2>
+      <p>Consider this code:</p>
+      <pre><code class="language-c">void funA()
+{
+    funB();
+}
+
+void funB()
+{
+    funA();
+}</code></pre>
+      <p>Execution:</p>
+      <pre><code class="language-none">funA()
+
+↓
+
+funB()
+
+↓
+
+funA()
+
+↓
+
+funB()
+
+↓
+
+...</code></pre>
+      <p>This never ends.</p>
+      <p>Result:</p>
+      <pre><code class="language-none">Infinite Recursion
+
+↓
+
+Stack Overflow</code></pre>
+      <p>A <strong>base case</strong> is essential to stop the recursive calls.</p>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Models problems that naturally involve two or more interacting processes.</li>
+        <li>Makes some algorithms easier to express.</li>
+        <li>Useful in state-based recursive problems.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>More difficult to understand and debug than direct recursion.</li>
+        <li>Uses additional stack memory.</li>
+        <li>Easy to create infinite recursion if base cases are incorrect.</li>
+        <li>Often harder to trace program flow.</li>
+      </ul>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Even/Odd checking.</li>
+        <li>State machine implementations.</li>
+        <li>Grammar parsing in compilers.</li>
+        <li>Recursive descent parsers.</li>
+        <li>Certain graph and tree algorithms.</li>
+      </ul>
+
+      <h2>Direct vs Indirect Recursion</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Direct Recursion</th>
+            <th>Indirect Recursion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Function calls</td><td>Itself</td><td>Another function</td></tr>
+          <tr><td>Number of functions</td><td>One</td><td>Two or more</td></tr>
+          <tr><td>Complexity</td><td>Easier</td><td>More complex</td></tr>
+          <tr><td>Debugging</td><td>Easier</td><td>Harder</td></tr>
+          <tr><td>Base case</td><td>Required</td><td>Required</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Types of Recursion Covered So Far</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Direct Recursion</td><td>Function calls itself directly</td></tr>
+          <tr><td>Tail Recursion</td><td>Recursive call is the last operation</td></tr>
+          <tr><td>Head Recursion</td><td>Recursive call is the first operation</td></tr>
+          <tr><td>Indirect Recursion</td><td>Two or more functions call each other recursively</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li><strong>Indirect Recursion</strong> involves <strong>two or more functions</strong> calling each other.</li>
+        <li>It is also known as <strong>Mutual Recursion</strong>.</li>
+        <li>Every chain of recursive calls must eventually reach a <strong>base case</strong>.</li>
+        <li>Without a base case, the program enters <strong>infinite recursion</strong> and eventually causes a <strong>stack overflow</strong>.</li>
+        <li>Indirect recursion is useful for modeling problems where different states or behaviors naturally alternate.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

@@ -304,6 +304,10 @@
         {
           "title": "Head Recursion",
           "path": "lessons/unit7-head-recursion.html"
+        },
+        {
+          "title": "Indirect Recursion",
+          "path": "lessons/unit7-indirect-recursion.html"
         }
       ]
     }
