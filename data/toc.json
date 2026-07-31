@@ -210,6 +210,10 @@
         {
           "title": "File Utilities & Command Line Arguments",
           "path": "lessons/unit5-file-utilities-command-line-arguments.html"
+        },
+        {
+          "title": "Advanced C Concepts",
+          "path": "lessons/unit5-advanced-c-concepts.html"
         }
       ]
     }

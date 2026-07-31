@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced C Concepts — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 5 / Advanced C Concepts</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Advanced C Concepts</h1>
+
+      <p>Advanced C concepts provide powerful features for writing <strong>efficient, flexible, and maintainable programs</strong>. These include advanced bit manipulation, enumerations, type conversion, macros, and preprocessor directives.</p>
+
+      <h2>1. Bitwise Operators (Advanced)</h2>
+      <h3>Definition</h3>
+      <p>Bitwise operators perform operations directly on the <strong>binary representation (bits)</strong> of integers.</p>
+      <p>They are commonly used in:</p>
+      <ul>
+        <li>Embedded Systems</li>
+        <li>Device Drivers</li>
+        <li>Operating Systems</li>
+        <li>Networking</li>
+        <li>Data Compression</li>
+        <li>Cryptography</li>
+      </ul>
+
+      <h2>Binary Representation</h2>
+      <p>Example</p>
+      <pre><code class="language-none">Decimal 5
+
+Binary
+
+00000101</code></pre>
+      <pre><code class="language-none">Decimal 3
+
+Binary
+
+00000011</code></pre>
+
+      <h2>Bitwise Operators</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&amp;</code></td><td>AND</td><td>Sets bit to 1 only if both bits are 1</td></tr>
+          <tr><td><code>|</code></td><td>OR</td><td>Sets bit to 1 if either bit is 1</td></tr>
+          <tr><td><code>^</code></td><td>XOR</td><td>Sets bit to 1 if bits are different</td></tr>
+          <tr><td><code>~</code></td><td>NOT</td><td>Inverts all bits</td></tr>
+          <tr><td><code>&lt;&lt;</code></td><td>Left Shift</td><td>Shifts bits to the left</td></tr>
+          <tr><td><code>&gt;&gt;</code></td><td>Right Shift</td><td>Shifts bits to the right</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Bitwise AND (<code>&amp;</code>)</h2>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 5;
+    int b = 3;
+
+    printf("%d", a &amp; b);
+
+    return 0;
+}</code></pre>
+      <p>Calculation</p>
+      <pre><code class="language-none">5 = 0101
+
+3 = 0011
+
+------------
+    0001</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1</code></pre>
+
+      <h2>Bitwise OR (<code>|</code>)</h2>
+      <pre><code class="language-c">printf("%d", 5 | 3);</code></pre>
+      <p>Calculation</p>
+      <pre><code class="language-none">0101
+
+0011
+
+------
+0111</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">7</code></pre>
+
+      <h2>Bitwise XOR (<code>^</code>)</h2>
+      <pre><code class="language-c">printf("%d", 5 ^ 3);</code></pre>
+      <p>Calculation</p>
+      <pre><code class="language-none">0101
+
+0011
+
+------
+0110</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">6</code></pre>
+
+      <h2>Bitwise NOT (<code>~</code>)</h2>
+      <pre><code class="language-c">printf("%d", ~5);</code></pre>
+      <p>Binary (8-bit representation)</p>
+      <pre><code class="language-none">00000101
+
+↓
+
+11111010</code></pre>
+      <p>On most systems using two's complement representation, the output is:</p>
+      <pre><code class="language-none">-6</code></pre>
+
+      <h2>Left Shift (<code>&lt;&lt;</code>)</h2>
+      <p>Shifts bits to the left.</p>
+      <pre><code class="language-c">printf("%d", 5 &lt;&lt; 1);</code></pre>
+      <p>Calculation</p>
+      <pre><code class="language-none">0101
+
+↓
+
+1010</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10</code></pre>
+      <p>Rule</p>
+      <pre><code class="language-none">x &lt;&lt; n = x × 2ⁿ</code></pre>
+
+      <h2>Right Shift (<code>&gt;&gt;</code>)</h2>
+      <p>Shifts bits to the right.</p>
+      <pre><code class="language-c">printf("%d", 8 &gt;&gt; 1);</code></pre>
+      <p>Calculation</p>
+      <pre><code class="language-none">1000
+
+↓
+
+0100</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">4</code></pre>
+      <p>Rule</p>
+      <pre><code class="language-none">x &gt;&gt; n ≈ x ÷ 2ⁿ</code></pre>
+      <p>(for positive integers)</p>
+
+      <h2>Applications of Bitwise Operators</h2>
+      <ul>
+        <li>Flag manipulation</li>
+        <li>Permission checking</li>
+        <li>Embedded programming</li>
+        <li>Network protocols</li>
+        <li>Cryptography</li>
+        <li>Graphics programming</li>
+      </ul>
+
+      <h2>2. Enumerated Data Types (<code>enum</code>)</h2>
+      <h3>Definition</h3>
+      <p>An <strong>enumeration (<code>enum</code>)</strong> is a user-defined data type that consists of a set of <strong>named integer constants</strong>.</p>
+      <p>It improves code readability by replacing numeric values with meaningful names.</p>
+
+      <h2>Syntax</h2>
+      <pre><code class="language-c">enum EnumName
+{
+    constant1,
+    constant2,
+    constant3
+};</code></pre>
+
+      <h2>Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+enum Day
+{
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday
+};
+
+int main()
+{
+    enum Day today;
+
+    today = Wednesday;
+
+    printf("%d", today);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">2</code></pre>
+      <p>Enumeration values start from <strong>0</strong> by default.</p>
+
+      <h2>Custom Values</h2>
+      <pre><code class="language-c">enum Month
+{
+    Jan = 1,
+    Feb,
+    Mar,
+    Apr
+};</code></pre>
+      <p>Values</p>
+      <pre><code class="language-none">Jan = 1
+
+Feb = 2
+
+Mar = 3
+
+Apr = 4</code></pre>
+
+      <h2>Advantages of enum</h2>
+      <ul>
+        <li>Improves readability</li>
+        <li>Eliminates magic numbers</li>
+        <li>Easy maintenance</li>
+        <li>Used in menus and state management</li>
+      </ul>
+
+      <h2>3. Type Casting</h2>
+      <h3>Definition</h3>
+      <p>Type casting is the process of <strong>converting one data type into another</strong>.</p>
+      <p>There are two types:</p>
+      <ul>
+        <li>Implicit Type Casting</li>
+        <li>Explicit Type Casting</li>
+      </ul>
+
+      <h2>Implicit Type Casting</h2>
+      <p>Performed automatically by the compiler.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int a = 10;
+
+float b;
+
+b = a;</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10.000000</code></pre>
+
+      <h2>Explicit Type Casting</h2>
+      <p>Performed manually by the programmer.</p>
+
+      <h2>Syntax</h2>
+      <pre><code class="language-c">(data_type) expression</code></pre>
+
+      <h2>Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 10;
+    int b = 3;
+
+    float result;
+
+    result = (float)a / b;
+
+    printf("%.2f", result);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">3.33</code></pre>
+      <p>Without casting</p>
+      <pre><code class="language-c">result = a / b;</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">3.00</code></pre>
+
+      <h2>Applications of Type Casting</h2>
+      <ul>
+        <li>Prevent integer division</li>
+        <li>Data conversion</li>
+        <li>Mathematical calculations</li>
+        <li>Mixed data type operations</li>
+      </ul>
+
+      <h2>4. Macros</h2>
+      <h3>Definition</h3>
+      <p>A <strong>macro</strong> is a name or symbol defined using the <code>#define</code> preprocessor directive.</p>
+      <p>The preprocessor replaces the macro with its value <strong>before compilation</strong>.</p>
+
+      <h2>Syntax</h2>
+      <pre><code class="language-c">#define NAME value</code></pre>
+
+      <h2>Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+#define PI 3.14159
+
+int main()
+{
+    printf("%.5f", PI);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">3.14159</code></pre>
+
+      <h2>Macro with Parameters</h2>
+      <pre><code class="language-c">#define SQUARE(x) ((x) * (x))</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+#define SQUARE(x) ((x) * (x))
+
+int main()
+{
+    printf("%d", SQUARE(5));
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">25</code></pre>
+
+      <h2>Advantages of Macros</h2>
+      <ul>
+        <li>Faster execution</li>
+        <li>No function call overhead</li>
+        <li>Easy to define constants</li>
+        <li>Reusable code</li>
+      </ul>
+
+      <h2>5. Preprocessor Directives</h2>
+      <h3>Definition</h3>
+      <p>Preprocessor directives are commands that are processed <strong>before the actual compilation begins</strong>.</p>
+      <p>Every directive starts with the <code>#</code> symbol.</p>
+
+      <h2>Common Preprocessor Directives</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Directive</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>#include</code></td><td>Includes header files</td></tr>
+          <tr><td><code>#define</code></td><td>Defines macros</td></tr>
+          <tr><td><code>#undef</code></td><td>Removes a macro definition</td></tr>
+          <tr><td><code>#ifdef</code></td><td>Checks if a macro is defined</td></tr>
+          <tr><td><code>#ifndef</code></td><td>Checks if a macro is not defined</td></tr>
+          <tr><td><code>#if</code></td><td>Conditional compilation</td></tr>
+          <tr><td><code>#else</code></td><td>Alternative compilation block</td></tr>
+          <tr><td><code>#elif</code></td><td>Else-if for conditional compilation</td></tr>
+          <tr><td><code>#endif</code></td><td>Ends a conditional block</td></tr>
+          <tr><td><code>#error</code></td><td>Generates a compile-time error</td></tr>
+          <tr><td><code>#pragma</code></td><td>Compiler-specific instructions</td></tr>
+        </tbody>
+      </table>
+
+      <h2>#include</h2>
+      <p>Includes header files.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;</code></pre>
+
+      <h2>#define</h2>
+      <p>Defines constants.</p>
+      <pre><code class="language-c">#define MAX 100</code></pre>
+
+      <h2>#undef</h2>
+      <p>Removes a macro definition.</p>
+      <pre><code class="language-c">#define MAX 100
+
+#undef MAX</code></pre>
+
+      <h2>#ifdef</h2>
+      <p>Checks if a macro exists.</p>
+      <pre><code class="language-c">#define DEBUG
+
+#ifdef DEBUG
+printf("Debug Mode");
+#endif</code></pre>
+
+      <h2>#ifndef</h2>
+      <p>Checks if a macro is <strong>not</strong> defined.</p>
+      <pre><code class="language-c">#ifndef PI
+#define PI 3.14
+#endif</code></pre>
+
+      <h2>#if</h2>
+      <p>Conditional compilation.</p>
+      <pre><code class="language-c">#define VERSION 2
+
+#if VERSION == 2
+printf("Version 2");
+#endif</code></pre>
+
+      <h2>#else</h2>
+      <pre><code class="language-c">#define VALUE 0
+
+#if VALUE
+printf("True");
+#else
+printf("False");
+#endif</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">False</code></pre>
+
+      <h2>#elif</h2>
+      <pre><code class="language-c">#define LEVEL 2
+
+#if LEVEL == 1
+printf("Basic");
+#elif LEVEL == 2
+printf("Intermediate");
+#else
+printf("Advanced");
+#endif</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Intermediate</code></pre>
+
+      <h2>#error</h2>
+      <p>Generates a compile-time error.</p>
+      <pre><code class="language-c">#error Compiler Not Supported</code></pre>
+
+      <h2>#pragma</h2>
+      <p>Provides compiler-specific instructions.</p>
+      <pre><code class="language-c">#pragma once</code></pre>
+      <p>Used mainly in header files to prevent multiple inclusion.</p>
+
+      <h2>Macro vs Function</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Macro</th>
+            <th>Function</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Execution</td><td>Before compilation</td><td>During execution</td></tr>
+          <tr><td>Speed</td><td>Faster</td><td>Slightly slower</td></tr>
+          <tr><td>Type Checking</td><td>No</td><td>Yes</td></tr>
+          <tr><td>Memory</td><td>No function call</td><td>Uses function call</td></tr>
+          <tr><td>Debugging</td><td>Difficult</td><td>Easier</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Real-World Applications</h2>
+      <ul>
+        <li>Embedded Systems</li>
+        <li>Operating Systems</li>
+        <li>Device Drivers</li>
+        <li>Network Programming</li>
+        <li>Game Development</li>
+        <li>System Utilities</li>
+        <li>Compiler Development</li>
+        <li>Hardware Interface Programming</li>
+      </ul>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li><strong>Bitwise operators</strong> manipulate data at the bit level and are widely used in low-level programming.</li>
+        <li><strong><code>enum</code></strong> creates user-defined named integer constants, making programs more readable and maintainable.</li>
+        <li><strong>Type casting</strong> converts values between different data types, either implicitly by the compiler or explicitly by the programmer.</li>
+        <li><strong>Macros</strong> (<code>#define</code>) create symbolic constants and parameterized code that is expanded by the preprocessor before compilation.</li>
+        <li><strong>Preprocessor directives</strong> (such as <code>#include</code>, <code>#define</code>, <code>#ifdef</code>, and <code>#pragma</code>) control how the source code is processed before it is compiled.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
