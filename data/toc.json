@@ -280,6 +280,10 @@
         {
           "title": "Counting Sort",
           "path": "lessons/unit7-counting-sort.html"
+        },
+        {
+          "title": "Radix Sort",
+          "path": "lessons/unit7-radix-sort.html"
         }
       ]
     }

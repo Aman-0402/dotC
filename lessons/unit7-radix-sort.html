@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radix Sort — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Radix Sort</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Radix Sort</h1>
+
+      <p>Radix Sort is a <strong>non-comparison-based sorting algorithm</strong> that sorts numbers <strong>digit by digit</strong> instead of comparing entire numbers.</p>
+      <p>It processes one digit at a time, starting from either:</p>
+      <ul>
+        <li><strong>Least Significant Digit (LSD)</strong> → Rightmost digit (Most commonly used)</li>
+        <li><strong>Most Significant Digit (MSD)</strong> → Leftmost digit</li>
+      </ul>
+      <p>In this chapter, we will study the <strong>LSD Radix Sort</strong>, which uses <strong>Counting Sort</strong> as a subroutine.</p>
+
+      <h2>What is Radix Sort?</h2>
+      <p>Unlike Bubble Sort or Quick Sort, Radix Sort does <strong>not compare numbers</strong> directly.</p>
+      <p>Instead, it:</p>
+      <ol>
+        <li>Sorts the numbers based on the <strong>units digit</strong>.</li>
+        <li>Then sorts based on the <strong>tens digit</strong>.</li>
+        <li>Then sorts based on the <strong>hundreds digit</strong>.</li>
+        <li>Continues until the highest place value is processed.</li>
+      </ol>
+      <p>Since <strong>Counting Sort is stable</strong>, the order established in earlier passes is preserved.</p>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine arranging files by their identification numbers.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">329
+457
+657
+839
+436
+720
+355</code></pre>
+      <p>Instead of comparing whole numbers:</p>
+      <ul>
+        <li>Arrange them by the <strong>last digit</strong>.</li>
+        <li>Then by the <strong>middle digit</strong>.</li>
+        <li>Finally by the <strong>first digit</strong>.</li>
+      </ul>
+      <p>After the final pass, the files are completely sorted.</p>
+
+      <h2>Example</h2>
+      <p>Given the array:</p>
+      <pre><code class="language-none">170 45 75 90 802 24 2 66</code></pre>
+      <p>Maximum value:</p>
+      <pre><code class="language-none">802</code></pre>
+      <p>Since <strong>802 has 3 digits</strong>, we need <strong>3 passes</strong>.</p>
+
+      <h3>Pass 1: Units Digit</h3>
+      <p>Sort based on the <strong>units</strong> place.</p>
+      <table>
+        <thead>
+          <tr><th>Number</th><th>Units Digit</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>170</td><td>0</td></tr>
+          <tr><td>45</td><td>5</td></tr>
+          <tr><td>75</td><td>5</td></tr>
+          <tr><td>90</td><td>0</td></tr>
+          <tr><td>802</td><td>2</td></tr>
+          <tr><td>24</td><td>4</td></tr>
+          <tr><td>2</td><td>2</td></tr>
+          <tr><td>66</td><td>6</td></tr>
+        </tbody>
+      </table>
+      <p>After Counting Sort:</p>
+      <pre><code class="language-none">170 90 802 2 24 45 75 66</code></pre>
+
+      <h3>Pass 2: Tens Digit</h3>
+      <p>Now sort based on the <strong>tens</strong> place.</p>
+      <table>
+        <thead>
+          <tr><th>Number</th><th>Tens Digit</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>170</td><td>7</td></tr>
+          <tr><td>90</td><td>9</td></tr>
+          <tr><td>802</td><td>0</td></tr>
+          <tr><td>2</td><td>0</td></tr>
+          <tr><td>24</td><td>2</td></tr>
+          <tr><td>45</td><td>4</td></tr>
+          <tr><td>75</td><td>7</td></tr>
+          <tr><td>66</td><td>6</td></tr>
+        </tbody>
+      </table>
+      <p>After Counting Sort:</p>
+      <pre><code class="language-none">802 2 24 45 66 170 75 90</code></pre>
+
+      <h3>Pass 3: Hundreds Digit</h3>
+      <p>Sort using the <strong>hundreds</strong> place.</p>
+      <table>
+        <thead>
+          <tr><th>Number</th><th>Hundreds Digit</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>802</td><td>8</td></tr>
+          <tr><td>2</td><td>0</td></tr>
+          <tr><td>24</td><td>0</td></tr>
+          <tr><td>45</td><td>0</td></tr>
+          <tr><td>66</td><td>0</td></tr>
+          <tr><td>170</td><td>1</td></tr>
+          <tr><td>75</td><td>0</td></tr>
+          <tr><td>90</td><td>0</td></tr>
+        </tbody>
+      </table>
+      <p>Final sorted array:</p>
+      <pre><code class="language-none">2 24 45 66 75 90 170 802</code></pre>
+
+      <h2>Visualization</h2>
+      <pre><code class="language-none">Original Array
+
+170 45 75 90 802 24 2 66
+
+↓
+
+Units Digit
+
+170 90 802 2 24 45 75 66
+
+↓
+
+Tens Digit
+
+802 2 24 45 66 170 75 90
+
+↓
+
+Hundreds Digit
+
+2 24 45 66 75 90 170 802</code></pre>
+
+      <h2>Radix Sort Algorithm</h2>
+      <pre><code class="language-none">Find maximum element
+
+For each digit position
+
+    Perform Counting Sort
+
+Repeat until highest digit is processed</code></pre>
+
+      <h2>Try It Yourself</h2>
+      <p>This visualizer runs Counting Sort once per digit place (units, tens, hundreds), rebuilding the array from right to left each pass. Empty slots are shown as gaps until filled within a pass.</p>
+      <div class="viz">
+        <div class="viz-bars" id="viz-bars"></div>
+        <p class="viz-caption" id="viz-caption">Ready — press Play or Step to begin.</p>
+        <input type="range" class="viz-slider" id="viz-slider" min="0" value="0" step="1" />
+        <div class="viz-controls">
+          <button id="viz-shuffle" type="button">Shuffle</button>
+          <button id="viz-play" type="button">Play</button>
+          <button id="viz-step" type="button">Step</button>
+          <button id="viz-reset" type="button">Reset</button>
+        </div>
+      </div>
+
+      <h2>C Program</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int getMax(int arr[], int n)
+{
+    int max = arr[0];
+
+    for(int i = 1; i &lt; n; i++)
+        if(arr[i] &gt; max)
+            max = arr[i];
+
+    return max;
+}
+
+void countingSort(int arr[], int n, int exp)
+{
+    int output[n];
+    int count[10] = {0};
+
+    for(int i = 0; i &lt; n; i++)
+        count[(arr[i] / exp) % 10]++;
+
+    for(int i = 1; i &lt; 10; i++)
+        count[i] += count[i - 1];
+
+    for(int i = n - 1; i &gt;= 0; i--)
+    {
+        output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+        count[(arr[i] / exp) % 10]--;
+    }
+
+    for(int i = 0; i &lt; n; i++)
+        arr[i] = output[i];
+}
+
+void radixSort(int arr[], int n)
+{
+    int max = getMax(arr, n);
+
+    for(int exp = 1; max / exp &gt; 0; exp *= 10)
+        countingSort(arr, n, exp);
+}
+
+int main()
+{
+    int arr[] = {170, 45, 75, 90, 802, 24, 2, 66};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    radixSort(arr, n);
+
+    printf("Sorted Array:\n");
+
+    for(int i = 0; i &lt; n; i++)
+        printf("%d ", arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">Sorted Array:
+2 24 45 66 75 90 170 802</code></pre>
+
+      <h2>Code Explanation</h2>
+
+      <h3>Find Maximum Element</h3>
+      <pre><code class="language-c">int max = getMax(arr, n);</code></pre>
+      <p>The maximum value determines the number of digit positions to process.</p>
+
+      <h3>Process Each Digit</h3>
+      <pre><code class="language-c">for(int exp = 1; max / exp &gt; 0; exp *= 10)</code></pre>
+      <p>The value of <code>exp</code> changes as:</p>
+      <pre><code class="language-none">1
+10
+100
+1000
+...</code></pre>
+      <p>This processes:</p>
+      <ul>
+        <li>Units</li>
+        <li>Tens</li>
+        <li>Hundreds</li>
+        <li>Thousands</li>
+      </ul>
+
+      <h3>Extract Digit</h3>
+      <pre><code class="language-c">(arr[i] / exp) % 10</code></pre>
+      <p>Example:</p>
+      <p>For <strong>458</strong></p>
+      <table>
+        <thead>
+          <tr><th>exp</th><th>Result</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>8</td></tr>
+          <tr><td>10</td><td>5</td></tr>
+          <tr><td>100</td><td>4</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Counting Sort</h3>
+      <p>Each digit is sorted using <strong>Counting Sort</strong>, which must be <strong>stable</strong> to preserve the ordering established in previous passes.</p>
+
+      <h2>Time Complexity</h2>
+      <table>
+        <thead>
+          <tr><th>Case</th><th>Complexity</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Best Case</td><td><strong>O(d × (n + k))</strong></td></tr>
+          <tr><td>Average Case</td><td><strong>O(d × (n + k))</strong></td></tr>
+          <tr><td>Worst Case</td><td><strong>O(d × (n + k))</strong></td></tr>
+        </tbody>
+      </table>
+      <p>Where:</p>
+      <ul>
+        <li><strong>n</strong> = Number of elements</li>
+        <li><strong>d</strong> = Number of digits in the largest number</li>
+        <li><strong>k</strong> = Base (10 for decimal numbers)</li>
+      </ul>
+      <p>For decimal integers, <code>k = 10</code>, so the complexity is often simplified to <strong>O(d × n)</strong>.</p>
+
+      <h2>Space Complexity</h2>
+      <pre><code class="language-none">O(n + k)</code></pre>
+      <p>Additional space is required for the output array and the count array.</p>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Faster than comparison-based sorting for suitable datasets.</li>
+        <li>Stable sorting algorithm.</li>
+        <li>Does not compare elements directly.</li>
+        <li>Efficient when the number of digits is small.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Works mainly for integers (or fixed-length strings with suitable adaptations).</li>
+        <li>Requires extra memory.</li>
+        <li>Not suitable when numbers have a very large number of digits.</li>
+        <li>More complex to implement than simple sorting algorithms.</li>
+      </ul>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Sorting large collections of integers.</li>
+        <li>Postal code sorting.</li>
+        <li>Employee ID sorting.</li>
+        <li>Student roll number sorting.</li>
+        <li>Telephone number sorting.</li>
+        <li>Used in systems where keys have a fixed number of digits.</li>
+      </ul>
+
+      <h2>Comparison of All Sorting Algorithms</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Algorithm</th>
+            <th>Best</th>
+            <th>Average</th>
+            <th>Worst</th>
+            <th>Space</th>
+            <th>Stable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Bubble Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>Yes</td></tr>
+          <tr><td>Selection Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>No</td></tr>
+          <tr><td>Insertion Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>Yes</td></tr>
+          <tr><td>Merge Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td><td>Yes</td></tr>
+          <tr><td>Quick Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>O(log n)</td><td>No</td></tr>
+          <tr><td>Heap Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(1)</td><td>No</td></tr>
+          <tr><td>Counting Sort</td><td>O(n + k)</td><td>O(n + k)</td><td>O(n + k)</td><td>O(n + k)</td><td>Yes</td></tr>
+          <tr><td><strong>Radix Sort</strong></td><td><strong>O(d × (n + k))</strong></td><td><strong>O(d × (n + k))</strong></td><td><strong>O(d × (n + k))</strong></td><td><strong>O(n + k)</strong></td><td><strong>Yes</strong></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>Radix Sort is a <strong>non-comparison-based</strong> sorting algorithm.</li>
+        <li>It sorts numbers <strong>digit by digit</strong>.</li>
+        <li><strong>LSD (Least Significant Digit)</strong> Radix Sort starts from the rightmost digit.</li>
+        <li>It uses <strong>Counting Sort</strong> as a stable subroutine.</li>
+        <li>Time Complexity: <strong>O(d × (n + k))</strong>.</li>
+        <li>Space Complexity: <strong>O(n + k)</strong>.</li>
+        <li>Best suited for sorting large collections of integers with a limited number of digits.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+  <script>
+    (function () {
+      var initialArray = [170, 45, 75, 90, 802, 24, 2, 66];
+
+      function generateSteps(startArray) {
+        var a = startArray.slice();
+        var steps = [];
+        var n = a.length;
+
+        function getMax() {
+          var m = a[0];
+          for (var i = 1; i < n; i++) {
+            if (a[i] > m) m = a[i];
+          }
+          return m;
+        }
+
+        function countingSortByDigit(exp, placeLabel) {
+          var count = [];
+          for (var i = 0; i < 10; i++) count.push(0);
+          for (var i = 0; i < n; i++) count[Math.floor(a[i] / exp) % 10]++;
+          for (var i = 1; i < 10; i++) count[i] += count[i - 1];
+
+          var output = [];
+          for (var i = 0; i < n; i++) output.push(null);
+
+          for (var i = n - 1; i >= 0; i--) {
+            var digit = Math.floor(a[i] / exp) % 10;
+            var pos = count[digit] - 1;
+            output[pos] = a[i];
+            count[digit]--;
+            steps.push({
+              type: 'write',
+              indices: [pos],
+              caption: 'Place ' + a[i] + ' (' + placeLabel + ' digit ' + digit + ') at index ' + pos,
+              array: output.slice()
+            });
+          }
+
+          for (var i = 0; i < n; i++) a[i] = output[i];
+        }
+
+        var max = getMax();
+        var exp = 1;
+        var placeNames = ['units', 'tens', 'hundreds', 'thousands'];
+        var passIndex = 0;
+
+        while (Math.floor(max / exp) > 0) {
+          var placeLabel = placeNames[passIndex] || (exp + 's');
+          countingSortByDigit(exp, placeLabel);
+          exp *= 10;
+          passIndex++;
+        }
+
+        var allIndices = [];
+        for (var i = 0; i < n; i++) allIndices.push(i);
+        steps.push({
+          type: 'markSorted',
+          indices: allIndices,
+          caption: 'All digit passes complete — array is fully sorted',
+          array: a.slice()
+        });
+
+        return steps;
+      }
+
+      function shuffleArray(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+        return arr;
+      }
+
+      var container = document.getElementById('viz-bars');
+      var caption = document.getElementById('viz-caption');
+      var slider = document.getElementById('viz-slider');
+      var shuffleBtn = document.getElementById('viz-shuffle');
+      var playBtn = document.getElementById('viz-play');
+      var stepBtn = document.getElementById('viz-step');
+      var resetBtn = document.getElementById('viz-reset');
+
+      if (!container) return;
+
+      var currentArray = initialArray.slice();
+      var steps = generateSteps(currentArray);
+      var stepIndex = 0;
+      var playing = false;
+      var playTimer = null;
+
+      function maxValue(arr) {
+        var m = 1;
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i] !== null && arr[i] > m) m = arr[i];
+        }
+        return m;
+      }
+
+      function sortedIndicesUpTo(idx) {
+        var sorted = {};
+        for (var i = 0; i <= idx; i++) {
+          if (steps[i].type === 'markSorted') {
+            steps[i].indices.forEach(function (n) {
+              sorted[n] = true;
+            });
+          }
+        }
+        return sorted;
+      }
+
+      function render() {
+        container.innerHTML = '';
+        var step = steps[stepIndex];
+        var arr = step ? step.array : currentArray.map(function () { return null; });
+        var max = maxValue(arr);
+        var sorted = sortedIndicesUpTo(stepIndex);
+
+        arr.forEach(function (value, idx) {
+          var bar = document.createElement('div');
+          bar.className = 'viz-bar';
+
+          if (value === null) {
+            bar.style.height = '4px';
+          } else {
+            bar.style.height = (value / max * 100) + '%';
+          }
+
+          if (step && step.type !== 'markSorted' && step.indices.indexOf(idx) !== -1) {
+            bar.classList.add('viz-bar--comparing');
+          }
+
+          if (sorted[idx]) {
+            bar.classList.add('viz-bar--sorted');
+          }
+
+          var label = document.createElement('span');
+          label.textContent = value === null ? '' : value;
+          bar.appendChild(label);
+
+          container.appendChild(bar);
+        });
+
+        caption.textContent = step ? step.caption : 'Ready — press Play or Step to begin.';
+        slider.value = stepIndex;
+        stepBtn.disabled = stepIndex >= steps.length - 1;
+
+        if (stepIndex >= steps.length - 1) {
+          pause();
+        }
+      }
+
+      function goToStep(idx) {
+        stepIndex = Math.max(0, Math.min(idx, steps.length - 1));
+        render();
+      }
+
+      function play() {
+        if (playing) return;
+        playing = true;
+        playBtn.textContent = 'Pause';
+        playTimer = setInterval(function () {
+          if (stepIndex >= steps.length - 1) {
+            pause();
+            return;
+          }
+          goToStep(stepIndex + 1);
+        }, 700);
+      }
+
+      function pause() {
+        playing = false;
+        playBtn.textContent = 'Play';
+        if (playTimer) {
+          clearInterval(playTimer);
+          playTimer = null;
+        }
+      }
+
+      shuffleBtn.addEventListener('click', function () {
+        pause();
+        currentArray = shuffleArray(initialArray.slice());
+        steps = generateSteps(currentArray);
+        slider.max = steps.length - 1;
+        goToStep(0);
+      });
+
+      playBtn.addEventListener('click', function () {
+        if (playing) {
+          pause();
+        } else {
+          play();
+        }
+      });
+
+      stepBtn.addEventListener('click', function () {
+        pause();
+        goToStep(stepIndex + 1);
+      });
+
+      resetBtn.addEventListener('click', function () {
+        pause();
+        goToStep(0);
+      });
+
+      slider.addEventListener('input', function () {
+        pause();
+        goToStep(parseInt(slider.value, 10));
+      });
+
+      slider.max = steps.length - 1;
+      render();
+    })();
+  </script>
+</body>
+</html>
