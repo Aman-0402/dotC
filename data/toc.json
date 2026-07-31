@@ -276,6 +276,10 @@
         {
           "title": "Heap Sort",
           "path": "lessons/unit7-heap-sort.html"
+        },
+        {
+          "title": "Counting Sort",
+          "path": "lessons/unit7-counting-sort.html"
         }
       ]
     }

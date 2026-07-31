@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Counting Sort — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Counting Sort</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Counting Sort</h1>
+
+      <p>Counting Sort is a <strong>non-comparison-based sorting algorithm</strong>. Instead of comparing elements like Bubble Sort or Quick Sort, it <strong>counts how many times each value appears</strong> and then reconstructs the sorted array.</p>
+      <p>It is very efficient when the range of input values is <strong>small</strong>.</p>
+
+      <h2>What is Counting Sort?</h2>
+      <p>Counting Sort works in <strong>three main steps</strong>:</p>
+      <ol>
+        <li>Count the frequency of each element.</li>
+        <li>Calculate the cumulative (prefix) count.</li>
+        <li>Place each element in its correct position.</li>
+      </ol>
+      <p>Unlike comparison-based sorting algorithms, Counting Sort does <strong>not</strong> compare two elements.</p>
+
+      <h2>When Should We Use Counting Sort?</h2>
+      <p>Counting Sort is suitable when:</p>
+      <ul>
+        <li>Elements are integers.</li>
+        <li>The range of values (<code>0</code> to <code>k</code>) is small.</li>
+        <li>There are many duplicate values.</li>
+      </ul>
+      <p>Example:</p>
+      <pre><code class="language-none">2 5 3 0 2 3 0 3</code></pre>
+      <p>Range:</p>
+      <pre><code class="language-none">0 to 5</code></pre>
+      <p>Since the range is small, Counting Sort works efficiently.</p>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine a classroom where students receive grades from <strong>0 to 10</strong>.</p>
+      <p>Instead of arranging all answer sheets one by one:</p>
+      <ul>
+        <li>Count how many students got each grade.</li>
+        <li>Write all <code>0</code>s, then all <code>1</code>s, then all <code>2</code>s, and so on.</li>
+      </ul>
+      <p>The result is automatically sorted.</p>
+
+      <h2>Example</h2>
+      <p>Given the array:</p>
+      <pre><code class="language-none">4 2 2 8 3 3 1</code></pre>
+      <p>Maximum value:</p>
+      <pre><code class="language-none">8</code></pre>
+
+      <h3>Step 1: Count Frequency</h3>
+      <p>Create a count array from <code>0</code> to <code>8</code>.</p>
+      <table>
+        <thead>
+          <tr><th>Number</th><th>Frequency</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>0</td><td>0</td></tr>
+          <tr><td>1</td><td>1</td></tr>
+          <tr><td>2</td><td>2</td></tr>
+          <tr><td>3</td><td>2</td></tr>
+          <tr><td>4</td><td>1</td></tr>
+          <tr><td>5</td><td>0</td></tr>
+          <tr><td>6</td><td>0</td></tr>
+          <tr><td>7</td><td>0</td></tr>
+          <tr><td>8</td><td>1</td></tr>
+        </tbody>
+      </table>
+      <p>Count array:</p>
+      <pre><code class="language-none">0 1 2 2 1 0 0 0 1</code></pre>
+
+      <h3>Step 2: Cumulative Count</h3>
+      <p>Add previous counts.</p>
+      <table>
+        <thead>
+          <tr><th>Number</th><th>Cumulative Count</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>0</td><td>0</td></tr>
+          <tr><td>1</td><td>1</td></tr>
+          <tr><td>2</td><td>3</td></tr>
+          <tr><td>3</td><td>5</td></tr>
+          <tr><td>4</td><td>6</td></tr>
+          <tr><td>5</td><td>6</td></tr>
+          <tr><td>6</td><td>6</td></tr>
+          <tr><td>7</td><td>6</td></tr>
+          <tr><td>8</td><td>7</td></tr>
+        </tbody>
+      </table>
+      <p>Count array becomes:</p>
+      <pre><code class="language-none">0 1 3 5 6 6 6 6 7</code></pre>
+
+      <h3>Step 3: Place Elements</h3>
+      <p>Process the original array <strong>from right to left</strong>.</p>
+      <table>
+        <thead>
+          <tr><th>Element</th><th>Position</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>1</td></tr>
+          <tr><td>2</td><td>2,3</td></tr>
+          <tr><td>3</td><td>4,5</td></tr>
+          <tr><td>4</td><td>6</td></tr>
+          <tr><td>8</td><td>7</td></tr>
+        </tbody>
+      </table>
+      <p>Sorted array:</p>
+      <pre><code class="language-none">1 2 2 3 3 4 8</code></pre>
+
+      <h2>Visualization</h2>
+      <pre><code class="language-none">Original array:
+
+4 2 2 8 3 3 1
+
+↓
+
+Frequency Count
+
+0 1 2 2 1 0 0 0 1
+
+↓
+
+Cumulative Count
+
+0 1 3 5 6 6 6 6 7
+
+↓
+
+Sorted Array
+
+1 2 2 3 3 4 8</code></pre>
+
+      <h2>Counting Sort Algorithm</h2>
+      <pre><code class="language-none">Find maximum element
+
+Create count array
+
+Count frequency of every element
+
+Compute cumulative count
+
+Create output array
+
+Place elements using cumulative count
+
+Copy output back to original array</code></pre>
+
+      <h2>Try It Yourself</h2>
+      <p>This visualizer shows the <strong>output array being built</strong> as each element from the original array is placed into its final position (right to left). Empty slots are shown as gaps until filled.</p>
+      <div class="viz">
+        <div class="viz-bars" id="viz-bars"></div>
+        <p class="viz-caption" id="viz-caption">Ready — press Play or Step to begin.</p>
+        <input type="range" class="viz-slider" id="viz-slider" min="0" value="0" step="1" />
+        <div class="viz-controls">
+          <button id="viz-shuffle" type="button">Shuffle</button>
+          <button id="viz-play" type="button">Play</button>
+          <button id="viz-step" type="button">Step</button>
+          <button id="viz-reset" type="button">Reset</button>
+        </div>
+      </div>
+
+      <h2>C Program</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void countingSort(int arr[], int n)
+{
+    int max = arr[0];
+
+    // Find maximum element
+    for(int i = 1; i &lt; n; i++)
+    {
+        if(arr[i] &gt; max)
+            max = arr[i];
+    }
+
+    int count[max + 1];
+    int output[n];
+
+    // Initialize count array
+    for(int i = 0; i &lt;= max; i++)
+        count[i] = 0;
+
+    // Count frequency
+    for(int i = 0; i &lt; n; i++)
+        count[arr[i]]++;
+
+    // Cumulative count
+    for(int i = 1; i &lt;= max; i++)
+        count[i] += count[i - 1];
+
+    // Build output array (right to left for stability)
+    for(int i = n - 1; i &gt;= 0; i--)
+    {
+        output[count[arr[i]] - 1] = arr[i];
+        count[arr[i]]--;
+    }
+
+    // Copy output back
+    for(int i = 0; i &lt; n; i++)
+        arr[i] = output[i];
+}
+
+int main()
+{
+    int arr[] = {4, 2, 2, 8, 3, 3, 1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    countingSort(arr, n);
+
+    printf("Sorted Array:\n");
+
+    for(int i = 0; i &lt; n; i++)
+        printf("%d ", arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">Sorted Array:
+1 2 2 3 3 4 8</code></pre>
+
+      <h2>Code Explanation</h2>
+
+      <h3>Find Maximum Element</h3>
+      <pre><code class="language-c">int max = arr[0];</code></pre>
+      <p>Find the largest value to determine the size of the count array.</p>
+
+      <h3>Count Frequency</h3>
+      <pre><code class="language-c">count[arr[i]]++;</code></pre>
+      <p>Increase the frequency of each value.</p>
+
+      <h3>Cumulative Count</h3>
+      <pre><code class="language-c">count[i] += count[i - 1];</code></pre>
+      <p>Convert frequencies into positions.</p>
+
+      <h3>Build Output Array</h3>
+      <pre><code class="language-c">output[count[arr[i]] - 1] = arr[i];
+count[arr[i]]--;</code></pre>
+      <p>Place each element into its correct position.</p>
+      <p>Processing from <strong>right to left</strong> preserves the order of equal elements, making Counting Sort <strong>stable</strong>.</p>
+
+      <h3>Copy Back</h3>
+      <pre><code class="language-c">arr[i] = output[i];</code></pre>
+      <p>Replace the original array with the sorted array.</p>
+
+      <h2>Time Complexity</h2>
+      <table>
+        <thead>
+          <tr><th>Case</th><th>Complexity</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Best Case</td><td><strong>O(n + k)</strong></td></tr>
+          <tr><td>Average Case</td><td><strong>O(n + k)</strong></td></tr>
+          <tr><td>Worst Case</td><td><strong>O(n + k)</strong></td></tr>
+        </tbody>
+      </table>
+      <p>Where:</p>
+      <ul>
+        <li><strong>n</strong> = Number of elements</li>
+        <li><strong>k</strong> = Range of input values (maximum value + 1)</li>
+      </ul>
+
+      <h2>Space Complexity</h2>
+      <pre><code class="language-none">O(n + k)</code></pre>
+      <p>Extra space is required for both the output array and the count array.</p>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Very fast when the range of values is small.</li>
+        <li>Stable sorting algorithm.</li>
+        <li>Does not perform element comparisons.</li>
+        <li>Linear time complexity under suitable conditions.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Works only with integer values.</li>
+        <li>Inefficient when the range of values (<code>k</code>) is much larger than the number of elements (<code>n</code>).</li>
+        <li>Requires extra memory.</li>
+      </ul>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Sorting student grades.</li>
+        <li>Sorting ages.</li>
+        <li>Counting votes.</li>
+        <li>Histogram generation.</li>
+        <li>Used as a subroutine in <strong>Radix Sort</strong>.</li>
+      </ul>
+
+      <h2>Comparison with Previous Algorithms</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Algorithm</th>
+            <th>Best</th>
+            <th>Average</th>
+            <th>Worst</th>
+            <th>Space</th>
+            <th>Stable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Bubble Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>Yes</td></tr>
+          <tr><td>Selection Sort</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>No</td></tr>
+          <tr><td>Insertion Sort</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>Yes</td></tr>
+          <tr><td>Merge Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td><td>Yes</td></tr>
+          <tr><td>Quick Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>O(log n)</td><td>No</td></tr>
+          <tr><td>Heap Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(1)</td><td>No</td></tr>
+          <tr><td><strong>Counting Sort</strong></td><td><strong>O(n + k)</strong></td><td><strong>O(n + k)</strong></td><td><strong>O(n + k)</strong></td><td><strong>O(n + k)</strong></td><td><strong>Yes</strong></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>Counting Sort is <strong>non-comparison-based</strong>.</li>
+        <li>It counts the frequency of each value instead of comparing elements.</li>
+        <li>Best suited for <strong>small integer ranges</strong>.</li>
+        <li>Stable sorting algorithm.</li>
+        <li>Time Complexity: <strong>O(n + k)</strong>.</li>
+        <li>Space Complexity: <strong>O(n + k)</strong>.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+  <script>
+    (function () {
+      var initialArray = [4, 2, 2, 8, 3, 3, 1];
+
+      function generateSteps(startArray) {
+        var a = startArray.slice();
+        var steps = [];
+        var n = a.length;
+        var max = a[0];
+        for (var i = 1; i < n; i++) {
+          if (a[i] > max) max = a[i];
+        }
+
+        var count = [];
+        for (var i = 0; i <= max; i++) count.push(0);
+        for (var i = 0; i < n; i++) count[a[i]]++;
+        for (var i = 1; i <= max; i++) count[i] += count[i - 1];
+
+        var output = [];
+        for (var i = 0; i < n; i++) output.push(null);
+
+        for (var i = n - 1; i >= 0; i--) {
+          var pos = count[a[i]] - 1;
+          output[pos] = a[i];
+          count[a[i]]--;
+          steps.push({
+            type: 'write',
+            indices: [pos],
+            caption: 'Place ' + a[i] + ' at output index ' + pos,
+            array: output.slice()
+          });
+        }
+
+        var allIndices = [];
+        for (var i = 0; i < n; i++) allIndices.push(i);
+        steps.push({
+          type: 'markSorted',
+          indices: allIndices,
+          caption: 'Output array is fully built and sorted',
+          array: output.slice()
+        });
+
+        return steps;
+      }
+
+      function shuffleArray(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+        return arr;
+      }
+
+      var container = document.getElementById('viz-bars');
+      var caption = document.getElementById('viz-caption');
+      var slider = document.getElementById('viz-slider');
+      var shuffleBtn = document.getElementById('viz-shuffle');
+      var playBtn = document.getElementById('viz-play');
+      var stepBtn = document.getElementById('viz-step');
+      var resetBtn = document.getElementById('viz-reset');
+
+      if (!container) return;
+
+      var currentArray = initialArray.slice();
+      var steps = generateSteps(currentArray);
+      var stepIndex = 0;
+      var playing = false;
+      var playTimer = null;
+
+      function maxValue(arr) {
+        var m = 1;
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i] !== null && arr[i] > m) m = arr[i];
+        }
+        return m;
+      }
+
+      function sortedIndicesUpTo(idx) {
+        var sorted = {};
+        for (var i = 0; i <= idx; i++) {
+          if (steps[i].type === 'markSorted') {
+            steps[i].indices.forEach(function (n) {
+              sorted[n] = true;
+            });
+          }
+        }
+        return sorted;
+      }
+
+      function render() {
+        container.innerHTML = '';
+        var step = steps[stepIndex];
+        var arr = step ? step.array : currentArray.map(function () { return null; });
+        var max = maxValue(arr);
+        var sorted = sortedIndicesUpTo(stepIndex);
+
+        arr.forEach(function (value, idx) {
+          var bar = document.createElement('div');
+          bar.className = 'viz-bar';
+
+          if (value === null) {
+            bar.style.height = '4px';
+          } else {
+            bar.style.height = (value / max * 100) + '%';
+          }
+
+          if (step && step.type !== 'markSorted' && step.indices.indexOf(idx) !== -1) {
+            bar.classList.add('viz-bar--comparing');
+          }
+
+          if (sorted[idx]) {
+            bar.classList.add('viz-bar--sorted');
+          }
+
+          var label = document.createElement('span');
+          label.textContent = value === null ? '' : value;
+          bar.appendChild(label);
+
+          container.appendChild(bar);
+        });
+
+        caption.textContent = step ? step.caption : 'Ready — press Play or Step to begin.';
+        slider.value = stepIndex;
+        stepBtn.disabled = stepIndex >= steps.length - 1;
+
+        if (stepIndex >= steps.length - 1) {
+          pause();
+        }
+      }
+
+      function goToStep(idx) {
+        stepIndex = Math.max(0, Math.min(idx, steps.length - 1));
+        render();
+      }
+
+      function play() {
+        if (playing) return;
+        playing = true;
+        playBtn.textContent = 'Pause';
+        playTimer = setInterval(function () {
+          if (stepIndex >= steps.length - 1) {
+            pause();
+            return;
+          }
+          goToStep(stepIndex + 1);
+        }, 700);
+      }
+
+      function pause() {
+        playing = false;
+        playBtn.textContent = 'Play';
+        if (playTimer) {
+          clearInterval(playTimer);
+          playTimer = null;
+        }
+      }
+
+      shuffleBtn.addEventListener('click', function () {
+        pause();
+        currentArray = shuffleArray(initialArray.slice());
+        steps = generateSteps(currentArray);
+        slider.max = steps.length - 1;
+        goToStep(0);
+      });
+
+      playBtn.addEventListener('click', function () {
+        if (playing) {
+          pause();
+        } else {
+          play();
+        }
+      });
+
+      stepBtn.addEventListener('click', function () {
+        pause();
+        goToStep(stepIndex + 1);
+      });
+
+      resetBtn.addEventListener('click', function () {
+        pause();
+        goToStep(0);
+      });
+
+      slider.addEventListener('input', function () {
+        pause();
+        goToStep(parseInt(slider.value, 10));
+      });
+
+      slider.max = steps.length - 1;
+      render();
+    })();
+  </script>
+</body>
+</html>
