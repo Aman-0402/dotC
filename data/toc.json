@@ -127,6 +127,10 @@
         {
           "title": "Expressions, L-value & R-value, Type Conversion",
           "path": "lessons/unit2-expressions-lvalue-rvalue-type-conversion.html"
+        },
+        {
+          "title": "Operators in C",
+          "path": "lessons/unit2-operators.html"
         }
       ]
     }

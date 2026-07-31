@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operators in C — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Operators in C</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Operators in C</h1>
+
+      <p>Operators are one of the most important topics in C. Almost every C program uses operators for calculations, comparisons, logical decisions, memory operations, and bit manipulation.</p>
+      <p>This topic covers:</p>
+      <ul>
+        <li>Operators</li>
+        <li>Arithmetic Operators</li>
+        <li>Relational Operators</li>
+        <li>Logical Operators</li>
+        <li>Conditional (Ternary) Operator</li>
+        <li>Operator Precedence</li>
+        <li>Pre-Increment &amp; Post-Increment Expressions</li>
+        <li>Assignment Operators</li>
+        <li>Bitwise Operators</li>
+        <li>Comma Operator</li>
+        <li>Arrow (<code>-&gt;</code>) Operator</li>
+        <li><code>sizeof</code> Operator</li>
+      </ul>
+
+      <h2>What is an Operator?</h2>
+      <p>An <strong>operator</strong> is a special symbol that performs an operation on one or more operands and produces a result.</p>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>An operator is a symbol that tells the compiler to perform a specific operation on one or more operands.</strong></p>
+      </blockquote>
+
+      <h3>General Form</h3>
+      <pre><code class="language-none">Operand   Operator   Operand
+
+a + b</code></pre>
+      <p>Where:</p>
+      <ul>
+        <li><code>a</code>, <code>b</code> → Operands</li>
+        <li><code>+</code> → Operator</li>
+      </ul>
+      <p>Result:</p>
+      <pre><code class="language-none">a + b = value</code></pre>
+
+      <h2>Types of Operators in C</h2>
+      <pre><code class="language-none">Operators
+│
+├── Arithmetic
+├── Relational
+├── Logical
+├── Assignment
+├── Increment / Decrement
+├── Conditional (Ternary)
+├── Bitwise
+├── Comma
+├── Arrow (->)
+└── sizeof</code></pre>
+
+      <h2>1. Arithmetic Operators</h2>
+      <p>Arithmetic operators perform mathematical calculations.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Meaning</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>+</code></td><td>Addition</td><td><code>a + b</code></td></tr>
+          <tr><td><code>-</code></td><td>Subtraction</td><td><code>a - b</code></td></tr>
+          <tr><td><code>*</code></td><td>Multiplication</td><td><code>a * b</code></td></tr>
+          <tr><td><code>/</code></td><td>Division</td><td><code>a / b</code></td></tr>
+          <tr><td><code>%</code></td><td>Modulus (Remainder)</td><td><code>a % b</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Addition</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 10, b = 20;
+
+    printf("%d", a + b);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">30</code></pre>
+
+      <h3>Subtraction</h3>
+      <pre><code class="language-c">printf("%d", 20 - 5);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">15</code></pre>
+
+      <h3>Multiplication</h3>
+      <pre><code class="language-c">printf("%d", 6 * 7);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">42</code></pre>
+
+      <h3>Division</h3>
+      <pre><code class="language-c">printf("%d", 10 / 2);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">5</code></pre>
+
+      <h4>Integer Division</h4>
+      <pre><code class="language-c">printf("%d", 5 / 2);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">2</code></pre>
+      <p>Because both operands are integers.</p>
+
+      <h4>Floating Division</h4>
+      <pre><code class="language-c">printf("%f", 5.0 / 2);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">2.500000</code></pre>
+
+      <h3>Modulus Operator</h3>
+      <p>Returns the remainder.</p>
+      <pre><code class="language-c">printf("%d", 10 % 3);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1</code></pre>
+
+      <h2>2. Relational Operators</h2>
+      <p>Used to compare two values.</p>
+      <p>Return:</p>
+      <pre><code class="language-none">1 → True
+
+0 → False</code></pre>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>==</code></td><td>Equal</td></tr>
+          <tr><td><code>!=</code></td><td>Not Equal</td></tr>
+          <tr><td><code>&gt;</code></td><td>Greater Than</td></tr>
+          <tr><td><code>&lt;</code></td><td>Less Than</td></tr>
+          <tr><td><code>&gt;=</code></td><td>Greater Than or Equal</td></tr>
+          <tr><td><code>&lt;=</code></td><td>Less Than or Equal</td></tr>
+        </tbody>
+      </table>
+
+      <p>Example</p>
+      <pre><code class="language-c">int a = 10;
+int b = 20;
+
+printf("%d", a &lt; b);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">printf("%d", 5 == 5);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">printf("%d", 5 != 5);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">0</code></pre>
+
+      <h2>3. Logical Operators</h2>
+      <p>Logical operators combine multiple conditions.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&amp;&amp;</code></td><td>AND</td></tr>
+          <tr><td><code>||</code></td><td>OR</td></tr>
+          <tr><td><code>!</code></td><td>NOT</td></tr>
+        </tbody>
+      </table>
+
+      <h3>AND</h3>
+      <pre><code class="language-c">5 > 3 &amp;&amp; 10 > 8</code></pre>
+      <p>Both are true.</p>
+      <p>Output</p>
+      <pre><code class="language-none">1</code></pre>
+
+      <h3>OR</h3>
+      <pre><code class="language-c">5 > 10 || 10 > 8</code></pre>
+      <p>Second condition is true.</p>
+      <p>Output</p>
+      <pre><code class="language-none">1</code></pre>
+
+      <h3>NOT</h3>
+      <pre><code class="language-c">!(5 > 3)</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">0</code></pre>
+
+      <h3>Truth Table</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>A &amp;&amp; B</th>
+            <th>A || B</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+        </tbody>
+      </table>
+
+      <h2>4. Conditional (Ternary) Operator</h2>
+      <p>The ternary operator is a shorthand for <code>if...else</code>.</p>
+      <p>Syntax</p>
+      <pre><code class="language-c">condition ? expression1 : expression2;</code></pre>
+      <p>Meaning</p>
+      <pre><code class="language-none">If condition is true
+↓
+
+expression1
+
+Else
+
+expression2</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 10, b = 20;
+
+    int max = (a > b) ? a : b;
+
+    printf("%d", max);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20</code></pre>
+
+      <h2>5. Operator Precedence</h2>
+      <p>When multiple operators appear in an expression, C follows precedence rules.</p>
+      <p>Example</p>
+      <pre><code class="language-c">5 + 3 * 2</code></pre>
+      <p>Evaluation</p>
+      <pre><code class="language-none">3 × 2
+
+↓
+
+6
+
+↓
+
+5 + 6
+
+↓
+
+11</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">(5 + 3) * 2</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">16</code></pre>
+
+      <h3>Common Precedence (Highest → Lowest)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>()</code></td></tr>
+          <tr><td><code>++ --</code></td></tr>
+          <tr><td><code>* / %</code></td></tr>
+          <tr><td><code>+ -</code></td></tr>
+          <tr><td><code>&lt; &lt;= &gt; &gt;=</code></td></tr>
+          <tr><td><code>== !=</code></td></tr>
+          <tr><td><code>&amp;&amp;</code></td></tr>
+          <tr><td><code>||</code></td></tr>
+          <tr><td><code>?:</code></td></tr>
+          <tr><td><code>=</code></td></tr>
+        </tbody>
+      </table>
+      <blockquote>
+        <p>Parentheses are the safest way to make evaluation order clear.</p>
+      </blockquote>
+
+      <h2>6. Pre-Increment &amp; Post-Increment</h2>
+      <p>Increment increases a value by <strong>1</strong>.</p>
+
+      <h3>Pre-Increment (<code>++x</code>)</h3>
+      <p>Increment happens <strong>before</strong> the value is used.</p>
+      <pre><code class="language-c">int x = 5;
+
+printf("%d", ++x);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">6</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">x = 5
+
+↓
+
+Increment
+
+↓
+
+6
+
+↓
+
+Print 6</code></pre>
+
+      <h3>Post-Increment (<code>x++</code>)</h3>
+      <p>Value is used first.</p>
+      <p>Then increment happens.</p>
+      <pre><code class="language-c">int x = 5;
+
+printf("%d", x++);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">5</code></pre>
+      <p>After printing</p>
+      <pre><code class="language-none">x = 6</code></pre>
+
+      <h4>Comparison</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Expression</th>
+            <th>Output</th>
+            <th>Final x</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>++x</code></td><td>6</td><td>6</td></tr>
+          <tr><td><code>x++</code></td><td>5</td><td>6</td></tr>
+        </tbody>
+      </table>
+
+      <h2>7. Assignment Operators</h2>
+      <p>Assignment operators assign values.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>=</code></td><td>Assignment</td></tr>
+          <tr><td><code>+=</code></td><td>Add and Assign</td></tr>
+          <tr><td><code>-=</code></td><td>Subtract and Assign</td></tr>
+          <tr><td><code>*=</code></td><td>Multiply and Assign</td></tr>
+          <tr><td><code>/=</code></td><td>Divide and Assign</td></tr>
+          <tr><td><code>%=</code></td><td>Modulus and Assign</td></tr>
+        </tbody>
+      </table>
+
+      <p>Example</p>
+      <pre><code class="language-c">int x = 10;
+
+x += 5;</code></pre>
+      <p>Equivalent to</p>
+      <pre><code class="language-c">x = x + 5;</code></pre>
+      <p>Result</p>
+      <pre><code class="language-none">15</code></pre>
+
+      <p>Another Example</p>
+      <pre><code class="language-c">x *= 2;</code></pre>
+      <p>Equivalent to</p>
+      <pre><code class="language-c">x = x * 2;</code></pre>
+
+      <h2>8. Bitwise Operators</h2>
+      <p>Bitwise operators work directly on the <strong>binary representation</strong> of integers.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&amp;</code></td><td>Bitwise AND</td></tr>
+          <tr><td><code>|</code></td><td>Bitwise OR</td></tr>
+          <tr><td><code>^</code></td><td>Bitwise XOR</td></tr>
+          <tr><td><code>~</code></td><td>Bitwise NOT</td></tr>
+          <tr><td><code>&lt;&lt;</code></td><td>Left Shift</td></tr>
+          <tr><td><code>&gt;&gt;</code></td><td>Right Shift</td></tr>
+        </tbody>
+      </table>
+
+      <p>Example</p>
+      <pre><code class="language-c">5 &amp; 3</code></pre>
+      <p>Binary</p>
+      <pre><code class="language-none">5 = 0101
+
+3 = 0011
+
+------------
+    0001</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1</code></pre>
+
+      <h3>Left Shift</h3>
+      <pre><code class="language-c">5 &lt;&lt; 1</code></pre>
+      <p>Binary</p>
+      <pre><code class="language-none">0101
+
+↓
+
+1010</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10</code></pre>
+
+      <h3>Right Shift</h3>
+      <pre><code class="language-c">8 &gt;&gt; 1</code></pre>
+      <p>Binary</p>
+      <pre><code class="language-none">1000
+
+↓
+
+0100</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">4</code></pre>
+
+      <h2>9. Comma Operator</h2>
+      <p>The comma operator evaluates multiple expressions from <strong>left to right</strong> and returns the value of the <strong>last expression</strong>.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int x;
+
+x = (2, 4, 6);</code></pre>
+      <p>Result</p>
+      <pre><code class="language-none">x = 6</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">int a = (10, 20, 30);
+
+printf("%d", a);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">30</code></pre>
+
+      <h2>10. Arrow (<code>-&gt;</code>) Operator</h2>
+      <p>The arrow operator is used to access structure members through a <strong>pointer to a structure</strong>.</p>
+      <p>It is equivalent to:</p>
+      <pre><code class="language-c">(*pointer).member</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">struct Student
+{
+    int id;
+};
+
+struct Student s = {101};
+struct Student *ptr = &amp;s;
+
+printf("%d", ptr->id);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">101</code></pre>
+      <blockquote>
+        <p>We will study <strong>structures and pointers</strong> in detail in later units.</p>
+      </blockquote>
+
+      <h2>11. <code>sizeof</code> Operator</h2>
+      <p><code>sizeof</code> returns the size of a data type or variable in bytes.</p>
+      <p>Syntax</p>
+      <pre><code class="language-c">sizeof(data_type)</code></pre>
+      <p>or</p>
+      <pre><code class="language-c">sizeof(variable)</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("%zu\n", sizeof(int));
+    printf("%zu\n", sizeof(char));
+    printf("%zu\n", sizeof(double));
+
+    return 0;
+}</code></pre>
+      <p>Sample Output</p>
+      <pre><code class="language-none">4
+1
+8</code></pre>
+
+      <h2>Complete Operator Summary</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Operators</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Arithmetic</td><td><code>+ - * / %</code></td></tr>
+          <tr><td>Relational</td><td><code>== != &gt; &lt; &gt;= &lt;=</code></td></tr>
+          <tr><td>Logical</td><td><code>&amp;&amp; || !</code></td></tr>
+          <tr><td>Assignment</td><td><code>= += -= *= /= %=</code></td></tr>
+          <tr><td>Increment</td><td><code>++ --</code></td></tr>
+          <tr><td>Conditional</td><td><code>?:</code></td></tr>
+          <tr><td>Bitwise</td><td><code>&amp; | ^ ~ &lt;&lt; &gt;&gt;</code></td></tr>
+          <tr><td>Comma</td><td><code>,</code></td></tr>
+          <tr><td>Arrow</td><td><code>-&gt;</code></td></tr>
+          <tr><td>Size</td><td><code>sizeof</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Using <code>=</code> Instead of <code>==</code></h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">if (a = 10)</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">if (a == 10)</code></pre>
+
+      <h3>2. Integer Division</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">5 / 2</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">2</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">5.0 / 2</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">2.5</code></pre>
+
+      <h3>3. Confusing <code>++x</code> and <code>x++</code></h3>
+      <pre><code class="language-c">int x = 5;
+
+printf("%d", ++x);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">6</code></pre>
+      <pre><code class="language-c">int y = 5;
+
+printf("%d", y++);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">5</code></pre>
+      <p>Final <code>y</code></p>
+      <pre><code class="language-none">6</code></pre>
+
+      <h3>4. Using <code>%</code> with Floating-Point Numbers</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">5.5 % 2</code></pre>
+      <p>The modulus operator works only with integer operands in C.</p>
+
+      <h2>Interview Questions</h2>
+      <ol>
+        <li>What is an operator in C?</li>
+        <li>Differentiate between arithmetic and relational operators.</li>
+        <li>What is the difference between <code>=</code> and <code>==</code>?</li>
+        <li>Explain the difference between <code>++x</code> and <code>x++</code>.</li>
+        <li>What is operator precedence?</li>
+        <li>What is the ternary operator?</li>
+        <li>What is the purpose of the <code>sizeof</code> operator?</li>
+        <li>Explain the difference between logical and bitwise operators.</li>
+        <li>When is the <code>-&gt;</code> operator used?</li>
+        <li>What value does the comma operator return?</li>
+      </ol>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define an operator.</li>
+        <li>Explain all categories of operators in C.</li>
+        <li>Differentiate between logical and relational operators.</li>
+        <li>Explain pre-increment and post-increment with examples.</li>
+        <li>Describe the working of bitwise shift operators.</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Arithmetic Operators</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 12, b = 5;
+
+    printf("Addition      : %d\n", a + b);
+    printf("Subtraction   : %d\n", a - b);
+    printf("Multiplication: %d\n", a * b);
+    printf("Division      : %d\n", a / b);
+    printf("Remainder     : %d\n", a % b);
+
+    return 0;
+}</code></pre>
+
+      <h4>Q2. Pre-Increment vs Post-Increment</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int x = 5;
+
+    printf("Pre  : %d\n", ++x);
+
+    x = 5;
+
+    printf("Post : %d\n", x++);
+
+    printf("Final: %d\n", x);
+
+    return 0;
+}</code></pre>
+
+      <h4>Q3. Ternary Operator</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 25, b = 18;
+
+    int max = (a > b) ? a : b;
+
+    printf("Maximum = %d", max);
+
+    return 0;
+}</code></pre>
+
+      <h4>Q4. <code>sizeof</code> Operator</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("char        : %zu bytes\n", sizeof(char));
+    printf("int         : %zu bytes\n", sizeof(int));
+    printf("float       : %zu bytes\n", sizeof(float));
+    printf("double      : %zu bytes\n", sizeof(double));
+
+    return 0;
+}</code></pre>
+
+      <h4>Q5. Bitwise AND</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 5, b = 3;
+
+    printf("%d", a &amp; b);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">1</code></pre>
+
+      <h2>Exam Tips</h2>
+      <ul>
+        <li>⭐ Operators perform operations on operands.</li>
+        <li>⭐ <code>=</code> assigns a value, while <code>==</code> compares values.</li>
+        <li>⭐ <code>++x</code> increments <strong>before</strong> use; <code>x++</code> increments <strong>after</strong> use.</li>
+        <li>⭐ <code>%</code> works only with integer operands.</li>
+        <li>⭐ The ternary operator <code>?:</code> is a compact form of <code>if...else</code>.</li>
+        <li>⭐ Parentheses <code>()</code> have the highest precedence and make expressions easier to understand.</li>
+        <li>⭐ <code>sizeof</code> returns the memory size of a data type or variable.</li>
+        <li>⭐ <code>-&gt;</code> is used to access structure members through a pointer.</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>C provides a rich set of operators for arithmetic, comparison, logical operations, assignments, bit manipulation, and memory-related tasks.</li>
+        <li>Understanding <strong>operator precedence</strong> helps predict how expressions are evaluated.</li>
+        <li><strong>Pre-increment</strong> and <strong>post-increment</strong> differ in when the increment occurs.</li>
+        <li><strong>Bitwise operators</strong> work on binary representations of integers.</li>
+        <li><strong><code>sizeof</code></strong> is useful for writing portable programs.</li>
+        <li><strong>Comma</strong> and <strong>Arrow</strong> operators are specialized operators that are important in advanced C programming.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
