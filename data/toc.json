@@ -231,6 +231,10 @@
         {
           "title": "Algorithm Analysis",
           "path": "lessons/unit6-algorithm-analysis.html"
+        },
+        {
+          "title": "Arrays (Advanced)",
+          "path": "lessons/unit6-arrays-advanced.html"
         }
       ]
     }

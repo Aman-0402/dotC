@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arrays (Advanced) — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 6 / Arrays (Advanced)</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Arrays (Advanced)</h1>
+
+      <p>Arrays are one of the most important data structures because they store multiple elements of the same data type in contiguous memory locations. Many algorithms such as searching, sorting, and dynamic programming are built using arrays.</p>
+
+      <h2>1. Review of Arrays</h2>
+      <h3>Definition</h3>
+      <p>An <strong>Array</strong> is a collection of elements of the same data type stored in contiguous memory locations.</p>
+      <p>Each element is identified using an <strong>index</strong>.</p>
+
+      <h3>Declaration</h3>
+      <pre><code class="language-c">int arr[5];</code></pre>
+      <p>This creates an integer array of size 5.</p>
+
+      <h3>Initialization</h3>
+      <pre><code class="language-c">int arr[5]={10,20,30,40,50};</code></pre>
+
+      <h3>Accessing Elements</h3>
+      <pre><code class="language-c">printf("%d",arr[2]);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">30</code></pre>
+
+      <h3>Indexing</h3>
+      <p>Array indexing starts from <strong>0</strong>.</p>
+      <pre><code class="language-none">Index : 0   1   2   3   4
+
+Value :10  20  30  40  50</code></pre>
+
+      <h3>Advantages</h3>
+      <ul>
+        <li>Fast access using index</li>
+        <li>Easy to traverse</li>
+        <li>Memory efficient</li>
+        <li>Suitable for searching and sorting</li>
+      </ul>
+
+      <h3>Disadvantages</h3>
+      <ul>
+        <li>Fixed size</li>
+        <li>Same data type only</li>
+        <li>Insertion and deletion are costly</li>
+      </ul>
+
+      <h2>2. Memory Representation</h2>
+      <p>Arrays store elements in <strong>contiguous (continuous) memory locations</strong>.</p>
+      <p>Suppose</p>
+      <pre><code class="language-c">int arr[5]={10,20,30,40,50};</code></pre>
+      <p>Assume first element starts at address <strong>1000</strong>.</p>
+      <pre><code class="language-none">Address
+
+1000 → 10
+
+1004 → 20
+
+1008 → 30
+
+1012 → 40
+
+1016 → 50</code></pre>
+      <p>Each integer occupies <strong>4 bytes</strong>.</p>
+
+      <h3>Address Formula</h3>
+      <p>For one-dimensional arrays</p>
+      <pre><code class="language-none">Address(arr[i])
+
+= Base Address + (Index × Size of Data Type)</code></pre>
+      <p>Example</p>
+      <pre><code class="language-none">Base Address =1000
+
+Index =3
+
+Size =4 bytes
+
+Address
+
+=1000+(3×4)
+
+=1012</code></pre>
+
+      <h2>3. Traversing an Array</h2>
+      <p>Traversing means visiting every element exactly once.</p>
+
+      <h3>Algorithm</h3>
+      <pre><code class="language-none">Start
+
+Repeat from i=0 to n−1
+
+Print arr[i]
+
+Stop</code></pre>
+
+      <h3>Program</h3>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50};
+
+    for(int i=0;i&lt;5;i++)
+    {
+        printf("%d ",arr[i]);
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+
+      <h3>Complexity</h3>
+      <p>Time : <strong>O(n)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>4. Insertion</h2>
+      <p>Insertion means adding a new element at a desired position.</p>
+
+      <h3>Example</h3>
+      <p>Original Array</p>
+      <pre><code class="language-none">10 20 40 50</code></pre>
+      <p>Insert <strong>30</strong> at Position <strong>2</strong></p>
+      <p>Result</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+
+      <h3>Algorithm</h3>
+      <pre><code class="language-none">Start
+
+Read Position and Element
+
+Move all elements one position right
+
+Insert new element
+
+Increase size
+
+Stop</code></pre>
+
+      <h3>Program</h3>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[10]={10,20,40,50};
+    int n=4;
+    int pos=2;
+    int item=30;
+
+    for(int i=n;i&gt;pos;i--)
+        arr[i]=arr[i-1];
+
+    arr[pos]=item;
+    n++;
+
+    for(int i=0;i&lt;n;i++)
+        printf("%d ",arr[i]);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+
+      <h3>Complexity</h3>
+      <p>Time : <strong>O(n)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>5. Deletion</h2>
+      <p>Deletion removes an element from an array.</p>
+
+      <h3>Example</h3>
+      <p>Original</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>Delete Position <strong>2</strong></p>
+      <p>Result</p>
+      <pre><code class="language-none">10 20 40 50</code></pre>
+
+      <h3>Algorithm</h3>
+      <pre><code class="language-none">Start
+
+Read Position
+
+Shift all elements left
+
+Decrease size
+
+Stop</code></pre>
+
+      <h3>Program</h3>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50};
+    int n=5;
+    int pos=2;
+
+    for(int i=pos;i&lt;n-1;i++)
+        arr[i]=arr[i+1];
+
+    n--;
+
+    for(int i=0;i&lt;n;i++)
+        printf("%d ",arr[i]);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10 20 40 50</code></pre>
+
+      <h3>Complexity</h3>
+      <p>Time : <strong>O(n)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>6. Searching</h2>
+      <p>Searching means finding whether an element exists in an array.</p>
+      <p>There are two common searching techniques:</p>
+      <ul>
+        <li>Linear Search</li>
+        <li>Binary Search (covered later)</li>
+      </ul>
+
+      <h3>Example</h3>
+      <pre><code class="language-none">Array
+
+10 20 30 40 50
+
+Search 40
+
+Found at index 3</code></pre>
+
+      <h3>Linear Search Program</h3>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50};
+    int key=40;
+
+    for(int i=0;i&lt;5;i++)
+    {
+        if(arr[i]==key)
+        {
+            printf("Found at index %d",i);
+            return 0;
+        }
+    }
+
+    printf("Not Found");
+
+    return 0;
+}</code></pre>
+
+      <h3>Complexity</h3>
+      <p>Time : <strong>O(n)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>7. Updating</h2>
+      <p>Updating means changing an existing element.</p>
+
+      <h3>Example</h3>
+      <p>Original</p>
+      <pre><code class="language-none">10 20 30 40</code></pre>
+      <p>Update index <strong>2</strong></p>
+      <pre><code class="language-none">99</code></pre>
+      <p>Result</p>
+      <pre><code class="language-none">10 20 99 40</code></pre>
+
+      <h3>Program</h3>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40};
+
+    arr[2]=99;
+
+    for(int i=0;i&lt;4;i++)
+        printf("%d ",arr[i]);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10 20 99 40</code></pre>
+
+      <h3>Complexity</h3>
+      <p>Time : <strong>O(1)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>8. Merging Arrays</h2>
+      <p>Merging combines two arrays into one.</p>
+
+      <h3>Example</h3>
+      <p>Array A</p>
+      <pre><code class="language-none">10 20 30</code></pre>
+      <p>Array B</p>
+      <pre><code class="language-none">40 50</code></pre>
+      <p>Merged Array</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+
+      <h3>Program</h3>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int a[]={10,20,30};
+    int b[]={40,50};
+    int c[5];
+
+    int i;
+
+    for(i=0;i&lt;3;i++)
+        c[i]=a[i];
+
+    for(int j=0;j&lt;2;j++)
+        c[i++]=b[j];
+
+    for(i=0;i&lt;5;i++)
+        printf("%d ",c[i]);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+
+      <h3>Complexity</h3>
+      <p>Time : <strong>O(n+m)</strong></p>
+      <p>Space : <strong>O(n+m)</strong></p>
+
+      <h2>9. Rotation</h2>
+      <p>Rotation shifts array elements either left or right.</p>
+
+      <h3>Left Rotation</h3>
+      <p>Original</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>After Left Rotation</p>
+      <pre><code class="language-none">20 30 40 50 10</code></pre>
+
+      <h3>Program</h3>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50};
+    int temp=arr[0];
+
+    for(int i=0;i&lt;4;i++)
+        arr[i]=arr[i+1];
+
+    arr[4]=temp;
+
+    for(int i=0;i&lt;5;i++)
+        printf("%d ",arr[i]);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20 30 40 50 10</code></pre>
+
+      <h3>Right Rotation</h3>
+      <p>Original</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>Result</p>
+      <pre><code class="language-none">50 10 20 30 40</code></pre>
+
+      <h3>Complexity</h3>
+      <p>Time : <strong>O(n)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>10. Reversal</h2>
+      <p>Reverse changes the order of elements.</p>
+
+      <h3>Example</h3>
+      <p>Original</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>Reversed</p>
+      <pre><code class="language-none">50 40 30 20 10</code></pre>
+
+      <h3>Program</h3>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,40,50};
+    int start=0,end=4,temp;
+
+    while(start&lt;end)
+    {
+        temp=arr[start];
+        arr[start]=arr[end];
+        arr[end]=temp;
+
+        start++;
+        end--;
+    }
+
+    for(int i=0;i&lt;5;i++)
+        printf("%d ",arr[i]);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">50 40 30 20 10</code></pre>
+
+      <h3>Complexity</h3>
+      <p>Time : <strong>O(n)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>11. Frequency Count</h2>
+      <p>Frequency count determines how many times each element appears.</p>
+
+      <h3>Example</h3>
+      <pre><code class="language-none">Array
+
+1 2 2 3 1 2</code></pre>
+      <p>Frequency</p>
+      <pre><code class="language-none">1 → 2
+
+2 → 3
+
+3 → 1</code></pre>
+
+      <h3>Program</h3>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={1,2,2,3,1,2};
+    int n=6;
+
+    for(int i=0;i&lt;n;i++)
+    {
+        int count=1;
+
+        if(arr[i]==-1)
+            continue;
+
+        for(int j=i+1;j&lt;n;j++)
+        {
+            if(arr[i]==arr[j])
+            {
+                count++;
+                arr[j]=-1;
+            }
+        }
+
+        printf("%d occurs %d times\n",arr[i],count);
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1 occurs 2 times
+
+2 occurs 3 times
+
+3 occurs 1 time</code></pre>
+
+      <h3>Complexity</h3>
+      <p>Time : <strong>O(n²)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>12. Duplicate Detection</h2>
+      <p>Duplicate detection identifies repeated elements in an array.</p>
+
+      <h3>Example</h3>
+      <pre><code class="language-none">Array
+
+10 20 30 20 40 10</code></pre>
+      <p>Duplicates</p>
+      <pre><code class="language-none">10
+
+20</code></pre>
+
+      <h3>Program</h3>
+      <pre><code class="language-c">#include&lt;stdio.h&gt;
+
+int main()
+{
+    int arr[]={10,20,30,20,40,10};
+    int n=6;
+
+    for(int i=0;i&lt;n;i++)
+    {
+        for(int j=i+1;j&lt;n;j++)
+        {
+            if(arr[i]==arr[j])
+            {
+                printf("%d ",arr[i]);
+                break;
+            }
+        }
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10 20</code></pre>
+
+      <h3>Complexity</h3>
+      <p>Time : <strong>O(n²)</strong></p>
+      <p>Space : <strong>O(1)</strong></p>
+
+      <h2>Summary Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Operation</th>
+            <th>Time Complexity</th>
+            <th>Space Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Traversing</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Insertion</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Deletion</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Linear Searching</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Updating</td><td>O(1)</td><td>O(1)</td></tr>
+          <tr><td>Merging</td><td>O(n + m)</td><td>O(n + m)</td></tr>
+          <tr><td>Rotation</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Reversal</td><td>O(n)</td><td>O(1)</td></tr>
+          <tr><td>Frequency Count</td><td>O(n²)</td><td>O(1)</td></tr>
+          <tr><td>Duplicate Detection</td><td>O(n²)</td><td>O(1)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>Arrays store <strong>homogeneous data</strong> in <strong>contiguous memory locations</strong>.</li>
+        <li>Array indexing starts from <strong>0</strong>.</li>
+        <li>Address calculation formula:
+          <pre><code class="language-none">Address = Base Address + (Index × Size of Data Type)</code></pre>
+        </li>
+        <li><strong>Traversing</strong> visits each element once.</li>
+        <li><strong>Insertion</strong> and <strong>Deletion</strong> require shifting elements, making them <strong>O(n)</strong> operations.</li>
+        <li><strong>Updating</strong> an element by index is <strong>O(1)</strong>.</li>
+        <li><strong>Merging</strong> combines two arrays into a larger array.</li>
+        <li><strong>Rotation</strong> shifts elements left or right.</li>
+        <li><strong>Reversal</strong> swaps elements from both ends toward the center.</li>
+        <li><strong>Frequency Count</strong> counts occurrences of each element.</li>
+        <li><strong>Duplicate Detection</strong> identifies repeated values in an array.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
