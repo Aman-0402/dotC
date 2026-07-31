@@ -11,9 +11,17 @@
     var container = document.createElement("div");
 
     toc.chapters.forEach(function (chapter) {
-      var heading = document.createElement("h3");
-      heading.textContent = chapter.title;
-      container.appendChild(heading);
+      var isCurrentChapter = chapter.lessons.some(function (lesson) {
+        return lesson.path === here;
+      });
+
+      var details = document.createElement("details");
+      details.className = "sidebar-chapter";
+      details.open = isCurrentChapter;
+
+      var summary = document.createElement("summary");
+      summary.textContent = chapter.title;
+      details.appendChild(summary);
 
       var list = document.createElement("ul");
       list.className = "sidebar-lesson-list";
@@ -30,7 +38,8 @@
         list.appendChild(li);
       });
 
-      container.appendChild(list);
+      details.appendChild(list);
+      container.appendChild(details);
     });
 
     sidebar.appendChild(container);

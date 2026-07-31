@@ -47,6 +47,22 @@ pre[class*="language-"] {
   padding: 0.35rem 0;
 }
 
+.sidebar-chapter {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-chapter summary {
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+}
+
+.sidebar-chapter summary:hover {
+  background: var(--color-bg-elevated);
+}
+
 .sidebar-lesson-list {
   list-style: none;
 }
