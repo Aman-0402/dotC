@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recursive Functions — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Recursive Functions</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Recursive Functions</h1>
+
+      <p>A <strong>Recursive Function</strong> is a function that <strong>calls itself</strong> directly or indirectly to solve a problem.</p>
+      <p>The key idea is:</p>
+      <blockquote>
+        <p><strong>Solve a small part of the problem, then let the function solve the remaining smaller problem.</strong></p>
+      </blockquote>
+
+      <h2>Anatomy of a Recursive Function</h2>
+      <p>Every recursive function has three essential components:</p>
+      <pre><code class="language-c">returnType function(parameters)
+{
+    // Base Case
+    if(condition)
+        return value;
+
+    // Recursive Case
+    return function(smaller_problem);
+}</code></pre>
+
+      <h3>Components</h3>
+      <ol>
+        <li><strong>Function Declaration</strong></li>
+        <li><strong>Base Case</strong> (Stopping condition)</li>
+        <li><strong>Recursive Call</strong> (Function calls itself)</li>
+      </ol>
+
+      <h2>Example 1: Print Numbers from 1 to 5</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void print(int n)
+{
+    if(n &gt; 5)
+        return;
+
+    printf("%d ", n);
+
+    print(n + 1);
+}
+
+int main()
+{
+    print(1);
+
+    return 0;
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+
+      <h2>Dry Run</h2>
+      <p>Call:</p>
+      <pre><code class="language-c">print(1);</code></pre>
+      <p>Execution:</p>
+      <pre><code class="language-none">print(1)
+
+↓
+
+Print 1
+
+↓
+
+print(2)
+
+↓
+
+Print 2
+
+↓
+
+print(3)
+
+↓
+
+Print 3
+
+↓
+
+print(4)
+
+↓
+
+Print 4
+
+↓
+
+print(5)
+
+↓
+
+Print 5
+
+↓
+
+print(6)
+
+↓
+
+Base Case
+
+↓
+
+Return</code></pre>
+
+      <h2>Example 2: Print Numbers in Reverse</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void reverse(int n)
+{
+    if(n == 0)
+        return;
+
+    printf("%d ", n);
+
+    reverse(n - 1);
+}
+
+int main()
+{
+    reverse(5);
+
+    return 0;
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-none">5 4 3 2 1</code></pre>
+
+      <h2>Example 3: Sum of First N Numbers</h2>
+      <p>Formula:</p>
+      <pre><code class="language-none">sum(n) = n + sum(n - 1)</code></pre>
+      <p>Base Case:</p>
+      <pre><code class="language-none">sum(0) = 0</code></pre>
+
+      <h3>Program</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int sum(int n)
+{
+    if(n == 0)
+        return 0;
+
+    return n + sum(n - 1);
+}
+
+int main()
+{
+    printf("%d", sum(5));
+
+    return 0;
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-none">15</code></pre>
+
+      <h2>Dry Run</h2>
+      <pre><code class="language-none">sum(5)
+
+↓
+
+5 + sum(4)
+
+↓
+
+5 + 4 + sum(3)
+
+↓
+
+5 + 4 + 3 + sum(2)
+
+↓
+
+5 + 4 + 3 + 2 + sum(1)
+
+↓
+
+5 + 4 + 3 + 2 + 1 + sum(0)
+
+↓
+
+0</code></pre>
+      <p>Returning:</p>
+      <pre><code class="language-none">0
+
+↓
+
+1
+
+↓
+
+3
+
+↓
+
+6
+
+↓
+
+10
+
+↓
+
+15</code></pre>
+
+      <h2>Example 4: Power of a Number</h2>
+      <p>Formula:</p>
+      <pre><code class="language-none">power(a, b)
+
+=
+
+a × power(a, b − 1)</code></pre>
+
+      <h3>Program</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int power(int base, int exp)
+{
+    if(exp == 0)
+        return 1;
+
+    return base * power(base, exp - 1);
+}
+
+int main()
+{
+    printf("%d", power(2, 5));
+
+    return 0;
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-none">32</code></pre>
+
+      <h2>Example 5: Fibonacci Series</h2>
+      <p>Formula:</p>
+      <pre><code class="language-none">F(n)
+
+=
+
+F(n-1) + F(n-2)</code></pre>
+      <p>Base Cases:</p>
+      <pre><code class="language-none">F(0)=0
+
+F(1)=1</code></pre>
+
+      <h3>Program</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int fibonacci(int n)
+{
+    if(n == 0)
+        return 0;
+
+    if(n == 1)
+        return 1;
+
+    return fibonacci(n-1) + fibonacci(n-2);
+}
+
+int main()
+{
+    for(int i=0;i&lt;8;i++)
+        printf("%d ", fibonacci(i));
+
+    return 0;
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-none">0 1 1 2 3 5 8 13</code></pre>
+
+      <h2>Fibonacci Call Tree</h2>
+      <p>For:</p>
+      <pre><code class="language-none">fibonacci(4)</code></pre>
+      <pre><code class="language-none">                 fib(4)
+                /      \
+            fib(3)    fib(2)
+           /     \     /    \
+       fib(2) fib(1) fib(1) fib(0)
+       /   \
+   fib(1) fib(0)</code></pre>
+      <p>Notice that:</p>
+      <pre><code class="language-none">fib(2)
+
+fib(1)
+
+fib(0)</code></pre>
+      <p>are computed multiple times.</p>
+      <p>This is why the recursive Fibonacci solution is inefficient.</p>
+
+      <h2>Recursive Call Stack</h2>
+      <p>Example:</p>
+      <pre><code class="language-none">factorial(4)</code></pre>
+      <p>Calls:</p>
+      <pre><code class="language-none">factorial(4)
+
+↓
+
+factorial(3)
+
+↓
+
+factorial(2)
+
+↓
+
+factorial(1)
+
+↓
+
+factorial(0)</code></pre>
+      <p>Call Stack:</p>
+      <pre><code class="language-none">┌──────────────┐
+│ factorial(0) │
+├──────────────┤
+│ factorial(1) │
+├──────────────┤
+│ factorial(2) │
+├──────────────┤
+│ factorial(3) │
+├──────────────┤
+│ factorial(4) │
+└──────────────┘</code></pre>
+      <p>Returns:</p>
+      <pre><code class="language-none">factorial(0)
+
+↓
+
+factorial(1)
+
+↓
+
+factorial(2)
+
+↓
+
+factorial(3)
+
+↓
+
+factorial(4)</code></pre>
+      <p>This follows the <strong>LIFO (Last In, First Out)</strong> principle.</p>
+
+      <h2>Rules for Writing Recursive Functions</h2>
+      <p>✅ Always define a <strong>Base Case</strong>.</p>
+      <pre><code class="language-c">if(n == 0)
+    return;</code></pre>
+      <p>✅ Reduce the problem size.</p>
+      <pre><code class="language-c">fun(n-1);</code></pre>
+      <p>or</p>
+      <pre><code class="language-c">fun(n/2);</code></pre>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">fun(n);</code></pre>
+      <p>The problem size never changes, causing infinite recursion.</p>
+
+      <h2>Common Errors</h2>
+
+      <h3>Missing Base Case</h3>
+      <pre><code class="language-c">void fun()
+{
+    fun();
+}</code></pre>
+      <p>Result:</p>
+      <pre><code class="language-none">Infinite Recursion
+
+↓
+
+Stack Overflow</code></pre>
+
+      <h3>Problem Not Reduced</h3>
+      <pre><code class="language-c">fun(n);</code></pre>
+      <p>The same function keeps calling itself forever.</p>
+
+      <h3>Wrong Base Condition</h3>
+      <pre><code class="language-c">if(n == 100)
+    return;</code></pre>
+      <p>If <code>n</code> never becomes 100, the recursion never stops.</p>
+
+      <h2>Applications of Recursive Functions</h2>
+      <ul>
+        <li>Factorial</li>
+        <li>Fibonacci Series</li>
+        <li>Sum of N Numbers</li>
+        <li>Power Calculation</li>
+        <li>Binary Search</li>
+        <li>Merge Sort</li>
+        <li>Quick Sort</li>
+        <li>Tree Traversal</li>
+        <li>Graph Traversal</li>
+        <li>Tower of Hanoi</li>
+        <li>Backtracking Algorithms</li>
+      </ul>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Short and clean code.</li>
+        <li>Easy to understand for recursive problems.</li>
+        <li>Natural fit for divide-and-conquer algorithms.</li>
+        <li>Ideal for hierarchical data structures like trees.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Extra memory is needed for the call stack.</li>
+        <li>Can be slower than loops due to function call overhead.</li>
+        <li>Poorly designed recursion can lead to stack overflow.</li>
+        <li>Some recursive solutions (e.g., naive Fibonacci) perform repeated computations.</li>
+      </ul>
+
+      <h2>Iteration vs Recursion</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Iteration</th>
+            <th>Recursion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Uses</td><td>Loops</td><td>Function calls</td></tr>
+          <tr><td>Memory</td><td>O(1)</td><td>O(n) (call stack)</td></tr>
+          <tr><td>Speed</td><td>Usually faster</td><td>Usually slower</td></tr>
+          <tr><td>Code</td><td>More verbose</td><td>Often shorter and cleaner</td></tr>
+          <tr><td>Best For</td><td>Repetitive tasks</td><td>Divide-and-conquer, trees, graphs</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>A recursive function solves a problem by calling itself.</li>
+        <li>Every recursive function must have a <strong>base case</strong>.</li>
+        <li>Each recursive call should move closer to the base case.</li>
+        <li>The call stack stores active recursive calls.</li>
+        <li>Recursive functions are powerful but should be used carefully to avoid excessive memory use and infinite recursion.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

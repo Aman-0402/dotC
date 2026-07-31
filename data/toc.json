@@ -288,6 +288,10 @@
         {
           "title": "Introduction to Recursion",
           "path": "lessons/unit7-introduction-to-recursion.html"
+        },
+        {
+          "title": "Recursive Functions",
+          "path": "lessons/unit7-recursive-functions.html"
         }
       ]
     }
