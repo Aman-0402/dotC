@@ -308,6 +308,10 @@
         {
           "title": "Indirect Recursion",
           "path": "lessons/unit7-indirect-recursion.html"
+        },
+        {
+          "title": "Applications of Recursion",
+          "path": "lessons/unit7-applications-of-recursion.html"
         }
       ]
     }

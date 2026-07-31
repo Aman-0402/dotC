@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Applications of Recursion — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Applications of Recursion</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Applications of Recursion</h1>
+
+      <p>Recursion is one of the most powerful programming techniques. It is widely used to solve problems that can be <strong>broken into smaller subproblems of the same type</strong>.</p>
+      <p>Many important algorithms and data structures rely on recursion.</p>
+
+      <h2>Why Use Recursion?</h2>
+      <p>Recursion is useful when:</p>
+      <ul>
+        <li>A problem can be divided into smaller versions of itself.</li>
+        <li>The solution naturally follows a hierarchical structure.</li>
+        <li>Divide and Conquer is an appropriate strategy.</li>
+        <li>Working with trees or graphs.</li>
+      </ul>
+
+      <h2>Major Applications of Recursion</h2>
+      <ol>
+        <li>Factorial</li>
+        <li>Fibonacci Series</li>
+        <li>Binary Search</li>
+        <li>Merge Sort</li>
+        <li>Quick Sort</li>
+        <li>Tower of Hanoi</li>
+        <li>Tree Traversal</li>
+        <li>Graph Traversal</li>
+        <li>Backtracking</li>
+        <li>Divide and Conquer</li>
+      </ol>
+
+      <h2>1. Factorial</h2>
+      <p>Formula:</p>
+      <pre><code class="language-none">n! = n × (n − 1)!
+
+0! = 1</code></pre>
+      <p>Example:</p>
+      <pre><code class="language-none">5!
+
+↓
+
+5 × 4!
+
+↓
+
+5 × 4 × 3!
+
+↓
+
+5 × 4 × 3 × 2!
+
+↓
+
+5 × 4 × 3 × 2 × 1!
+
+↓
+
+120</code></pre>
+
+      <h3>C Program</h3>
+      <pre><code class="language-c">int factorial(int n)
+{
+    if(n == 0)
+        return 1;
+
+    return n * factorial(n - 1);
+}</code></pre>
+
+      <h2>2. Fibonacci Series</h2>
+      <p>Formula:</p>
+      <pre><code class="language-none">F(n)
+
+=
+
+F(n-1) + F(n-2)</code></pre>
+      <p>Base Cases:</p>
+      <pre><code class="language-none">F(0)=0
+
+F(1)=1</code></pre>
+      <p>Sequence:</p>
+      <pre><code class="language-none">0 1 1 2 3 5 8 13 21 ...</code></pre>
+
+      <h3>C Program</h3>
+      <pre><code class="language-c">int fib(int n)
+{
+    if(n &lt;= 1)
+        return n;
+
+    return fib(n-1) + fib(n-2);
+}</code></pre>
+
+      <h2>3. Binary Search</h2>
+      <p>Binary Search repeatedly divides a sorted array into two halves.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">10 20 30 40 50 60 70</code></pre>
+      <p>Search:</p>
+      <pre><code class="language-none">50</code></pre>
+      <p>Steps:</p>
+      <pre><code class="language-none">Middle = 40
+
+↓
+
+50 &gt; 40
+
+↓
+
+Search Right Half
+
+↓
+
+50 Found</code></pre>
+      <p>Recursive Function:</p>
+      <pre><code class="language-c">int binarySearch(int arr[], int left, int right, int key)
+{
+    if(left &gt; right)
+        return -1;
+
+    int mid = (left + right) / 2;
+
+    if(arr[mid] == key)
+        return mid;
+
+    if(key &lt; arr[mid])
+        return binarySearch(arr, left, mid - 1, key);
+
+    return binarySearch(arr, mid + 1, right, key);
+}</code></pre>
+
+      <h3>Time Complexity</h3>
+      <pre><code class="language-none">O(log n)</code></pre>
+
+      <h2>4. Merge Sort</h2>
+      <p>Merge Sort uses <strong>Divide and Conquer</strong>.</p>
+      <p>Steps:</p>
+      <pre><code class="language-none">Divide
+
+↓
+
+Sort Left
+
+↓
+
+Sort Right
+
+↓
+
+Merge</code></pre>
+      <p>Example:</p>
+      <pre><code class="language-none">8 4 2 6</code></pre>
+      <p>↓</p>
+      <pre><code class="language-none">8 4
+
+2 6</code></pre>
+      <p>↓</p>
+      <pre><code class="language-none">4 8
+
+2 6</code></pre>
+      <p>↓</p>
+      <pre><code class="language-none">2 4 6 8</code></pre>
+      <p>Time Complexity:</p>
+      <pre><code class="language-none">O(n log n)</code></pre>
+
+      <h2>5. Quick Sort</h2>
+      <p>Quick Sort recursively partitions the array around a <strong>Pivot</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">7 2 9 4 6</code></pre>
+      <p>Choose Pivot:</p>
+      <pre><code class="language-none">6</code></pre>
+      <p>↓</p>
+      <p>Partition:</p>
+      <pre><code class="language-none">2 4 6 7 9</code></pre>
+      <p>↓</p>
+      <p>Recursively sort left and right partitions.</p>
+      <p>Time Complexity:</p>
+      <pre><code class="language-none">Average: O(n log n)
+
+Worst: O(n²)</code></pre>
+
+      <h2>6. Tower of Hanoi</h2>
+      <p>One of the most famous recursion problems.</p>
+      <p>Three rods:</p>
+      <pre><code class="language-none">A
+
+B
+
+C</code></pre>
+      <p>Move all disks from A to C.</p>
+      <p>Rules:</p>
+      <ul>
+        <li>Move only one disk at a time.</li>
+        <li>Never place a larger disk on a smaller disk.</li>
+        <li>Use the auxiliary rod.</li>
+      </ul>
+      <p>Recursive Solution:</p>
+      <pre><code class="language-none">Move n−1 disks
+
+↓
+
+Move largest disk
+
+↓
+
+Move n−1 disks</code></pre>
+      <p>Example:</p>
+      <pre><code class="language-none">3 Disks
+
+A → C
+
+using B</code></pre>
+      <p>Moves required:</p>
+      <pre><code class="language-none">2ⁿ - 1</code></pre>
+      <p>For:</p>
+      <pre><code class="language-none">n=3</code></pre>
+      <p>Moves:</p>
+      <pre><code class="language-none">7</code></pre>
+
+      <h2>7. Tree Traversal</h2>
+      <p>Trees are naturally recursive.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">        A
+      /   \
+     B     C
+    / \   / \
+   D  E  F  G</code></pre>
+      <p>Recursive Traversals:</p>
+
+      <h3>Preorder</h3>
+      <pre><code class="language-none">Root
+
+↓
+
+Left
+
+↓
+
+Right</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">A B D E C F G</code></pre>
+
+      <h3>Inorder</h3>
+      <pre><code class="language-none">Left
+
+↓
+
+Root
+
+↓
+
+Right</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">D B E A F C G</code></pre>
+
+      <h3>Postorder</h3>
+      <pre><code class="language-none">Left
+
+↓
+
+Right
+
+↓
+
+Root</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">D E B F G C A</code></pre>
+
+      <h2>8. Graph Traversal</h2>
+      <p>Depth First Search (DFS) is commonly implemented recursively.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">A
+
+/ \
+
+B  C
+
+|
+
+D</code></pre>
+      <p>Recursive DFS:</p>
+      <pre><code class="language-none">A
+
+↓
+
+B
+
+↓
+
+D
+
+↓
+
+C</code></pre>
+
+      <h2>9. Backtracking</h2>
+      <p>Backtracking is recursion with trial and error.</p>
+      <p>Examples:</p>
+      <ul>
+        <li>Sudoku Solver</li>
+        <li>N-Queens Problem</li>
+        <li>Rat in a Maze</li>
+        <li>Word Search</li>
+        <li>Crossword Puzzle</li>
+      </ul>
+      <p>General Idea:</p>
+      <pre><code class="language-none">Choose
+
+↓
+
+Explore
+
+↓
+
+If Wrong
+
+↓
+
+Backtrack
+
+↓
+
+Try Another Choice</code></pre>
+
+      <h2>10. Divide and Conquer</h2>
+      <p>Divide and Conquer is based on recursion.</p>
+      <p>Steps:</p>
+      <pre><code class="language-none">Divide
+
+↓
+
+Solve
+
+↓
+
+Combine</code></pre>
+      <p>Algorithms:</p>
+      <ul>
+        <li>Merge Sort</li>
+        <li>Quick Sort</li>
+        <li>Binary Search</li>
+        <li>Strassen Matrix Multiplication</li>
+        <li>Closest Pair of Points</li>
+      </ul>
+
+      <h2>Real-World Applications</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Application</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Operating Systems</td><td>Directory traversal</td></tr>
+          <tr><td>Compilers</td><td>Expression parsing</td></tr>
+          <tr><td>Databases</td><td>B-Tree operations</td></tr>
+          <tr><td>Artificial Intelligence</td><td>Search algorithms</td></tr>
+          <tr><td>Games</td><td>Minimax algorithm</td></tr>
+          <tr><td>Networking</td><td>Routing algorithms</td></tr>
+          <tr><td>Graphics</td><td>Fractals</td></tr>
+          <tr><td>File Systems</td><td>Folder traversal</td></tr>
+          <tr><td>Machine Learning</td><td>Decision Trees</td></tr>
+          <tr><td>Web Crawlers</td><td>Recursive page traversal</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Advantages of Recursion</h2>
+      <ul>
+        <li>Simple and elegant code.</li>
+        <li>Natural for hierarchical structures.</li>
+        <li>Ideal for Divide and Conquer.</li>
+        <li>Easy implementation of tree and graph algorithms.</li>
+        <li>Reduces code complexity for many recursive problems.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>More memory due to the call stack.</li>
+        <li>Function call overhead.</li>
+        <li>Risk of stack overflow with deep recursion.</li>
+        <li>Some recursive algorithms perform repeated computations (e.g., naive Fibonacci).</li>
+      </ul>
+
+      <h2>Common Recursive Algorithms</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Algorithm</th>
+            <th>Time Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Factorial</td><td>O(n)</td></tr>
+          <tr><td>Sum of N Numbers</td><td>O(n)</td></tr>
+          <tr><td>Fibonacci (naive)</td><td>O(2ⁿ)</td></tr>
+          <tr><td>Binary Search</td><td>O(log n)</td></tr>
+          <tr><td>Merge Sort</td><td>O(n log n)</td></tr>
+          <tr><td>Quick Sort (Average)</td><td>O(n log n)</td></tr>
+          <tr><td>Tower of Hanoi</td><td>O(2ⁿ)</td></tr>
+          <tr><td>DFS</td><td>O(V + E)</td></tr>
+        </tbody>
+      </table>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
