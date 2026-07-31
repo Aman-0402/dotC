@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>String Handling Functions — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 4 / String Handling Functions</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>String Handling Functions</h1>
+
+      <p>String handling functions are predefined library functions used to perform operations on strings such as finding length, copying, concatenating, comparing, and changing case.</p>
+      <p>These functions are declared in the header file:</p>
+      <pre><code class="language-c">#include &lt;string.h&gt;</code></pre>
+
+      <h2>Why Use String Functions?</h2>
+      <p>Without string functions, many operations require loops.</p>
+      <p>For example:</p>
+      <ul>
+        <li>Finding string length</li>
+        <li>Copying one string to another</li>
+        <li>Joining two strings</li>
+        <li>Comparing two strings</li>
+      </ul>
+      <p>The <strong>string library</strong> makes these tasks simple and efficient.</p>
+
+      <h2>Common String Functions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>strlen()</code></td><td>Find length of string</td></tr>
+          <tr><td><code>strcpy()</code></td><td>Copy one string to another</td></tr>
+          <tr><td><code>strcat()</code></td><td>Concatenate (join) strings</td></tr>
+          <tr><td><code>strcmp()</code></td><td>Compare two strings</td></tr>
+          <tr><td><code>strrev()</code>*</td><td>Reverse string (Non-standard)</td></tr>
+          <tr><td><code>strupr()</code>*</td><td>Convert to uppercase (Non-standard)</td></tr>
+          <tr><td><code>strlwr()</code>*</td><td>Convert to lowercase (Non-standard)</td></tr>
+        </tbody>
+      </table>
+      <blockquote>
+        <p><strong>Note:</strong> <code>strrev()</code>, <code>strupr()</code>, and <code>strlwr()</code> are <strong>not part of the ISO C standard</strong>. They are available only in some compilers (such as older Turbo C or certain Windows compilers). For portable C programs, use loops or functions from <code>&lt;ctype.h&gt;</code> instead.</p>
+      </blockquote>
+
+      <h2>1. strlen()</h2>
+      <p>Returns the number of characters in a string.</p>
+      <p>The null character (<code>'\0'</code>) is <strong>not counted</strong>.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">strlen(string);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char name[] = "Programming";
+
+    printf("Length = %lu", strlen(name));
+
+    return 0;
+}</code></pre>
+      <h3>Output</h3>
+      <pre><code class="language-none">Length = 11</code></pre>
+
+      <h2>2. strcpy()</h2>
+      <p>Copies one string into another.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">strcpy(destination, source);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char source[] = "Programming";
+    char destination[30];
+
+    strcpy(destination, source);
+
+    printf("%s", destination);
+
+    return 0;
+}</code></pre>
+      <h3>Output</h3>
+      <pre><code class="language-none">Programming</code></pre>
+
+      <h2>3. strcat()</h2>
+      <p>Joins two strings.</p>
+      <p>The second string is added to the end of the first string.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">strcat(firstString, secondString);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char first[30] = "Hello ";
+    char second[] = "World";
+
+    strcat(first, second);
+
+    printf("%s", first);
+
+    return 0;
+}</code></pre>
+      <h3>Output</h3>
+      <pre><code class="language-none">Hello World</code></pre>
+
+      <h2>4. strcmp()</h2>
+      <p>Compares two strings alphabetically.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">strcmp(string1, string2);</code></pre>
+      <h3>Return Values</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Return Value</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>0</td><td>Strings are equal</td></tr>
+          <tr><td>Negative Value</td><td>First string is smaller</td></tr>
+          <tr><td>Positive Value</td><td>First string is greater</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Example 1</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char a[] = "Apple";
+    char b[] = "Apple";
+
+    if(strcmp(a,b)==0)
+        printf("Equal");
+
+    return 0;
+}</code></pre>
+      <h3>Output</h3>
+      <pre><code class="language-none">Equal</code></pre>
+
+      <h3>Example 2</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char a[] = "Cat";
+    char b[] = "Dog";
+
+    printf("%d", strcmp(a,b));
+
+    return 0;
+}</code></pre>
+      <h3>Output</h3>
+      <pre><code class="language-none">Negative Value</code></pre>
+      <p>(The exact negative number depends on the compiler.)</p>
+
+      <h2>5. strrev() <em>(Non-standard)</em></h2>
+      <p>Reverses a string.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">strrev(string);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char name[] = "Programming";
+
+    strrev(name);
+
+    printf("%s", name);
+
+    return 0;
+}</code></pre>
+      <h3>Output</h3>
+      <pre><code class="language-none">gnimmargorP</code></pre>
+      <blockquote>
+        <p><strong>Note:</strong> <code>strrev()</code> is not available in standard C. It may not work on GCC, Clang, or other modern compilers.</p>
+      </blockquote>
+
+      <h2>6. strupr() <em>(Non-standard)</em></h2>
+      <p>Converts all letters into uppercase.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">strupr(string);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char name[] = "Programming";
+
+    strupr(name);
+
+    printf("%s", name);
+
+    return 0;
+}</code></pre>
+      <h3>Output</h3>
+      <pre><code class="language-none">PROGRAMMING</code></pre>
+
+      <h2>7. strlwr() <em>(Non-standard)</em></h2>
+      <p>Converts all letters into lowercase.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">strlwr(string);</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char name[] = "PROGRAMMING";
+
+    strlwr(name);
+
+    printf("%s", name);
+
+    return 0;
+}</code></pre>
+      <h3>Output</h3>
+      <pre><code class="language-none">programming</code></pre>
+
+      <h2>Summary of String Functions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Header File</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>strlen()</code></td><td><code>&lt;string.h&gt;</code></td><td>Returns string length</td></tr>
+          <tr><td><code>strcpy()</code></td><td><code>&lt;string.h&gt;</code></td><td>Copies a string</td></tr>
+          <tr><td><code>strcat()</code></td><td><code>&lt;string.h&gt;</code></td><td>Joins two strings</td></tr>
+          <tr><td><code>strcmp()</code></td><td><code>&lt;string.h&gt;</code></td><td>Compares two strings</td></tr>
+          <tr><td><code>strrev()</code>*</td><td><code>&lt;string.h&gt;</code></td><td>Reverses string <em>(Non-standard)</em></td></tr>
+          <tr><td><code>strupr()</code>*</td><td><code>&lt;string.h&gt;</code></td><td>Converts to uppercase <em>(Non-standard)</em></td></tr>
+          <tr><td><code>strlwr()</code>*</td><td><code>&lt;string.h&gt;</code></td><td>Converts to lowercase <em>(Non-standard)</em></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Comparison of Functions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Modifies Original String?</th>
+            <th>Returns Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>strlen()</code></td><td>No</td><td>Length of string</td></tr>
+          <tr><td><code>strcpy()</code></td><td>Yes</td><td>Destination string</td></tr>
+          <tr><td><code>strcat()</code></td><td>Yes</td><td>First string</td></tr>
+          <tr><td><code>strcmp()</code></td><td>No</td><td>Integer value</td></tr>
+          <tr><td><code>strrev()</code>*</td><td>Yes</td><td>Reversed string</td></tr>
+          <tr><td><code>strupr()</code>*</td><td>Yes</td><td>Uppercase string</td></tr>
+          <tr><td><code>strlwr()</code>*</td><td>Yes</td><td>Lowercase string</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Complete Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char s1[50] = "Hello";
+    char s2[50] = " World";
+    char copy[50];
+
+    printf("Length of s1 = %lu\n", strlen(s1));
+
+    strcpy(copy, s1);
+    printf("Copied String = %s\n", copy);
+
+    strcat(s1, s2);
+    printf("Concatenated String = %s\n", s1);
+
+    printf("Comparison Result = %d\n", strcmp("ABC","ABC"));
+
+    return 0;
+}</code></pre>
+      <h3>Output</h3>
+      <pre><code class="language-none">Length of s1 = 5
+Copied String = Hello
+Concatenated String = Hello World
+Comparison Result = 0</code></pre>
+
+      <h2>Important Notes</h2>
+      <ul>
+        <li>Include <strong><code>#include &lt;string.h&gt;</code></strong> to use standard string functions.</li>
+        <li><code>strlen()</code> counts characters <strong>excluding</strong> the null character (<code>'\0'</code>).</li>
+        <li><code>strcpy()</code> overwrites the destination string, so ensure the destination array is large enough.</li>
+        <li><code>strcat()</code> appends one string to another; the destination array must have sufficient space.</li>
+        <li><code>strcmp()</code> compares strings based on their ASCII values and is <strong>case-sensitive</strong>.</li>
+        <li><code>strrev()</code>, <code>strupr()</code>, and <code>strlwr()</code> are <strong>non-standard</strong> and should be avoided in portable C programs.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
