@@ -325,6 +325,10 @@
         {
           "title": "Dynamic Memory Concept",
           "path": "lessons/unit8-dynamic-memory-concept.html"
+        },
+        {
+          "title": "Advantages and Disadvantages of Linked Lists",
+          "path": "lessons/unit8-advantages-disadvantages.html"
         }
       ]
     }

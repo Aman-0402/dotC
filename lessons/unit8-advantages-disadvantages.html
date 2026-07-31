@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advantages and Disadvantages of Linked Lists — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 8 / Advantages and Disadvantages of Linked Lists</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Advantages and Disadvantages of Linked Lists</h1>
+
+      <p>After understanding <strong>dynamic memory allocation</strong>, let's see why linked lists are used and where they are not the best choice.</p>
+
+      <h2>Why Use Linked Lists?</h2>
+      <p>Arrays have several limitations:</p>
+      <ul>
+        <li>Fixed size</li>
+        <li>Expensive insertion and deletion</li>
+        <li>Require contiguous memory</li>
+      </ul>
+      <p>Linked lists overcome many of these limitations.</p>
+
+      <h2>Advantages of Linked Lists</h2>
+
+      <h3>1. Dynamic Size</h3>
+      <p>The size of a linked list can grow or shrink during program execution.</p>
+
+      <h4>Array</h4>
+      <pre><code class="language-none">int arr[5];</code></pre>
+      <p>Size is fixed.</p>
+      <p>Maximum elements = <strong>5</strong></p>
+
+      <h4>Linked List</h4>
+      <pre><code class="language-none">10 → 20 → 30</code></pre>
+      <p>Want another node?</p>
+      <pre><code class="language-none">10 → 20 → 30 → 40</code></pre>
+      <p>Simply allocate another node using <code>malloc()</code>.</p>
+      <p>No need to create a new list.</p>
+
+      <h3>2. Efficient Insertion</h3>
+      <p>Suppose we want to insert <strong>25</strong> between 20 and 30.</p>
+
+      <h4>Array</h4>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>After insertion</p>
+      <pre><code class="language-none">10 20 25 30 40 50</code></pre>
+      <p>Elements must be shifted.</p>
+      <p>Time Complexity:</p>
+      <p><strong>O(n)</strong></p>
+
+      <h4>Linked List</h4>
+      <p>Before</p>
+      <pre><code class="language-none">10 → 20 → 30</code></pre>
+      <p>After</p>
+      <pre><code class="language-none">10 → 20 → 25 → 30</code></pre>
+      <p>Only the pointers change.</p>
+      <p>No element shifting.</p>
+      <p>Time Complexity:</p>
+      <ul>
+        <li>O(1) if the insertion position (node) is already known.</li>
+        <li>O(n) if you first need to search for the position.</li>
+      </ul>
+
+      <h3>3. Efficient Deletion</h3>
+      <p>Delete 30.</p>
+
+      <h4>Array</h4>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>After deletion</p>
+      <pre><code class="language-none">10 20 40 50</code></pre>
+      <p>Remaining elements must shift left.</p>
+
+      <h4>Linked List</h4>
+      <p>Before</p>
+      <pre><code class="language-none">10 → 20 → 30 → 40</code></pre>
+      <p>After</p>
+      <pre><code class="language-none">10 → 20 → 40</code></pre>
+      <p>Simply bypass the node.</p>
+      <p>No shifting.</p>
+
+      <h3>4. Better Memory Utilization</h3>
+      <p>Arrays reserve memory in advance.</p>
+      <p>Example</p>
+      <pre><code class="language-none">int arr[100];</code></pre>
+      <p>If only 10 elements are used:</p>
+      <p>90 locations remain unused.</p>
+      <p>Memory is wasted.</p>
+      <p>Linked list</p>
+      <p>Allocate only what is required.</p>
+      <p>Need 10 nodes?</p>
+      <p>Allocate exactly 10 nodes.</p>
+      <p>Need 100?</p>
+      <p>Allocate 100.</p>
+
+      <h3>5. Memory Need Not Be Contiguous</h3>
+      <p>Arrays require consecutive memory.</p>
+      <p>Example</p>
+      <pre><code class="language-none">1000
+1004
+1008
+1012
+1016</code></pre>
+      <p>If contiguous memory is unavailable:</p>
+      <p>Array creation may fail.</p>
+      <p>Linked list nodes can be anywhere.</p>
+      <p>Example</p>
+      <pre><code class="language-none">Address    Data
+
+1000       10
+5000       20
+2500       30
+8000       40</code></pre>
+      <p>Pointers connect them.</p>
+
+      <h3>6. Easy Implementation of Other Data Structures</h3>
+      <p>Linked lists are used to implement:</p>
+      <ul>
+        <li>Stack</li>
+        <li>Queue</li>
+        <li>Graph</li>
+        <li>Hash Table</li>
+        <li>Polynomial</li>
+        <li>Sparse Matrix</li>
+        <li>Browser History</li>
+        <li>Undo/Redo</li>
+        <li>Music Playlist</li>
+      </ul>
+
+      <h3>7. No Memory Reallocation</h3>
+      <p>Suppose the list grows.</p>
+      <p>Array:</p>
+      <p>Create a larger array and copy all elements.</p>
+      <p>Linked list:</p>
+      <p>Just create another node.</p>
+
+      <h2>Disadvantages of Linked Lists</h2>
+
+      <h3>1. Extra Memory Requirement</h3>
+      <p>Each node stores:</p>
+      <pre><code class="language-none">Data + Pointer</code></pre>
+      <p>Example</p>
+      <pre><code class="language-none">+------+------+
+| Data | Next |
++------+------+</code></pre>
+      <p>Arrays store only data.</p>
+      <p>Therefore linked lists require more memory.</p>
+
+      <h3>2. No Random Access</h3>
+      <p>Array</p>
+      <pre><code class="language-none">arr[50]</code></pre>
+      <p>Access directly.</p>
+      <p>Time Complexity:</p>
+      <p><strong>O(1)</strong></p>
+      <p>Linked list</p>
+      <pre><code class="language-none">10 → 20 → 30 → 40 → 50</code></pre>
+      <p>To reach 50:</p>
+      <p>Visit</p>
+      <pre><code class="language-none">10
+
+↓
+
+20
+
+↓
+
+30
+
+↓
+
+40
+
+↓
+
+50</code></pre>
+      <p>Time Complexity:</p>
+      <p><strong>O(n)</strong></p>
+
+      <h3>3. Slower Traversal</h3>
+      <p>Arrays are stored together in memory.</p>
+      <p>CPU cache works efficiently.</p>
+      <p>Traversal is very fast.</p>
+      <p>Linked list nodes are scattered.</p>
+      <p>Example</p>
+      <pre><code class="language-none">1000
+8000
+2500
+500
+12000</code></pre>
+      <p>CPU cache is less effective.</p>
+      <p>Traversal is slower.</p>
+
+      <h3>4. Pointer Complexity</h3>
+      <p>Pointers increase programming complexity.</p>
+      <p>Common mistakes include:</p>
+      <ul>
+        <li>Forgetting to update pointers</li>
+        <li>Losing the head node</li>
+        <li>Memory leaks</li>
+        <li>Dangling pointers</li>
+        <li>Infinite loops</li>
+        <li>Segmentation faults</li>
+      </ul>
+
+      <h3>5. Reverse Traversal is Not Possible in Singly Linked Lists</h3>
+      <p>Example</p>
+      <pre><code class="language-none">10 → 20 → 30 → NULL</code></pre>
+      <p>Can move:</p>
+      <pre><code class="language-none">10 → 20 → 30</code></pre>
+      <p>Cannot move:</p>
+      <pre><code class="language-none">30 → 20</code></pre>
+      <p>Because there is no previous pointer.</p>
+
+      <h3>6. Memory Fragmentation</h3>
+      <p>Nodes are created dynamically.</p>
+      <p>After repeated allocations and deallocations:</p>
+      <pre><code class="language-none">Heap
+
+Node
+
+Empty
+
+Node
+
+Empty
+
+Node</code></pre>
+      <p>Memory becomes fragmented.</p>
+      <p>Large contiguous blocks may become difficult to allocate.</p>
+
+      <h2>Comparison: Array vs Linked List</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Array</th>
+            <th>Linked List</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Memory Allocation</td><td>Static</td><td>Dynamic</td></tr>
+          <tr><td>Memory Layout</td><td>Contiguous</td><td>Non-contiguous</td></tr>
+          <tr><td>Size</td><td>Fixed</td><td>Dynamic</td></tr>
+          <tr><td>Insertion</td><td>O(n)</td><td>O(1)*</td></tr>
+          <tr><td>Deletion</td><td>O(n)</td><td>O(1)*</td></tr>
+          <tr><td>Random Access</td><td>O(1)</td><td>O(n)</td></tr>
+          <tr><td>Searching</td><td>O(n)</td><td>O(n)</td></tr>
+          <tr><td>Extra Memory</td><td>No</td><td>Yes (Pointers)</td></tr>
+          <tr><td>Cache Performance</td><td>Better</td><td>Poorer</td></tr>
+          <tr><td>Reverse Traversal</td><td>Yes</td><td>No (Singly)</td></tr>
+        </tbody>
+      </table>
+      <blockquote>
+        <p>*Assuming the position (or previous node) is already known.</p>
+      </blockquote>
+
+      <h2>When Should You Use a Linked List?</h2>
+      <p>Use a linked list when:</p>
+      <ul>
+        <li>The number of elements changes frequently.</li>
+        <li>There are many insertions and deletions.</li>
+        <li>Dynamic memory allocation is needed.</li>
+        <li>Random access is not important.</li>
+      </ul>
+
+      <h2>When Should You Use an Array?</h2>
+      <p>Use an array when:</p>
+      <ul>
+        <li>Frequent random access is required.</li>
+        <li>The size is known in advance.</li>
+        <li>Memory efficiency is important.</li>
+        <li>Fast traversal is needed.</li>
+      </ul>
+
+      <h2>Real-Life Examples</h2>
+
+      <h3>Train Coaches</h3>
+      <pre><code class="language-none">Engine → Coach → Coach → Coach</code></pre>
+      <p>New coaches can be added or removed easily, similar to linked list nodes.</p>
+
+      <h3>Music Playlist</h3>
+      <pre><code class="language-none">Song1 → Song2 → Song3 → Song4</code></pre>
+      <p>Songs can be inserted, deleted, or reordered without shifting all other songs.</p>
+
+      <h3>Browser History</h3>
+      <pre><code class="language-none">Page1 → Page2 → Page3</code></pre>
+      <p>Each page links to the next (and in many browsers, also to the previous page using a doubly linked list).</p>
+
+      <h2>Summary</h2>
+
+      <h3>Advantages</h3>
+      <ul>
+        <li>Dynamic size</li>
+        <li>Efficient insertion and deletion</li>
+        <li>Better memory utilization</li>
+        <li>Non-contiguous memory allocation</li>
+        <li>Easy implementation of other data structures</li>
+        <li>No need for memory reallocation</li>
+      </ul>
+
+      <h3>Disadvantages</h3>
+      <ul>
+        <li>Extra memory for pointers</li>
+        <li>No random access</li>
+        <li>Slower traversal due to poor cache locality</li>
+        <li>Pointer management is complex</li>
+        <li>Reverse traversal not possible in singly linked lists</li>
+        <li>Memory fragmentation can occur</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
