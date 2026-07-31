@@ -333,6 +333,10 @@
         {
           "title": "Singly Linked List – Creation",
           "path": "lessons/unit8-singly-linked-list-creation.html"
+        },
+        {
+          "title": "Singly Linked List – Traversal",
+          "path": "lessons/unit8-singly-linked-list-traversal.html"
         }
       ]
     }

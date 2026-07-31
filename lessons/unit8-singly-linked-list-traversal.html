@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Singly Linked List – Traversal — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+  <style>
+    .ll-viz {
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: var(--color-bg-elevated);
+      padding: 1.5rem 1rem;
+      margin: 1.5rem 0;
+    }
+    .ll-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+      min-height: 70px;
+    }
+    .ll-node {
+      display: flex;
+      flex-direction: column;
+      border: 2px solid var(--color-border);
+      border-radius: 4px;
+      overflow: hidden;
+      font-family: var(--font-mono);
+      min-width: 64px;
+    }
+    .ll-node--highlight {
+      border-color: var(--color-accent);
+    }
+    .ll-node--visited {
+      opacity: 0.6;
+    }
+    .ll-node-data {
+      padding: 0.5rem 0.75rem;
+      text-align: center;
+      font-weight: 700;
+      background: var(--color-bg);
+      color: var(--color-text);
+    }
+    .ll-node-label {
+      padding: 0.3rem 0.75rem;
+      text-align: center;
+      font-size: 0.75rem;
+      background: var(--color-bg-elevated);
+      color: var(--color-text);
+      border-top: 1px solid var(--color-border);
+    }
+    .ll-arrow {
+      display: flex;
+      align-items: center;
+      width: 40px;
+      height: 2px;
+      background: var(--color-border);
+      position: relative;
+      margin: 0 4px;
+    }
+    .ll-arrow::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: -4px;
+      border-left: 8px solid var(--color-border);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+    .ll-arrow--null {
+      width: 30px;
+    }
+    .ll-arrow--null::after {
+      border-left: none;
+      border-right: 2px solid var(--color-border);
+      right: 2px;
+      top: -6px;
+      height: 12px;
+      border-top: none;
+      border-bottom: none;
+    }
+    .ll-null-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-text);
+      margin-left: 4px;
+    }
+    .ll-temp-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-accent);
+      text-align: center;
+      height: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+    .ll-printed {
+      font-family: var(--font-mono);
+      margin-top: 1rem;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      background: var(--color-bg);
+      color: var(--color-text);
+      min-height: 1.5rem;
+    }
+    .ll-caption {
+      font-family: var(--font-mono);
+      margin-top: 1rem;
+      color: var(--color-text);
+    }
+    .ll-slider {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .ll-controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .ll-controls button {
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      background: var(--color-bg);
+      color: var(--color-text);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 8 / Singly Linked List – Traversal</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Singly Linked List – Traversal</h1>
+
+      <p>Once a linked list is created, the first operation we usually perform is <strong>Traversal</strong>.</p>
+      <p>Traversal means <strong>visiting each node of the linked list exactly once</strong> to perform some operation such as:</p>
+      <ul>
+        <li>Displaying data</li>
+        <li>Counting nodes</li>
+        <li>Finding the sum</li>
+        <li>Searching for an element</li>
+        <li>Finding the maximum or minimum value</li>
+      </ul>
+      <p>Traversal is one of the most fundamental operations because almost every other linked list operation relies on it.</p>
+
+      <h2>What is Traversal?</h2>
+      <p><strong>Traversal</strong> is the process of moving from the <strong>first node (head)</strong> to the <strong>last node (NULL)</strong> by following the <code>next</code> pointers.</p>
+      <p>Suppose we have the following linked list:</p>
+      <pre><code class="language-none">Head
+ ↓
+10 → 20 → 30 → 40 → NULL</code></pre>
+      <p>Traversal visits the nodes in this order:</p>
+      <pre><code class="language-none">10
+ ↓
+20
+ ↓
+30
+ ↓
+40
+ ↓
+NULL</code></pre>
+
+      <h2>How Traversal Works</h2>
+      <p>Instead of moving the <code>head</code> pointer, we create a temporary pointer.</p>
+      <pre><code class="language-c">struct Node *temp;</code></pre>
+      <p>Initialize it with the head node.</p>
+      <pre><code class="language-c">temp = head;</code></pre>
+      <p>Now move until <code>NULL</code>.</p>
+      <pre><code class="language-none">temp
+ ↓
+10 → 20 → 30 → 40 → NULL</code></pre>
+      <p>Move one step.</p>
+      <pre><code class="language-none">Head
+ ↓
+10 → 20 → 30 → 40 → NULL
+      ↑
+     temp</code></pre>
+      <p>Again.</p>
+      <pre><code class="language-none">Head
+ ↓
+10 → 20 → 30 → 40 → NULL
+           ↑
+          temp</code></pre>
+      <p>Continue until:</p>
+      <pre><code class="language-none">Head
+ ↓
+10 → 20 → 30 → 40 → NULL
+                      ↑
+                     temp</code></pre>
+      <p>When <code>temp == NULL</code>, traversal stops.</p>
+
+      <h2>Try It Yourself</h2>
+      <p>This visualizer steps a <code>temp</code> pointer through the list <code>10 → 20 → 30</code>, printing each value as it goes — the same walk shown in the C program below.</p>
+      <div class="ll-viz">
+        <div class="ll-temp-label" id="ll-temp-label"></div>
+        <div class="ll-row" id="ll-row"></div>
+        <p class="ll-printed" id="ll-printed">Printed: (none yet)</p>
+        <p class="ll-caption" id="ll-caption">Ready — press Step to begin.</p>
+        <input type="range" class="ll-slider" id="ll-slider" min="0" value="0" step="1" />
+        <div class="ll-controls">
+          <button id="ll-step" type="button">Step</button>
+          <button id="ll-reset" type="button">Reset</button>
+        </div>
+      </div>
+
+      <h2>Traversal Algorithm</h2>
+      <pre><code class="language-none">Step 1: Start
+Step 2: temp = head
+Step 3: While temp != NULL
+            Print temp->data
+            temp = temp->next
+Step 4: Stop</code></pre>
+
+      <h2>Flowchart</h2>
+      <pre><code class="language-none">        Start
+          │
+          ▼
+     temp = head
+          │
+          ▼
+   temp == NULL ?
+      /        \
+    Yes        No
+    │           │
+    ▼           ▼
+   Stop   Print temp->data
+               │
+               ▼
+        temp = temp->next
+               │
+               └───────────────┐
+                               │
+                               ▼
+                      temp == NULL ?</code></pre>
+
+      <h2>C Program for Traversal</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node
+{
+    int data;
+    struct Node *next;
+};
+
+int main()
+{
+    struct Node *head, *second, *third;
+    struct Node *temp;
+
+    head = (struct Node *)malloc(sizeof(struct Node));
+    second = (struct Node *)malloc(sizeof(struct Node));
+    third = (struct Node *)malloc(sizeof(struct Node));
+
+    head->data = 10;
+    head->next = second;
+
+    second->data = 20;
+    second->next = third;
+
+    third->data = 30;
+    third->next = NULL;
+
+    temp = head;
+
+    while(temp != NULL)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+
+    free(head);
+    free(second);
+    free(third);
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">10 20 30</code></pre>
+
+      <h2>Line-by-Line Explanation</h2>
+
+      <h3>Step 1</h3>
+      <p>Start from the head.</p>
+      <pre><code class="language-c">temp = head;</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Head
+ ↓
+10 → 20 → 30 → NULL
+ ↑
+temp</code></pre>
+
+      <h3>Step 2</h3>
+      <p>Print data.</p>
+      <pre><code class="language-c">printf("%d ", temp->data);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10</code></pre>
+
+      <h3>Step 3</h3>
+      <p>Move to the next node.</p>
+      <pre><code class="language-c">temp = temp->next;</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Head
+ ↓
+10 → 20 → 30 → NULL
+      ↑
+     temp</code></pre>
+
+      <h3>Step 4</h3>
+      <p>Print again.</p>
+      <pre><code class="language-none">20</code></pre>
+      <p>Move again.</p>
+      <pre><code class="language-none">Head
+ ↓
+10 → 20 → 30 → NULL
+           ↑
+          temp</code></pre>
+
+      <h3>Step 5</h3>
+      <p>Print again.</p>
+      <pre><code class="language-none">30</code></pre>
+      <p>Move again.</p>
+      <pre><code class="language-none">Head
+ ↓
+10 → 20 → 30 → NULL
+                ↑
+               temp</code></pre>
+      <p>Now:</p>
+      <pre><code class="language-c">temp == NULL</code></pre>
+      <p>The loop ends.</p>
+
+      <h2>Using a Function</h2>
+      <p>Traversal is usually implemented as a separate function.</p>
+      <pre><code class="language-c">void display(struct Node *head)
+{
+    struct Node *temp = head;
+
+    while(temp != NULL)
+    {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+}</code></pre>
+      <p>Calling it:</p>
+      <pre><code class="language-c">display(head);</code></pre>
+
+      <h2>Traversal Using for Loop</h2>
+      <pre><code class="language-c">for(struct Node *temp = head; temp != NULL; temp = temp->next)
+{
+    printf("%d ", temp->data);
+}</code></pre>
+      <p>This is shorter but performs the same traversal.</p>
+
+      <h2>Recursive Traversal</h2>
+      <p>A linked list can also be traversed recursively.</p>
+      <pre><code class="language-c">void display(struct Node *head)
+{
+    if(head == NULL)
+        return;
+
+    printf("%d ", head->data);
+
+    display(head->next);
+}</code></pre>
+
+      <h3>Output</h3>
+      <pre><code class="language-none">10 20 30</code></pre>
+
+      <h2>Memory Representation</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Data</th>
+            <th>Next</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>500</td><td>10</td><td>1200</td></tr>
+          <tr><td>1200</td><td>20</td><td>750</td></tr>
+          <tr><td>750</td><td>30</td><td>NULL</td></tr>
+        </tbody>
+      </table>
+      <p>Traversal sequence:</p>
+      <pre><code class="language-none">500
+ ↓
+1200
+ ↓
+750
+ ↓
+NULL</code></pre>
+      <p>Printed values:</p>
+      <pre><code class="language-none">10 20 30</code></pre>
+
+      <h2>Applications of Traversal</h2>
+      <p>Traversal is used to:</p>
+      <ul>
+        <li>Display all nodes</li>
+        <li>Count total nodes</li>
+        <li>Find the sum of all elements</li>
+        <li>Find the maximum or minimum value</li>
+        <li>Search for a specific value</li>
+        <li>Copy a linked list</li>
+        <li>Reverse a linked list (as part of the algorithm)</li>
+      </ul>
+
+      <h2>Common Mistakes</h2>
+
+      <h3>1. Moving the head Pointer</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">while(head != NULL)
+{
+    printf("%d ", head->data);
+    head = head->next;
+}</code></pre>
+      <p>After this loop, <code>head</code> becomes <code>NULL</code>, and the original starting address is lost.</p>
+      <p>✔ Correct</p>
+      <pre><code class="language-c">struct Node *temp = head;</code></pre>
+      <p>Use a temporary pointer for traversal.</p>
+
+      <h3>2. Forgetting to Move the Pointer</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">while(temp != NULL)
+{
+    printf("%d ", temp->data);
+}</code></pre>
+      <p>The pointer never advances, causing an infinite loop.</p>
+      <p>✔ Correct</p>
+      <pre><code class="language-c">temp = temp->next;</code></pre>
+
+      <h3>3. Incorrect Loop Condition</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">while(temp->next != NULL)</code></pre>
+      <p>This skips the last node.</p>
+      <p>✔ Correct</p>
+      <pre><code class="language-c">while(temp != NULL)</code></pre>
+
+      <h2>Time Complexity</h2>
+      <p>Suppose the linked list contains <strong>n</strong> nodes.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Operation</th>
+            <th>Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Traversal</td><td><strong>O(n)</strong></td></tr>
+          <tr><td>Best Case</td><td><strong>O(1)</strong> (empty list)</td></tr>
+          <tr><td>Worst Case</td><td><strong>O(n)</strong></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Space Complexity</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Space</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Iterative Traversal</td><td><strong>O(1)</strong></td></tr>
+          <tr><td>Recursive Traversal</td><td><strong>O(n)</strong> (due to the call stack)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li>Traversal means visiting every node from <strong>head</strong> to <strong>NULL</strong>.</li>
+        <li>Always use a <strong>temporary pointer</strong> (<code>temp</code>) instead of modifying <code>head</code>.</li>
+        <li>Move to the next node using <code>temp = temp->next</code>.</li>
+        <li>Stop when <code>temp == NULL</code>.</li>
+        <li>Iterative traversal uses <strong>O(1)</strong> extra space, while recursive traversal uses <strong>O(n)</strong> call stack space.</li>
+        <li>Traversal is the basis for many linked list operations such as searching, counting, summing, and reversing.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+  <script>
+    (function () {
+      var list = [
+        { id: 'n10', value: 10 },
+        { id: 'n20', value: 20 },
+        { id: 'n30', value: 30 }
+      ];
+
+      function generateSteps() {
+        var steps = [];
+        var printed = [];
+
+        steps.push({
+          tempIndex: 0,
+          printed: printed.slice(),
+          caption: 'temp = head'
+        });
+
+        for (var i = 0; i < list.length; i++) {
+          printed.push(list[i].value);
+          steps.push({
+            tempIndex: i,
+            printed: printed.slice(),
+            caption: 'Print ' + list[i].value
+          });
+
+          if (i < list.length - 1) {
+            steps.push({
+              tempIndex: i + 1,
+              printed: printed.slice(),
+              caption: 'Move to the next node: temp = temp->next'
+            });
+          } else {
+            steps.push({
+              tempIndex: null,
+              printed: printed.slice(),
+              caption: 'Move to the next node: temp = temp->next (temp is now NULL)'
+            });
+          }
+        }
+
+        steps.push({
+          tempIndex: null,
+          printed: printed.slice(),
+          caption: 'temp == NULL — traversal stops'
+        });
+
+        return steps;
+      }
+
+      var steps = generateSteps();
+
+      var tempLabel = document.getElementById('ll-temp-label');
+      var row = document.getElementById('ll-row');
+      var printedEl = document.getElementById('ll-printed');
+      var caption = document.getElementById('ll-caption');
+      var slider = document.getElementById('ll-slider');
+      var stepBtn = document.getElementById('ll-step');
+      var resetBtn = document.getElementById('ll-reset');
+
+      if (!row) return;
+
+      var stepIndex = 0;
+
+      function buildNodeEl(node, isLast, highlighted, visited) {
+        var el = document.createElement('div');
+        el.className = 'll-node';
+        if (highlighted) el.classList.add('ll-node--highlight');
+        if (visited) el.classList.add('ll-node--visited');
+
+        var dataEl = document.createElement('div');
+        dataEl.className = 'll-node-data';
+        dataEl.textContent = node.value;
+
+        var labelEl = document.createElement('div');
+        labelEl.className = 'll-node-label';
+        labelEl.textContent = isLast ? 'next: NULL' : 'next: •';
+
+        el.appendChild(dataEl);
+        el.appendChild(labelEl);
+        return el;
+      }
+
+      function buildArrow(isNull) {
+        var arrow = document.createElement('div');
+        arrow.className = 'll-arrow';
+        if (isNull) arrow.classList.add('ll-arrow--null');
+        return arrow;
+      }
+
+      function render() {
+        var step = steps[stepIndex];
+        row.innerHTML = '';
+        tempLabel.innerHTML = '';
+
+        var visitedUpTo = step.printed.length - 1;
+
+        list.forEach(function (node, idx) {
+          var isLast = idx === list.length - 1;
+          var highlighted = step.tempIndex === idx;
+          var visited = idx < visitedUpTo || (idx === visitedUpTo && step.tempIndex !== idx);
+
+          var slot = document.createElement('div');
+          slot.style.display = 'flex';
+          slot.style.flexDirection = 'column';
+          slot.style.alignItems = 'center';
+
+          var marker = document.createElement('div');
+          marker.className = 'll-temp-label';
+          marker.textContent = highlighted ? 'temp' : '';
+          slot.appendChild(marker);
+          slot.appendChild(buildNodeEl(node, isLast, highlighted, visited));
+
+          row.appendChild(slot);
+          row.appendChild(buildArrow(isLast));
+
+          if (isLast) {
+            var nullLabel = document.createElement('span');
+            nullLabel.className = 'll-null-label';
+            nullLabel.textContent = 'null';
+            row.appendChild(nullLabel);
+          }
+        });
+
+        printedEl.textContent = step.printed.length
+          ? 'Printed: ' + step.printed.join(' ')
+          : 'Printed: (none yet)';
+
+        caption.textContent = step.caption;
+        slider.max = steps.length - 1;
+        slider.value = stepIndex;
+        stepBtn.disabled = stepIndex >= steps.length - 1;
+      }
+
+      function goToStep(idx) {
+        stepIndex = Math.max(0, Math.min(idx, steps.length - 1));
+        render();
+      }
+
+      stepBtn.addEventListener('click', function () {
+        goToStep(stepIndex + 1);
+      });
+
+      resetBtn.addEventListener('click', function () {
+        goToStep(0);
+      });
+
+      slider.addEventListener('input', function () {
+        goToStep(parseInt(slider.value, 10));
+      });
+
+      slider.max = steps.length - 1;
+      render();
+    })();
+  </script>
+</body>
+</html>
