@@ -160,6 +160,10 @@
         {
           "title": "Arrays (One-Dimensional Arrays)",
           "path": "lessons/unit3-one-dimensional-arrays.html"
+        },
+        {
+          "title": "Two-Dimensional Arrays (2D Arrays)",
+          "path": "lessons/unit3-two-dimensional-arrays.html"
         }
       ]
     }

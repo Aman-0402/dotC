@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Two-Dimensional Arrays (2D Arrays) — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 3 / Two-Dimensional Arrays (2D Arrays)</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Two-Dimensional Arrays (2D Arrays)</h1>
+
+      <h2>Introduction</h2>
+      <p>A <strong>One-Dimensional Array (1D Array)</strong> stores data in a single row.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>But many real-world applications require data to be stored in <strong>rows and columns</strong>, such as:</p>
+      <ul>
+        <li>Student marks</li>
+        <li>Multiplication tables</li>
+        <li>Matrices</li>
+        <li>Seating arrangements</li>
+        <li>Chess board</li>
+        <li>Spreadsheet data</li>
+      </ul>
+      <p>For such data, C provides <strong>Two-Dimensional Arrays (2D Arrays)</strong>.</p>
+
+      <h2>What is a Two-Dimensional Array?</h2>
+      <p>A <strong>Two-Dimensional Array</strong> is an array of arrays. It stores data in the form of <strong>rows and columns</strong>, similar to a table or matrix.</p>
+      <p>Example</p>
+      <pre><code class="language-none">Marks of Students
+
+       Subject1  Subject2  Subject3
+
+Student1    85       90       88
+Student2    70       75       80
+Student3    92       95       91</code></pre>
+
+      <h2>Representation of a 2D Array</h2>
+      <pre><code class="language-none">Rows
+
+0 → 10 20 30
+
+1 → 40 50 60
+
+2 → 70 80 90
+
+      0  1  2
+     Columns</code></pre>
+
+      <h2>Declaration of a Two-Dimensional Array</h2>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">data_type array_name[rows][columns];</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">int marks[3][4];
+
+float salary[5][2];
+
+char board[8][8];</code></pre>
+
+      <h2>Explanation</h2>
+      <pre><code class="language-c">int marks[3][4];</code></pre>
+      <p>Means</p>
+      <ul>
+        <li>3 Rows</li>
+        <li>4 Columns</li>
+      </ul>
+      <p>Total Elements</p>
+      <pre><code class="language-none">3 × 4 = 12 Elements</code></pre>
+
+      <h2>Memory Representation</h2>
+      <pre><code class="language-c">int arr[2][3];</code></pre>
+      <pre><code class="language-none">         Columns
+
+          0    1    2
+
+Row 0    10   20   30
+
+Row 1    40   50   60</code></pre>
+      <p>Memory is actually stored in contiguous locations.</p>
+      <pre><code class="language-none">10 → 20 → 30 → 40 → 50 → 60</code></pre>
+
+      <h2>Initialization of 2D Arrays</h2>
+
+      <h3>Method 1</h3>
+      <p>Initialize row-wise.</p>
+      <pre><code class="language-c">int arr[2][3] =
+{
+    {10,20,30},
+    {40,50,60}
+};</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">10 20 30
+40 50 60</code></pre>
+
+      <h3>Method 2</h3>
+      <p>Single List Initialization</p>
+      <pre><code class="language-c">int arr[2][3] =
+{
+    10,20,30,
+    40,50,60
+};</code></pre>
+      <p>Compiler automatically fills row by row.</p>
+
+      <h3>Method 3</h3>
+      <p>Partial Initialization</p>
+      <pre><code class="language-c">int arr[2][3] =
+{
+    {10,20},
+    {40}
+};</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">10 20 0
+
+40  0 0</code></pre>
+      <p>Remaining elements become <strong>0</strong>.</p>
+
+      <h3>Method 4</h3>
+      <p>Initialize all elements to zero.</p>
+      <pre><code class="language-c">int arr[3][3] = {0};</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">0 0 0
+
+0 0 0
+
+0 0 0</code></pre>
+
+      <h2>Accessing Elements</h2>
+      <p>Syntax</p>
+      <pre><code class="language-c">array[row][column]</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">marks[0][2]
+
+marks[2][1]
+
+arr[1][0]</code></pre>
+
+      <h2>Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[2][3] =
+    {
+        {10,20,30},
+        {40,50,60}
+    };
+
+    printf("%d\n", arr[0][0]);
+    printf("%d\n", arr[1][2]);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10
+60</code></pre>
+
+      <h2>Modifying Elements</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[2][2] =
+    {
+        {10,20},
+        {30,40}
+    };
+
+    arr[0][1] = 100;
+
+    printf("%d", arr[0][1]);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">100</code></pre>
+
+      <h2>Input in 2D Array</h2>
+      <p>Nested loops are used.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[2][3];
+    int i, j;
+
+    printf("Enter Elements:\n");
+
+    for(i = 0; i &lt; 2; i++)
+    {
+        for(j = 0; j &lt; 3; j++)
+        {
+            scanf("%d", &amp;arr[i][j]);
+        }
+    }
+
+    return 0;
+}</code></pre>
+
+      <h2>Output from 2D Array</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[2][3] =
+    {
+        {10,20,30},
+        {40,50,60}
+    };
+
+    int i, j;
+
+    for(i = 0; i &lt; 2; i++)
+    {
+        for(j = 0; j &lt; 3; j++)
+        {
+            printf("%d ", arr[i][j]);
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10 20 30
+40 50 60</code></pre>
+
+      <h2>Traversing a 2D Array</h2>
+      <p>Traversing means visiting every element.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[3][3] =
+    {
+        {1,2,3},
+        {4,5,6},
+        {7,8,9}
+    };
+
+    int i, j;
+
+    for(i = 0; i &lt; 3; i++)
+    {
+        for(j = 0; j &lt; 3; j++)
+        {
+            printf("%d ", arr[i][j]);
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1 2 3
+4 5 6
+7 8 9</code></pre>
+
+      <h2>Common 2D Array Programs</h2>
+
+      <h3>Program 1</h3>
+      <p>Print Matrix</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[2][2] =
+    {
+        {5,10},
+        {15,20}
+    };
+
+    int i, j;
+
+    for(i = 0; i &lt; 2; i++)
+    {
+        for(j = 0; j &lt; 2; j++)
+        {
+            printf("%d ", arr[i][j]);
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">5 10
+15 20</code></pre>
+
+      <h3>Program 2</h3>
+      <p>Find Sum of All Elements</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[2][2] =
+    {
+        {10,20},
+        {30,40}
+    };
+
+    int sum = 0;
+    int i, j;
+
+    for(i = 0; i &lt; 2; i++)
+    {
+        for(j = 0; j &lt; 2; j++)
+        {
+            sum += arr[i][j];
+        }
+    }
+
+    printf("Sum = %d", sum);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Sum = 100</code></pre>
+
+      <h3>Program 3</h3>
+      <p>Find Largest Element</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[2][3] =
+    {
+        {20,15,30},
+        {45,12,25}
+    };
+
+    int max = arr[0][0];
+    int i, j;
+
+    for(i = 0; i &lt; 2; i++)
+    {
+        for(j = 0; j &lt; 3; j++)
+        {
+            if(arr[i][j] > max)
+            {
+                max = arr[i][j];
+            }
+        }
+    }
+
+    printf("Largest = %d", max);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Largest = 45</code></pre>
+
+      <h3>Program 4</h3>
+      <p>Find Smallest Element</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[2][3] =
+    {
+        {20,15,30},
+        {45,12,25}
+    };
+
+    int min = arr[0][0];
+    int i, j;
+
+    for(i = 0; i &lt; 2; i++)
+    {
+        for(j = 0; j &lt; 3; j++)
+        {
+            if(arr[i][j] &lt; min)
+            {
+                min = arr[i][j];
+            }
+        }
+    }
+
+    printf("Smallest = %d", min);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Smallest = 12</code></pre>
+
+      <h3>Program 5</h3>
+      <p>Addition of Two Matrices</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int A[2][2] = {{1,2},{3,4}};
+    int B[2][2] = {{5,6},{7,8}};
+    int C[2][2];
+
+    int i, j;
+
+    for(i = 0; i &lt; 2; i++)
+    {
+        for(j = 0; j &lt; 2; j++)
+        {
+            C[i][j] = A[i][j] + B[i][j];
+        }
+    }
+
+    printf("Result Matrix:\n");
+
+    for(i = 0; i &lt; 2; i++)
+    {
+        for(j = 0; j &lt; 2; j++)
+        {
+            printf("%d ", C[i][j]);
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Result Matrix:
+6 8
+10 12</code></pre>
+
+      <h3>Program 6</h3>
+      <p>Transpose of a Matrix</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[2][3] =
+    {
+        {1,2,3},
+        {4,5,6}
+    };
+
+    int i, j;
+
+    printf("Transpose Matrix:\n");
+
+    for(i = 0; i &lt; 3; i++)
+    {
+        for(j = 0; j &lt; 2; j++)
+        {
+            printf("%d ", arr[j][i]);
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Transpose Matrix:
+1 4
+2 5
+3 6</code></pre>
+
+      <h2>Common Mistakes</h2>
+
+      <h3>Using Invalid Row Index</h3>
+      <p>❌ Incorrect</p>
+      <pre><code class="language-c">arr[3][1];</code></pre>
+      <p>If the array has only 3 rows, valid row indices are <code>0</code> to <code>2</code>.</p>
+
+      <h3>Using Invalid Column Index</h3>
+      <p>❌ Incorrect</p>
+      <pre><code class="language-c">arr[1][5];</code></pre>
+      <p>If the array has 4 columns, valid column indices are <code>0</code> to <code>3</code>.</p>
+
+      <h3>Incorrect Loop Limits</h3>
+      <p>❌ Incorrect</p>
+      <pre><code class="language-c">for(i = 0; i &lt;= 2; i++)</code></pre>
+      <p>For a <code>2 × 2</code> array, the correct loop is:</p>
+      <pre><code class="language-c">for(i = 0; i &lt; 2; i++)</code></pre>
+
+      <h2>Applications of 2D Arrays</h2>
+      <ul>
+        <li>Matrix operations</li>
+        <li>Multiplication tables</li>
+        <li>Chess and Sudoku boards</li>
+        <li>Student mark sheets</li>
+        <li>Seating arrangements</li>
+        <li>Image processing (pixels)</li>
+        <li>Spreadsheet-like data</li>
+      </ul>
+
+      <h2>One-Dimensional vs Two-Dimensional Arrays</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>1D Array</th>
+            <th>2D Array</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Structure</td><td>Single row</td><td>Rows and columns</td></tr>
+          <tr><td>Declaration</td><td><code>int arr[5];</code></td><td><code>int arr[3][4];</code></td></tr>
+          <tr><td>Indexing</td><td><code>arr[i]</code></td><td><code>arr[i][j]</code></td></tr>
+          <tr><td>Loops Used</td><td>One loop</td><td>Nested loops</td></tr>
+          <tr><td>Applications</td><td>Lists, sequences</td><td>Matrices, tables, grids</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Summary</h2>
+      <ul>
+        <li>A <strong>Two-Dimensional Array</strong> stores data in rows and columns.</li>
+        <li>It is declared using <code>data_type array_name[rows][columns];</code>.</li>
+        <li>Elements are accessed using <strong>two indices</strong>: <code>array[row][column]</code>.</li>
+        <li>Nested loops are commonly used for <strong>input, output, and processing</strong> of 2D arrays.</li>
+        <li>Common operations include <strong>traversing, matrix addition, transpose, and finding the largest, smallest, or sum of elements</strong>.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
