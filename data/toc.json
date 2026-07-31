@@ -256,6 +256,10 @@
         {
           "title": "Bubble Sort",
           "path": "lessons/unit7-bubble-sort.html"
+        },
+        {
+          "title": "Selection Sort",
+          "path": "lessons/unit7-selection-sort.html"
         }
       ]
     }

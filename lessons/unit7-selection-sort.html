@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selection Sort — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Selection Sort</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Selection Sort</h1>
+
+      <p>Selection Sort is a <strong>simple comparison-based sorting algorithm</strong>. Instead of repeatedly swapping adjacent elements like Bubble Sort, it <strong>finds the smallest element from the unsorted part of the array and places it at its correct position</strong>.</p>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine arranging playing cards in ascending order.</p>
+      <p>You:</p>
+      <ol>
+        <li>Look through all the cards.</li>
+        <li>Find the smallest card.</li>
+        <li>Place it at the beginning.</li>
+        <li>Repeat the process for the remaining cards.</li>
+      </ol>
+      <p>This is exactly how <strong>Selection Sort</strong> works.</p>
+
+      <h2>How Selection Sort Works</h2>
+      <p>Given the array:</p>
+      <pre><code class="language-none">64 25 12 22 11</code></pre>
+      <p>Initially:</p>
+      <pre><code class="language-none">64 25 12 22 11
+ ^</code></pre>
+      <p>The arrow (<code>^</code>) indicates the current position where the smallest element should be placed.</p>
+
+      <h3>Pass 1</h3>
+      <p>Find the smallest element in:</p>
+      <pre><code class="language-none">64 25 12 22 11</code></pre>
+      <p>Smallest = <strong>11</strong></p>
+      <p>Swap <strong>64</strong> and <strong>11</strong></p>
+      <pre><code class="language-none">11 25 12 22 64</code></pre>
+      <p>Now, <strong>11</strong> is in its correct position.</p>
+
+      <h3>Pass 2</h3>
+      <p>Search the remaining unsorted part:</p>
+      <pre><code class="language-none">11 25 12 22 64
+   ^</code></pre>
+      <p>Smallest = <strong>12</strong></p>
+      <p>Swap <strong>25</strong> and <strong>12</strong></p>
+      <pre><code class="language-none">11 12 25 22 64</code></pre>
+
+      <h3>Pass 3</h3>
+      <p>Search:</p>
+      <pre><code class="language-none">11 12 25 22 64
+      ^</code></pre>
+      <p>Smallest = <strong>22</strong></p>
+      <p>Swap <strong>25</strong> and <strong>22</strong></p>
+      <pre><code class="language-none">11 12 22 25 64</code></pre>
+
+      <h3>Pass 4</h3>
+      <p>Remaining elements:</p>
+      <pre><code class="language-none">11 12 22 25 64
+         ^</code></pre>
+      <p>Smallest = <strong>25</strong></p>
+      <p>Already in the correct position, so no swap is needed.</p>
+      <p>Final array:</p>
+      <pre><code class="language-none">11 12 22 25 64</code></pre>
+
+      <h2>Pass Summary</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pass</th>
+            <th>Array</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Initial</td><td>64 25 12 22 11</td></tr>
+          <tr><td>Pass 1</td><td>11 25 12 22 64</td></tr>
+          <tr><td>Pass 2</td><td>11 12 25 22 64</td></tr>
+          <tr><td>Pass 3</td><td>11 12 22 25 64</td></tr>
+          <tr><td>Pass 4</td><td>11 12 22 25 64</td></tr>
+        </tbody>
+      </table>
+      <p>Notice that after <strong>each pass</strong>, the <strong>smallest unsorted element</strong> is placed in its correct position.</p>
+
+      <h2>Selection Sort Algorithm</h2>
+      <pre><code class="language-none">Start
+
+For each position i
+
+    Assume current element is the smallest
+
+    Search remaining array
+
+    If a smaller element is found
+
+        Update minimum index
+
+    Swap minimum element with current element
+
+Stop</code></pre>
+
+      <h2>Flow of Selection Sort</h2>
+      <pre><code class="language-none">Start
+   │
+Assume Current Element is Minimum
+   │
+Compare with Remaining Elements
+   │
+Found Smaller?
+   │
+Yes → Update Minimum
+   │
+No
+   │
+End of Search
+   │
+Swap Current and Minimum
+   │
+Next Position
+   │
+Sorted</code></pre>
+
+      <h2>C Program</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[] = {64, 25, 12, 22, 11};
+    int n = 5;
+
+    for (int i = 0; i &lt; n - 1; i++)
+    {
+        int minIndex = i;
+
+        for (int j = i + 1; j &lt; n; j++)
+        {
+            if (arr[j] &lt; arr[minIndex])
+            {
+                minIndex = j;
+            }
+        }
+
+        int temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+
+    printf("Sorted Array:\n");
+
+    for (int i = 0; i &lt; n; i++)
+        printf("%d ", arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">Sorted Array:
+11 12 22 25 64</code></pre>
+
+      <h2>Code Explanation</h2>
+
+      <h3>Outer Loop</h3>
+      <pre><code class="language-c">for(int i = 0; i &lt; n - 1; i++)</code></pre>
+      <ul>
+        <li>Runs <strong>n − 1</strong> passes.</li>
+        <li>Each pass places one element in its correct position.</li>
+      </ul>
+
+      <h3>Minimum Index</h3>
+      <pre><code class="language-c">int minIndex = i;</code></pre>
+      <p>Initially, assume the current element is the smallest.</p>
+
+      <h3>Inner Loop</h3>
+      <pre><code class="language-c">for(int j = i + 1; j &lt; n; j++)</code></pre>
+      <p>Search the remaining unsorted elements for a smaller value.</p>
+
+      <h3>Update Minimum</h3>
+      <pre><code class="language-c">if(arr[j] &lt; arr[minIndex])</code></pre>
+      <p>If a smaller element is found, update <code>minIndex</code>.</p>
+
+      <h3>Swap</h3>
+      <pre><code class="language-c">int temp = arr[i];
+arr[i] = arr[minIndex];
+arr[minIndex] = temp;</code></pre>
+      <p>Place the smallest element at the current position.</p>
+
+      <h2>Time Complexity</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Best Case</td><td><strong>O(n²)</strong></td></tr>
+          <tr><td>Average Case</td><td><strong>O(n²)</strong></td></tr>
+          <tr><td>Worst Case</td><td><strong>O(n²)</strong></td></tr>
+        </tbody>
+      </table>
+      <p>Unlike Bubble Sort, Selection Sort always scans the remaining array to find the minimum, even if the array is already sorted.</p>
+
+      <h2>Space Complexity</h2>
+      <pre><code class="language-none">O(1)</code></pre>
+      <p>Only one temporary variable is used for swapping, so the extra memory required is constant.</p>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Easy to understand and implement.</li>
+        <li>Performs fewer swaps than Bubble Sort.</li>
+        <li>In-place sorting algorithm.</li>
+        <li>Suitable for small datasets.</li>
+        <li>Useful when swapping elements is expensive.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Time complexity is always <strong>O(n²)</strong>.</li>
+        <li>Not efficient for large datasets.</li>
+        <li>Not a stable sorting algorithm in its basic form.</li>
+      </ul>
+
+      <h2>Bubble Sort vs Selection Sort</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Bubble Sort</th>
+            <th>Selection Sort</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Method</td><td>Swap adjacent elements</td><td>Select minimum element</td></tr>
+          <tr><td>Swaps</td><td>Many</td><td>At most one per pass</td></tr>
+          <tr><td>Comparisons</td><td>O(n²)</td><td>O(n²)</td></tr>
+          <tr><td>Best Case</td><td>O(n) (optimized)</td><td>O(n²)</td></tr>
+          <tr><td>Stable</td><td>Yes</td><td>No</td></tr>
+          <tr><td>In-place</td><td>Yes</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Sorting small datasets.</li>
+        <li>Situations where minimizing the number of swaps is important.</li>
+        <li>Educational purposes to understand sorting fundamentals.</li>
+      </ul>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>Finds the <strong>smallest element</strong> in the unsorted portion.</li>
+        <li>Places it at the beginning of the unsorted portion after each pass.</li>
+        <li>Performs <strong>one swap per pass</strong>.</li>
+        <li><strong>Not stable</strong> in its basic implementation.</li>
+        <li><strong>Time Complexity:</strong> O(n²) in all cases.</li>
+        <li><strong>Space Complexity:</strong> O(1).</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
