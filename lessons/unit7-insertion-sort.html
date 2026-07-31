@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insertion Sort — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Insertion Sort</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Insertion Sort</h1>
+
+      <p>Insertion Sort is a <strong>simple and efficient comparison-based sorting algorithm</strong>. It works by <strong>taking one element at a time and inserting it into its correct position</strong> within the already sorted part of the array.</p>
+      <p>Unlike Bubble Sort and Selection Sort, Insertion Sort builds the sorted array <strong>gradually</strong>.</p>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine sorting a hand of playing cards.</p>
+      <p>When you pick up a new card:</p>
+      <ol>
+        <li>Compare it with the cards already in your hand.</li>
+        <li>Shift larger cards to the right.</li>
+        <li>Insert the new card into its correct position.</li>
+      </ol>
+      <p>This is exactly how <strong>Insertion Sort</strong> works.</p>
+
+      <h2>How Insertion Sort Works</h2>
+      <p>Given the array:</p>
+      <pre><code class="language-none">12 11 13 5 6</code></pre>
+      <p>Initially, the first element is considered sorted.</p>
+      <pre><code class="language-none">12 | 11 13 5 6</code></pre>
+      <ul>
+        <li>Left side = Sorted</li>
+        <li>Right side = Unsorted</li>
+      </ul>
+
+      <h3>Pass 1</h3>
+      <p>Take <strong>11</strong> as the <strong>key</strong>.</p>
+      <pre><code class="language-none">12 | 11 13 5 6</code></pre>
+      <p>Compare 11 with 12.</p>
+      <p>Since <strong>11 &lt; 12</strong>, shift 12 to the right.</p>
+      <pre><code class="language-none">12 12 13 5 6</code></pre>
+      <p>Insert 11.</p>
+      <pre><code class="language-none">11 12 | 13 5 6</code></pre>
+
+      <h3>Pass 2</h3>
+      <p>Take <strong>13</strong>.</p>
+      <pre><code class="language-none">11 12 | 13 5 6</code></pre>
+      <p>Compare with 12.</p>
+      <p>13 is larger, so no shifting.</p>
+      <pre><code class="language-none">11 12 13 | 5 6</code></pre>
+
+      <h3>Pass 3</h3>
+      <p>Take <strong>5</strong>.</p>
+      <pre><code class="language-none">11 12 13 | 5 6</code></pre>
+      <p>Compare from right to left.</p>
+      <p>Shift 13.</p>
+      <pre><code class="language-none">11 12 13 13 6</code></pre>
+      <p>Shift 12.</p>
+      <pre><code class="language-none">11 12 12 13 6</code></pre>
+      <p>Shift 11.</p>
+      <pre><code class="language-none">11 11 12 13 6</code></pre>
+      <p>Insert 5.</p>
+      <pre><code class="language-none">5 11 12 13 | 6</code></pre>
+
+      <h3>Pass 4</h3>
+      <p>Take <strong>6</strong>.</p>
+      <pre><code class="language-none">5 11 12 13 | 6</code></pre>
+      <p>Shift 13.</p>
+      <pre><code class="language-none">5 11 12 13 13</code></pre>
+      <p>Shift 12.</p>
+      <pre><code class="language-none">5 11 12 12 13</code></pre>
+      <p>Shift 11.</p>
+      <pre><code class="language-none">5 11 11 12 13</code></pre>
+      <p>Insert 6.</p>
+      <pre><code class="language-none">5 6 11 12 13</code></pre>
+      <p>Array is now sorted.</p>
+
+      <h2>Pass Summary</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pass</th>
+            <th>Array</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Initial</td><td>12 11 13 5 6</td></tr>
+          <tr><td>Pass 1</td><td>11 12 13 5 6</td></tr>
+          <tr><td>Pass 2</td><td>11 12 13 5 6</td></tr>
+          <tr><td>Pass 3</td><td>5 11 12 13 6</td></tr>
+          <tr><td>Pass 4</td><td>5 6 11 12 13</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Try It Yourself</h2>
+      <div class="viz">
+        <div class="viz-bars" id="viz-bars"></div>
+        <p class="viz-caption" id="viz-caption">Ready — press Play or Step to begin.</p>
+        <input type="range" class="viz-slider" id="viz-slider" min="0" value="0" step="1" />
+        <div class="viz-controls">
+          <button id="viz-shuffle" type="button">Shuffle</button>
+          <button id="viz-play" type="button">Play</button>
+          <button id="viz-step" type="button">Step</button>
+          <button id="viz-reset" type="button">Reset</button>
+        </div>
+      </div>
+
+      <h2>Insertion Sort Algorithm</h2>
+      <pre><code class="language-none">Start
+
+For each element from the second position
+
+    Store current element as key
+
+    Compare key with previous elements
+
+    Shift larger elements one position right
+
+    Insert key into its correct position
+
+Stop</code></pre>
+
+      <h2>Flow of Insertion Sort</h2>
+      <pre><code class="language-none">Start
+   │
+Pick Next Element (Key)
+   │
+Compare with Sorted Part
+   │
+Shift Larger Elements Right
+   │
+Insert Key
+   │
+Repeat
+   │
+Sorted</code></pre>
+
+      <h2>C Program</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[] = {12, 11, 13, 5, 6};
+    int n = 5;
+
+    for (int i = 1; i &lt; n; i++)
+    {
+        int key = arr[i];
+        int j = i - 1;
+
+        while (j >= 0 &amp;&amp; arr[j] > key)
+        {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+
+        arr[j + 1] = key;
+    }
+
+    printf("Sorted Array:\n");
+
+    for (int i = 0; i &lt; n; i++)
+        printf("%d ", arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">Sorted Array:
+5 6 11 12 13</code></pre>
+
+      <h2>Code Explanation</h2>
+
+      <h3>Outer Loop</h3>
+      <pre><code class="language-c">for(int i = 1; i &lt; n; i++)</code></pre>
+      <ul>
+        <li>Starts from the second element (<code>i = 1</code>).</li>
+        <li>The first element is already considered sorted.</li>
+      </ul>
+
+      <h3>Store the Key</h3>
+      <pre><code class="language-c">int key = arr[i];</code></pre>
+      <p>The current element is stored in the variable <code>key</code>.</p>
+
+      <h3>Previous Element</h3>
+      <pre><code class="language-c">int j = i - 1;</code></pre>
+      <p><code>j</code> points to the last element of the sorted part.</p>
+
+      <h3>Shift Larger Elements</h3>
+      <pre><code class="language-c">while(j >= 0 &amp;&amp; arr[j] > key)
+{
+    arr[j + 1] = arr[j];
+    j--;
+}</code></pre>
+      <ul>
+        <li>Compare the key with elements in the sorted part.</li>
+        <li>Shift larger elements one position to the right.</li>
+      </ul>
+
+      <h3>Insert the Key</h3>
+      <pre><code class="language-c">arr[j + 1] = key;</code></pre>
+      <p>Place the key in its correct position.</p>
+
+      <h2>Time Complexity</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Best Case (already sorted)</td><td><strong>O(n)</strong></td></tr>
+          <tr><td>Average Case</td><td><strong>O(n²)</strong></td></tr>
+          <tr><td>Worst Case (reverse order)</td><td><strong>O(n²)</strong></td></tr>
+        </tbody>
+      </table>
+      <p>When the array is already sorted, no shifting is needed, making Insertion Sort very efficient.</p>
+
+      <h2>Space Complexity</h2>
+      <pre><code class="language-none">O(1)</code></pre>
+      <p>Insertion Sort uses only a few extra variables (<code>key</code> and <code>j</code>), so it requires constant extra memory.</p>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Simple and easy to implement.</li>
+        <li>Efficient for <strong>small datasets</strong>.</li>
+        <li>Very efficient for <strong>nearly sorted arrays</strong>.</li>
+        <li>Stable sorting algorithm.</li>
+        <li>In-place sorting (no extra array required).</li>
+        <li>Performs fewer comparisons for nearly sorted data.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Inefficient for large datasets.</li>
+        <li>Worst-case time complexity is <strong>O(n²)</strong>.</li>
+        <li>Requires many shifts when the array is in reverse order.</li>
+      </ul>
+
+      <h2>Bubble vs Selection vs Insertion Sort</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Bubble</th>
+            <th>Selection</th>
+            <th>Insertion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Method</td><td>Adjacent swaps</td><td>Select minimum</td><td>Insert into sorted part</td></tr>
+          <tr><td>Best Case</td><td>O(n)</td><td>O(n²)</td><td>O(n)</td></tr>
+          <tr><td>Average Case</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td></tr>
+          <tr><td>Worst Case</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td></tr>
+          <tr><td>Stable</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+          <tr><td>In-place</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Swaps/Shifts</td><td>Many swaps</td><td>Few swaps</td><td>Shifts elements</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Sorting small datasets.</li>
+        <li>Sorting nearly sorted data efficiently.</li>
+        <li>Online sorting (processing data as it arrives).</li>
+        <li>Used as a subroutine in advanced algorithms like <strong>TimSort</strong> (used in Python) and <strong>IntroSort</strong>.</li>
+      </ul>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>The first element is considered sorted.</li>
+        <li>Each new element is inserted into its correct position in the sorted part.</li>
+        <li>Larger elements are shifted to the right.</li>
+        <li><strong>Stable</strong> and <strong>in-place</strong> sorting algorithm.</li>
+        <li>Best Case: <strong>O(n)</strong>.</li>
+        <li>Average/Worst Case: <strong>O(n²)</strong>.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+  <script>
+    (function () {
+      var initialArray = [12, 11, 13, 5, 6];
+
+      function generateSteps(startArray) {
+        var a = startArray.slice();
+        var steps = [];
+        var n = a.length;
+
+        steps.push({
+          type: 'markSorted',
+          indices: [0],
+          caption: 'Index 0 is already sorted',
+          array: a.slice()
+        });
+
+        for (var i = 1; i < n; i++) {
+          var key = a[i];
+          var j = i - 1;
+
+          while (j >= 0) {
+            steps.push({
+              type: 'compare',
+              indices: [j, j + 1],
+              caption: 'Compare ' + a[j] + ' and ' + key,
+              array: a.slice()
+            });
+
+            if (a[j] > key) {
+              a[j + 1] = a[j];
+              steps.push({
+                type: 'shift',
+                indices: [j, j + 1],
+                caption: 'Shift ' + a[j] + ' right',
+                array: a.slice()
+              });
+              j--;
+            } else {
+              break;
+            }
+          }
+
+          a[j + 1] = key;
+          steps.push({
+            type: 'insert',
+            indices: [j + 1],
+            caption: 'Insert ' + key + ' at index ' + (j + 1),
+            array: a.slice()
+          });
+
+          steps.push({
+            type: 'markSorted',
+            indices: [i],
+            caption: 'Indices 0 to ' + i + ' are now sorted',
+            array: a.slice()
+          });
+        }
+
+        return steps;
+      }
+
+      function shuffleArray(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+        return arr;
+      }
+
+      var container = document.getElementById('viz-bars');
+      var caption = document.getElementById('viz-caption');
+      var slider = document.getElementById('viz-slider');
+      var shuffleBtn = document.getElementById('viz-shuffle');
+      var playBtn = document.getElementById('viz-play');
+      var stepBtn = document.getElementById('viz-step');
+      var resetBtn = document.getElementById('viz-reset');
+
+      if (!container) return;
+
+      var currentArray = initialArray.slice();
+      var steps = generateSteps(currentArray);
+      var stepIndex = 0;
+      var playing = false;
+      var playTimer = null;
+
+      function maxValue(arr) {
+        var m = arr[0];
+        for (var i = 1; i < arr.length; i++) {
+          if (arr[i] > m) m = arr[i];
+        }
+        return m;
+      }
+
+      function sortedIndicesUpTo(idx) {
+        var sorted = {};
+        for (var i = 0; i <= idx; i++) {
+          if (steps[i].type === 'markSorted') {
+            steps[i].indices.forEach(function (n) {
+              sorted[n] = true;
+            });
+          }
+        }
+        return sorted;
+      }
+
+      function render() {
+        container.innerHTML = '';
+        var step = steps[stepIndex];
+        var arr = step ? step.array : currentArray;
+        var max = maxValue(arr);
+        var sorted = sortedIndicesUpTo(stepIndex);
+
+        arr.forEach(function (value, idx) {
+          var bar = document.createElement('div');
+          bar.className = 'viz-bar';
+          bar.style.height = (value / max * 100) + '%';
+
+          if (step && step.indices.indexOf(idx) !== -1 && step.type !== 'markSorted') {
+            bar.classList.add('viz-bar--comparing');
+          }
+
+          if (sorted[idx]) {
+            bar.classList.add('viz-bar--sorted');
+          }
+
+          var label = document.createElement('span');
+          label.textContent = value;
+          bar.appendChild(label);
+
+          container.appendChild(bar);
+        });
+
+        caption.textContent = step ? step.caption : 'Ready — press Play or Step to begin.';
+        slider.value = stepIndex;
+        stepBtn.disabled = stepIndex >= steps.length - 1;
+
+        if (stepIndex >= steps.length - 1) {
+          pause();
+        }
+      }
+
+      function goToStep(idx) {
+        stepIndex = Math.max(0, Math.min(idx, steps.length - 1));
+        render();
+      }
+
+      function play() {
+        if (playing) return;
+        playing = true;
+        playBtn.textContent = 'Pause';
+        playTimer = setInterval(function () {
+          if (stepIndex >= steps.length - 1) {
+            pause();
+            return;
+          }
+          goToStep(stepIndex + 1);
+        }, 700);
+      }
+
+      function pause() {
+        playing = false;
+        playBtn.textContent = 'Play';
+        if (playTimer) {
+          clearInterval(playTimer);
+          playTimer = null;
+        }
+      }
+
+      shuffleBtn.addEventListener('click', function () {
+        pause();
+        currentArray = shuffleArray(initialArray.slice());
+        steps = generateSteps(currentArray);
+        slider.max = steps.length - 1;
+        goToStep(0);
+      });
+
+      playBtn.addEventListener('click', function () {
+        if (playing) {
+          pause();
+        } else {
+          play();
+        }
+      });
+
+      stepBtn.addEventListener('click', function () {
+        pause();
+        goToStep(stepIndex + 1);
+      });
+
+      resetBtn.addEventListener('click', function () {
+        pause();
+        goToStep(0);
+      });
+
+      slider.addEventListener('input', function () {
+        pause();
+        goToStep(parseInt(slider.value, 10));
+      });
+
+      slider.max = steps.length - 1;
+      render();
+    })();
+  </script>
+</body>
+</html>

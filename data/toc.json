@@ -260,6 +260,10 @@
         {
           "title": "Selection Sort",
           "path": "lessons/unit7-selection-sort.html"
+        },
+        {
+          "title": "Insertion Sort",
+          "path": "lessons/unit7-insertion-sort.html"
         }
       ]
     }
