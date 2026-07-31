@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Error Handling — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 5 / Error Handling</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Error Handling</h1>
+
+      <p>Error handling is the process of <strong>detecting, reporting, and responding to errors</strong> that occur while a program is running.</p>
+      <p>Errors can happen due to invalid input, missing files, insufficient memory, division by zero, hardware failures, or operating system issues. Proper error handling helps prevent program crashes and makes applications more reliable.</p>
+
+      <h2>What is Error Handling?</h2>
+      <p><strong>Error handling</strong> is a mechanism used to identify errors and take appropriate action instead of allowing the program to terminate unexpectedly.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">Without Error Handling
+
+Program Starts
+       │
+       ▼
+Open File
+       │
+       ▼
+File Not Found
+       │
+       ▼
+Program Crashes</code></pre>
+      <pre><code class="language-none">With Error Handling
+
+Program Starts
+       │
+       ▼
+Open File
+       │
+       ▼
+File Not Found
+       │
+       ▼
+Display Error Message
+       │
+       ▼
+Exit Gracefully</code></pre>
+
+      <h2>Why Error Handling?</h2>
+      <ul>
+        <li>Prevents unexpected crashes</li>
+        <li>Helps identify the cause of errors</li>
+        <li>Improves program reliability</li>
+        <li>Makes debugging easier</li>
+        <li>Provides user-friendly error messages</li>
+      </ul>
+
+      <h2>Common Types of Errors</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Error Type</th>
+            <th>Description</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Syntax Error</td><td>Mistakes in program syntax</td><td>Missing <code>;</code></td></tr>
+          <tr><td>Runtime Error</td><td>Occurs during execution</td><td>File not found</td></tr>
+          <tr><td>Logical Error</td><td>Program runs but gives incorrect output</td><td>Wrong formula</td></tr>
+          <tr><td>File Error</td><td>Unable to open/read/write a file</td><td>Missing file</td></tr>
+          <tr><td>Memory Error</td><td>Memory allocation fails</td><td><code>malloc()</code> returns <code>NULL</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Error Handling Functions</h2>
+      <p>Common functions used in C:</p>
+      <pre><code class="language-none">Error Handling
+│
+├── exit()
+├── perror()
+└── errno (from &lt;errno.h&gt;)</code></pre>
+
+      <h2>1. exit()</h2>
+      <h3>Definition</h3>
+      <p>The <code>exit()</code> function <strong>immediately terminates the program</strong> and returns a status code to the operating system.</p>
+      <p>It is declared in the <strong><code>&lt;stdlib.h&gt;</code></strong> header file.</p>
+
+      <h2>Syntax</h2>
+      <pre><code class="language-c">#include &lt;stdlib.h&gt;
+
+exit(status);</code></pre>
+
+      <h2>Exit Status Codes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>0</code></td><td>Successful termination</td></tr>
+          <tr><td><code>EXIT_SUCCESS</code></td><td>Successful termination</td></tr>
+          <tr><td><code>1</code></td><td>Abnormal termination</td></tr>
+          <tr><td><code>EXIT_FAILURE</code></td><td>Program terminated due to an error</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Example 1</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+    printf("Program Started\n");
+
+    exit(0);
+
+    printf("This line will never execute.");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Program Started</code></pre>
+      <p>The second <code>printf()</code> is never executed because <code>exit()</code> terminates the program immediately.</p>
+
+      <h2>Example 2</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("student.txt", "r");
+
+    if(fp == NULL)
+    {
+        printf("Cannot Open File\n");
+        exit(EXIT_FAILURE);
+    }
+
+    printf("File Opened Successfully");
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+
+      <h2>Advantages of exit()</h2>
+      <ul>
+        <li>Terminates the program safely</li>
+        <li>Returns an exit status to the operating system</li>
+        <li>Useful for handling fatal errors</li>
+        <li>Prevents execution of invalid code</li>
+      </ul>
+
+      <h2>2. perror()</h2>
+      <h3>Definition</h3>
+      <p>The <code>perror()</code> function prints a <strong>custom message followed by the system-generated error description</strong> for the most recent error.</p>
+      <p>It is declared in <strong><code>&lt;stdio.h&gt;</code></strong>.</p>
+
+      <h2>Syntax</h2>
+      <pre><code class="language-c">perror("Message");</code></pre>
+
+      <h2>Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("abc.txt", "r");
+
+    if(fp == NULL)
+    {
+        perror("Error");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Possible Output</p>
+      <pre><code class="language-none">Error: No such file or directory</code></pre>
+      <p>Here:</p>
+      <ul>
+        <li><strong>Error</strong> → Custom message</li>
+        <li><strong>No such file or directory</strong> → System-generated error message</li>
+      </ul>
+
+      <h2>Another Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("data.txt", "r");
+
+    if(fp == NULL)
+    {
+        perror("Unable to Open File");
+    }
+
+    return 0;
+}</code></pre>
+      <p>Possible Output</p>
+      <pre><code class="language-none">Unable to Open File: No such file or directory</code></pre>
+
+      <h2>Advantages of perror()</h2>
+      <ul>
+        <li>Displays meaningful error messages</li>
+        <li>Easy to debug programs</li>
+        <li>Uses operating system error information</li>
+        <li>Saves time compared to writing custom messages</li>
+      </ul>
+
+      <h2>3. <code>&lt;errno.h&gt;</code></h2>
+      <h3>Definition</h3>
+      <p>The <strong><code>&lt;errno.h&gt;</code></strong> header file provides access to the global variable <strong><code>errno</code></strong>, which stores an error number whenever a library function fails.</p>
+      <blockquote>
+        <p><strong>Note:</strong> The correct header is <strong><code>&lt;errno.h&gt;</code></strong>, <strong>not</strong> <code>error.h</code>.</p>
+      </blockquote>
+
+      <h2>Syntax</h2>
+      <pre><code class="language-c">#include &lt;errno.h&gt;</code></pre>
+
+      <h2>The <code>errno</code> Variable</h2>
+      <ul>
+        <li>Set automatically when an error occurs</li>
+        <li>Contains a numeric error code</li>
+        <li>Can be used with <code>perror()</code> or <code>strerror()</code></li>
+      </ul>
+
+      <h2>Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("sample.txt", "r");
+
+    if(fp == NULL)
+    {
+        printf("Error Number : %d\n", errno);
+    }
+
+    return 0;
+}</code></pre>
+      <p>Possible Output</p>
+      <pre><code class="language-none">Error Number : 2</code></pre>
+      <p>(Error number may vary depending on the operating system.)</p>
+
+      <h2>Using <code>strerror()</code></h2>
+      <p>The <code>strerror()</code> function converts an error number into a human-readable message.</p>
+      <p>Header files:</p>
+      <pre><code class="language-c">#include &lt;string.h&gt;
+#include &lt;errno.h&gt;</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("sample.txt", "r");
+
+    if(fp == NULL)
+    {
+        printf("Error %d : %s\n", errno, strerror(errno));
+    }
+
+    return 0;
+}</code></pre>
+      <p>Possible Output</p>
+      <pre><code class="language-none">Error 2 : No such file or directory</code></pre>
+
+      <h2>Complete Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;errno.h&gt;
+
+int main()
+{
+    FILE *fp;
+
+    fp = fopen("student.txt", "r");
+
+    if(fp == NULL)
+    {
+        perror("File Error");
+        exit(EXIT_FAILURE);
+    }
+
+    printf("File Opened Successfully\n");
+
+    fclose(fp);
+
+    return 0;
+}</code></pre>
+      <p>Possible Output (if file does not exist)</p>
+      <pre><code class="language-none">File Error: No such file or directory</code></pre>
+
+      <h2>Comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Function/Header</th>
+            <th>Purpose</th>
+            <th>Header File</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>exit()</code></td><td>Terminates the program</td><td><code>&lt;stdlib.h&gt;</code></td></tr>
+          <tr><td><code>perror()</code></td><td>Prints custom + system error message</td><td><code>&lt;stdio.h&gt;</code></td></tr>
+          <tr><td><code>errno</code></td><td>Stores the last error number</td><td><code>&lt;errno.h&gt;</code></td></tr>
+          <tr><td><code>strerror()</code></td><td>Converts an error number to a message</td><td><code>&lt;string.h&gt;</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Error Handling Workflow</h2>
+      <pre><code class="language-none">Program Starts
+       │
+       ▼
+Perform Operation
+       │
+       ▼
+Operation Successful?
+    │            │
+   Yes          No
+    │            │
+ Continue     Check Error
+                 │
+                 ▼
+      perror() / errno
+                 │
+                 ▼
+       exit(EXIT_FAILURE)
+                 │
+                 ▼
+            Program Ends</code></pre>
+
+      <h2>Best Practices</h2>
+      <ul>
+        <li>Always check the return value of functions like <code>fopen()</code>, <code>malloc()</code>, and <code>fread()</code>.</li>
+        <li>Use <code>perror()</code> to display meaningful system error messages.</li>
+        <li>Use <code>exit(EXIT_FAILURE)</code> for unrecoverable errors.</li>
+        <li>Include <code>&lt;errno.h&gt;</code> when working with <code>errno</code>.</li>
+        <li>Close any opened files before terminating the program.</li>
+      </ul>
+
+      <h2>Real-World Applications</h2>
+      <ul>
+        <li>Banking Software</li>
+        <li>Student Management Systems</li>
+        <li>File Processing Applications</li>
+        <li>Database Systems</li>
+        <li>Network Programming</li>
+        <li>Operating Systems</li>
+        <li>Embedded Systems</li>
+        <li>Server Applications</li>
+      </ul>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li><strong>Error handling</strong> helps programs detect and respond to runtime problems gracefully.</li>
+        <li><code>exit()</code> terminates the program immediately and returns a status code to the operating system.</li>
+        <li><code>perror()</code> prints a custom message along with the system-generated description of the last error.</li>
+        <li><code>errno</code> (defined in <code>&lt;errno.h&gt;</code>) stores an error code whenever a library function fails.</li>
+        <li><code>strerror()</code> converts the numeric value of <code>errno</code> into a readable error message.</li>
+        <li>Always validate the return values of file and memory operations to write robust and reliable C programs.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
