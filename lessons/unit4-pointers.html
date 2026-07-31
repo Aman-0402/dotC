@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pointers — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 4 / Pointers</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Pointers</h1>
+
+      <h2>What is a Pointer?</h2>
+      <p>A <strong>pointer</strong> is a special variable that stores the <strong>memory address</strong> of another variable instead of storing the actual value.</p>
+      <p>Every variable stored in memory has:</p>
+      <ul>
+        <li>A <strong>value</strong></li>
+        <li>A <strong>memory address</strong></li>
+      </ul>
+      <p>A pointer stores this memory address.</p>
+
+      <h2>Why Use Pointers?</h2>
+      <p>Pointers are one of the most powerful features of C.</p>
+      <p>They are used for:</p>
+      <ul>
+        <li>Dynamic Memory Allocation</li>
+        <li>Call by Reference</li>
+        <li>Arrays and Strings</li>
+        <li>Data Structures (Linked List, Stack, Queue, Tree, Graph)</li>
+        <li>File Handling</li>
+        <li>Efficient Memory Management</li>
+      </ul>
+
+      <h2>Memory Representation</h2>
+      <p>Example</p>
+      <pre><code class="language-c">int a = 10;</code></pre>
+      <p>Suppose the variable is stored in memory as:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Value</th>
+            <th>Address (Example)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>a</td><td>10</td><td>1000</td></tr>
+        </tbody>
+      </table>
+      <p>A pointer stores the address <strong>1000</strong>, not the value <strong>10</strong>.</p>
+
+      <h2>Pointer Declaration</h2>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">data_type *pointer_name;</code></pre>
+      <p>Examples</p>
+      <pre><code class="language-c">int *ptr;
+char *ch;
+float *fptr;
+double *dptr;</code></pre>
+      <p>The <code>*</code> indicates that the variable is a pointer.</p>
+
+      <h2>Pointer Initialization</h2>
+      <p>A pointer should be initialized with the address of a variable.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int a = 10;
+
+int *ptr = &amp;a;</code></pre>
+      <p>Now,</p>
+      <ul>
+        <li><code>a</code> stores <strong>10</strong></li>
+        <li><code>ptr</code> stores the address of <code>a</code></li>
+      </ul>
+
+      <h2>Address Operator (<code>&amp;</code>)</h2>
+      <p>The <strong>address operator (<code>&amp;</code>)</strong> returns the memory address of a variable.</p>
+      <h3>Syntax</h3>
+      <pre><code class="language-c">&amp;variable</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 10;
+
+    printf("%p", &amp;a);
+
+    return 0;
+}</code></pre>
+      <h3>Output</h3>
+      <pre><code class="language-none">0x7ffd8f52...</code></pre>
+      <p>The actual address depends on the system and changes each time the program runs.</p>
+
+      <h2>Indirection (Dereference) Operator (<code>*</code>)</h2>
+      <p>The <strong>dereference operator (<code>*</code>)</strong> is used to access the value stored at the memory address held by a pointer.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int a = 10;
+
+int *ptr = &amp;a;
+
+printf("%d", *ptr);</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10</code></pre>
+
+      <h2>Example: Address and Value</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 25;
+
+    int *ptr = &amp;a;
+
+    printf("Value of a = %d\n", a);
+    printf("Address of a = %p\n", &amp;a);
+    printf("Value stored in ptr = %p\n", ptr);
+    printf("Value pointed by ptr = %d\n", *ptr);
+
+    return 0;
+}</code></pre>
+      <h3>Sample Output</h3>
+      <pre><code class="language-none">Value of a = 25
+Address of a = 0x7ffd8f52...
+Value stored in ptr = 0x7ffd8f52...
+Value pointed by ptr = 25</code></pre>
+
+      <h2>Relationship Between Variable and Pointer</h2>
+      <pre><code class="language-none">        +-----------+
+        |  a = 10   |
+        +-----------+
+Address -> 1000
+
+        +-----------+
+ptr --->|   1000    |
+        +-----------+</code></pre>
+      <ul>
+        <li><code>a</code> contains the value <strong>10</strong></li>
+        <li><code>ptr</code> contains the address of <code>a</code></li>
+        <li><code>*ptr</code> gives the value stored at that address (<strong>10</strong>)</li>
+      </ul>
+
+      <h2>Pointer Arithmetic</h2>
+      <p>Pointers can be incremented and decremented.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int arr[] = {10,20,30};
+
+int *ptr = arr;
+
+ptr++;</code></pre>
+      <p>Initially</p>
+      <pre><code class="language-none">ptr → arr[0]</code></pre>
+      <p>After increment</p>
+      <pre><code class="language-none">ptr → arr[1]</code></pre>
+
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[] = {10,20,30};
+
+    int *ptr = arr;
+
+    printf("%d\n", *ptr);
+
+    ptr++;
+
+    printf("%d\n", *ptr);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10
+20</code></pre>
+
+      <h2>Rules of Pointer Arithmetic</h2>
+      <p>Allowed:</p>
+      <ul>
+        <li>Increment (<code>++</code>)</li>
+        <li>Decrement (<code>--</code>)</li>
+        <li>Addition with integer</li>
+        <li>Subtraction with integer</li>
+        <li>Difference between two pointers (pointing into the same array)</li>
+      </ul>
+      <p>Not Allowed:</p>
+      <ul>
+        <li>Addition of two pointers</li>
+        <li>Multiplication of pointers</li>
+        <li>Division of pointers</li>
+      </ul>
+
+      <h2>Pointer and Arrays</h2>
+      <p>The name of an array acts as a pointer to its first element.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int arr[5] = {10,20,30,40,50};
+
+int *ptr = arr;</code></pre>
+      <p>Equivalent to</p>
+      <pre><code class="language-c">int *ptr = &amp;arr[0];</code></pre>
+
+      <h3>Accessing Array Using Pointer</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int arr[] = {10,20,30,40};
+
+    int *ptr = arr;
+
+    for(int i=0;i&lt;4;i++)
+    {
+        printf("%d ", *(ptr+i));
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10 20 30 40</code></pre>
+
+      <h2>Null Pointer</h2>
+      <p>A <strong>Null Pointer</strong> points to nothing.</p>
+      <p>It is assigned using <code>NULL</code>.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int *ptr = NULL;</code></pre>
+      <p>Characteristics</p>
+      <ul>
+        <li>Safe initialization</li>
+        <li>Indicates "no valid address"</li>
+        <li>Prevents accidental use of uninitialized pointers</li>
+      </ul>
+
+      <h2>Void Pointer</h2>
+      <p>A <strong>Void Pointer</strong> is a generic pointer.</p>
+      <p>It can store the address of any data type.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int a = 100;
+
+void *ptr = &amp;a;</code></pre>
+      <p>To access the value, type casting is required.</p>
+      <pre><code class="language-c">printf("%d", *(int *)ptr);</code></pre>
+
+      <h2>Wild Pointer</h2>
+      <p>A <strong>Wild Pointer</strong> is a pointer that has been declared but not initialized.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int *ptr;</code></pre>
+      <p>This pointer contains an unknown (garbage) address.</p>
+      <p>Using a wild pointer can lead to undefined behavior.</p>
+      <p>Correct approach</p>
+      <pre><code class="language-c">int *ptr = NULL;</code></pre>
+
+      <h2>Dangling Pointer</h2>
+      <p>A <strong>Dangling Pointer</strong> points to a memory location that is no longer valid.</p>
+      <p>Example</p>
+      <pre><code class="language-c">int *ptr;
+
+{
+    int x = 50;
+    ptr = &amp;x;
+}</code></pre>
+      <p>After the block ends, <code>x</code> no longer exists, so <code>ptr</code> becomes a dangling pointer.</p>
+      <p>Another common case is after freeing dynamically allocated memory.</p>
+      <pre><code class="language-c">free(ptr);
+ptr = NULL;</code></pre>
+      <p>Setting the pointer to <code>NULL</code> after <code>free()</code> helps avoid accidental use.</p>
+
+      <h2>Types of Pointers</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pointer Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Normal Pointer</td><td>Stores address of a variable</td></tr>
+          <tr><td>Null Pointer</td><td>Points to nothing (<code>NULL</code>)</td></tr>
+          <tr><td>Void Pointer</td><td>Can point to any data type</td></tr>
+          <tr><td>Wild Pointer</td><td>Declared but not initialized</td></tr>
+          <tr><td>Dangling Pointer</td><td>Points to invalid memory</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Complete Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int num = 50;
+
+    int *ptr = &amp;num;
+
+    printf("Value of num = %d\n", num);
+
+    printf("Address of num = %p\n", &amp;num);
+
+    printf("Pointer Value = %p\n", ptr);
+
+    printf("Dereferenced Value = %d\n", *ptr);
+
+    return 0;
+}</code></pre>
+      <h3>Sample Output</h3>
+      <pre><code class="language-none">Value of num = 50
+Address of num = 0x7ffd8f52...
+Pointer Value = 0x7ffd8f52...
+Dereferenced Value = 50</code></pre>
+
+      <h2>Difference Between Address Operator (<code>&amp;</code>) and Dereference Operator (<code>*</code>)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Operator</th>
+            <th>Purpose</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&amp;</code></td><td>Returns the address of a variable</td><td><code>&amp;a</code></td></tr>
+          <tr><td><code>*</code></td><td>Accesses the value stored at an address</td><td><code>*ptr</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Difference Between Variable and Pointer</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Variable</th>
+            <th>Pointer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Stores a value</td><td>Stores an address</td></tr>
+          <tr><td>Uses normal data type</td><td>Uses pointer data type</td></tr>
+          <tr><td>Accessed directly</td><td>Accessed using <code>*</code></td></tr>
+          <tr><td>Has its own address</td><td>Also has its own address</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Important Notes</h2>
+      <ul>
+        <li>A pointer stores the <strong>memory address</strong> of another variable.</li>
+        <li>The <strong>address operator (<code>&amp;</code>)</strong> returns the address of a variable.</li>
+        <li>The <strong>dereference operator (<code>*</code>)</strong> accesses the value stored at the address.</li>
+        <li>Pointer arithmetic moves between elements based on the size of the data type.</li>
+        <li>The array name points to the first element of the array.</li>
+        <li>Always initialize pointers before using them.</li>
+        <li>Use <code>NULL</code> to indicate that a pointer does not currently point to a valid object.</li>
+        <li>Avoid using <strong>wild</strong> and <strong>dangling</strong> pointers, as they can cause undefined behavior and program crashes.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

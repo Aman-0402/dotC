@@ -181,6 +181,10 @@
         {
           "title": "Functions",
           "path": "lessons/unit4-functions.html"
+        },
+        {
+          "title": "Pointers",
+          "path": "lessons/unit4-pointers.html"
         }
       ]
     }
