@@ -123,6 +123,10 @@
         {
           "title": "Non-Numeric Data Types (Character & String)",
           "path": "lessons/unit2-non-numeric-data-types.html"
+        },
+        {
+          "title": "Expressions, L-value & R-value, Type Conversion",
+          "path": "lessons/unit2-expressions-lvalue-rvalue-type-conversion.html"
         }
       ]
     }
