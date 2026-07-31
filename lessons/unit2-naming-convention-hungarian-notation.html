@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naming Convention & Hungarian Notation — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Naming Convention & Hungarian Notation</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Naming Convention &amp; Hungarian Notation</h1>
+
+      <p>Writing a program that <strong>works</strong> is important, but writing code that is <strong>easy to read, understand, and maintain</strong> is equally important.</p>
+      <p>This topic explains how programmers should name variables, functions, constants, files, and other identifiers using standard conventions.</p>
+      <p>This topic covers:</p>
+      <ul>
+        <li>Naming Convention</li>
+        <li>Hungarian Notation</li>
+      </ul>
+
+      <h2>What is a Naming Convention?</h2>
+      <p>A <strong>Naming Convention</strong> is a set of rules and best practices for giving meaningful names to variables, functions, constants, files, and other program elements.</p>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>A Naming Convention is a standard way of naming identifiers to make code readable, understandable, and maintainable.</strong></p>
+      </blockquote>
+
+      <h2>Why are Naming Conventions Important?</h2>
+      <p>Imagine reading this code:</p>
+      <pre><code class="language-c">int a;
+int b;
+int c;
+
+c = a * b;</code></pre>
+      <p>What do <code>a</code>, <code>b</code>, and <code>c</code> represent?</p>
+      <p>Nobody knows.</p>
+      <p>Now look at this:</p>
+      <pre><code class="language-c">int length;
+int width;
+int area;
+
+area = length * width;</code></pre>
+      <p>It is immediately clear what the program does.</p>
+
+      <h2>Benefits of Naming Conventions</h2>
+      <ul>
+        <li>Improves readability</li>
+        <li>Makes debugging easier</li>
+        <li>Makes teamwork easier</li>
+        <li>Reduces mistakes</li>
+        <li>Makes code self-explanatory</li>
+        <li>Easier maintenance</li>
+      </ul>
+
+      <h2>Good vs Bad Naming</h2>
+
+      <h3>Bad</h3>
+      <pre><code class="language-c">int x;
+int y;
+int z;</code></pre>
+
+      <h3>Better</h3>
+      <pre><code class="language-c">int studentAge;
+int employeeSalary;
+int totalMarks;</code></pre>
+
+      <h3>Best</h3>
+      <pre><code class="language-c">int studentAge;
+float monthlySalary;
+int totalMarksObtained;</code></pre>
+      <p>The name itself explains the purpose.</p>
+
+      <h2>Rules for Naming Identifiers</h2>
+      <p>A valid identifier in C must follow these rules.</p>
+
+      <h3>Rule 1: Begin with a Letter or Underscore</h3>
+      <p>Correct</p>
+      <pre><code class="language-c">age</code></pre>
+      <pre><code class="language-c">_student</code></pre>
+      <pre><code class="language-c">salary2025</code></pre>
+      <p>Wrong</p>
+      <pre><code class="language-c">2age</code></pre>
+      <p>Identifiers cannot start with a digit.</p>
+
+      <h3>Rule 2: Digits are Allowed (Not at the Beginning)</h3>
+      <p>Correct</p>
+      <pre><code class="language-c">student1</code></pre>
+      <pre><code class="language-c">rollNumber2</code></pre>
+      <p>Wrong</p>
+      <pre><code class="language-c">123name</code></pre>
+
+      <h3>Rule 3: No Spaces</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">student name</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">studentName</code></pre>
+      <p>or</p>
+      <pre><code class="language-c">student_name</code></pre>
+
+      <h3>Rule 4: No Special Characters</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">price@</code></pre>
+      <pre><code class="language-c">salary$</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">price</code></pre>
+
+      <h3>Rule 5: Keywords Cannot Be Used</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">int int;</code></pre>
+      <p>Wrong</p>
+      <pre><code class="language-c">float return;</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">int total;</code></pre>
+
+      <h2>Naming Guidelines</h2>
+      <p>Instead of writing</p>
+      <pre><code class="language-c">int x;</code></pre>
+      <p>write</p>
+      <pre><code class="language-c">int totalStudents;</code></pre>
+      <p>Instead of</p>
+      <pre><code class="language-c">float a;</code></pre>
+      <p>write</p>
+      <pre><code class="language-c">float averageMarks;</code></pre>
+
+      <h2>Variable Naming Examples</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Bad</th>
+            <th>Good</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>x</td><td>age</td></tr>
+          <tr><td>y</td><td>salary</td></tr>
+          <tr><td>a</td><td>length</td></tr>
+          <tr><td>b</td><td>width</td></tr>
+          <tr><td>c</td><td>totalMarks</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Function Naming</h2>
+      <p>Bad</p>
+      <pre><code class="language-c">void fun();</code></pre>
+      <p>Better</p>
+      <pre><code class="language-c">void calculateArea();</code></pre>
+      <p>Even better</p>
+      <pre><code class="language-c">void calculateStudentPercentage();</code></pre>
+      <p>The function name should describe what it does.</p>
+
+      <h2>Constant Naming</h2>
+      <p>Constants are usually written in uppercase.</p>
+      <p>Example</p>
+      <pre><code class="language-c">#define MAX_STUDENTS 100</code></pre>
+      <pre><code class="language-c">#define PI 3.14159</code></pre>
+
+      <h2>File Naming</h2>
+      <p>Good</p>
+      <pre><code class="language-none">student.c
+
+employee.c
+
+calculator.c</code></pre>
+      <p>Bad</p>
+      <pre><code class="language-none">file1.c
+
+abc.c
+
+temp.c</code></pre>
+
+      <h2>Common Naming Styles</h2>
+      <p>There are several naming styles used in programming.</p>
+
+      <h3>1. camelCase</h3>
+      <p>First word starts with a lowercase letter.</p>
+      <p>Each new word starts with a capital letter.</p>
+      <p>Example</p>
+      <pre><code class="language-c">studentAge</code></pre>
+      <pre><code class="language-c">totalMarks</code></pre>
+      <pre><code class="language-c">employeeSalary</code></pre>
+
+      <h3>2. PascalCase</h3>
+      <p>Every word starts with a capital letter.</p>
+      <p>Example</p>
+      <pre><code class="language-none">StudentAge
+
+EmployeeSalary
+
+CalculateArea</code></pre>
+      <p>Used more commonly in languages like C#, Java, and C++ for class names.</p>
+
+      <h3>3. snake_case</h3>
+      <p>Words are separated by underscores.</p>
+      <p>Example</p>
+      <pre><code class="language-none">student_age
+
+employee_salary
+
+total_marks</code></pre>
+      <p>Very common in C programming and many C libraries.</p>
+
+      <h3>Comparison</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Style</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>camelCase</td><td><code>studentAge</code></td></tr>
+          <tr><td>PascalCase</td><td><code>StudentAge</code></td></tr>
+          <tr><td>snake_case</td><td><code>student_age</code></td></tr>
+        </tbody>
+      </table>
+
+      <h2>Which Style is Preferred in C?</h2>
+      <p>Most C projects use:</p>
+      <ul>
+        <li><code>snake_case</code> for variables and functions</li>
+        <li><code>UPPER_CASE</code> for macros and constants</li>
+      </ul>
+      <p>Example</p>
+      <pre><code class="language-c">int student_age;
+
+float total_marks;
+
+#define MAX_SIZE 100</code></pre>
+      <p>Some modern C projects also use <code>camelCase</code>, but consistency within a project is more important than the specific style.</p>
+
+      <h2>Real-World Example</h2>
+      <p>Poor Code</p>
+      <pre><code class="language-c">int a,b,c;
+
+c=a+b;</code></pre>
+      <p>Professional Code</p>
+      <pre><code class="language-c">int firstNumber;
+int secondNumber;
+int totalSum;
+
+totalSum = firstNumber + secondNumber;</code></pre>
+      <p>Easy to understand.</p>
+
+      <h2>Naming in Large Projects</h2>
+      <p>Example</p>
+      <pre><code class="language-none">student_name
+
+student_age
+
+student_roll_number
+
+student_percentage</code></pre>
+      <p>All variables begin with:</p>
+      <pre><code class="language-none">student_</code></pre>
+      <p>This keeps related variables grouped together.</p>
+
+      <h2>Prefix and Suffix Usage</h2>
+      <p>Sometimes prefixes indicate the purpose.</p>
+      <p>Example</p>
+      <pre><code class="language-none">isLoggedIn
+
+hasPermission
+
+totalMarks
+
+maxStudents</code></pre>
+      <p>Here</p>
+      <pre><code class="language-none">is
+
+has
+
+total
+
+max</code></pre>
+      <p>help explain the meaning.</p>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>Using Single Letters</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">int x;</code></pre>
+      <p>Better</p>
+      <pre><code class="language-c">int studentCount;</code></pre>
+
+      <h3>Using Confusing Abbreviations</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">int std;</code></pre>
+      <p>Better</p>
+      <pre><code class="language-c">int studentCount;</code></pre>
+
+      <h3>Mixing Naming Styles</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">studentAge
+
+student_age
+
+StudentAge</code></pre>
+      <p>inside the same project.</p>
+      <p>Always remain consistent.</p>
+
+      <h3>Using Meaningless Names</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">temp
+
+abc
+
+xyz</code></pre>
+      <p>Better</p>
+      <pre><code class="language-c">currentTemperature
+
+averageMarks
+
+studentAge</code></pre>
+
+      <h2>Hungarian Notation</h2>
+      <p>Hungarian Notation is an old naming convention where the variable name begins with a <strong>prefix</strong> that indicates its data type or purpose.</p>
+      <p>It was popular in the 1980s and 1990s, especially in Microsoft software development.</p>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>Hungarian Notation is a naming convention where prefixes are added to variable names to indicate their type or usage.</strong></p>
+      </blockquote>
+
+      <h2>Why Was It Introduced?</h2>
+      <p>Before modern IDEs and advanced compilers, programmers could not easily determine the type of a variable.</p>
+      <p>Prefixes helped identify the data type quickly.</p>
+      <p>Example</p>
+      <p>Instead of</p>
+      <pre><code class="language-c">age</code></pre>
+      <p>Programmers wrote</p>
+      <pre><code class="language-c">iAge</code></pre>
+      <p>where</p>
+      <pre><code class="language-none">i
+
+↓
+
+Integer</code></pre>
+
+      <h2>Common Hungarian Prefixes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Prefix</th>
+            <th>Meaning</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>i</code></td><td>Integer</td><td><code>iAge</code></td></tr>
+          <tr><td><code>f</code></td><td>Float</td><td><code>fSalary</code></td></tr>
+          <tr><td><code>d</code></td><td>Double</td><td><code>dPi</code></td></tr>
+          <tr><td><code>c</code></td><td>Character</td><td><code>cGrade</code></td></tr>
+          <tr><td><code>ch</code></td><td>Character</td><td><code>chLetter</code></td></tr>
+          <tr><td><code>sz</code></td><td>String (null-terminated character array)</td><td><code>szName</code></td></tr>
+          <tr><td><code>b</code></td><td>Boolean</td><td><code>bIsPassed</code></td></tr>
+          <tr><td><code>p</code></td><td>Pointer</td><td><code>pStudent</code></td></tr>
+          <tr><td><code>arr</code></td><td>Array</td><td><code>arrMarks</code></td></tr>
+          <tr><td><code>n</code></td><td>Count/Number</td><td><code>nStudents</code></td></tr>
+        </tbody>
+      </table>
+      <blockquote>
+        <p><strong>Note:</strong> C itself does not have a built-in <code>bool</code> type before C99, but the <code>b</code> prefix is still commonly seen in Hungarian notation.</p>
+      </blockquote>
+
+      <h2>Examples</h2>
+      <p>Without Hungarian</p>
+      <pre><code class="language-c">int age;
+
+float salary;
+
+char grade;</code></pre>
+
+      <p>With Hungarian</p>
+      <pre><code class="language-c">int iAge;
+
+float fSalary;
+
+char cGrade;</code></pre>
+
+      <p>String Example</p>
+      <pre><code class="language-c">char szName[30];</code></pre>
+      <p>Meaning</p>
+      <pre><code class="language-none">sz
+
+↓
+
+String</code></pre>
+
+      <p>Pointer Example</p>
+      <pre><code class="language-c">int *pAge;</code></pre>
+      <p>Meaning</p>
+      <pre><code class="language-none">p
+
+↓
+
+Pointer</code></pre>
+
+      <p>Array Example</p>
+      <pre><code class="language-c">int arrMarks[5];</code></pre>
+      <p>Meaning</p>
+      <pre><code class="language-none">arr
+
+↓
+
+Array</code></pre>
+
+      <h2>Advantages of Hungarian Notation</h2>
+      <ul>
+        <li>Easy to identify variable types</li>
+        <li>Useful in older development environments</li>
+        <li>Helpful in large legacy projects</li>
+        <li>Makes pointer variables easy to recognize</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <p>Modern IDEs automatically display:</p>
+      <ul>
+        <li>Data type</li>
+        <li>Documentation</li>
+        <li>Auto-completion</li>
+        <li>Error checking</li>
+      </ul>
+      <p>Because of this,</p>
+      <p>Modern code usually prefers meaningful names over type prefixes.</p>
+      <p>Instead of</p>
+      <pre><code class="language-c">int iStudentAge;</code></pre>
+      <p>many developers now prefer</p>
+      <pre><code class="language-c">int student_age;</code></pre>
+      <p>or</p>
+      <pre><code class="language-c">int studentAge;</code></pre>
+
+      <h2>Modern Recommendation</h2>
+      <p>Instead of focusing on the data type,</p>
+      <p>focus on the <strong>meaning</strong>.</p>
+      <p>Less Preferred</p>
+      <pre><code class="language-c">int iTotal;</code></pre>
+      <p>Preferred</p>
+      <pre><code class="language-c">int total_students;</code></pre>
+      <p>The name explains the purpose, while the compiler and IDE already know the type.</p>
+
+      <h2>Comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Naming Convention</th>
+            <th>Hungarian Notation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Purpose</td><td>Improve readability</td><td>Show type or purpose</td></tr>
+          <tr><td>Modern Usage</td><td>Very common</td><td>Mostly legacy projects</td></tr>
+          <tr><td>Readability</td><td>Excellent</td><td>Good, but can become verbose</td></tr>
+          <tr><td>Industry Preference</td><td>Recommended</td><td>Used mainly in older codebases</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Complete Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+#define MAX_STUDENTS 100
+
+int main()
+{
+    int student_age = 20;
+    float average_marks = 88.5f;
+    char grade = 'A';
+
+    printf("Age            : %d\n", student_age);
+    printf("Average Marks  : %.1f\n", average_marks);
+    printf("Grade          : %c\n", grade);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Age            : 20
+Average Marks  : 88.5
+Grade          : A</code></pre>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is a naming convention?</h3>
+      <p>A naming convention is a standard set of rules for naming variables, functions, constants, and other identifiers to improve readability and maintainability.</p>
+
+      <h3>2. Why are naming conventions important?</h3>
+      <p>They improve code readability, reduce errors, simplify debugging, and make teamwork easier.</p>
+
+      <h3>3. What is Hungarian Notation?</h3>
+      <p>It is a naming convention that uses prefixes to indicate the data type or purpose of a variable.</p>
+
+      <h3>4. Is Hungarian Notation still widely used?</h3>
+      <p>It is mainly found in legacy codebases. Modern C projects usually prefer meaningful names with consistent naming styles such as <code>snake_case</code>.</p>
+
+      <h3>5. Which naming style is commonly used in C?</h3>
+      <ul>
+        <li><code>snake_case</code> for variables and functions</li>
+        <li><code>UPPER_CASE</code> for macros and constants</li>
+      </ul>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define naming conventions.</li>
+        <li>Explain the rules for naming identifiers in C.</li>
+        <li>Compare <code>camelCase</code>, <code>PascalCase</code>, and <code>snake_case</code>.</li>
+        <li>What is Hungarian Notation?</li>
+        <li>List the advantages and disadvantages of Hungarian Notation.</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Use meaningful variable names.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int student_age = 20;
+    int total_marks = 450;
+
+    printf("Age   : %d\n", student_age);
+    printf("Marks : %d\n", total_marks);
+
+    return 0;
+}</code></pre>
+
+      <h4>Q2. Demonstrate Hungarian Notation.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int iAge = 21;
+    float fSalary = 25000.50f;
+    char cGrade = 'A';
+
+    printf("Age    : %d\n", iAge);
+    printf("Salary : %.2f\n", fSalary);
+    printf("Grade  : %c\n", cGrade);
+
+    return 0;
+}</code></pre>
+
+      <h4>Q3. Compare Good vs Bad Naming.</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    /* Poor naming */
+    int a = 10;
+    int b = 20;
+    int c = a + b;
+
+    /* Better naming */
+    int first_number = 10;
+    int second_number = 20;
+    int total_sum = first_number + second_number;
+
+    printf("Poor Naming Result   : %d\n", c);
+    printf("Good Naming Result   : %d\n", total_sum);
+
+    return 0;
+}</code></pre>
+
+      <h2>Exam Tips</h2>
+      <ul>
+        <li>⭐ Always use <strong>meaningful and descriptive names</strong>.</li>
+        <li>⭐ Follow one naming style consistently throughout the project.</li>
+        <li>⭐ Use <strong><code>snake_case</code></strong> for variables and functions in C.</li>
+        <li>⭐ Use <strong><code>UPPER_CASE</code></strong> for macros and constants.</li>
+        <li>⭐ Avoid single-letter variable names except for simple loop counters like <code>i</code> and <code>j</code>.</li>
+        <li>⭐ Hungarian Notation is useful for understanding older codebases but is less common in modern C development.</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <ul>
+        <li><strong>Naming conventions</strong> improve the readability, maintainability, and quality of code.</li>
+        <li>Use descriptive names that clearly indicate the purpose of variables and functions.</li>
+        <li>Common naming styles include <strong>camelCase</strong>, <strong>PascalCase</strong>, and <strong>snake_case</strong>, with <strong>snake_case</strong> being the most common in C.</li>
+        <li><strong>Hungarian Notation</strong> uses prefixes such as <code>i</code>, <code>f</code>, <code>c</code>, and <code>p</code> to indicate data types or usage.</li>
+        <li>While Hungarian Notation is still found in legacy systems, modern C programming emphasizes <strong>meaningful names</strong> and <strong>consistent style</strong> over type prefixes.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

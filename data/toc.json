@@ -131,6 +131,10 @@
         {
           "title": "Operators in C",
           "path": "lessons/unit2-operators.html"
+        },
+        {
+          "title": "Naming Convention & Hungarian Notation",
+          "path": "lessons/unit2-naming-convention-hungarian-notation.html"
         }
       ]
     }
