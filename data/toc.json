@@ -321,6 +321,10 @@
         {
           "title": "Introduction to Linked Lists",
           "path": "lessons/unit8-introduction-to-linked-lists.html"
+        },
+        {
+          "title": "Dynamic Memory Concept",
+          "path": "lessons/unit8-dynamic-memory-concept.html"
         }
       ]
     }

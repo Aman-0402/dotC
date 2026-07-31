@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Memory Concept — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 8 / Dynamic Memory Concept</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Dynamic Memory Concept</h1>
+
+      <p>Dynamic memory allocation is the <strong>foundation of linked lists</strong>. Without it, linked lists cannot exist.</p>
+
+      <h2>Why Do We Need Dynamic Memory?</h2>
+      <p>Before learning linked lists, let's understand a problem.</p>
+      <p>Suppose you create an array:</p>
+      <pre><code class="language-c">int arr[5];</code></pre>
+      <p>Memory is allocated like this:</p>
+      <pre><code class="language-none">+----+----+----+----+----+
+| 10 | 20 | 30 | 40 | 50 |
++----+----+----+----+----+</code></pre>
+      <p>Problems:</p>
+      <ul>
+        <li>Size is fixed.</li>
+        <li>Cannot increase or decrease at runtime.</li>
+        <li>Memory is allocated before execution.</li>
+      </ul>
+      <p>If later you want to store one more element:</p>
+      <pre><code class="language-none">10 20 30 40 50 60</code></pre>
+      <p>The array cannot grow.</p>
+
+      <h2>Static Memory Allocation</h2>
+      <p>Memory allocated <strong>before program execution</strong> is called <strong>Static Memory Allocation</strong>.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">int arr[100];</code></pre>
+      <p>Characteristics:</p>
+      <ul>
+        <li>Fixed size</li>
+        <li>Fast access</li>
+        <li>Cannot expand</li>
+        <li>May waste memory</li>
+      </ul>
+
+      <h2>Dynamic Memory Allocation</h2>
+      <p>Memory allocated <strong>during program execution (runtime)</strong> is called <strong>Dynamic Memory Allocation</strong>.</p>
+      <p>The programmer requests memory whenever required.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">int *ptr;
+
+ptr = (int *)malloc(sizeof(int));</code></pre>
+      <p>Memory is created only when <code>malloc()</code> is executed.</p>
+
+      <h2>Where Does Dynamic Memory Come From?</h2>
+      <p>A C program uses different memory areas:</p>
+      <pre><code class="language-none">+----------------------+
+|      Code Segment    |
++----------------------+
+|   Global Variables   |
++----------------------+
+|        Heap          |  &lt;-- Dynamic Memory
++----------------------+
+|                      |
+|                      |
++----------------------+
+|        Stack         |
++----------------------+</code></pre>
+
+      <h3>Heap</h3>
+      <ul>
+        <li>Used for dynamic memory allocation.</li>
+        <li>Controlled by the programmer.</li>
+        <li>Memory remains allocated until it is explicitly released using <code>free()</code>.</li>
+      </ul>
+
+      <h3>Stack</h3>
+      <p>Stores:</p>
+      <ul>
+        <li>Local variables</li>
+        <li>Function calls</li>
+        <li>Parameters</li>
+      </ul>
+      <p>Memory is automatically released when the function ends.</p>
+
+      <h2>Why Linked Lists Use Heap Memory</h2>
+      <p>Consider this declaration:</p>
+      <pre><code class="language-c">struct Node *head;</code></pre>
+      <p>Only the pointer <code>head</code> exists.</p>
+      <p>No node has been created yet.</p>
+      <pre><code class="language-none">head
+ ↓
+NULL</code></pre>
+      <p>When you create a node:</p>
+      <pre><code class="language-c">head = (struct Node *)malloc(sizeof(struct Node));</code></pre>
+      <p>A new node is allocated in the heap.</p>
+      <pre><code class="language-none">Heap
+
++-----------+
+| Data | *  |
++-----------+
+
+head
+ ↓
++-----------+
+| Data | *  |
++-----------+</code></pre>
+      <p>Now the linked list has one node.</p>
+
+      <h2>Memory Allocation Functions</h2>
+
+      <h3>1. malloc()</h3>
+      <p><strong>Syntax</strong></p>
+      <pre><code class="language-c">pointer = (type *)malloc(size);</code></pre>
+      <p>Example:</p>
+      <pre><code class="language-c">int *ptr;
+
+ptr = (int *)malloc(sizeof(int));</code></pre>
+      <p>Output:</p>
+      <pre><code class="language-none">Heap
+
++------+
+|  ?   |
++------+</code></pre>
+      <p>The allocated memory contains <strong>garbage values</strong> until initialized.</p>
+
+      <h3>2. calloc()</h3>
+      <p>Allocates memory and initializes all bytes to <strong>zero</strong>.</p>
+      <p><strong>Syntax</strong></p>
+      <pre><code class="language-c">pointer = (type *)calloc(n, size);</code></pre>
+      <p>Example:</p>
+      <pre><code class="language-c">int *ptr;
+
+ptr = (int *)calloc(5, sizeof(int));</code></pre>
+      <p>Memory:</p>
+      <pre><code class="language-none">0 0 0 0 0</code></pre>
+
+      <h3>Difference Between malloc() and calloc()</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>malloc()</th>
+            <th>calloc()</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Initialization</td><td>Garbage values</td><td>Zero initialized</td></tr>
+          <tr><td>Parameters</td><td>1</td><td>2</td></tr>
+          <tr><td>Speed</td><td>Slightly faster</td><td>Slightly slower</td></tr>
+        </tbody>
+      </table>
+
+      <h3>3. realloc()</h3>
+      <p>Changes the size of previously allocated memory.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">ptr = (int *)realloc(ptr, 10 * sizeof(int));</code></pre>
+      <p>If possible:</p>
+      <ul>
+        <li>Memory is expanded.</li>
+        <li>Otherwise, a new block is allocated, data is copied, and the old block is released.</li>
+      </ul>
+
+      <h3>4. free()</h3>
+      <p>Releases dynamically allocated memory.</p>
+      <p>Example:</p>
+      <pre><code class="language-c">free(ptr);</code></pre>
+      <p>After freeing:</p>
+      <pre><code class="language-none">Memory returned to Heap</code></pre>
+      <p>It is good practice to write:</p>
+      <pre><code class="language-c">ptr = NULL;</code></pre>
+      <p>This prevents <strong>dangling pointers</strong> (pointers that refer to freed memory).</p>
+
+      <h2>Creating the First Linked List Node</h2>
+
+      <h3>Structure</h3>
+      <pre><code class="language-c">struct Node
+{
+    int data;
+    struct Node *next;
+};</code></pre>
+      <p>This structure defines a node with:</p>
+      <ul>
+        <li><code>data</code> → stores the value</li>
+        <li><code>next</code> → stores the address of the next node</li>
+      </ul>
+
+      <h3>Creating a Node</h3>
+      <pre><code class="language-c">struct Node *head;
+
+head = (struct Node *)malloc(sizeof(struct Node));</code></pre>
+      <p>Memory:</p>
+      <pre><code class="language-none">head
+ ↓
++-----------+
+| data | *  |
++-----------+</code></pre>
+
+      <h3>Assign Values</h3>
+      <pre><code class="language-c">head->data = 10;
+head->next = NULL;</code></pre>
+      <p>Memory:</p>
+      <pre><code class="language-none">head
+ ↓
++-----------+
+| 10 | NULL |
++-----------+</code></pre>
+      <p>This is the smallest valid linked list.</p>
+
+      <h2>Creating Two Nodes</h2>
+      <pre><code class="language-c">struct Node *first, *second;
+
+first = (struct Node *)malloc(sizeof(struct Node));
+second = (struct Node *)malloc(sizeof(struct Node));
+
+first->data = 10;
+first->next = second;
+
+second->data = 20;
+second->next = NULL;</code></pre>
+      <p>Memory:</p>
+      <pre><code class="language-none">first
+  ↓
++-----------+      +-----------+
+| 10 |   ----|----->| 20 | NULL |
++-----------+      +-----------+</code></pre>
+
+      <h2>Why sizeof(struct Node)?</h2>
+      <p>Suppose the structure is:</p>
+      <pre><code class="language-c">struct Node
+{
+    int data;
+    struct Node *next;
+};</code></pre>
+      <p><code>sizeof(struct Node)</code> automatically calculates the required memory for the entire node, including any padding added by the compiler. This makes the code portable and avoids hardcoding sizes.</p>
+
+      <h2>Common Mistakes</h2>
+
+      <h3>Forgetting to Allocate Memory</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">struct Node *head;
+
+head->data = 10;</code></pre>
+      <p><code>head</code> doesn't point to valid memory, leading to <strong>undefined behavior</strong>.</p>
+      <p>✔ Correct</p>
+      <pre><code class="language-c">head = (struct Node *)malloc(sizeof(struct Node));
+
+head->data = 10;</code></pre>
+
+      <h3>Forgetting to Free Memory</h3>
+      <pre><code class="language-c">malloc(...)</code></pre>
+      <p>without</p>
+      <pre><code class="language-c">free(...)</code></pre>
+      <p>causes a <strong>memory leak</strong>, where allocated memory remains unavailable until the program terminates.</p>
+
+      <h3>Using Memory After free()</h3>
+      <p>❌ Wrong</p>
+      <pre><code class="language-c">free(head);
+
+head->data = 50;</code></pre>
+      <p>This accesses freed memory and results in undefined behavior.</p>
+      <p>✔ Better</p>
+      <pre><code class="language-c">free(head);
+head = NULL;</code></pre>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine a hotel:</p>
+      <ul>
+        <li><strong>Stack</strong> → Rooms booked automatically for a short stay. Guests check out automatically.</li>
+        <li><strong>Heap</strong> → Rooms booked manually. The guest stays until someone explicitly checks them out.</li>
+      </ul>
+      <p>Linked list nodes are like heap rooms—they remain available until you call <code>free()</code>.</p>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li>Dynamic memory is allocated at <strong>runtime</strong> from the <strong>heap</strong>.</li>
+        <li>Linked lists rely on dynamic memory because their size changes during execution.</li>
+        <li><code>malloc()</code> allocates uninitialized memory.</li>
+        <li><code>calloc()</code> allocates zero-initialized memory.</li>
+        <li><code>realloc()</code> resizes previously allocated memory.</li>
+        <li><code>free()</code> releases memory back to the heap.</li>
+        <li>Every linked list node is created dynamically using <code>malloc()</code> and should eventually be released using <code>free()</code>.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
