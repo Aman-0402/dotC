@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction to Linked Lists — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+  <style>
+    .ll-viz {
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: var(--color-bg-elevated);
+      padding: 1.5rem 1rem;
+      margin: 1.5rem 0;
+    }
+    .ll-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .ll-tab {
+      flex: 1;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    .ll-tab--active {
+      background: var(--color-accent);
+      color: #fff;
+      border-color: var(--color-accent);
+    }
+    .ll-row,
+    .ll-detached-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+      min-height: 70px;
+    }
+    .ll-detached-row {
+      min-height: 60px;
+      margin-top: 0.5rem;
+    }
+    .ll-node {
+      display: flex;
+      flex-direction: column;
+      border: 2px solid var(--color-border);
+      border-radius: 4px;
+      overflow: hidden;
+      font-family: var(--font-mono);
+      min-width: 64px;
+    }
+    .ll-node--highlight {
+      border-color: var(--color-accent);
+    }
+    .ll-node--detached {
+      border-style: dashed;
+      opacity: 0.85;
+    }
+    .ll-node-data {
+      padding: 0.5rem 0.75rem;
+      text-align: center;
+      font-weight: 700;
+      background: var(--color-bg);
+      color: var(--color-text);
+    }
+    .ll-node-next {
+      padding: 0.3rem 0.75rem;
+      text-align: center;
+      font-size: 0.75rem;
+      background: var(--color-bg-elevated);
+      color: var(--color-text);
+      border-top: 1px solid var(--color-border);
+    }
+    .ll-arrow {
+      display: flex;
+      align-items: center;
+      width: 40px;
+      height: 2px;
+      background: var(--color-border);
+      position: relative;
+      margin: 0 4px;
+    }
+    .ll-arrow::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: -4px;
+      border-left: 8px solid var(--color-border);
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+    .ll-arrow--highlight {
+      background: var(--color-accent);
+    }
+    .ll-arrow--highlight::after {
+      border-left-color: var(--color-accent);
+    }
+    .ll-arrow--null {
+      width: 30px;
+    }
+    .ll-arrow--null::after {
+      border-left: none;
+      border-right: 2px solid var(--color-border);
+      right: 2px;
+      top: -6px;
+      height: 12px;
+      border-top: none;
+      border-bottom: none;
+    }
+    .ll-null-label {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-text);
+      margin-left: 4px;
+    }
+    .ll-detached-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-text);
+      margin-left: 0.5rem;
+      opacity: 0.7;
+    }
+    .ll-caption {
+      font-family: var(--font-mono);
+      margin-top: 1rem;
+      color: var(--color-text);
+    }
+    .ll-slider {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .ll-controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .ll-controls button {
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      background: var(--color-bg);
+      color: var(--color-text);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 8 / Introduction to Linked Lists</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Introduction to Linked Lists</h1>
+
+      <h2>What is a Linked List?</h2>
+      <p>A <strong>Linked List</strong> is a <strong>linear data structure</strong> in which elements (called <strong>nodes</strong>) are stored <strong>non-contiguously</strong> in memory. Each node contains:</p>
+      <ol>
+        <li><strong>Data</strong> – the actual value.</li>
+        <li><strong>Pointer (Link)</strong> – the address of the next node.</li>
+      </ol>
+      <p>Unlike arrays, linked lists do <strong>not</strong> require contiguous memory locations.</p>
+
+      <h2>Visual Representation</h2>
+      <pre><code class="language-none">Head
+ ↓
++------+------+
+| 10   |  •------+
++------+------+
+              |
+              v
+        +------+------+
+        | 20   |  •------+
+        +------+------+
+                      |
+                      v
+                +------+------+
+                | 30   | NULL |
+                +------+------+</code></pre>
+      <p>Each node stores:</p>
+      <pre><code class="language-none">+------+------+
+| Data | Next |
++------+------+</code></pre>
+      <p>Where:</p>
+      <ul>
+        <li><strong>Data</strong> = Information stored</li>
+        <li><strong>Next</strong> = Address of the next node</li>
+      </ul>
+
+      <h2>Try It Yourself</h2>
+      <p>This visualizer shows a singly linked list <code>10 → 20 → 30</code>. Switch between <strong>Insert</strong> (adding node 25 after node 20) and <strong>Delete</strong> (removing node 20) to see how pointers change.</p>
+      <div class="ll-viz">
+        <div class="ll-tabs">
+          <button class="ll-tab ll-tab--active" id="ll-tab-insert" type="button">Insert</button>
+          <button class="ll-tab" id="ll-tab-delete" type="button">Delete</button>
+        </div>
+        <div class="ll-row" id="ll-row"></div>
+        <div class="ll-detached-row" id="ll-detached-row"></div>
+        <p class="ll-caption" id="ll-caption">Ready — press Step to begin.</p>
+        <input type="range" class="ll-slider" id="ll-slider" min="0" value="0" step="1" />
+        <div class="ll-controls">
+          <button id="ll-step" type="button">Step</button>
+          <button id="ll-reset" type="button">Reset</button>
+        </div>
+      </div>
+
+      <h2>Real Memory Representation</h2>
+      <p>Suppose memory looks like this:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Address</th>
+            <th>Data</th>
+            <th>Next</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>500</td><td>10</td><td>1200</td></tr>
+          <tr><td>1200</td><td>20</td><td>750</td></tr>
+          <tr><td>750</td><td>30</td><td>NULL</td></tr>
+        </tbody>
+      </table>
+      <p>Notice:</p>
+      <ul>
+        <li>Nodes are <strong>not stored together</strong>.</li>
+        <li>They are connected using <strong>addresses (pointers)</strong>.</li>
+        <li>The <strong>Head pointer</strong> stores the address of the first node (500).</li>
+      </ul>
+
+      <h2>Why Do We Need Linked Lists?</h2>
+      <p>Consider an array:</p>
+      <pre><code class="language-none">10 20 30 40 50</code></pre>
+      <p>If you want to insert <strong>25</strong> between 20 and 30:</p>
+      <pre><code class="language-none">10 20 25 30 40 50</code></pre>
+      <p>In an array:</p>
+      <ul>
+        <li>Elements must be shifted.</li>
+        <li>Time complexity = <strong>O(n)</strong>.</li>
+      </ul>
+      <p>In a linked list:</p>
+      <ul>
+        <li>Just change a few pointers.</li>
+        <li>No shifting of elements is required.</li>
+      </ul>
+
+      <h2>Linked List vs Array</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Array</th>
+            <th>Linked List</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Memory</td><td>Contiguous</td><td>Non-contiguous</td></tr>
+          <tr><td>Size</td><td>Fixed</td><td>Dynamic</td></tr>
+          <tr><td>Insertion</td><td>Slow</td><td>Fast (at known position)</td></tr>
+          <tr><td>Deletion</td><td>Slow</td><td>Fast (at known position)</td></tr>
+          <tr><td>Random Access</td><td>Yes (O(1))</td><td>No (O(n))</td></tr>
+          <tr><td>Memory Usage</td><td>No pointer overhead</td><td>Extra memory for pointers</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Basic Terminology</h2>
+
+      <h3>Node</h3>
+      <p>The basic building block.</p>
+      <pre><code class="language-none">+------+------+
+| Data | Next |
++------+------+</code></pre>
+
+      <h3>Head</h3>
+      <p>The pointer that stores the address of the first node.</p>
+      <pre><code class="language-none">Head
+ ↓
+10 → 20 → 30 → NULL</code></pre>
+
+      <h3>Tail</h3>
+      <p>The last node.</p>
+      <pre><code class="language-none">10 → 20 → 30
+            ↑
+          Tail</code></pre>
+      <p>Its next pointer is:</p>
+      <pre><code class="language-none">NULL</code></pre>
+
+      <h3>NULL</h3>
+      <p>Marks the end of the linked list.</p>
+      <pre><code class="language-none">10 → 20 → 30 → NULL</code></pre>
+
+      <h2>Types of Linked Lists</h2>
+
+      <h3>1. Singly Linked List</h3>
+      <pre><code class="language-none">10 → 20 → 30 → NULL</code></pre>
+      <p>Each node points only to the next node.</p>
+
+      <h3>2. Doubly Linked List</h3>
+      <pre><code class="language-none">NULL ← 10 ⇄ 20 ⇄ 30 → NULL</code></pre>
+      <p>Each node has both <strong>previous</strong> and <strong>next</strong> pointers.</p>
+
+      <h3>3. Circular Singly Linked List</h3>
+      <pre><code class="language-none">10 → 20 → 30
+↑          ↓
+└──────────┘</code></pre>
+      <p>The last node points back to the first node.</p>
+
+      <h3>4. Circular Doubly Linked List</h3>
+      <pre><code class="language-none">      ⇄
+10 ⇄ 20 ⇄ 30
+↑          ↓
+└──────────┘</code></pre>
+      <p>Both previous and next links form a circle.</p>
+
+      <h2>Where Are Linked Lists Used?</h2>
+      <ul>
+        <li>Implementing stacks</li>
+        <li>Implementing queues</li>
+        <li>Graphs (Adjacency Lists)</li>
+        <li>Hash Tables (Separate Chaining)</li>
+        <li>Music playlists</li>
+        <li>Browser history</li>
+        <li>Undo/Redo functionality</li>
+        <li>Memory management</li>
+        <li>Polynomial representation</li>
+        <li>Dynamic memory allocation</li>
+      </ul>
+
+      <h2>Time Complexity Overview</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Operation</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Access</td><td>O(n)</td></tr>
+          <tr><td>Search</td><td>O(n)</td></tr>
+          <tr><td>Insert at Beginning</td><td>O(1)</td></tr>
+          <tr><td>Insert at End (with tail)</td><td>O(1)</td></tr>
+          <tr><td>Insert at End (without tail)</td><td>O(n)</td></tr>
+          <tr><td>Delete at Beginning</td><td>O(1)</td></tr>
+          <tr><td>Delete at End</td><td>O(n)</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li>A linked list is a <strong>dynamic linear data structure</strong> made up of nodes.</li>
+        <li>Each node contains <strong>data</strong> and a <strong>pointer to the next node</strong>.</li>
+        <li>Nodes can be stored anywhere in memory.</li>
+        <li>Linked lists allow efficient insertion and deletion without shifting elements.</li>
+        <li>The trade-off is that random access is not possible, so searching takes <strong>O(n)</strong> time.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+  <script>
+  <!-- ll-viz script body added in Task 2 -->
+  </script>
+</body>
+</html>
