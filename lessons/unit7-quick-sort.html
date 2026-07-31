@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quick Sort — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 7 / Quick Sort</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Quick Sort</h1>
+
+      <p>Quick Sort is one of the <strong>fastest and most widely used sorting algorithms</strong>. It is a <strong>comparison-based</strong> sorting algorithm that uses the <strong>Divide and Conquer</strong> technique.</p>
+      <p>Unlike Merge Sort, Quick Sort <strong>does not divide the array into equal halves</strong>. Instead, it selects a <strong>Pivot</strong> element and rearranges the array so that:</p>
+      <ul>
+        <li>All elements <strong>smaller than the pivot</strong> are placed on the left.</li>
+        <li>All elements <strong>greater than the pivot</strong> are placed on the right.</li>
+        <li>The pivot reaches its correct sorted position.</li>
+      </ul>
+      <p>The same process is then applied recursively to the left and right subarrays.</p>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine arranging students by height around a chosen student (the <strong>pivot</strong>).</p>
+      <p>Suppose the pivot student is <strong>170 cm</strong> tall.</p>
+      <ul>
+        <li>Students shorter than 170 cm stand on the <strong>left</strong>.</li>
+        <li>Students taller than 170 cm stand on the <strong>right</strong>.</li>
+        <li>The pivot remains in the <strong>middle</strong>.</li>
+      </ul>
+      <p>Now repeat the same process separately for the left and right groups until everyone is in order.</p>
+
+      <h2>Key Terminology</h2>
+      <h3>Pivot</h3>
+      <p>A <strong>Pivot</strong> is the element chosen to partition the array.</p>
+      <p>The pivot can be:</p>
+      <ul>
+        <li>First element</li>
+        <li>Last element</li>
+        <li>Middle element</li>
+        <li>Random element</li>
+        <li>Median of three (advanced optimization)</li>
+      </ul>
+      <p>In this chapter, we will use the <strong>last element as the pivot (Lomuto Partition Scheme)</strong> because it is simple and commonly taught.</p>
+
+      <h2>How Quick Sort Works</h2>
+      <p>Given the array:</p>
+      <pre><code class="language-none">10 80 30 90 40 50 70</code></pre>
+
+      <h3>Step 1: Choose Pivot</h3>
+      <p>Choose the last element.</p>
+      <pre><code class="language-none">10 80 30 90 40 50 [70]</code></pre>
+      <p>Pivot = <strong>70</strong></p>
+
+      <h3>Step 2: Partition</h3>
+      <p>Move all elements smaller than 70 to the left and larger ones to the right.</p>
+      <pre><code class="language-none">10 30 40 50 70 90 80</code></pre>
+      <p>Now <strong>70</strong> is in its correct sorted position.</p>
+
+      <h3>Step 3: Recursively Sort Left</h3>
+      <p>Left subarray:</p>
+      <pre><code class="language-none">10 30 40 50</code></pre>
+      <p>Choose pivot = <strong>50</strong></p>
+      <p>Already partitioned.</p>
+
+      <h3>Step 4: Recursively Sort Right</h3>
+      <p>Right subarray:</p>
+      <pre><code class="language-none">90 80</code></pre>
+      <p>Choose pivot = <strong>80</strong></p>
+      <p>Partition:</p>
+      <pre><code class="language-none">80 90</code></pre>
+
+      <h3>Final Sorted Array</h3>
+      <pre><code class="language-none">10 30 40 50 70 80 90</code></pre>
+
+      <h2>Quick Sort Visualization</h2>
+      <pre><code class="language-none">Initial Array
+
+10 80 30 90 40 50 70
+                  ↑
+                Pivot
+
+↓
+
+Partition
+
+10 30 40 50 |70| 90 80
+
+↓
+
+Sort Left
+
+10 30 40 50
+
+↓
+
+Sort Right
+
+80 90
+
+↓
+
+Final
+
+10 30 40 50 70 80 90</code></pre>
+
+      <h2>Try It Yourself</h2>
+      <div class="viz">
+        <div class="viz-bars" id="viz-bars"></div>
+        <p class="viz-caption" id="viz-caption">Ready — press Play or Step to begin.</p>
+        <input type="range" class="viz-slider" id="viz-slider" min="0" value="0" step="1" />
+        <div class="viz-controls">
+          <button id="viz-shuffle" type="button">Shuffle</button>
+          <button id="viz-play" type="button">Play</button>
+          <button id="viz-step" type="button">Step</button>
+          <button id="viz-reset" type="button">Reset</button>
+        </div>
+      </div>
+
+      <h2>Quick Sort Algorithm</h2>
+      <pre><code class="language-none">QuickSort(low, high)
+
+If low < high
+
+    Partition array
+
+    Pivot reaches correct position
+
+    QuickSort(left)
+
+    QuickSort(right)</code></pre>
+
+      <h2>Partition Algorithm (Lomuto)</h2>
+      <pre><code class="language-none">Choose last element as Pivot
+
+Maintain index i
+
+Traverse array
+
+If current element < Pivot
+
+    Increment i
+
+    Swap
+
+Finally
+
+Swap Pivot with i+1
+
+Return Pivot Index</code></pre>
+
+      <h2>C Program</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int partition(int arr[], int low, int high)
+{
+    int pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j &lt; high; j++)
+    {
+        if (arr[j] &lt; pivot)
+        {
+            i++;
+            swap(&amp;arr[i], &amp;arr[j]);
+        }
+    }
+
+    swap(&amp;arr[i + 1], &amp;arr[high]);
+
+    return i + 1;
+}
+
+void quickSort(int arr[], int low, int high)
+{
+    if (low &lt; high)
+    {
+        int pi = partition(arr, low, high);
+
+        quickSort(arr, low, pi - 1);
+
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int main()
+{
+    int arr[] = {10, 80, 30, 90, 40, 50, 70};
+
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    quickSort(arr, 0, n - 1);
+
+    printf("Sorted Array:\n");
+
+    for (int i = 0; i &lt; n; i++)
+        printf("%d ", arr[i]);
+
+    return 0;
+}</code></pre>
+
+      <h2>Output</h2>
+      <pre><code class="language-none">Sorted Array:
+10 30 40 50 70 80 90</code></pre>
+
+      <h2>Code Explanation</h2>
+
+      <h3>Pivot Selection</h3>
+      <pre><code class="language-c">int pivot = arr[high];</code></pre>
+      <p>The last element is selected as the pivot.</p>
+
+      <h3>Partition</h3>
+      <pre><code class="language-c">for(int j = low; j &lt; high; j++)</code></pre>
+      <p>Traverse the array and move elements smaller than the pivot to the left.</p>
+
+      <h3>Swap</h3>
+      <pre><code class="language-c">swap(&amp;arr[i], &amp;arr[j]);</code></pre>
+      <p>Places smaller elements before the pivot.</p>
+
+      <h3>Final Pivot Placement</h3>
+      <pre><code class="language-c">swap(&amp;arr[i + 1], &amp;arr[high]);</code></pre>
+      <p>Moves the pivot to its correct sorted position.</p>
+
+      <h3>Recursive Calls</h3>
+      <pre><code class="language-c">quickSort(arr, low, pi - 1);
+
+quickSort(arr, pi + 1, high);</code></pre>
+      <p>Recursively sort the left and right partitions.</p>
+
+      <h2>Time Complexity</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Best Case</td><td><strong>O(n log n)</strong></td></tr>
+          <tr><td>Average Case</td><td><strong>O(n log n)</strong></td></tr>
+          <tr><td>Worst Case</td><td><strong>O(n²)</strong></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Why is the Worst Case O(n²)?</h3>
+      <p>If the pivot is always the smallest or largest element (for example, when the array is already sorted and the last element is always chosen as the pivot), the partitions become highly unbalanced.</p>
+      <p>Example:</p>
+      <pre><code class="language-none">1 2 3 4 5</code></pre>
+      <p>Pivot = 5</p>
+      <p>Left side has 4 elements, right side has 0 elements.</p>
+      <p>This continues recursively, leading to <strong>O(n²)</strong> time.</p>
+
+      <h2>Space Complexity</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Complexity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Average</td><td><strong>O(log n)</strong></td></tr>
+          <tr><td>Worst</td><td><strong>O(n)</strong></td></tr>
+        </tbody>
+      </table>
+      <p>The extra space is due to the recursive function call stack.</p>
+
+      <h2>Advantages</h2>
+      <ul>
+        <li>Very fast in practice.</li>
+        <li>Average time complexity is <strong>O(n log n)</strong>.</li>
+        <li>In-place sorting algorithm.</li>
+        <li>Requires very little extra memory.</li>
+        <li>Widely used in standard libraries and real-world applications.</li>
+      </ul>
+
+      <h2>Disadvantages</h2>
+      <ul>
+        <li>Worst-case time complexity is <strong>O(n²)</strong>.</li>
+        <li>Not a stable sorting algorithm.</li>
+        <li>Recursive calls can become deep in the worst case.</li>
+      </ul>
+
+      <h2>Applications</h2>
+      <ul>
+        <li>Large in-memory datasets.</li>
+        <li>Standard library sorting functions.</li>
+        <li>Database systems.</li>
+        <li>Operating systems.</li>
+        <li>Competitive programming.</li>
+        <li>Real-time applications requiring fast average performance.</li>
+      </ul>
+
+      <h2>Merge Sort vs Quick Sort</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Merge Sort</th>
+            <th>Quick Sort</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Technique</td><td>Divide &amp; Conquer</td><td>Divide &amp; Conquer</td></tr>
+          <tr><td>Stable</td><td>Yes</td><td>No</td></tr>
+          <tr><td>In-place</td><td>No</td><td>Yes</td></tr>
+          <tr><td>Best Case</td><td>O(n log n)</td><td>O(n log n)</td></tr>
+          <tr><td>Average Case</td><td>O(n log n)</td><td>O(n log n)</td></tr>
+          <tr><td>Worst Case</td><td>O(n log n)</td><td>O(n²)</td></tr>
+          <tr><td>Extra Memory</td><td>O(n)</td><td>O(log n) (recursion stack)</td></tr>
+          <tr><td>Performance</td><td>Consistent</td><td>Faster on average</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Key Points to Remember</h2>
+      <ul>
+        <li>Uses the <strong>Divide and Conquer</strong> technique.</li>
+        <li>Selects a <strong>pivot</strong> and partitions the array.</li>
+        <li>Elements smaller than the pivot move to the left.</li>
+        <li>Elements larger than the pivot move to the right.</li>
+        <li><strong>In-place</strong> sorting algorithm.</li>
+        <li><strong>Not stable</strong>.</li>
+        <li>Average Time Complexity: <strong>O(n log n)</strong>.</li>
+        <li>Worst Time Complexity: <strong>O(n²)</strong>.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+  <script>
+    (function () {
+      var initialArray = [10, 80, 30, 90, 40, 50, 70];
+
+      function generateSteps(startArray) {
+        var a = startArray.slice();
+        var steps = [];
+
+        function partitionRange(low, high) {
+          var pivot = a[high];
+          var i = low - 1;
+
+          for (var j = low; j < high; j++) {
+            steps.push({
+              type: 'compare',
+              indices: [j, high],
+              caption: 'Compare ' + a[j] + ' with pivot ' + pivot,
+              array: a.slice()
+            });
+
+            if (a[j] < pivot) {
+              i++;
+              var temp = a[i];
+              a[i] = a[j];
+              a[j] = temp;
+              steps.push({
+                type: 'swap',
+                indices: [i, j],
+                caption: 'Swap ' + a[j] + ' and ' + a[i],
+                array: a.slice()
+              });
+            }
+          }
+
+          var temp2 = a[i + 1];
+          a[i + 1] = a[high];
+          a[high] = temp2;
+          steps.push({
+            type: 'swap',
+            indices: [i + 1, high],
+            caption: 'Place pivot ' + a[i + 1] + ' at index ' + (i + 1),
+            array: a.slice()
+          });
+
+          steps.push({
+            type: 'markSorted',
+            indices: [i + 1],
+            caption: 'Pivot ' + a[i + 1] + ' is now in its correct position',
+            array: a.slice()
+          });
+
+          return i + 1;
+        }
+
+        function quickSortRange(low, high) {
+          if (low < high) {
+            var pi = partitionRange(low, high);
+            quickSortRange(low, pi - 1);
+            quickSortRange(pi + 1, high);
+          } else if (low === high) {
+            steps.push({
+              type: 'markSorted',
+              indices: [low],
+              caption: 'Single element at index ' + low + ' is trivially sorted',
+              array: a.slice()
+            });
+          }
+        }
+
+        quickSortRange(0, a.length - 1);
+        return steps;
+      }
+
+      function shuffleArray(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+        return arr;
+      }
+
+      var container = document.getElementById('viz-bars');
+      var caption = document.getElementById('viz-caption');
+      var slider = document.getElementById('viz-slider');
+      var shuffleBtn = document.getElementById('viz-shuffle');
+      var playBtn = document.getElementById('viz-play');
+      var stepBtn = document.getElementById('viz-step');
+      var resetBtn = document.getElementById('viz-reset');
+
+      if (!container) return;
+
+      var currentArray = initialArray.slice();
+      var steps = generateSteps(currentArray);
+      var stepIndex = 0;
+      var playing = false;
+      var playTimer = null;
+
+      function maxValue(arr) {
+        var m = arr[0];
+        for (var i = 1; i < arr.length; i++) {
+          if (arr[i] > m) m = arr[i];
+        }
+        return m;
+      }
+
+      function sortedIndicesUpTo(idx) {
+        var sorted = {};
+        for (var i = 0; i <= idx; i++) {
+          if (steps[i].type === 'markSorted') {
+            steps[i].indices.forEach(function (n) {
+              sorted[n] = true;
+            });
+          }
+        }
+        return sorted;
+      }
+
+      function render() {
+        container.innerHTML = '';
+        var step = steps[stepIndex];
+        var arr = step ? step.array : currentArray;
+        var max = maxValue(arr);
+        var sorted = sortedIndicesUpTo(stepIndex);
+
+        arr.forEach(function (value, idx) {
+          var bar = document.createElement('div');
+          bar.className = 'viz-bar';
+          bar.style.height = (value / max * 100) + '%';
+
+          if (step && step.type !== 'markSorted' && step.indices.indexOf(idx) !== -1) {
+            bar.classList.add('viz-bar--comparing');
+          }
+
+          if (sorted[idx]) {
+            bar.classList.add('viz-bar--sorted');
+          }
+
+          var label = document.createElement('span');
+          label.textContent = value;
+          bar.appendChild(label);
+
+          container.appendChild(bar);
+        });
+
+        caption.textContent = step ? step.caption : 'Ready — press Play or Step to begin.';
+        slider.value = stepIndex;
+        stepBtn.disabled = stepIndex >= steps.length - 1;
+
+        if (stepIndex >= steps.length - 1) {
+          pause();
+        }
+      }
+
+      function goToStep(idx) {
+        stepIndex = Math.max(0, Math.min(idx, steps.length - 1));
+        render();
+      }
+
+      function play() {
+        if (playing) return;
+        playing = true;
+        playBtn.textContent = 'Pause';
+        playTimer = setInterval(function () {
+          if (stepIndex >= steps.length - 1) {
+            pause();
+            return;
+          }
+          goToStep(stepIndex + 1);
+        }, 700);
+      }
+
+      function pause() {
+        playing = false;
+        playBtn.textContent = 'Play';
+        if (playTimer) {
+          clearInterval(playTimer);
+          playTimer = null;
+        }
+      }
+
+      shuffleBtn.addEventListener('click', function () {
+        pause();
+        currentArray = shuffleArray(initialArray.slice());
+        steps = generateSteps(currentArray);
+        slider.max = steps.length - 1;
+        goToStep(0);
+      });
+
+      playBtn.addEventListener('click', function () {
+        if (playing) {
+          pause();
+        } else {
+          play();
+        }
+      });
+
+      stepBtn.addEventListener('click', function () {
+        pause();
+        goToStep(stepIndex + 1);
+      });
+
+      resetBtn.addEventListener('click', function () {
+        pause();
+        goToStep(0);
+      });
+
+      slider.addEventListener('input', function () {
+        pause();
+        goToStep(parseInt(slider.value, 10));
+      });
+
+      slider.max = steps.length - 1;
+      render();
+    })();
+  </script>
+</body>
+</html>
