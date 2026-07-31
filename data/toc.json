@@ -187,6 +187,15 @@
           "path": "lessons/unit4-pointers.html"
         }
       ]
+    },
+    {
+      "title": "Unit 5",
+      "lessons": [
+        {
+          "title": "Structures & Unions",
+          "path": "lessons/unit5-structures-unions.html"
+        }
+      ]
     }
   ]
 }

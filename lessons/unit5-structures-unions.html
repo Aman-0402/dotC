@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Structures & Unions — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 5 / Structures & Unions</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Structures &amp; Unions</h1>
+
+      <p>Structures and unions are <strong>user-defined data types</strong> in C that allow programmers to group multiple variables under a single name. They help organize related data and make programs more structured and easier to manage.</p>
+      <p>Although structures and unions appear similar, they differ in how memory is allocated and used.</p>
+
+      <h2>1. User-defined Structure</h2>
+      <h3>Definition</h3>
+      <p>A <strong>structure (<code>struct</code>)</strong> is a user-defined data type that groups variables of <strong>different data types</strong> into a single unit.</p>
+      <p>Instead of storing related information in separate variables, a structure stores them together.</p>
+
+      <h3>Real-Life Example</h3>
+      <p>Consider student information.</p>
+      <p>Instead of writing:</p>
+      <pre><code class="language-c">char name[30];
+int roll;
+float marks;
+char grade;</code></pre>
+      <p>We can combine them into one structure.</p>
+      <pre><code class="language-c">struct Student
+{
+    char name[30];
+    int roll;
+    float marks;
+    char grade;
+};</code></pre>
+      <p>Now all student-related information belongs to one data type.</p>
+
+      <h2>Why Use Structures?</h2>
+      <ul>
+        <li>Store related information together.</li>
+        <li>Makes code organized.</li>
+        <li>Easy to pass data to functions.</li>
+        <li>Represents real-world objects.</li>
+        <li>Used in databases, file handling, linked lists, trees, etc.</li>
+      </ul>
+
+      <h2>Syntax</h2>
+      <pre><code class="language-c">struct StructureName
+{
+    data_type member1;
+    data_type member2;
+    data_type member3;
+};</code></pre>
+      <h3>Example</h3>
+      <pre><code class="language-c">struct Employee
+{
+    int id;
+    char name[30];
+    float salary;
+};</code></pre>
+
+      <h2>Declaring Structure Variables</h2>
+      <p>After defining the structure, create variables.</p>
+      <pre><code class="language-c">struct Employee emp1;</code></pre>
+      <p>Multiple variables:</p>
+      <pre><code class="language-c">struct Employee emp1, emp2, emp3;</code></pre>
+
+      <h2>Initializing Structure</h2>
+      <pre><code class="language-c">struct Employee emp1 =
+{
+    101,
+    "Rahul",
+    45000.50
+};</code></pre>
+
+      <h2>Accessing Members</h2>
+      <p>Use the <strong>dot (.) operator</strong>.</p>
+      <pre><code class="language-c">emp1.id
+emp1.name
+emp1.salary</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">printf("%d", emp1.id);
+printf("%s", emp1.name);
+printf("%.2f", emp1.salary);</code></pre>
+
+      <h2>Taking Input</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+struct Student
+{
+    int roll;
+    char name[30];
+    float marks;
+};
+
+int main()
+{
+    struct Student s;
+
+    printf("Enter Roll: ");
+    scanf("%d", &amp;s.roll);
+
+    printf("Enter Name: ");
+    scanf("%s", s.name);
+
+    printf("Enter Marks: ");
+    scanf("%f", &amp;s.marks);
+
+    printf("\nStudent Details\n");
+    printf("Roll : %d\n", s.roll);
+    printf("Name : %s\n", s.name);
+    printf("Marks: %.2f\n", s.marks);
+
+    return 0;
+}</code></pre>
+      <h3>Output</h3>
+      <pre><code class="language-none">Enter Roll: 101
+Enter Name: Aman
+Enter Marks: 92.5
+
+Student Details
+Roll : 101
+Name : Aman
+Marks: 92.50</code></pre>
+
+      <h2>Memory Allocation in Structure</h2>
+      <p>Each member gets <strong>its own memory</strong>.</p>
+      <p>Example</p>
+      <pre><code class="language-c">struct Demo
+{
+    int a;
+    float b;
+    char c;
+};</code></pre>
+      <p>Approximate memory</p>
+      <pre><code class="language-none">a -> 4 Bytes
+
+b -> 4 Bytes
+
+c -> 1 Byte
+
+Total ≈ 12 Bytes (including padding)</code></pre>
+      <p>Each member exists independently.</p>
+
+      <h2>Array of Structures</h2>
+      <p>Useful for storing multiple records.</p>
+      <pre><code class="language-c">struct Student
+{
+    int roll;
+    char name[30];
+};
+
+struct Student s[50];</code></pre>
+      <p>Stores information of 50 students.</p>
+
+      <h2>Nested Structure</h2>
+      <p>A structure inside another structure.</p>
+      <pre><code class="language-c">struct Address
+{
+    char city[30];
+    int pin;
+};
+
+struct Student
+{
+    char name[30];
+    int roll;
+    struct Address add;
+};</code></pre>
+      <p>Access members</p>
+      <pre><code class="language-c">student.add.city
+student.add.pin</code></pre>
+
+      <h2>Structure Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+struct Book
+{
+    int id;
+    char title[40];
+    float price;
+};
+
+int main()
+{
+    struct Book b =
+    {
+        1,
+        "C Programming",
+        499.50
+    };
+
+    printf("Book ID : %d\n", b.id);
+    printf("Title   : %s\n", b.title);
+    printf("Price   : %.2f\n", b.price);
+
+    return 0;
+}</code></pre>
+
+      <h2>Advantages of Structures</h2>
+      <ul>
+        <li>Organizes related data.</li>
+        <li>Supports arrays of records.</li>
+        <li>Supports nested structures.</li>
+        <li>Easy to maintain.</li>
+        <li>Widely used in real-world software.</li>
+      </ul>
+
+      <h2>Limitations</h2>
+      <ul>
+        <li>Members occupy separate memory.</li>
+        <li>Arithmetic operations cannot be performed directly on structures.</li>
+        <li>Requires dot operator for member access.</li>
+      </ul>
+
+      <h2>2. Union</h2>
+      <h3>Definition</h3>
+      <p>A <strong>union (<code>union</code>)</strong> is a user-defined data type similar to a structure, but <strong>all members share the same memory location</strong>.</p>
+      <p>Only <strong>one member can hold a meaningful value at a time</strong> because writing to one member overwrites the others.</p>
+
+      <h2>Syntax</h2>
+      <pre><code class="language-c">union UnionName
+{
+    data_type member1;
+    data_type member2;
+};</code></pre>
+      <p>Example</p>
+      <pre><code class="language-c">union Data
+{
+    int i;
+    float f;
+    char str[20];
+};</code></pre>
+
+      <h2>Declaring Union Variable</h2>
+      <pre><code class="language-c">union Data d;</code></pre>
+
+      <h2>Accessing Members</h2>
+      <p>Use the dot operator.</p>
+      <pre><code class="language-c">d.i
+d.f
+d.str</code></pre>
+
+      <h2>Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+union Data
+{
+    int i;
+    float f;
+};
+
+int main()
+{
+    union Data d;
+
+    d.i = 100;
+    printf("Integer = %d\n", d.i);
+
+    d.f = 5.5;
+    printf("Float = %.2f\n", d.f);
+
+    printf("Integer after storing float = %d\n", d.i);
+
+    return 0;
+}</code></pre>
+      <h3>Possible Output</h3>
+      <pre><code class="language-none">Integer = 100
+Float = 5.50
+Integer after storing float = 1085276160</code></pre>
+      <p>The integer value changes because both members share the same memory.</p>
+
+      <h2>Memory Allocation in Union</h2>
+      <pre><code class="language-c">union Demo
+{
+    int a;
+    float b;
+    char c;
+};</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">int   -> 4 Bytes
+float -> 4 Bytes
+char  -> 1 Byte
+
+Total Memory = 4 Bytes</code></pre>
+      <p>The union size is determined by its <strong>largest member</strong> (plus any alignment requirements).</p>
+
+      <h2>Structure vs Union</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Structure</th>
+            <th>Union</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Memory Allocation</td><td>Separate memory for each member</td><td>Shared memory for all members</td></tr>
+          <tr><td>Total Size</td><td>Sum of member sizes (plus padding)</td><td>Size of the largest member</td></tr>
+          <tr><td>Simultaneous Values</td><td>All members can store values at the same time</td><td>Only one member can store a meaningful value at a time</td></tr>
+          <tr><td>Memory Efficiency</td><td>Lower</td><td>Higher</td></tr>
+          <tr><td>Data Safety</td><td>Better</td><td>Lower, as members overwrite each other</td></tr>
+          <tr><td>Use Case</td><td>Records (students, employees, books)</td><td>Memory optimization, hardware interfaces, embedded systems</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Dry Run (Union)</h2>
+      <pre><code class="language-c">union Data
+{
+    int i;
+    float f;
+};
+
+union Data d;</code></pre>
+
+      <h3>Step 1</h3>
+      <pre><code class="language-c">d.i = 25;</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">+---------+
+|   25    |
++---------+</code></pre>
+
+      <h3>Step 2</h3>
+      <pre><code class="language-c">d.f = 6.75;</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">+---------+
+| 6.75    |
++---------+</code></pre>
+      <p>The previous integer value (<code>25</code>) is overwritten because both members occupy the same memory location.</p>
+
+      <h2>Applications of Structures</h2>
+      <ul>
+        <li>Student Management System</li>
+        <li>Employee Database</li>
+        <li>Library Management</li>
+        <li>Banking Software</li>
+        <li>Inventory System</li>
+        <li>Hospital Management</li>
+        <li>Linked Lists</li>
+        <li>Trees</li>
+        <li>Graphs</li>
+      </ul>
+
+      <h2>Applications of Unions</h2>
+      <ul>
+        <li>Memory optimization</li>
+        <li>Embedded systems</li>
+        <li>Device drivers</li>
+        <li>Hardware register mapping</li>
+        <li>Communication protocols</li>
+        <li>Low-level system programming</li>
+      </ul>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li><strong>Structure</strong> stores multiple related variables, with each member having its own memory.</li>
+        <li><strong>Union</strong> stores different data types in the same memory location, saving memory.</li>
+        <li>Structures are ideal for managing records and real-world entities.</li>
+        <li>Unions are useful when memory efficiency is more important and only one member is needed at a time.</li>
+        <li>Both <code>struct</code> and <code>union</code> are user-defined data types and are widely used in C programming.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
