@@ -416,7 +416,7 @@
           detached: { id: newNode.id, value: newNode.value, nextTarget: 'n30' },
           highlightNodeIds: ['n20'],
           highlightArrowFrom: 'n20',
-          caption: "Point node 20's next to X."
+          caption: "Node 20 currently points to 30 (highlighted) — this link is about to be replaced by a link to X."
         });
 
         var finalList = [list[0], list[1], newNode, list[2]];
@@ -536,13 +536,14 @@
         });
 
         if (step.detached) {
-          var nextLabel = step.detached.nextTarget
+          var detachedNextLabel = step.detached.nextTarget
             ? findNodeIdLabel(step.detached.nextTarget)
             : 'null';
+          var detachedHighlighted = step.highlightNodeIds.indexOf(step.detached.id) !== -1;
           var detachedEl = buildNodeEl(
             { value: step.detached.value },
             step.detached.nextTarget ? '•' : 'null',
-            false,
+            detachedHighlighted,
             true
           );
           detachedRow.appendChild(detachedEl);
@@ -552,7 +553,7 @@
             detachedRow.appendChild(buildArrow(arrowHighlighted, false));
             var targetLabel = document.createElement('span');
             targetLabel.className = 'll-null-label';
-            targetLabel.textContent = '→ node ' + nextLabel;
+            targetLabel.textContent = '→ node ' + detachedNextLabel;
             detachedRow.appendChild(targetLabel);
           }
 
