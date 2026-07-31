@@ -135,6 +135,10 @@
         {
           "title": "Naming Convention & Hungarian Notation",
           "path": "lessons/unit2-naming-convention-hungarian-notation.html"
+        },
+        {
+          "title": "Input & Output",
+          "path": "lessons/unit2-input-output.html"
         }
       ]
     }

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input & Output (Input Functions & Output Functions) — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Input & Output</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Input &amp; Output (Input Functions &amp; Output Functions)</h1>
+
+      <p>Input and Output (I/O) are fundamental operations in every C program. A program becomes interactive when it can <strong>accept data from the user (Input)</strong> and <strong>display results (Output)</strong>.</p>
+      <p>This topic covers:</p>
+      <ul>
+        <li>Input &amp; Output (I/O)</li>
+        <li>Input Functions</li>
+        <li>Output Functions</li>
+      </ul>
+
+      <h2>What is Input?</h2>
+      <p><strong>Input</strong> is the process of providing data to a program.</p>
+      <p>The data may come from:</p>
+      <ul>
+        <li>Keyboard</li>
+        <li>Mouse</li>
+        <li>Scanner</li>
+        <li>File</li>
+        <li>Network</li>
+      </ul>
+      <p>In this topic, we will focus on <strong>keyboard input</strong>.</p>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>Input is the process of entering data into a program for processing.</strong></p>
+      </blockquote>
+
+      <h3>Real-Life Example</h3>
+      <pre><code class="language-none">Enter Your Name
+↓
+
+Aman</code></pre>
+      <p>Here,</p>
+      <pre><code class="language-none">Aman</code></pre>
+      <p>is the input.</p>
+
+      <h2>What is Output?</h2>
+      <p><strong>Output</strong> is the information displayed by the program after processing the input.</p>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong>Output is the information produced by a program and displayed to the user or another device.</strong></p>
+      </blockquote>
+
+      <h3>Example</h3>
+      <p>Input</p>
+      <pre><code class="language-none">Number = 5</code></pre>
+      <p>Processing</p>
+      <pre><code class="language-none">Square = 5 × 5</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">25</code></pre>
+
+      <h2>Input → Process → Output (IPO Model)</h2>
+      <pre><code class="language-none">        INPUT
+          │
+          ▼
++----------------+
+|   Processing   |
++----------------+
+          │
+          ▼
+        OUTPUT</code></pre>
+      <p>Example</p>
+      <pre><code class="language-none">Enter Number
+
+↓
+
+10
+
+↓
+
+Multiply by 2
+
+↓
+
+20</code></pre>
+
+      <h2>Input and Output in C</h2>
+      <p>C provides library functions for performing Input and Output.</p>
+      <p>These functions are available through</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;</code></pre>
+      <p>Without including this header file, functions like <code>printf()</code> and <code>scanf()</code> cannot be used.</p>
+
+      <h2>Types of I/O Functions</h2>
+      <pre><code class="language-none">Input &amp; Output
+│
+├── Output Functions
+│      ├── printf()
+│      ├── puts()
+│      └── putchar()
+│
+└── Input Functions
+       ├── scanf()
+       ├── getchar()
+       └── fgets()</code></pre>
+
+      <h2>Part 1: Output Functions</h2>
+      <p>Output functions display information on the screen.</p>
+
+      <h2>1. printf()</h2>
+      <p>The most commonly used output function.</p>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong><code>printf()</code> prints formatted output to the screen.</strong></p>
+      </blockquote>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">printf("message");</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    printf("Hello World");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Hello World</code></pre>
+
+      <h2>Printing Variables</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 20;
+
+    printf("%d", age);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20</code></pre>
+
+      <h2>Multiple Values</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 20;
+    float marks = 95.5;
+    char grade = 'A';
+
+    printf("Age = %d\n", age);
+    printf("Marks = %.1f\n", marks);
+    printf("Grade = %c\n", grade);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Age = 20
+Marks = 95.5
+Grade = A</code></pre>
+
+      <h2>Format Specifiers</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Specifier</th>
+            <th>Data Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>%d</code></td><td>int</td></tr>
+          <tr><td><code>%hd</code></td><td>short</td></tr>
+          <tr><td><code>%ld</code></td><td>long</td></tr>
+          <tr><td><code>%lld</code></td><td>long long</td></tr>
+          <tr><td><code>%u</code></td><td>unsigned int</td></tr>
+          <tr><td><code>%f</code></td><td>float</td></tr>
+          <tr><td><code>%lf</code></td><td>double (used with <code>scanf</code>; <code>printf</code> accepts <code>%f</code> for <code>double</code>)</td></tr>
+          <tr><td><code>%Lf</code></td><td>long double</td></tr>
+          <tr><td><code>%c</code></td><td>char</td></tr>
+          <tr><td><code>%s</code></td><td>string</td></tr>
+          <tr><td><code>%p</code></td><td>Pointer</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Escape Sequences</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Escape Sequence</th>
+            <th>Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>\n</code></td><td>New Line</td></tr>
+          <tr><td><code>\t</code></td><td>Horizontal Tab</td></tr>
+          <tr><td><code>\\</code></td><td>Backslash</td></tr>
+          <tr><td><code>\"</code></td><td>Double Quote</td></tr>
+          <tr><td><code>\'</code></td><td>Single Quote</td></tr>
+          <tr><td><code>\0</code></td><td>Null Character</td></tr>
+        </tbody>
+      </table>
+
+      <p>Example</p>
+      <pre><code class="language-c">printf("Hello\nWorld");</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Hello
+World</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">printf("Name\tAge");</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Name    Age</code></pre>
+
+      <h2>2. puts()</h2>
+      <p>Prints an entire string followed by a newline.</p>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">puts("Hello");</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    puts("Welcome");
+    puts("C Programming");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Welcome
+C Programming</code></pre>
+
+      <h2>Difference between printf() and puts()</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>printf()</th>
+            <th>puts()</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Formatted output</td><td>Prints string only</td></tr>
+          <tr><td>Uses format specifiers</td><td>No format specifiers</td></tr>
+          <tr><td>Does not automatically add newline</td><td>Automatically adds newline</td></tr>
+        </tbody>
+      </table>
+
+      <h2>3. putchar()</h2>
+      <p>Prints a single character.</p>
+
+      <p>Syntax</p>
+      <pre><code class="language-c">putchar('A');</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    putchar('A');
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">A</code></pre>
+
+      <h2>Part 2: Input Functions</h2>
+      <p>Input functions read data from the keyboard.</p>
+
+      <h2>1. scanf()</h2>
+      <p>The most commonly used input function.</p>
+
+      <h3>Definition</h3>
+      <blockquote>
+        <p><strong><code>scanf()</code> reads formatted input from the keyboard.</strong></p>
+      </blockquote>
+
+      <h3>Syntax</h3>
+      <pre><code class="language-c">scanf("format", &amp;variable);</code></pre>
+      <p>Notice the <code>&amp;</code> operator before variables like <code>int</code>, <code>float</code>, and <code>char</code>. It passes the <strong>memory address</strong> of the variable so <code>scanf()</code> can store the input there.</p>
+
+      <h2>Integer Input</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age;
+
+    printf("Enter Age: ");
+    scanf("%d", &amp;age);
+
+    printf("Age = %d", age);
+
+    return 0;
+}</code></pre>
+      <p>Sample Output</p>
+      <pre><code class="language-none">Enter Age: 20
+Age = 20</code></pre>
+
+      <h2>Float Input</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    float salary;
+
+    printf("Enter Salary: ");
+    scanf("%f", &amp;salary);
+
+    printf("%.2f", salary);
+
+    return 0;
+}</code></pre>
+
+      <h2>Character Input</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char grade;
+
+    printf("Enter Grade: ");
+    scanf(" %c", &amp;grade);
+
+    printf("%c", grade);
+
+    return 0;
+}</code></pre>
+      <blockquote>
+        <p><strong>Notice the space before <code>%c</code></strong>. It tells <code>scanf()</code> to skip any leftover whitespace (such as a newline from previous input).</p>
+      </blockquote>
+
+      <h2>String Input</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[30];
+
+    printf("Enter Name: ");
+    scanf("%29s", name);
+
+    printf("%s", name);
+
+    return 0;
+}</code></pre>
+      <p>Sample Input</p>
+      <pre><code class="language-none">Aman</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Aman</code></pre>
+      <blockquote>
+        <p><code>scanf("%s", ...)</code> stops reading when it encounters whitespace.</p>
+      </blockquote>
+
+      <h2>Multiple Inputs</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age;
+    float marks;
+
+    printf("Enter Age and Marks: ");
+
+    scanf("%d %f", &amp;age, &amp;marks);
+
+    printf("%d %.2f", age, marks);
+
+    return 0;
+}</code></pre>
+      <p>Input</p>
+      <pre><code class="language-none">20 95.5</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20 95.50</code></pre>
+
+      <h2>2. getchar()</h2>
+      <p>Reads a single character.</p>
+
+      <p>Syntax</p>
+      <pre><code class="language-c">char ch = getchar();</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char ch;
+
+    printf("Enter Character: ");
+
+    ch = getchar();
+
+    printf("%c", ch);
+
+    return 0;
+}</code></pre>
+
+      <h2>3. fgets()</h2>
+      <p>Reads an entire line of text, including spaces (up to a specified limit).</p>
+
+      <p>Syntax</p>
+      <pre><code class="language-c">fgets(array, size, stdin);</code></pre>
+
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[50];
+
+    printf("Enter Full Name: ");
+
+    fgets(name, sizeof(name), stdin);
+
+    printf("%s", name);
+
+    return 0;
+}</code></pre>
+      <p>Input</p>
+      <pre><code class="language-none">Aman Kumar</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Aman Kumar</code></pre>
+
+      <h2><code>scanf()</code> vs <code>fgets()</code></h2>
+      <table>
+        <thead>
+          <tr>
+            <th><code>scanf("%s")</code></th>
+            <th><code>fgets()</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Stops at first space</td><td>Reads spaces too</td></tr>
+          <tr><td>Good for one word</td><td>Good for full sentences</td></tr>
+          <tr><td>Can overflow if width is omitted</td><td>Safer because maximum size is specified</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Complete Input &amp; Output Example</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age;
+    float marks;
+    char grade;
+    char name[30];
+
+    printf("Enter Name: ");
+    scanf("%29s", name);
+
+    printf("Enter Age: ");
+    scanf("%d", &amp;age);
+
+    printf("Enter Marks: ");
+    scanf("%f", &amp;marks);
+
+    printf("Enter Grade: ");
+    scanf(" %c", &amp;grade);
+
+    printf("\n----- Student Details -----\n");
+    printf("Name  : %s\n", name);
+    printf("Age   : %d\n", age);
+    printf("Marks : %.2f\n", marks);
+    printf("Grade : %c\n", grade);
+
+    return 0;
+}</code></pre>
+
+      <h2>Memory Representation</h2>
+      <pre><code class="language-c">int age = 20;</code></pre>
+      <pre><code class="language-none">Keyboard
+   │
+   ▼
+20
+   │
+   ▼
++---------+
+| age=20  |
++---------+
+   │
+   ▼
+printf()
+   │
+   ▼
+Screen</code></pre>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Forgetting <code>&amp;</code> in <code>scanf()</code></h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">scanf("%d", age);</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">scanf("%d", &amp;age);</code></pre>
+
+      <h3>2. Using <code>&amp;</code> with a Character Array</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">scanf("%s", &amp;name);</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">scanf("%29s", name);</code></pre>
+      <p>Array names already represent their starting address.</p>
+
+      <h3>3. Mixing <code>scanf()</code> and <code>getchar()</code></h3>
+      <pre><code class="language-c">scanf("%d", &amp;age);
+ch = getchar();</code></pre>
+      <p>The <code>getchar()</code> may read the leftover newline (<code>'\n'</code>) instead of waiting for new input.</p>
+
+      <h3>4. Using <code>%d</code> for Float</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">scanf("%d", &amp;marks);</code></pre>
+      <p>Correct</p>
+      <pre><code class="language-c">scanf("%f", &amp;marks);</code></pre>
+
+      <h3>5. Ignoring Buffer Limits</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">scanf("%s", name);</code></pre>
+      <p>Safer</p>
+      <pre><code class="language-c">scanf("%29s", name);</code></pre>
+      <p>This limits input to avoid overflowing a 30-character array.</p>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is Input?</h3>
+      <p>The process of entering data into a program.</p>
+
+      <h3>2. What is Output?</h3>
+      <p>The information displayed after processing data.</p>
+
+      <h3>3. What is the difference between <code>printf()</code> and <code>scanf()</code>?</h3>
+      <table>
+        <thead>
+          <tr>
+            <th><code>printf()</code></th>
+            <th><code>scanf()</code></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Displays output</td><td>Reads input</td></tr>
+          <tr><td>Output function</td><td>Input function</td></tr>
+        </tbody>
+      </table>
+
+      <h3>4. Why is <code>&amp;</code> used in <code>scanf()</code>?</h3>
+      <p>It passes the memory address where the input should be stored. Character arrays used as strings are an exception because the array name already acts as an address.</p>
+
+      <h3>5. Why is <code>fgets()</code> preferred over <code>scanf("%s")</code> for strings?</h3>
+      <p>Because it can read spaces and helps prevent buffer overflow by limiting the number of characters read.</p>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define Input and Output.</li>
+        <li>Explain the difference between <code>printf()</code> and <code>puts()</code>.</li>
+        <li>Differentiate between <code>scanf()</code> and <code>fgets()</code>.</li>
+        <li>What is the purpose of <code>putchar()</code> and <code>getchar()</code>?</li>
+        <li>Why is <code>&amp;</code> required with <code>scanf()</code>?</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Read and Display an Integer</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int number;
+
+    printf("Enter Number: ");
+    scanf("%d", &amp;number);
+
+    printf("You entered: %d\n", number);
+
+    return 0;
+}</code></pre>
+
+      <h4>Q2. Read Name and Age</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char name[30];
+    int age;
+
+    printf("Enter Name: ");
+    scanf("%29s", name);
+
+    printf("Enter Age: ");
+    scanf("%d", &amp;age);
+
+    printf("Name: %s\n", name);
+    printf("Age : %d\n", age);
+
+    return 0;
+}</code></pre>
+
+      <h4>Q3. Read a Full Name</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char full_name[50];
+
+    printf("Enter Full Name: ");
+    fgets(full_name, sizeof(full_name), stdin);
+
+    printf("Full Name: %s", full_name);
+
+    return 0;
+}</code></pre>
+
+      <h4>Q4. Use <code>putchar()</code> and <code>getchar()</code></h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    char ch;
+
+    printf("Enter a character: ");
+    ch = getchar();
+
+    printf("You entered: ");
+    putchar(ch);
+    putchar('\n');
+
+    return 0;
+}</code></pre>
+
+      <h2>Exam Tips</h2>
+      <ul>
+        <li>⭐ Include <code>#include &lt;stdio.h&gt;</code> when using standard input/output functions.</li>
+        <li>⭐ <code>printf()</code> is used for formatted output.</li>
+        <li>⭐ <code>scanf()</code> is used for formatted input.</li>
+        <li>⭐ Use <code>&amp;</code> with variables in <code>scanf()</code>, except for character arrays used as strings.</li>
+        <li>⭐ <code>puts()</code> automatically prints a newline.</li>
+        <li>⭐ <code>putchar()</code> and <code>getchar()</code> work with a single character.</li>
+        <li>⭐ Use <code>fgets()</code> instead of <code>scanf("%s")</code> when reading text containing spaces.</li>
+        <li>⭐ Use width specifiers like <code>%29s</code> with <code>scanf()</code> to reduce the risk of buffer overflow.</li>
+      </ul>
+
+      <h2>Summary</h2>
+      <ul>
+        <li><strong>Input</strong> is the process of receiving data from the user, while <strong>Output</strong> is the process of displaying processed information.</li>
+        <li>The Standard I/O library (<code>stdio.h</code>) provides functions for reading and writing data.</li>
+        <li>Common <strong>Output Functions</strong> are <code>printf()</code>, <code>puts()</code>, and <code>putchar()</code>.</li>
+        <li>Common <strong>Input Functions</strong> are <code>scanf()</code>, <code>getchar()</code>, and <code>fgets()</code>.</li>
+        <li>Choosing the correct function depends on the type of data and whether spaces or formatting need to be handled.</li>
+        <li>Safe input practices, such as using field widths with <code>scanf()</code> and preferring <code>fgets()</code> for full lines, help write more reliable C programs.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
