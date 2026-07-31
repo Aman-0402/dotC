@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scope — C Programming</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/layout.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link id="prism-theme" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.min.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span><a href="../toc.html">C Programming</a> / Unit 2 / Scope</span>
+    <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </nav>
+
+  <div class="lesson-layout">
+    <aside class="sidebar"></aside>
+
+    <main class="lesson-main">
+      <h1>Scope</h1>
+
+      <h2>What is Scope?</h2>
+      <p><strong>Scope</strong> defines <strong>where a variable or function can be accessed</strong> in a program.</p>
+      <p>In simple words:</p>
+      <blockquote>
+        <p><strong>Scope tells us from which part of the program a variable or function is visible and can be used.</strong></p>
+      </blockquote>
+      <p>If a variable is <strong>outside its scope</strong>, it <strong>cannot</strong> be accessed.</p>
+
+      <h2>Real-Life Analogy</h2>
+      <p>Imagine a classroom.</p>
+      <ul>
+        <li>A student's notebook can only be used by that student.</li>
+        <li>A classroom whiteboard can be seen by every student in the class.</li>
+        <li>The principal's notice board can be seen by the entire school.</li>
+      </ul>
+      <p>Similarly in C:</p>
+      <ul>
+        <li><strong>Local Variable</strong> → Like a student's notebook (usable only inside one function/block).</li>
+        <li><strong>Global Variable</strong> → Like the school's notice board (usable by all functions in the file).</li>
+      </ul>
+
+      <h2>Why is Scope Important?</h2>
+      <p>Scope helps to:</p>
+      <ul>
+        <li>Prevent name conflicts.</li>
+        <li>Improve program organization.</li>
+        <li>Protect variables from accidental modification.</li>
+        <li>Reduce memory misuse.</li>
+        <li>Improve readability and debugging.</li>
+      </ul>
+
+      <h2>Types of Scope in C</h2>
+      <p>There are <strong>4 main types of scope</strong> in C.</p>
+      <pre><code class="language-none">Scope
+│
+├── Local Scope
+├── Global Scope (File Scope)
+├── Block Scope
+└── Function Scope</code></pre>
+
+      <h2>1. Local Scope</h2>
+      <p>A variable declared <strong>inside a function</strong> is called a <strong>local variable</strong>.</p>
+      <p>It can be used <strong>only inside that function</strong>.</p>
+
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int age = 20;
+
+    printf("%d", age);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">main()
+
+┌──────────────────┐
+│ age = 20         │
+└──────────────────┘</code></pre>
+      <p>Outside <code>main()</code>, <code>age</code> does not exist.</p>
+
+      <h3>Wrong Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void display()
+{
+    printf("%d", age);
+}
+
+int main()
+{
+    int age = 20;
+
+    display();
+
+    return 0;
+}</code></pre>
+      <h4>Error</h4>
+      <pre><code class="language-none">'age' undeclared</code></pre>
+      <p>Reason:</p>
+      <p><code>age</code> belongs only to <code>main()</code>.</p>
+
+      <h2>2. Global Scope (File Scope)</h2>
+      <p>Variables declared <strong>outside all functions</strong> are called <strong>global variables</strong>.</p>
+      <p>They are accessible from any function in the same source file after their declaration.</p>
+
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int age = 20;
+
+void display()
+{
+    printf("%d\n", age);
+}
+
+int main()
+{
+    printf("%d\n", age);
+
+    display();
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">20
+20</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Global Memory
+
+┌────────────────────┐
+│ age = 20           │
+└────────────────────┘
+
+        │
+        ├────────► main()
+        │
+        └────────► display()</code></pre>
+
+      <h2>3. Block Scope</h2>
+      <p>Variables declared inside a pair of braces <code>{}</code> exist only inside that block.</p>
+
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    if(1)
+    {
+        int x = 100;
+
+        printf("%d\n", x);
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">100</code></pre>
+
+      <h3>Wrong Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    if(1)
+    {
+        int x = 100;
+    }
+
+    printf("%d", x);
+
+    return 0;
+}</code></pre>
+      <h4>Error</h4>
+      <pre><code class="language-none">'x' undeclared</code></pre>
+      <p>Reason:</p>
+      <p><code>x</code> exists only inside the <code>if</code> block.</p>
+
+      <h2>Block Scope in Loops</h2>
+      <p>Variables declared inside a loop also have block scope.</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    for(int i = 1; i &lt;= 3; i++)
+    {
+        printf("%d ", i);
+    }
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">1 2 3</code></pre>
+      <p>After the loop ends, <code>i</code> is no longer accessible.</p>
+
+      <h2>4. Function Scope</h2>
+      <p>Function labels (used with <code>goto</code>) have <strong>function scope</strong>.</p>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    goto end;
+
+    printf("Hello");
+
+end:
+    printf("Finished");
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">Finished</code></pre>
+      <p>The label <code>end</code> is accessible only within the same function.</p>
+
+      <h2>Variable Visibility</h2>
+      <p>Scope determines <strong>visibility</strong>.</p>
+      <p>Example</p>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int x = 10;
+
+void show()
+{
+    printf("%d\n", x);
+}
+
+int main()
+{
+    printf("%d\n", x);
+
+    show();
+
+    return 0;
+}</code></pre>
+      <p>Both functions can see <code>x</code>.</p>
+
+      <h2>Local vs Global Scope</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Local Scope</th>
+            <th>Global Scope</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Declared inside a function</td><td>Declared outside all functions</td></tr>
+          <tr><td>Accessible only within that function</td><td>Accessible throughout the file</td></tr>
+          <tr><td>Temporary lifetime (during function execution)</td><td>Exists for the entire program execution</td></tr>
+          <tr><td>Example: <code>int age;</code> inside <code>main()</code></td><td>Example: <code>int age;</code> outside all functions</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Variable Shadowing</h2>
+      <p>A local variable can have the same name as a global variable.</p>
+      <p>The local variable <strong>shadows</strong> (hides) the global variable within its scope.</p>
+
+      <h3>Example</h3>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int number = 100;
+
+int main()
+{
+    int number = 50;
+
+    printf("%d", number);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">50</code></pre>
+      <p>Memory</p>
+      <pre><code class="language-none">Global Variable
+
+number = 100
+
+↓
+
+main()
+
+number = 50</code></pre>
+      <p>Inside <code>main()</code>, the local <code>number</code> is used.</p>
+
+      <h2>Nested Block Scope</h2>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a = 10;
+
+    {
+        int b = 20;
+
+        printf("%d %d\n", a, b);
+    }
+
+    printf("%d", a);
+
+    return 0;
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">10 20
+10</code></pre>
+      <p>Explanation:</p>
+      <ul>
+        <li><code>a</code> is visible in the inner block.</li>
+        <li><code>b</code> is <strong>not</strong> visible outside the inner block.</li>
+      </ul>
+
+      <h2>Scope vs Lifetime</h2>
+      <p>Many beginners confuse these two concepts.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Scope</th>
+            <th>Lifetime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Where a variable can be accessed</td><td>How long the variable exists in memory</td></tr>
+          <tr><td>Compile-time concept</td><td>Runtime concept</td></tr>
+        </tbody>
+      </table>
+      <p>Example</p>
+      <pre><code class="language-c">int main()
+{
+    int x = 10;
+
+    return 0;
+}</code></pre>
+      <ul>
+        <li><strong>Scope:</strong> Only inside <code>main()</code></li>
+        <li><strong>Lifetime:</strong> From entering <code>main()</code> until it finishes execution.</li>
+      </ul>
+      <blockquote>
+        <p><strong>Note:</strong> Lifetime will be discussed in more detail when studying <strong>Storage Classes</strong>.</p>
+      </blockquote>
+
+      <h2>Common Beginner Mistakes</h2>
+
+      <h3>1. Accessing Local Variables Outside Their Scope</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">int main()
+{
+    int x = 10;
+}
+
+printf("%d", x);</code></pre>
+      <p>Error:</p>
+      <pre><code class="language-none">'x' undeclared</code></pre>
+
+      <h3>2. Using Block Variables Outside the Block</h3>
+      <p>Wrong</p>
+      <pre><code class="language-c">if(1)
+{
+    int marks = 90;
+}
+
+printf("%d", marks);</code></pre>
+
+      <h3>3. Confusing Global and Local Variables</h3>
+      <pre><code class="language-c">int x = 100;
+
+int main()
+{
+    int x = 50;
+
+    printf("%d", x);
+}</code></pre>
+      <p>Output</p>
+      <pre><code class="language-none">50</code></pre>
+      <p>The local variable hides the global one.</p>
+
+      <h3>4. Declaring Variables in the Wrong Scope</h3>
+      <p>Poor</p>
+      <pre><code class="language-c">int total;
+
+int main()
+{
+}</code></pre>
+      <p>If <code>total</code> is used only inside <code>main()</code>, it should be declared there instead of globally.</p>
+
+      <h2>Interview Questions</h2>
+
+      <h3>1. What is scope in C?</h3>
+      <p>Scope defines the region of a program where a variable or function can be accessed.</p>
+
+      <h3>2. What is the difference between local and global scope?</h3>
+      <ul>
+        <li>Local scope: Accessible only within the function or block where declared.</li>
+        <li>Global scope: Accessible throughout the source file after its declaration.</li>
+      </ul>
+
+      <h3>3. What is block scope?</h3>
+      <p>A variable declared inside <code>{}</code> is accessible only within that block.</p>
+
+      <h3>4. What is variable shadowing?</h3>
+      <p>Variable shadowing occurs when a local variable has the same name as a global variable, causing the local variable to hide the global one within its scope.</p>
+
+      <h3>5. What is the difference between scope and lifetime?</h3>
+      <ul>
+        <li><strong>Scope</strong> determines <strong>where</strong> a variable can be accessed.</li>
+        <li><strong>Lifetime</strong> determines <strong>how long</strong> the variable exists in memory.</li>
+      </ul>
+
+      <h2>Practice Questions</h2>
+
+      <h3>Theory</h3>
+      <ol>
+        <li>Define scope in C.</li>
+        <li>Explain the different types of scope.</li>
+        <li>Differentiate between local scope and global scope.</li>
+        <li>What is variable shadowing?</li>
+        <li>Distinguish between scope and lifetime.</li>
+      </ol>
+
+      <h3>Coding Questions</h3>
+
+      <h4>Q1. Demonstrate Local Scope</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int marks = 90;
+
+    printf("Marks = %d", marks);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Marks = 90</code></pre>
+
+      <h4>Q2. Demonstrate Global Scope</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int count = 10;
+
+void display()
+{
+    printf("Count = %d\n", count);
+}
+
+int main()
+{
+    display();
+    printf("Count = %d", count);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Count = 10
+Count = 10</code></pre>
+
+      <h4>Q3. Demonstrate Variable Shadowing</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int value = 100;
+
+int main()
+{
+    int value = 50;
+
+    printf("Local Value = %d\n", value);
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">Local Value = 50</code></pre>
+
+      <h4>Q4. Demonstrate Block Scope</h4>
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main()
+{
+    {
+        int x = 25;
+        printf("%d\n", x);
+    }
+
+    return 0;
+}</code></pre>
+      <p><strong>Output</strong></p>
+      <pre><code class="language-none">25</code></pre>
+
+      <h2>Summary</h2>
+      <ul>
+        <li><strong>Scope</strong> defines <strong>where</strong> a variable or function can be accessed.</li>
+        <li>C provides <strong>four main scopes</strong>:
+          <ul>
+            <li>Local Scope</li>
+            <li>Global (File) Scope</li>
+            <li>Block Scope</li>
+            <li>Function Scope</li>
+          </ul>
+        </li>
+        <li>Local variables are accessible only within their function or block.</li>
+        <li>Global variables are accessible throughout the source file after their declaration.</li>
+        <li><strong>Variable shadowing</strong> occurs when a local variable hides a global variable with the same name.</li>
+        <li><strong>Scope</strong> and <strong>lifetime</strong> are different concepts: scope is about <strong>visibility</strong>, while lifetime is about <strong>existence in memory</strong>.</li>
+      </ul>
+
+      <nav class="lesson-nav"></nav>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/sidebar.js"></script>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

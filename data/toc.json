@@ -95,6 +95,10 @@
         {
           "title": "Names",
           "path": "lessons/unit2-names.html"
+        },
+        {
+          "title": "Scope",
+          "path": "lessons/unit2-scope.html"
         }
       ]
     }
